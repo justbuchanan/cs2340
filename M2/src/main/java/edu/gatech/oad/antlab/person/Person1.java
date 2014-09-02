@@ -31,6 +31,10 @@ public class Person1 {
 	 */
 	private String calc(String input) {
 	  //Person 1 put your implementation here
+	  if (input.length() >= 3) {
+		  String result = input.substring(2) + input.substring(0,2);
+		  return result;
+	  }
 	  return null;
 	}
 	
