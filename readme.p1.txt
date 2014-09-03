@@ -9,8 +9,7 @@
 +-+-+-+-+-+ +-+-+
 
 Name: Bao Vu
-GT ID: 903088694
-email: bvu8@gatech.edu
+gtid: bvu8
 
 
 +-+-+-+-+-+-+ +-+-+-+-+-+
