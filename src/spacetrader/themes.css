@@ -8,6 +8,11 @@
     -fx-text-fill: #395306;
 }
 
+.bigbutton {
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+}
+
 .welcome_button {
 	-fx-font-size: 20;
 	-fx-font-weight: bold;
