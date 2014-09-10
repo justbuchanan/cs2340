@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="spacetrader.jar" size="48099" download="eager" />
+    <jar href="spacetrader.jar" size="51039" download="eager" />
   </resources>
 <security>
   <all-permissions/>
