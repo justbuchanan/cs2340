@@ -11,11 +11,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -60,10 +65,12 @@ public class ConfigController implements Initializable {
     Pane messagePane;
     @FXML
     TextField name;
+    @FXML
+    Label name_error;
 
     private Main application;
     private int[] points = new int[5];
-    private final int MAX_POINTS = 10;
+    private final int MAX_POINTS = 16;
     
     public void setApp(Main application){
         this.application = application;
@@ -71,8 +78,8 @@ public class ConfigController implements Initializable {
     
     @FXML
     private void handleOKAction(ActionEvent event) {
-        if (name.getText()=="") {
-            //do somthing
+        if (name.getText().equals("")) {
+            name_error.setText("Name field is blank.");
         } else
         messagePane.setVisible(true);
     }
