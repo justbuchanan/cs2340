@@ -42,14 +42,23 @@ public class Main extends Application {
         }
     }
     
+    /**
+     * Opens configuration screen
+     */
     void openConfig() {
         gotoConfig();
     }
     
+    /**
+     * CLoses configuration screen
+     */
     void closeConfig() {
         gotoWelcome();
     }
     
+    /**
+     * Goes to configuration screen
+     */
     private void gotoConfig() {
         try {
             ConfigController config = (ConfigController) replaceSceneContent("config.fxml");
@@ -59,6 +68,9 @@ public class Main extends Application {
         }
     }
         
+    /**
+     * Goes to welcome (starting) screen
+     */
     private void gotoWelcome() {
         try {
             WelcomeController Welcome = (WelcomeController) replaceSceneContent("welcome.fxml");
@@ -67,6 +79,7 @@ public class Main extends Application {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -74,6 +87,13 @@ public class Main extends Application {
         launch(args);
     }
     
+    /**
+     * Replaces scene content
+     * 
+     * @param target fxml
+     * @return controller
+     * @throws Exception 
+     */
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);

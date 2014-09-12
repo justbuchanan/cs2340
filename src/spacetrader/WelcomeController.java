@@ -23,6 +23,10 @@ public class WelcomeController implements Initializable {
     private Label label;
     private Main application;
     
+    /**
+     * Links to main application
+     * @param application 
+     */
     public void setApp(Main application){
         this.application = application;
     }

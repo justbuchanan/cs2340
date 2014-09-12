@@ -72,6 +72,11 @@ public class ConfigController implements Initializable {
     private int[] points = new int[5];
     private final int MAX_POINTS = 16;
     
+    /**
+     * Links to main application
+     * 
+     * @param application 
+     */
     public void setApp(Main application){
         this.application = application;
     }
@@ -80,8 +85,11 @@ public class ConfigController implements Initializable {
     private void handleOKAction(ActionEvent event) {
         if (name.getText().equals("")) {
             name_error.setText("Name field is blank.");
-        } else
-        messagePane.setVisible(true);
+        } else {
+            Player newPlayer = new Player(name.getText(), points);
+            messagePane.setVisible(true);
+            //System.out.println(newPlayer);
+        }
     }
     
     @FXML
@@ -131,6 +139,11 @@ public class ConfigController implements Initializable {
         application.closeConfig();
     }
    
+    /**
+     * Return remaining skill points
+     * 
+     * @return remaining points
+     */
     private int getRemainingPoints() {
         int sum = 0;
         for (int point: points) {
