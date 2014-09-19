@@ -81,6 +81,10 @@ public class ConfigController implements Initializable {
         this.application = application;
     }
     
+    /**
+     * "OK" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleOKAction(ActionEvent event) {
         if (name.getText().equals("")) {
@@ -94,11 +98,19 @@ public class ConfigController implements Initializable {
         }
     }
     
+    /**
+     * "Cancel" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleCancelAction(ActionEvent event) {
         application.closeConfig();
     }
         
+    /**
+     * "Up" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleUp(ActionEvent event) {
         if (getRemainingPoints() > 0) {
@@ -120,6 +132,10 @@ public class ConfigController implements Initializable {
         //System.out.printf("%d %d %d %d %d - %d%n", points[0], points[1], points[2], points[3], points[4], sum);
     }
     
+    /**
+     * "Down" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleDown(ActionEvent event) {
         if (event.getSource().equals(p0_down)) {
@@ -136,11 +152,19 @@ public class ConfigController implements Initializable {
         showRemainingPoints();
     }
     
+    /**
+     * "Play" is pressed
+     * @param event 
+     */
     @FXML
     private void handlePlay(ActionEvent event) {
         application.play();
     }
     
+    /**
+     * "Go to Home Screen" is pressed
+     * @param event 
+     */
     @FXML
     private void handleGoToHomeScreen(ActionEvent event) {
         application.closeConfig();
