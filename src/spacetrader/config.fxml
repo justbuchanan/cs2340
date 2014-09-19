@@ -120,14 +120,15 @@
          </font>
       </Label>
       <Label fx:id="name_error" layoutX="207.0" layoutY="176.0" textFill="RED" />
-      <Pane fx:id="messagePane" layoutX="14.0" layoutY="107.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="messagePane" layoutX="14.0" layoutY="107.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="186.0" layoutY="248.0" text="Player has been successfully created&#10;Generating the universe..." textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="186.0" layoutY="248.0" text="Player has been successfully created&#10;Generating the universe... Completed&#10;Game is ready to play" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
             <Button layoutX="340.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleGoToHomeScreen" styleClass="green" text="Go to Home Screen" />
+            <Button layoutX="340.0" layoutY="408.0" mnemonicParsing="false" onAction="#handlePlay" prefHeight="25.0" prefWidth="120.0" styleClass="green" text="Play" />
          </children>
       </Pane>
    </children>

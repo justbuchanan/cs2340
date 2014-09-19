@@ -50,10 +50,17 @@ public class Main extends Application {
     }
     
     /**
-     * CLoses configuration screen
+     * Closes configuration screen
      */
     void closeConfig() {
         gotoWelcome();
+    }
+    
+    /**
+     * CLoses configuration screen
+     */
+    void play() {
+        gotoGame();
     }
     
     /**
@@ -75,6 +82,21 @@ public class Main extends Application {
         try {
             WelcomeController Welcome = (WelcomeController) replaceSceneContent("welcome.fxml");
             Welcome.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+            
+    /**
+     * Goes to game screen
+     */
+    private void gotoGame() {
+        try {
+            GameController game = (GameController) replaceSceneContent("game.fxml");
+            game.setApp(this);
+            /*TestController test = (TestController) replaceSceneContent("test.fxml");
+            test.setApp(this);*/
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

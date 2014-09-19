@@ -70,7 +70,7 @@ public class ConfigController implements Initializable {
 
     private Main application;
     private int[] points = new int[5];
-    private final int MAX_POINTS = 16;
+    private final int MAX_POINTS = 15;
     
     /**
      * Links to main application
@@ -88,6 +88,8 @@ public class ConfigController implements Initializable {
         } else {
             Player newPlayer = new Player(name.getText(), points);
             messagePane.setVisible(true);
+            Universe uni = Universe.generateUniverse(100, 100, 40);
+    	    System.out.println(uni.toString());
             //System.out.println(newPlayer);
         }
     }
@@ -132,6 +134,11 @@ public class ConfigController implements Initializable {
             p4.setText((points[4]==0)?"0":--points[4] + "");
         }
         showRemainingPoints();
+    }
+    
+    @FXML
+    private void handlePlay(ActionEvent event) {
+        application.play();
     }
     
     @FXML
