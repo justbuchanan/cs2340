@@ -2,7 +2,7 @@ package spacetrader;
 
 /**
  * @author Michael
- *
+ * The stage of a solar system's technological development
  */
 public enum TechLevel {
 	PREAGRICULTURAL(0, "Pre-Agricultural"),

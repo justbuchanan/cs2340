@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * @author Michael
- *
+ * Represents the game universe. Holds solar systems and spatial dimensions.
  */
 public class Universe {
 	private ArrayList<SolarSystem> solarSystems;
@@ -15,7 +15,13 @@ public class Universe {
 	public Universe() {
 		solarSystems = new ArrayList<SolarSystem>();
 	}
-	
+	/**
+	 * Creates a new universe based on the given parameters
+	 * @param _width width of the universe
+	 * @param _height height of the universe
+	 * @param numSolarSystems number of solar systems in the universe
+	 * @return the newly created Universe
+	 */
 	public static Universe generateUniverse(int _width, int _height, int numSolarSystems) {
 		Random rand = new Random();
 		Universe universe = new Universe();
@@ -39,7 +45,12 @@ public class Universe {
 		}
 		return universe;
 	}
-
+	/**
+	 * Checks whether a solar system exists at a given point in space
+	 * @param _x x coordinate
+	 * @param _y y coordinate
+	 * @return true if this point is the location of a solar system
+	 */
 	public boolean hasSolarSystemAt(int _x, int _y) {
 		if (_x < 0 || _x > width-1 || _y < 0 || _y > height-1) return false;
 		for (SolarSystem ss : solarSystems) {
@@ -47,6 +58,11 @@ public class Universe {
 		}
 		return false;
 	}
+	/**
+	 * Finds a solar system by name
+	 * @param _name name to search for
+	 * @return true if a solar system with this name exists in the Universe
+	 */
 	public boolean hasSolarSystemName(String _name) {
 		for (SolarSystem ss : solarSystems) {
 			if (ss.getName().equals(_name)) return true;
@@ -68,7 +84,9 @@ public class Universe {
 	public int getWidth() { return width; }
 	public void setHeight(int _height) { this.height = _height; }
 	public int getHeight() { return height; }
-
+	/**
+	 * Contains all potential names for solar systems
+	 */
 	public static String[] SolarSystemName =
 	{
 	    "Acamar",
