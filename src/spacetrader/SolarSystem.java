@@ -2,7 +2,7 @@ package spacetrader;
 
 /**
  * @author Michael
- *
+ * Represents a single solar system. For now, this means a planet.
  */
 public class SolarSystem {
 	private String name;
