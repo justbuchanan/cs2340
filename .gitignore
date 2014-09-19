@@ -13,3 +13,7 @@ hs_err_pid*
 /dist/
 /build/
 /nbproject/private/
+
+.gradle
+
+
