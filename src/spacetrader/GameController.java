@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 /**
@@ -22,18 +23,26 @@ public class GameController implements Initializable {
 
 //<editor-fold defaultstate="collapsed" desc="FXML DECLARATIONS">
     @FXML Pane marketPane;
+    @FXML Label buyQuantity, currentBalance, afterBalance;
 //</editor-fold>
     
     private Main application;
     
-    //Player and universe are passed from config screen
+    //Player and universe objects are passed from config screen
     private Player myPlayer;
     private Universe myUniverse;
     
 //<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
+        //Put marketplace generated code here...
+        //Marketplace myMarket = new Marketplace(SolarSystem);
+        
+        //Display and set up marketPane
         marketPane.setVisible(true);
+        buyQuantity.setText("1");
+        currentBalance.setText(String.valueOf(myPlayer.getBalance()));
+        //Display ItemList in the table
     }
     @FXML
     private void closeMarketplace(ActionEvent event) {
@@ -41,11 +50,17 @@ public class GameController implements Initializable {
     }
     @FXML
     private void increaseBuyQuantity(ActionEvent event) {
-        //...
+        int q = Integer.parseInt(buyQuantity.getText());
+        q++;
+        buyQuantity.setText(q + "");
     }
     @FXML
     private void decreaseBuyQuantity(ActionEvent event) {
-        //...
+        if (Integer.parseInt(buyQuantity.getText()) != 1) {
+            int q = Integer.parseInt(buyQuantity.getText());
+            q--;
+            buyQuantity.setText(q + "");
+        }
     }
 //</editor-fold>
     

@@ -37,11 +37,10 @@
                               <Label layoutX="29.0" layoutY="350.0" text="Your credits:" textFill="WHITE" />
                               <Label layoutX="29.0" layoutY="381.0" text="Your credits after purchase:" textFill="WHITE" />
                               <Button layoutX="427.0" layoutY="369.0" mnemonicParsing="false" text="Buy" />
-                              <Button layoutX="525.0" layoutY="369.0" mnemonicParsing="false" onAction="#closeMarketplace" text="Return" />
                               <Label layoutX="85.0" layoutY="275.0" text="0" textFill="WHITE" />
-                              <Label layoutX="129.0" layoutY="312.0" text="0" textFill="WHITE" />
-                              <Label layoutX="136.0" layoutY="350.0" text="0" textFill="WHITE" />
-                              <Label layoutX="196.0" layoutY="381.0" text="0" textFill="WHITE" />
+                              <Label fx:id="buyQuantity" layoutX="129.0" layoutY="312.0" text="0" textFill="WHITE" />
+                              <Label fx:id="currentBalance" layoutX="136.0" layoutY="350.0" text="0" textFill="WHITE" />
+                              <Label fx:id="afterBalance" layoutX="196.0" layoutY="381.0" text="0" textFill="WHITE" />
                               <Button fx:id="buy_up" layoutX="183.0" layoutY="308.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
                               <Button fx:id="buy_down" layoutX="221.0" layoutY="308.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
                            </children>
@@ -55,6 +54,7 @@
                 </Tab>
               </tabs>
             </TabPane>
+            <Button layoutX="653.0" layoutY="560.0" mnemonicParsing="false" onAction="#closeMarketplace" text="Return" />
          </children>
       </Pane>
    </children>
