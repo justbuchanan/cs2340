@@ -32,7 +32,7 @@ public class GameController implements Initializable {
     private Player myPlayer;
     private Universe myUniverse;
     
-//<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
+//<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
         //Put marketplace generated code here...
@@ -48,6 +48,9 @@ public class GameController implements Initializable {
     private void closeMarketplace(ActionEvent event) {
         marketPane.setVisible(false);
     }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
     @FXML
     private void increaseBuyQuantity(ActionEvent event) {
         int q = Integer.parseInt(buyQuantity.getText());

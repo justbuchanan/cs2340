@@ -61,7 +61,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField fx:id="name" layoutX="195.0" layoutY="140.0" prefHeight="25.0" prefWidth="411.0" promptText="please enter your name here..." />
+      <TextField fx:id="name" layoutX="195.0" layoutY="140.0" prefHeight="25.0" prefWidth="411.0" promptText="please enter your name here..." text="Starlord" />
       <Label layoutX="134.0" layoutY="401.0" text="Points remaining:" textFill="WHITE">
          <font>
             <Font size="19.0" />

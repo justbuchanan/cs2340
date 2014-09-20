@@ -13,8 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
- *
- * @author Zephyr
+ * Welcome screen controller
+ * 
+ * @author Bao
  */
 public class WelcomeController implements Initializable {
     
