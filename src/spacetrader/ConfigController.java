@@ -29,45 +29,14 @@ import javafx.stage.StageStyle;
  */
 public class ConfigController implements Initializable {
      
-    //<editor-fold defaultstate="collapsed" desc="FXML objects">
-    @FXML
-            Label p0;
-    @FXML
-            Label p1;
-    @FXML
-            Label p2;
-    @FXML
-            Label p3;
-    @FXML
-            Label p4;
-    @FXML
-            Button p0_up;
-    @FXML
-            Button p1_up;
-    @FXML
-            Button p2_up;
-    @FXML
-            Button p3_up;
-    @FXML
-            Button p4_up;
-    @FXML
-            Button p0_down;
-    @FXML
-            Button p1_down;
-    @FXML
-            Button p2_down;
-    @FXML
-            Button p3_down;
-    @FXML
-            Button p4_down;
-    @FXML
-            Label remain;
-    @FXML
-            Pane messagePane;
-    @FXML
-            TextField name;
-    @FXML
-            Label name_error;
+//<editor-fold defaultstate="collapsed" desc="FXML objects">
+    @FXML Label p0, p1, p2, p3, p4;
+    @FXML Button p0_up, p1_up, p2_up, p3_up, p4_up;
+    @FXML Button p0_down, p1_down, p2_down, p3_down, p4_down;
+    @FXML Label remain;
+    @FXML Pane messagePane;
+    @FXML TextField name;
+    @FXML Label name_error;
 //</editor-fold>
 
     private Main application;
