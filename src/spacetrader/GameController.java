@@ -7,6 +7,8 @@
 package spacetrader;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +25,7 @@ public class GameController implements Initializable {
 
 //<editor-fold defaultstate="collapsed" desc="FXML DECLARATIONS">
     @FXML Pane marketPane;
+    @FXML Label coordinates;
     @FXML Label buyQuantity, currentBalance, afterBalance;
 //</editor-fold>
     
@@ -31,12 +34,13 @@ public class GameController implements Initializable {
     //Player and universe objects are passed from config screen
     private Player myPlayer;
     private Universe myUniverse;
+    private SolarSystem mySS;
     
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
         //Put marketplace generated code here...
-        //Marketplace myMarket = new Marketplace(SolarSystem);
+        //Marketplace myMarket = new Marketplace(mySS);
         
         //Display and set up marketPane
         marketPane.setVisible(true);
@@ -103,8 +107,20 @@ public class GameController implements Initializable {
      * @param u Universe
      */
     public void config(Player p, Universe u) {
+        Random rand = new Random();
+        
         myPlayer = p;
         myUniverse = u;
+        
+        //Randomly select a solar system as starting point
+        List<SolarSystem> solarSystems = myUniverse.getSolarSystems();
+        mySS = solarSystems.get(rand.nextInt(solarSystems.size()));
+        
+        coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
+                + "Solar System: " + mySS.getName() + "\n"
+                + "Tech Level: " + mySS.getResource() + "\n"
+                + "Government: " + mySS.getTechLevel()
+        );
     }
 //</editor-fold>
 }

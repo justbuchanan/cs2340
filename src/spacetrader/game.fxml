@@ -11,8 +11,8 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.GameController">
    <children>
       <Button layoutX="37.0" layoutY="31.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="146.0" text="Visit marketplace" />
-      <Label layoutX="573.0" layoutY="35.0" text="Coordinates (0,0)" />
-      <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;">
+      <Label fx:id="coordinates" layoutX="636.0" layoutY="475.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" />
+      <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" visible="false">
          <children>
             <Label layoutX="83.0" layoutY="27.0" text="Marketplace" textFill="WHITE">
                <font>
@@ -25,13 +25,13 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="14.0" layoutY="36.0" prefHeight="149.0" prefWidth="609.0">
+                              <TableView layoutX="14.0" layoutY="36.0" prefHeight="220.0" prefWidth="614.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />
                                 </columns>
                               </TableView>
-                              <Label layoutX="28.0" layoutY="231.0" text="Select an item from the list" textFill="WHITE" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Choose an item from the marketplace" textFill="WHITE" />
                               <Label layoutX="28.0" layoutY="275.0" text="Price:" textFill="WHITE" />
                               <Label layoutX="27.0" layoutY="312.0" text="Quantity:" textFill="WHITE" />
                               <Label layoutX="29.0" layoutY="350.0" text="Your credits:" textFill="WHITE" />

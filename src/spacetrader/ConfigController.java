@@ -44,6 +44,7 @@ public class ConfigController implements Initializable {
     private Universe myUniverse;
     private int[] points = new int[5];
     private final int MAX_POINTS = 15;
+    private final int NUMBER_OF_SOLAR_SYSTEMS = 40;
     
     /**
      * Links to main application
@@ -65,7 +66,7 @@ public class ConfigController implements Initializable {
         } else {
             myPlayer = new Player(name.getText(), points);
             messagePane.setVisible(true);
-            myUniverse = Universe.generateUniverse(100, 100, 40);
+            myUniverse = Universe.generateUniverse(100, 100, NUMBER_OF_SOLAR_SYSTEMS);
     	    System.out.println(myUniverse.toString());
             //System.out.println(newPlayer);
         }
