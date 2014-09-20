@@ -23,52 +23,56 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * FXML Controller class
+ * Configuration screen controller
  *
- * @author Zephyr
+ * @author Bao
  */
 public class ConfigController implements Initializable {
      
+    //<editor-fold defaultstate="collapsed" desc="FXML objects">
     @FXML
-    Label p0;
+            Label p0;
     @FXML
-    Label p1;    
+            Label p1;
     @FXML
-    Label p2;    
+            Label p2;
     @FXML
-    Label p3;    
+            Label p3;
     @FXML
-    Label p4;   
+            Label p4;
     @FXML
-    Button p0_up;
+            Button p0_up;
     @FXML
-    Button p1_up;
+            Button p1_up;
     @FXML
-    Button p2_up;
+            Button p2_up;
     @FXML
-    Button p3_up;
+            Button p3_up;
     @FXML
-    Button p4_up;
+            Button p4_up;
     @FXML
-    Button p0_down;
+            Button p0_down;
     @FXML
-    Button p1_down;
+            Button p1_down;
     @FXML
-    Button p2_down;
+            Button p2_down;
     @FXML
-    Button p3_down;
+            Button p3_down;
     @FXML
-    Button p4_down;
+            Button p4_down;
     @FXML
-    Label remain;
+            Label remain;
     @FXML
-    Pane messagePane;
+            Pane messagePane;
     @FXML
-    TextField name;
+            TextField name;
     @FXML
-    Label name_error;
+            Label name_error;
+//</editor-fold>
 
     private Main application;
+    private Player myPlayer;
+    private Universe myUniverse;
     private int[] points = new int[5];
     private final int MAX_POINTS = 15;
     
@@ -90,10 +94,10 @@ public class ConfigController implements Initializable {
         if (name.getText().equals("")) {
             name_error.setText("Name field is blank.");
         } else {
-            Player newPlayer = new Player(name.getText(), points);
+            myPlayer = new Player(name.getText(), points);
             messagePane.setVisible(true);
-            Universe uni = Universe.generateUniverse(100, 100, 40);
-    	    System.out.println(uni.toString());
+            myUniverse = Universe.generateUniverse(100, 100, 40);
+    	    System.out.println(myUniverse.toString());
             //System.out.println(newPlayer);
         }
     }
@@ -158,7 +162,7 @@ public class ConfigController implements Initializable {
      */
     @FXML
     private void handlePlay(ActionEvent event) {
-        application.play();
+        application.gotoGame(myPlayer, myUniverse);
     }
     
     /**

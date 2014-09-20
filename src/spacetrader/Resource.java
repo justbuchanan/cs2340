@@ -1,8 +1,9 @@
 package spacetrader;
 
 /**
- * @author Michael
  * The type of natural resource found on a planet.
+ * 
+ * @author Michael
  */
 public enum Resource {
 	NOSPECIALRESOURCES(0, "No special resources"),

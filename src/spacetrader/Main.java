@@ -19,8 +19,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Zephyr
+ * JavaFX main application
+ * 
+ * @author Bao
  */
 public class Main extends Application {
     private Stage stage;
@@ -57,13 +58,6 @@ public class Main extends Application {
     }
     
     /**
-     * CLoses configuration screen
-     */
-    void play() {
-        gotoGame();
-    }
-    
-    /**
      * Goes to configuration screen
      */
     private void gotoConfig() {
@@ -91,10 +85,11 @@ public class Main extends Application {
     /**
      * Goes to game screen
      */
-    private void gotoGame() {
+    void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
             GameController game = (GameController) replaceSceneContent("game.fxml");
             game.setApp(this);
+            game.config(myPlayer, myUniverse);
             /*TestController test = (TestController) replaceSceneContent("test.fxml");
             test.setApp(this);*/
         } catch (Exception ex) {
