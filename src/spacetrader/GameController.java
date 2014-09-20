@@ -34,6 +34,7 @@ public class GameController implements Initializable {
     //Player and universe objects are passed from config screen
     private Player myPlayer;
     private Universe myUniverse;
+    private List<SolarSystem> solarSystems;
     private SolarSystem mySS;
     
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
@@ -113,7 +114,7 @@ public class GameController implements Initializable {
         myUniverse = u;
         
         //Randomly select a solar system as starting point
-        List<SolarSystem> solarSystems = myUniverse.getSolarSystems();
+        solarSystems = myUniverse.getSolarSystems();
         mySS = solarSystems.get(rand.nextInt(solarSystems.size()));
         
         coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
