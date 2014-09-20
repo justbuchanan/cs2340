@@ -1,6 +1,7 @@
 package spacetrader;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -23,6 +24,7 @@ public class Universe {
 	 * @return the newly created Universe
 	 */
 	public static Universe generateUniverse(int _width, int _height, int numSolarSystems) {
+                shuffleArray(SolarSystemName);
 		Random rand = new Random();
 		Universe universe = new Universe();
 		universe.width = _width;
@@ -84,6 +86,22 @@ public class Universe {
 	public int getWidth() { return width; }
 	public void setHeight(int _height) { this.height = _height; }
 	public int getHeight() { return height; }
+        public List<SolarSystem> getSolarSystems() {
+            return solarSystems;
+        }
+        
+        public static void shuffleArray(String[] ar)
+        {
+          Random rnd = new Random();
+          for (int i = ar.length - 1; i > 0; i--)
+          {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+          }
+        }
 	/**
 	 * Contains all potential names for solar systems
 	 */
