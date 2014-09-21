@@ -9,62 +9,34 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="ws_background" stylesheets="@themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.ConfigController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Configuration" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="14.0" text="New Game" textFill="WHITE">
          <font>
-            <Font size="37.0" />
+            <Font name="FangSong" size="37.0" />
          </font></Label>
       <Button layoutX="351.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleOKAction" prefHeight="44.0" prefWidth="173.0" stylesheets="@themes.css" text="OK">
          <styleClass>
             <String fx:value="green" />
             <String fx:value="bigbutton" />
          </styleClass></Button>
-      <Label layoutX="135.0" layoutY="215.0" text="Allocate your skill points" textFill="WHITE">
+      <Label layoutX="135.0" layoutY="215.0" text="Allocate your skill points:" textFill="WHITE">
          <font>
-            <Font size="19.0" />
+            <Font name="FangSong" size="21.0" />
          </font></Label>
       <Button layoutX="564.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="44.0" prefWidth="173.0" text="Cancel">
          <styleClass>
             <String fx:value="green" />
             <String fx:value="bigbutton" />
          </styleClass></Button>
-      <VBox layoutX="201.0" layoutY="254.0">
-         <children>
-            <Label layoutX="201.0" layoutY="254.0" text="Pilot" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="201.0" layoutY="280.0" text="Fighter" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="201.0" layoutY="306.0" text="Trader" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="201.0" layoutY="332.0" text="Engineer" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="201.0" layoutY="358.0" text="Investor" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
+      <VBox layoutX="201.0" layoutY="254.0" />
       <Label layoutX="135.0" layoutY="99.0" text="Player's name:" textFill="WHITE">
          <font>
-            <Font size="19.0" />
+            <Font name="FangSong" size="21.0" />
          </font>
       </Label>
       <TextField fx:id="name" layoutX="195.0" layoutY="140.0" prefHeight="25.0" prefWidth="411.0" promptText="please enter your name here..." text="Starlord" />
       <Label layoutX="134.0" layoutY="401.0" text="Points remaining:" textFill="WHITE">
          <font>
-            <Font size="19.0" />
+            <Font name="FangSong" size="19.0" />
          </font>
       </Label>
       <VBox layoutX="313.0" layoutY="254.0" prefHeight="140.0" prefWidth="27.0">
@@ -96,24 +68,8 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="368.0" layoutY="254.0" spacing="3.0">
-         <children>
-            <Button fx:id="p0_up" layoutX="368.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleUp" text="▲" />
-            <Button fx:id="p1_up" layoutX="368.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleUp" text="▲" />
-            <Button fx:id="p2_up" layoutX="368.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleUp" text="▲" />
-            <Button fx:id="p3_up" layoutX="368.0" layoutY="358.0" mnemonicParsing="false" onAction="#handleUp" text="▲" />
-            <Button fx:id="p4_up" layoutX="368.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleUp" text="▲" />
-         </children>
-      </VBox>
-      <VBox layoutX="401.0" layoutY="254.0" spacing="3.0">
-         <children>
-            <Button fx:id="p0_down" layoutX="368.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleDown" text="▼" />
-            <Button fx:id="p1_down" layoutX="368.0" layoutY="288.0" mnemonicParsing="false" onAction="#handleDown" text="▼" />
-            <Button fx:id="p2_down" layoutX="368.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleDown" text="▼" />
-            <Button fx:id="p3_down" layoutX="368.0" layoutY="358.0" mnemonicParsing="false" onAction="#handleDown" text="▼" />
-            <Button fx:id="p4_down" layoutX="368.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleDown" text="▼" />
-         </children>
-      </VBox>
+      <VBox layoutX="368.0" layoutY="254.0" spacing="3.0" />
+      <VBox layoutX="401.0" layoutY="254.0" spacing="3.0" />
       <Label fx:id="remain" layoutX="314.0" layoutY="401.0" text="0" textFill="WHITE">
          <font>
             <Font size="19.0" />
@@ -131,5 +87,92 @@
             <Button layoutX="340.0" layoutY="408.0" mnemonicParsing="false" onAction="#handlePlay" prefHeight="25.0" prefWidth="120.0" styleClass="green" text="Play" />
          </children>
       </Pane>
+      <Group pickOnBounds="true">
+         <children>
+            <Label layoutX="174.0" layoutY="259.0" text="Fighter" textFill="WHITE">
+               <font>
+                  <Font name="FangSong" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="174.0" layoutY="374.0" prefHeight="15.0" prefWidth="82.0" text="Pilot" textFill="WHITE">
+               <font>
+                  <Font name="FangSong" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="174.0" layoutY="318.0" lineSpacing="2.0" text="Investor" textFill="WHITE">
+               <font>
+                  <Font name="FangSong" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="173.0" layoutY="290.0" text="Trader" textFill="WHITE">
+               <font>
+                  <Font name="FangSong" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="174.0" layoutY="345.0" text="Engineer" textFill="WHITE">
+               <font>
+                  <Font name="FangSong" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <Button fx:id="p1_down" layoutX="273.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleDown" text="◄">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p0_down" layoutX="274.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleDown" text="◄">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p3_down" layoutX="273.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleDown" text="◄">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p2_down" layoutX="273.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleDown" text="◄">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p4_down" layoutX="273.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleDown" text="◄">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <Button fx:id="p3_up" layoutX="337.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleUp" text="►">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p1_up" layoutX="337.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleUp" text="►">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p4_up" layoutX="337.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleUp" text="►">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p2_up" layoutX="337.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleUp" text="►">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="p0_up" layoutX="337.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleUp" text="►">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
    </children>
 </AnchorPane>
