@@ -17,3 +17,8 @@ hs_err_pid*
 /dist/
 /build/
 /nbproject/private/
+
+# NetBeans #
+nbproject/private/
+build/
+dist/
