@@ -114,7 +114,7 @@ public class Universe {
 	    "Antedi",
 	    "Balosnee",
 	    "Baratas",
-	    "Brax",			// One of the heroes in Master of Magic
+	    "Brax",		// One of the heroes in Master of Magic
 	    "Bretel",		// This is a Dutch device for keeping your pants up.
 	    "Calondia",
 	    "Campor",
@@ -153,7 +153,7 @@ public class Universe {
 	    "Jason",		// A Greek hero
 	    "Kaylon",
 	    "Khefka",
-	    "Kira",			// My dog's name
+	    "Kira",		// My dog's name
 	    "Klaatu",		// From a classic SF movie
 	    "Klaestron",
 	    "Korma",		// An Indian sauce
@@ -161,9 +161,10 @@ public class Universe {
 	    "Krios",
 	    "Laertes",		// A king in a Greek tragedy
 	    "Largo",
-	    "Lave",			// The starting system in Elite
+	    "Lave",		// The starting system in Elite
 	    "Ligon",
-	    "Lowry",		// The name of the "hero" in Terry Gilliam's "Brazil"
+	    "Lowry",            // The name of the "hero" in Terry Gilliam's "Brazil"
+            "Lylat",
 	    "Magrat",		// The second of the witches in Pratchett's Discworld
 	    "Malcoria",
 	    "Melina",
@@ -174,10 +175,10 @@ public class Universe {
 	    "Mordan",
 	    "Myrthe",		// The name of my daughter
 	    "Nelvana",
-	    "Nix",			// An interesting spelling of a word meaning "nothing" in Dutch
-	    "Nyle",			// An interesting spelling of the great river
+	    "Nix",		// An interesting spelling of a word meaning "nothing" in Dutch
+	    "Nyle",		// An interesting spelling of the great river
 	    "Odet",
-	    "Og",			// The last of the witches in Pratchett's Discworld
+	    "Og",		// The last of the witches in Pratchett's Discworld
 	    "Omega",		// The end of it all
 	    "Omphalos",		// Greek for navel
 	    "Orias",
@@ -188,7 +189,7 @@ public class Universe {
 	    "Pollux",		// Brother of Castor
 	    "Quator",
 	    "Rakhar",
-	    "Ran",			// A film by Akira Kurosawa
+	    "Ran",		// A film by Akira Kurosawa
 	    "Regulas",
 	    "Relva",
 	    "Rhymus",
@@ -199,7 +200,7 @@ public class Universe {
 	    "Sefalla",
 	    "Seltrice",
 	    "Sigma",
-	    "Sol",			// That's our own solar system
+	    "Sol",		// That's our own solar system
 	    "Somari",
 	    "Stakoron",
 	    "Styris",
@@ -223,10 +224,10 @@ public class Universe {
 	    "Ventax",
 	    "Xenon",
 	    "Xerxes",		// A Greek hero
-	    "Yew",			// A city which is in almost all of the Ultima games
+	    "Yew",		// A city which is in almost all of the Ultima games
 	    "Yojimbo",		// A film by Akira Kurosawa
 	    "Zalkon",
-	    "Zuul"			// From the first Ghostbusters movie
+	    "Zuul"		// From the first Ghostbusters movie
 	};
 
 }
