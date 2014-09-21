@@ -4,10 +4,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -21,6 +24,7 @@ public class GameController implements Initializable {
     @FXML Pane marketPane;
     @FXML Label coordinates;
     @FXML Label buyQuantity, currentBalance, afterBalance;
+    @FXML ListView list;
 //</editor-fold>
     
     private Main application;
@@ -41,7 +45,19 @@ public class GameController implements Initializable {
         marketPane.setVisible(true);
         buyQuantity.setText("1");
         currentBalance.setText(String.valueOf(myPlayer.getBalance()));
-        //Display ItemList in the table
+        //Display ItemList
+        ObservableList<String> items = FXCollections.observableArrayList (
+            "Water $30", "Furs $250", "Food", "Ore", "Games", "Firearms", "Medicine", "Machines", "Narcotics", "Robots");
+        list.setItems(items);
+        /*
+        list.getSelectionModel().selectedItemProperty().addListener(
+            new ChangeListener<String>() {
+                public void changed(ObservableValue<? extends String> ov, 
+                    String old_val, String new_val) {
+                        label.setText(new_val);
+                        label.setTextFill(Color.web(new_val));
+            }
+        });*/
     }
     @FXML
     private void closeMarketplace(ActionEvent event) {
