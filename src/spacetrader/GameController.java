@@ -147,14 +147,15 @@ public class GameController implements Initializable {
     }
     @FXML
     private void buy(ActionEvent event) {
-        int newBalance = Integer.parseInt(buyAfterBalance.getText());
-        if (newBalance >= 0) {
-            int itemIndex = buyList.getSelectionModel().getSelectedIndex();
-            int quantity = Integer.parseInt(buyQuantity.getText());
-            //List<Integer> cargo = myPlayer.getShip().getCargo();
-            myPlayer.getShip().addCargo(Item.values()[itemIndex], quantity);
-            myPlayer.setBalance(newBalance);
-            clearBuyWindow();
+        int itemIndex = buyList.getSelectionModel().getSelectedIndex();
+        if (myMarket.getPrice(Item.values()[itemIndex]) >= 0) { //check for -1
+            int newBalance = Integer.parseInt(buyAfterBalance.getText());
+            if (newBalance >= 0) {
+                int quantity = Integer.parseInt(buyQuantity.getText());
+                myPlayer.getShip().addCargo(Item.values()[itemIndex], quantity);
+                myPlayer.setBalance(newBalance);
+                clearBuyWindow();
+            }
         }
     }
     private void clearBuyWindow() {
