@@ -15,4 +15,9 @@ public class Marketplace {
         myItemList = new ArrayList<>();
         //generator here
     }
+    
+    public int getPrice(Item item) {
+        //dummy code
+        return 10*(item.getValue()+1);
+    }
 }
