@@ -90,6 +90,10 @@ public class Universe {
             return solarSystems;
         }
         
+        /**
+         * array shuffling helper
+         * @param ar input array
+         */
         public static void shuffleArray(String[] ar)
         {
           Random rnd = new Random();
