@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package spacetrader;
 
 import java.io.InputStream;
@@ -13,14 +7,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Zephyr
+ * JavaFX main application
+ * 
+ * @author Bao
  */
 public class Main extends Application {
     private Stage stage;
@@ -50,7 +44,7 @@ public class Main extends Application {
     }
     
     /**
-     * CLoses configuration screen
+     * Closes configuration screen
      */
     void closeConfig() {
         gotoWelcome();
@@ -75,6 +69,22 @@ public class Main extends Application {
         try {
             WelcomeController Welcome = (WelcomeController) replaceSceneContent("welcome.fxml");
             Welcome.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+            
+    /**
+     * Goes to game screen
+     */
+    void gotoGame(Player myPlayer, Universe myUniverse) {
+        try {
+            GameController game = (GameController) replaceSceneContent("game.fxml");
+            game.setApp(this);
+            game.config(myPlayer, myUniverse);
+            /*TestController test = (TestController) replaceSceneContent("test.fxml");
+            test.setApp(this);*/
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

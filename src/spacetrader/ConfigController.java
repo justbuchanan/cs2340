@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package spacetrader;
 
 import java.net.URL;
@@ -23,54 +17,28 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * FXML Controller class
+ * Configuration screen controller
  *
- * @author Zephyr
+ * @author Bao
  */
 public class ConfigController implements Initializable {
      
-    @FXML
-    Label p0;
-    @FXML
-    Label p1;    
-    @FXML
-    Label p2;    
-    @FXML
-    Label p3;    
-    @FXML
-    Label p4;   
-    @FXML
-    Button p0_up;
-    @FXML
-    Button p1_up;
-    @FXML
-    Button p2_up;
-    @FXML
-    Button p3_up;
-    @FXML
-    Button p4_up;
-    @FXML
-    Button p0_down;
-    @FXML
-    Button p1_down;
-    @FXML
-    Button p2_down;
-    @FXML
-    Button p3_down;
-    @FXML
-    Button p4_down;
-    @FXML
-    Label remain;
-    @FXML
-    Pane messagePane;
-    @FXML
-    TextField name;
-    @FXML
-    Label name_error;
+//<editor-fold defaultstate="collapsed" desc="FXML objects">
+    @FXML Label p0, p1, p2, p3, p4;
+    @FXML Button p0_up, p1_up, p2_up, p3_up, p4_up;
+    @FXML Button p0_down, p1_down, p2_down, p3_down, p4_down;
+    @FXML Label remain;
+    @FXML Pane messagePane;
+    @FXML TextField name;
+    @FXML Label name_error;
+//</editor-fold>
 
     private Main application;
+    private Player myPlayer;
+    private Universe myUniverse;
     private int[] points = new int[5];
-    private final int MAX_POINTS = 16;
+    private final int MAX_POINTS = 15;
+    private final int NUMBER_OF_SOLAR_SYSTEMS = 40;
     
     /**
      * Links to main application
@@ -81,22 +49,36 @@ public class ConfigController implements Initializable {
         this.application = application;
     }
     
+    /**
+     * "OK" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleOKAction(ActionEvent event) {
         if (name.getText().equals("")) {
             name_error.setText("Name field is blank.");
         } else {
-            Player newPlayer = new Player(name.getText(), points);
+            myPlayer = new Player(name.getText(), points);
             messagePane.setVisible(true);
+            myUniverse = Universe.generateUniverse(100, 100, NUMBER_OF_SOLAR_SYSTEMS);
+    	    System.out.println(myUniverse.toString());
             //System.out.println(newPlayer);
         }
     }
     
+    /**
+     * "Cancel" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleCancelAction(ActionEvent event) {
         application.closeConfig();
     }
         
+    /**
+     * "Up" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleUp(ActionEvent event) {
         if (getRemainingPoints() > 0) {
@@ -118,6 +100,10 @@ public class ConfigController implements Initializable {
         //System.out.printf("%d %d %d %d %d - %d%n", points[0], points[1], points[2], points[3], points[4], sum);
     }
     
+    /**
+     * "Down" button is pressed
+     * @param event 
+     */
     @FXML
     private void handleDown(ActionEvent event) {
         if (event.getSource().equals(p0_down)) {
@@ -134,6 +120,19 @@ public class ConfigController implements Initializable {
         showRemainingPoints();
     }
     
+    /**
+     * "Play" is pressed
+     * @param event 
+     */
+    @FXML
+    private void handlePlay(ActionEvent event) {
+        application.gotoGame(myPlayer, myUniverse);
+    }
+    
+    /**
+     * "Go to Home Screen" is pressed
+     * @param event 
+     */
     @FXML
     private void handleGoToHomeScreen(ActionEvent event) {
         application.closeConfig();

@@ -21,3 +21,7 @@ hs_err_pid*
 .gradle
 
 
+# NetBeans #
+nbproject/private/
+build/
+dist/
