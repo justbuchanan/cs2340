@@ -1,5 +1,9 @@
 package spacetrader;
 
+import spacetrader.data.Resource;
+import spacetrader.data.TechLevel;
+import spacetrader.models.SolarSystem;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

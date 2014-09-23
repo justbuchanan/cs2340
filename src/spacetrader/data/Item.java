@@ -1,4 +1,4 @@
-package spacetrader;
+package spacetrader.data;
 
 /**
  * Types of goods that are tradable.

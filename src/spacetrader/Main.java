@@ -10,6 +10,10 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import spacetrader.controllers.ConfigController;
+import spacetrader.controllers.GameController;
+import spacetrader.controllers.WelcomeController;
+import spacetrader.models.Player;
 
 /**
  * JavaFX main application
@@ -39,14 +43,14 @@ public class Main extends Application {
     /**
      * Opens configuration screen
      */
-    void openConfig() {
+    public void openConfig() {
         gotoConfig();
     }
     
     /**
      * Closes configuration screen
      */
-    void closeConfig() {
+    public void closeConfig() {
         gotoWelcome();
     }
     
@@ -55,7 +59,7 @@ public class Main extends Application {
      */
     private void gotoConfig() {
         try {
-            ConfigController config = (ConfigController) replaceSceneContent("config.fxml");
+            ConfigController config = (ConfigController) replaceSceneContent("views/config.fxml");
             config.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +71,7 @@ public class Main extends Application {
      */
     private void gotoWelcome() {
         try {
-            WelcomeController Welcome = (WelcomeController) replaceSceneContent("welcome.fxml");
+            WelcomeController Welcome = (WelcomeController) replaceSceneContent("views/welcome.fxml");
             Welcome.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,9 +82,9 @@ public class Main extends Application {
     /**
      * Goes to game screen
      */
-    void gotoGame(Player myPlayer, Universe myUniverse) {
+    public void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
-            GameController game = (GameController) replaceSceneContent("game.fxml");
+            GameController game = (GameController) replaceSceneContent("views/game.fxml");
             game.setApp(this);
             game.config(myPlayer, myUniverse);
             /*TestController test = (TestController) replaceSceneContent("test.fxml");
