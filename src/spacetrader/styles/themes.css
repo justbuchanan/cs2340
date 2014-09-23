@@ -1,5 +1,6 @@
 .root{
-	-fx-font-family: 'Helvetica', Arial, sans-serif;
+    -fx-font-family: 'Helvetica', Arial, sans-serif;
+    -fx-background-color: black;
 }
 
 .green {
