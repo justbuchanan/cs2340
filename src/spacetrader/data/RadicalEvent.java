@@ -14,15 +14,19 @@ public enum RadicalEvent {
 	PLAGUE(5, "Plague"),
 	LACKOFWORKERS(6, "Lack of workers");
 	
-	private int value;
-	private String text;
-	private RadicalEvent(int _value, String _text) {
-		this.value = _value;
-		this.text = _text;
+	private int priceIncrease;
+	private String name;
+	private RadicalEvent(int priceIncrease, String name) {
+            this.priceIncrease = priceIncrease;
+            this.name = name;
 	}
 	
 	@Override
 	public String toString() {
-		return this.text;
+            return this.name;
 	}
+        
+        public int getPriceIncrease() {
+            return this.priceIncrease;
+        }
 }
