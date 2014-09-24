@@ -19,17 +19,17 @@ public enum Item {
     
     private final int key;
     private final String name;
-    private final int mtlp;
-    private final int mtlu;
-    private final int ttp;
+    private final int mtlp;         //  Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
+    private final int mtlu;         //  Minimum Tech Level to Use this resource (You can't sell on planets below this level)
+    private final int ttp;          //  Tech Level which produces the most of this item
     private final int basePrice;
-    private final int ipl;
-    private final int var;
-    private final RadicalEvent ie;
-    private final Resource cr;
-    private final Resource er;
-    private final int mtl;
-    private final int mth;
+    private final int ipl;          //  Price increase per tech level
+    private final int var;          //  Var = variance is the maximum percentage that the price can vary above or below the base
+    private final RadicalEvent ie;  //  Radical price increase event, when this even happens on a planet, the price may increase astronomically
+    private final Resource cr;      //  When this condition is present, the price of this resource is unusually low
+    private final Resource er;      //  When this condition is present, the resource is expensive
+    private final int mtl;          //  Min price offered in space trade with random trader (not on a planet)
+    private final int mth;          //  Max price offered in space trade with random trader (not on a planet)
     
     
     private Item(int i, String d, int mtlp, int mtlu, int ttp, int base, int ipl, int var, RadicalEvent ie, Resource cr, Resource er, int mtl, int mth) {
