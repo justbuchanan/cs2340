@@ -25,4 +25,8 @@ public enum TechLevel {
 	public String toString() {
 		return this.text;
 	}
+        
+        public int getValue() {
+            return this.value;
+        }
 }

@@ -21,8 +21,11 @@ public class Marketplace {
     //  The radical events that currently affect this MarketPlace
     private HashSet<RadicalEvent> currentRadicalEvents;
     
+    private SolarSystem solarSystem;
+    
+    
     public Marketplace(SolarSystem mySS) {
-        //generator here
+        this.solarSystem = mySS;
     }
     
     /**
@@ -39,6 +42,21 @@ public class Marketplace {
             //  if a radical event is taking place that affects this item, apply the increase in cost
             if (currentRadicalEvents.contains(item.getIe())) {
                 price += item.getIe().getPriceIncrease();
+            }
+            
+            //  the price increases per tech level
+            price += (this.solarSystem.getTechLevel().getValue() - item.getMtlp()) * item.getIpl();
+            
+            
+            //  TODO: account for other ER and CR here
+            
+            
+            //  limit final price so that it's not more than @var different than the base price
+            int maxPriceDiff = item.getBasePrice() * item.getVar() / 100;
+            if (price - item.getBasePrice() > maxPriceDiff) {
+                price = item.getBasePrice() + maxPriceDiff;
+            } else if (price - item.getBasePrice() < -maxPriceDiff) {
+                price = item.getBasePrice() - maxPriceDiff;
             }
             
             return price;
@@ -86,7 +104,13 @@ public class Marketplace {
      * @param quantity
      * @return The amount of money received in the transaction
      */
-    public int sell(Item item, int quantity) {
+    public int sell(Item item, int quantity) throws Exception {
+        //  make sure the planet's Tech Leve is high enough to use this resource
+        if (this.solarSystem.getTechLevel().getValue() < item.getMtlu()) {
+            throw new Exception("This planet's Tech Level is too low to use this resource");
+        }
+        
+        
         //  make sure the item exists in our records
         if (!availableItems.containsKey(item)) {
             availableItems.put(item, 0);
