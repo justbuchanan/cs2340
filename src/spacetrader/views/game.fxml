@@ -25,28 +25,27 @@
             </Label>
             <TabPane fx:id="marketTabPane" layoutX="83.0" layoutY="74.0" prefHeight="462.0" prefWidth="655.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Buy">
+                <Tab text="Market">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Choose an item from the marketplace" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Welcome. Here is what we have for sale." />
                               <Label layoutX="28.0" layoutY="275.0" text="Price:" />
                               <Label layoutX="27.0" layoutY="312.0" text="Quantity:" />
-                              <Label layoutX="29.0" layoutY="350.0" text="Your credits:" />
                               <Label layoutX="29.0" layoutY="384.0" text="Your credits after purchase:" />
                               <Button layoutX="471.0" layoutY="368.0" mnemonicParsing="false" onAction="#buy" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="BUY" />
                               <Label fx:id="buyPrice" layoutX="85.0" layoutY="275.0" text="0" />
                               <Label fx:id="buyQuantity" layoutX="129.0" layoutY="312.0" text="0" />
-                              <Label fx:id="buyBalance" layoutX="136.0" layoutY="350.0" text="0" />
                               <Label fx:id="buyAfterBalance" layoutX="196.0" layoutY="385.0" text="0" />
                               <Button fx:id="buy_up" layoutX="183.0" layoutY="308.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
                               <Button fx:id="buy_down" layoutX="221.0" layoutY="308.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
                               <ListView fx:id="buyList" layoutX="33.0" layoutY="54.0" prefHeight="200.0" prefWidth="590.0" />
+                              <Group />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Sell">
+                <Tab text="Inventory">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -67,7 +66,9 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <Button layoutX="617.0" layoutY="27.0" mnemonicParsing="false" onAction="#closeMarketplace" prefHeight="25.0" prefWidth="121.0" text="Return" />
+            <Button layoutX="657.0" layoutY="557.0" mnemonicParsing="false" onAction="#closeMarketplace" prefHeight="25.0" prefWidth="121.0" text="Return" />
+            <Label layoutX="622.0" layoutY="45.0" text="Your credits:" textFill="WHITE" />
+            <Label fx:id="buyBalance" layoutX="708.0" layoutY="46.0" text="0" textFill="WHITE" />
          </children>
       </Pane>
    </children>
