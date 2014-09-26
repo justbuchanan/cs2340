@@ -18,7 +18,10 @@
       <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets right="30.0" />
-         </padding></Label>
+         </padding>
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font></Label>
       <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);" visible="false">
          <children>
             <Label layoutX="83.0" layoutY="27.0" text="Marketplace" textFill="WHITE">
