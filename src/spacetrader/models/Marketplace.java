@@ -26,6 +26,9 @@ public class Marketplace {
     
     public Marketplace(SolarSystem mySS) {
         this.solarSystem = mySS;
+        
+        this.availableItems = new HashMap<>();
+        this.currentRadicalEvents = new HashSet<>();
     }
     
     /**
