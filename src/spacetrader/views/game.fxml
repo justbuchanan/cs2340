@@ -15,6 +15,9 @@
       <Canvas fx:id="canvas" height="600.0" layoutY="8.0" width="800.0" />
       <Button layoutX="14.0" layoutY="569.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" text="EXIT" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
+      <Button layoutX="130.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
+      <Button layoutX="322.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="JUMP DRIVE" />
+      <Button layoutX="437.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="INVISIBLE" />
       <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets right="30.0" />
