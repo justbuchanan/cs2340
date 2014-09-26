@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import spacetrader.Main;
 import spacetrader.models.Player;
-import spacetrader.Universe;
+import spacetrader.models.Universe;
 
 /**
  * Configuration screen controller

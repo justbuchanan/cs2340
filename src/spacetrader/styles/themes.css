@@ -34,9 +34,9 @@
 }
 
 .ws_background {
-	-fx-background-image: url("../../img/background.jpg");
+	-fx-background-image: url("../resources/img/background.jpg");
 }
 
 .universe_background {
-	-fx-background-image: url("../../img/universe.jpg");
+	-fx-background-image: url("../resources/img/universe.jpg");
 }

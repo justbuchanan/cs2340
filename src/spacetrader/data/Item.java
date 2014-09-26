@@ -48,59 +48,115 @@ public enum Item {
         this.mth = mth;
     }
 
+    /**
+     * Get value of the item
+     * @return value
+     */
     public int getValue() {
         return key;
     }
     
+    /**
+     * Get name of the item
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Same as getValue();
+     * @return 
+     */
     public int getKey() {
         return key;
     }
-
-    public int getMtlp() {
+    
+    /**
+     * Get Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
+     * @return MTLP
+     */
+    public int getMTLP() {
         return mtlp;
     }
 
-    public int getMtlu() {
+    /**
+     * Get Minimum Tech Level to Use this resource (You can't sell on planets below this level)
+     * @return MTLU
+     */
+    public int getMTLU() {
         return mtlu;
     }
 
-    public int getTtp() {
+    /**
+     * Get Tech Level which produces the most of this item
+     * @return TTP
+     */
+    public int getTTP() {
         return ttp;
     }
 
+    /**
+     * Get base price of the item
+     * @return basePrice
+     */
     public int getBasePrice() {
         return basePrice;
     }
 
-    public int getIpl() {
+    /**
+     * Get Price increase per tech level
+     * @return IPL
+     */
+    public int getIPL() {
         return ipl;
     }
 
+    /**
+     * Get variance is the maximum percentage that the price can vary above or below the base
+     * @return variance
+     */
     public int getVar() {
         return var;
     }
 
-    public RadicalEvent getIe() {
+    /**
+     * Get Radical price increase event, when this even happens on a planet, the price may increase astronomically
+     * @return increase event
+     */
+    public RadicalEvent getIE() {
         return ie;
     }
 
-    public Resource getCr() {
+    /**
+     * Get the condition when the price is unusually low
+     * @return cheap resource
+     */
+    public Resource getCR() {
         return cr;
     }
-
-    public Resource getEr() {
+    
+    /**
+     * Get the condition when the resource is expensive
+     * @return expensive resource
+     */
+    public Resource getER() {
         return er;
     }
 
-    public int getMtl() {
+    /**
+     * Get min price offered in space trade with random trader (not on a planet)
+     * @return minPrice
+     */
+    public int getMTL() {
         return mtl;
     }
-
-    public int getMth() {
+    
+    /**
+     * Get max price offered in space trade with random trader (not on a planet)
+     * @return maxPrice
+     */
+    public int getMTH() {
         return mth;
     }
     

@@ -1,5 +1,6 @@
 package spacetrader.controllers;
 
+import spacetrader.models.Universe;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +13,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import spacetrader.*;
 import spacetrader.data.Item;
-import spacetrader.models.Marketplace;
-import spacetrader.models.Player;
-import spacetrader.models.SolarSystem;
+import spacetrader.data.TechLevel;
+import spacetrader.models.*;
 
 /**
  * Game screen controller
@@ -30,16 +36,19 @@ import spacetrader.models.SolarSystem;
  */
 public class GameController implements Initializable {
 
-//<editor-fold defaultstate="collapsed" desc="FXML DECLARATIONS">
+    private Main application;
+    
+//<editor-fold defaultstate="collapsed" desc="MARKETPLACE DECLARATIONS">
     @FXML Pane marketPane;
     @FXML Label coordinates;
     @FXML TabPane marketTabPane;
     @FXML Label buyPrice, buyQuantity, buyBalance, buyAfterBalance;
     @FXML Label sellPrice, sellQuantity, sellBalance, sellAfterBalance;
     @FXML ListView buyList, sellList;
+    @FXML Label error, cargo;
+    @FXML Pane buyPane, sellPane;
+    private ObservableList<String> buyItems, sellItems;
 //</editor-fold>
-    
-    private Main application;
     
     //Player and universe objects are passed from config screen
     private Player myPlayer;
@@ -47,13 +56,38 @@ public class GameController implements Initializable {
     private List<SolarSystem> solarSystems;
     private SolarSystem mySS;
     private Marketplace myMarket;
-    private ObservableList<String> buyItems, sellItems;
+    
+    @FXML
+    private Canvas canvas;
+    
+    /**
+     * Draws a planet on the canvas
+     * 
+     * @param gc graphics context
+     * @param x x-coordinate of the center
+     * @param y y-coordinate of the center
+     */
+    private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
+        gc.setFill(new RadialGradient(0, 0, 0.3, 0.3, 1, true,
+               CycleMethod.REFLECT,
+               new Stop(0.0, Color.WHITE),
+               new Stop(1.0, Color.CADETBLUE)));
+        gc.fillOval(x-r, y-r, r*2, r*2);
+    }
+    
+    /**
+     * Fills the canvas with planets
+     */
+    private void fillCanvas() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        drawPlanet(gc, 400, 300, 50);
+    }
     
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
         //Put marketplace generated code here...
-        myMarket = new Marketplace(mySS);
+        myMarket = mySS.getMP();
         
         //Display and set up marketPane
         marketPane.setVisible(true);
@@ -61,11 +95,13 @@ public class GameController implements Initializable {
         resetSellList();
         clearSellWindow();
         clearBuyWindow();
+        displayCargo();
                 
         marketTabPane.getSelectionModel().selectedItemProperty().addListener(
             new ChangeListener<Tab>() {
             @Override
             public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                error.setText("");
                 resetBuyList();
                 resetSellList();
                 clearSellWindow();
@@ -73,7 +109,6 @@ public class GameController implements Initializable {
             }
             }
         );
-        //List<Integer> marketList = marketList.getPrice();
        
     }
     @FXML
@@ -84,7 +119,7 @@ public class GameController implements Initializable {
     private void initBuyWindow() {
         List<String> marketListS = new ArrayList<String>(Item.values().length);
         for (int i = 0; i < Item.values().length; i++) {
-            marketListS.add(Item.values()[i].getName() + " (" + myMarket.getPrice(Item.values()[i]) + " credits)");
+            marketListS.add(null);
         }
         buyItems = FXCollections.observableArrayList(marketListS);
         buyList.setItems(buyItems);
@@ -95,21 +130,27 @@ public class GameController implements Initializable {
             new ChangeListener<String>() {
                 public void changed(ObservableValue<? extends String> ov, 
                     String old_val, String new_val) {
-                        int price = myMarket.getPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
+                    error.setText("");
+                    Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+                    if(myMarket.isBuyable(item)) {
+                        buyPane.setVisible(true);
+                        int price = myMarket.getBuyPrice(item);
                         buyPrice.setText(String.valueOf(price));
                         buyQuantity.setText("1");
                         int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*price;
                         buyAfterBalance.setText(String.valueOf(newBalance));
+                    } else {
+                        buyPane.setVisible(false);
+                    }
             }
         });
     }
     
     private void initSellWindow() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
-        //Create cargo list
         List<String> cargoS = new ArrayList<String>(Item.values().length);
         for (int i = 0; i < Item.values().length; i++) {
-            cargoS.add(cargo.get(i) + " " + Item.values()[i].getName());
+            cargoS.add(null);
         }
         sellItems = FXCollections.observableArrayList(cargoS);
         sellList.setItems(sellItems);
@@ -119,12 +160,18 @@ public class GameController implements Initializable {
         sellList.getSelectionModel().selectedItemProperty().addListener(
             new ChangeListener<String>() {
                 public void changed(ObservableValue<? extends String> ov, 
-                    String old_val, String new_val) {
-                        int price = myMarket.getPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
+                    String old_val, String new_val) {                    
+                    Item item = Item.values()[sellList.getSelectionModel().getSelectedIndex()];
+                    if (myMarket.isSellable(item)) {
+                        sellPane.setVisible(true);
+                        int price = myMarket.getSellPrice(item);
                         sellPrice.setText(String.valueOf(price));
                         sellQuantity.setText("1");
                         int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*price;
                         sellAfterBalance.setText(String.valueOf(newBalance));
+                    } else {
+                        sellPane.setVisible(false);
+                    }
             }
         });
     }
@@ -134,10 +181,13 @@ public class GameController implements Initializable {
     @FXML
     private void increaseBuyQuantity(ActionEvent event) {
         int q = Integer.parseInt(buyQuantity.getText());
-        q++;
-        buyQuantity.setText(q + "");
-        int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
-        buyAfterBalance.setText(String.valueOf(newBalance));
+        Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+        if (myMarket.getQuantity(item) > q) {
+            q++;
+            buyQuantity.setText(q + "");
+            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
+            buyAfterBalance.setText(String.valueOf(newBalance));
+        }
     }
     @FXML
     private void decreaseBuyQuantity(ActionEvent event) {
@@ -151,19 +201,27 @@ public class GameController implements Initializable {
     }
     @FXML
     private void buy(ActionEvent event) {
-        int itemIndex = buyList.getSelectionModel().getSelectedIndex();
-        if (myMarket.getPrice(Item.values()[itemIndex]) >= 0) { //check for -1
-            int newBalance = Integer.parseInt(buyAfterBalance.getText());
-            if (newBalance >= 0) {
-                int quantity = Integer.parseInt(buyQuantity.getText());
-                myPlayer.getShip().addCargo(Item.values()[itemIndex], quantity);
+        Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+        int newBalance = Integer.parseInt(buyAfterBalance.getText());
+        error.setText("");
+        int quantity = Integer.parseInt(buyQuantity.getText());
+        if (newBalance >= 0) {
+            if (myPlayer.getShip().getCurrentCargo() + quantity <= myPlayer.getShip().getMaxCargo()) {
+                myMarket.buy(item, quantity);
+                myPlayer.getShip().addCargo(item, quantity);
+                displayCargo();
                 myPlayer.setBalance(newBalance);
+                resetBuyList();
                 clearBuyWindow();
+            } else {
+                error.setText("Your cargo bays are full");
             }
+        } else {
+            error.setText("You have insufficient funds");
         }
     }
     private void clearBuyWindow() {
-        int price = myMarket.getPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
+        int price = myMarket.getBuyPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
         buyPrice.setText(String.valueOf(price));
         buyQuantity.setText("1");
         buyBalance.setText(String.valueOf(myPlayer.getBalance()));        
@@ -172,7 +230,11 @@ public class GameController implements Initializable {
     }
     private void resetBuyList() {
         for (int i = 0; i < Item.values().length; i++) {
-            buyItems.set(i, Item.values()[i].getName() + " (" + myMarket.getPrice(Item.values()[i]) + " credits)");
+            if (myMarket.isBuyable(Item.values()[i])) {
+                buyItems.set(i, Item.values()[i].getName() + " (Price: " + myMarket.getBuyPrice(Item.values()[i]) + " credits, Quantity: " + myMarket.getQuantity(Item.values()[i])+")");
+            } else {
+                buyItems.set(i, Item.values()[i].getName() + " is not available");
+            }
         }
         buyList.setItems(buyItems);
     }
@@ -196,20 +258,23 @@ public class GameController implements Initializable {
         }
     }
     @FXML
-    private void sell(ActionEvent event) {        
+    private void sell(ActionEvent event) {    
         List<Integer> cargo = myPlayer.getShip().getCargo();
         int itemIndex = sellList.getSelectionModel().getSelectedIndex();
+        Item item = Item.values()[itemIndex];
         int quantity = Integer.parseInt(sellQuantity.getText());
         if (cargo.get(itemIndex) >= quantity) {
+            myMarket.sell(item, quantity);
             int newBalance = Integer.parseInt(sellAfterBalance.getText());
             myPlayer.getShip().removeCargo(Item.values()[itemIndex], quantity);
+            displayCargo();
             myPlayer.setBalance(newBalance);
             resetSellList();
             clearSellWindow();
         }
     }
     private void clearSellWindow() {        
-        int price = myMarket.getPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
+        int price = myMarket.getSellPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
         sellPrice.setText(String.valueOf(price));
         sellQuantity.setText("1");
         sellBalance.setText(String.valueOf(myPlayer.getBalance()));        
@@ -219,9 +284,27 @@ public class GameController implements Initializable {
     private void resetSellList() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         for (int i = 0; i < Item.values().length; i++) {
-            sellItems.set(i, cargo.get(i) + " " + Item.values()[i].getName());
+            Item item = Item.values()[i];
+            if (myMarket.isSellable(item)) {
+                sellItems.set(i, cargo.get(i) + " " + item.getName() + " (Price: " + myMarket.getSellPrice(item) + " credits)");
+            } else {
+                sellItems.set(i, "Cannot sell " + item.getName() + " on this solar system");
+            }
         }
         sellList.setItems(sellItems);
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="CARGO HELPER METHODS">
+    private void displayCargo() {
+        cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo());
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="MAIN WINDOW COMPONENTS">
+    @FXML
+    private void exit(ActionEvent e) {
+        application.showWelcome();
     }
 //</editor-fold>
     
@@ -258,6 +341,9 @@ public class GameController implements Initializable {
         //Randomly select a solar system as starting point
         solarSystems = myUniverse.getSolarSystems();
         mySS = solarSystems.get(rand.nextInt(solarSystems.size()));
+        //mySS.setTechLevel(TechLevel.MEDIEVAL);
+        
+        fillCanvas();
         
         coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
                 + "Solar System: " + mySS.getName() + "\n"
@@ -271,4 +357,5 @@ public class GameController implements Initializable {
         initSellWindow();
     }
 //</editor-fold>
+    
 }

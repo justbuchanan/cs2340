@@ -1,4 +1,4 @@
-package spacetrader;
+package spacetrader.models;
 
 import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
@@ -47,6 +47,7 @@ public class Universe {
 			ss.setResource(rsc);
 			TechLevel tech = TechLevel.values()[rand.nextInt(TechLevel.values().length)];
 			ss.setTechLevel(tech);
+                        ss.setMP();
 			universe.solarSystems.add(ss);
 		}
 		return universe;

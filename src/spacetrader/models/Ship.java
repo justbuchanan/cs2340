@@ -25,7 +25,7 @@ public class Ship {
     }
     
     /**
-     * Adds items to cargo
+     * Add item to cargo
      * 
      * @param item
      * @param quantity 
@@ -36,7 +36,7 @@ public class Ship {
     } 
     
     /**
-     * Removes items from cargo
+     * Remove item from cargo
      * 
      * @param item
      * @param quantity 
@@ -46,20 +46,47 @@ public class Ship {
         cargo.set(item.getValue(), q - quantity);
     }
     
+    /**
+     * Get cargo list
+     * @return 
+     */
     public List<Integer> getCargo() {
         return cargo;
     }
 
+    /**
+     * Set cargo list
+     * @param cargo 
+     */
     public void setCargo(List<Integer> cargo) {
         this.cargo = cargo;
     }
 
+    /**
+     * Get the max carrying capability of the ship
+     * @return maximum number of cargo bays
+     */
     public int getMaxCargo() {
         return cargo_bay_number;
     }
-
+    
+    /**
+     * Set the max carrying capability of the ship
+     * @param number of cargo bays
+     */
     public void setMaxCargo(int number) {
         this.cargo_bay_number = number;
     }
     
+    /**
+     * Get the total number of cargo bays
+     * @return current number of cargo bays
+     */
+    public int getCurrentCargo() {
+        int sum = 0;
+        for (int i: cargo) {
+            sum += i;
+        }
+        return sum;
+    }
 }

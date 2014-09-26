@@ -1,5 +1,7 @@
 package spacetrader.models;
 
+import java.util.HashMap;
+import spacetrader.data.Item;
 import spacetrader.data.TechLevel;
 import spacetrader.data.Resource;
 
@@ -13,6 +15,19 @@ public class SolarSystem {
 	private int y;
 	private Resource resource;
 	private TechLevel techLevel;
+        private HashMap<Item, Integer> availableItems;
+        private Marketplace mp;
+        
+    /**
+     * Creates a solar system with some initial amount of resources
+     */
+    public SolarSystem() {
+        int quantity[] = {30,30,30,30,30,30,30,30,30,30};
+        availableItems = new HashMap<>();
+        for (int i = 0; i < quantity.length; i++) {
+            availableItems.put(Item.values()[i], quantity[i]);
+        }
+    }
 	
     /**
      * gets name
@@ -78,5 +93,36 @@ public class SolarSystem {
     public String toString() {
             return name+"("+x+","+y+") "+resource.name()+" "+techLevel.name();
     }
-	
+
+    /**
+     * Gets a map of items available on the solar system
+     * @return 
+     */
+    public HashMap<Item, Integer> getAvailableItems() {
+        return availableItems;
+    }
+
+    /**
+     * Sets what items are available on the solar systems
+     * @param availableItems 
+     */
+    public void setAvailableItems(HashMap<Item, Integer> availableItems) {
+        this.availableItems = availableItems;
+    }
+
+    /**
+     * Gets the marketplace of the solar system
+     * @return 
+     */
+    public Marketplace getMP() {
+        return mp;
+    }
+    
+    /**
+     * Sets the marketplace of the solar system
+     * @return 
+     */
+    public Marketplace setMP() {
+        return mp = new Marketplace(this);
+    }
 }

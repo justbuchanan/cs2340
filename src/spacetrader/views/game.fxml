@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -9,14 +10,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="universe_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.GameController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" styleClass="universe_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.GameController">
    <children>
-      <Button layoutX="37.0" layoutY="31.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="146.0" text="Visit marketplace" />
+      <Canvas fx:id="canvas" height="600.0" layoutY="8.0" width="800.0" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
       <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets right="30.0" />
          </padding></Label>
-      <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);">
+      <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);" visible="false">
          <children>
             <Label layoutX="83.0" layoutY="27.0" text="Marketplace" textFill="WHITE">
                <font>
@@ -25,50 +27,66 @@
             </Label>
             <TabPane fx:id="marketTabPane" layoutX="83.0" layoutY="74.0" prefHeight="462.0" prefWidth="655.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Buy">
+                <Tab text="BUY">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Choose an item from the marketplace" />
-                              <Label layoutX="28.0" layoutY="275.0" text="Price:" />
-                              <Label layoutX="27.0" layoutY="312.0" text="Quantity:" />
-                              <Label layoutX="29.0" layoutY="350.0" text="Your credits:" />
-                              <Label layoutX="29.0" layoutY="384.0" text="Your credits after purchase:" />
-                              <Button layoutX="471.0" layoutY="368.0" mnemonicParsing="false" onAction="#buy" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="BUY" />
-                              <Label fx:id="buyPrice" layoutX="85.0" layoutY="275.0" text="0" />
-                              <Label fx:id="buyQuantity" layoutX="129.0" layoutY="312.0" text="0" />
-                              <Label fx:id="buyBalance" layoutX="136.0" layoutY="350.0" text="0" />
-                              <Label fx:id="buyAfterBalance" layoutX="196.0" layoutY="385.0" text="0" />
-                              <Button fx:id="buy_up" layoutX="183.0" layoutY="308.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
-                              <Button fx:id="buy_down" layoutX="221.0" layoutY="308.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
-                              <ListView fx:id="buyList" layoutX="33.0" layoutY="54.0" prefHeight="200.0" prefWidth="590.0" />
+                              <Label layoutX="27.0" layoutY="21.0" text="MARKETPLACE ITEM LIST" />
+                              <ListView fx:id="buyList" layoutX="28.0" layoutY="48.0" prefHeight="223.0" prefWidth="601.0" />
+                              <Pane fx:id="buyPane" layoutX="6.0" layoutY="263.0" prefHeight="157.0" prefWidth="633.0">
+                                 <children>
+                                    <Label layoutX="48.0" layoutY="30.0" text="Price:" />
+                                    <Label layoutX="48.0" layoutY="51.0" text="Quantity:" />
+                                    <Label layoutX="48.0" layoutY="91.0" text="Your credits:" />
+                                    <Label layoutX="48.0" layoutY="113.0" text="Your credits after purchase:" />
+                                    <Button layoutX="490.0" layoutY="100.0" mnemonicParsing="false" onAction="#buy" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="BUY" />
+                                    <Label fx:id="buyPrice" layoutX="120.0" layoutY="30.0" text="0" />
+                                    <Label fx:id="buyQuantity" layoutX="120.0" layoutY="51.0" text="0" />
+                                    <Label fx:id="buyBalance" layoutX="140.0" layoutY="91.0" text="0" />
+                                    <Label fx:id="buyAfterBalance" layoutX="218.0" layoutY="113.0" text="0" />
+                                    <Button fx:id="buy_up" layoutX="143.0" layoutY="47.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
+                                    <Button fx:id="buy_down" layoutX="169.0" layoutY="47.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
+                                 </children>
+                              </Pane>
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Sell">
+                <Tab text="SELL">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ListView fx:id="sellList" layoutX="33.0" layoutY="43.0" prefHeight="200.0" prefWidth="590.0" />
-                              <Button layoutX="240.0" layoutY="302.0" mnemonicParsing="false" onAction="#decreaseSellQuantity" text="▼" />
-                              <Button layoutX="206.0" layoutY="302.0" mnemonicParsing="false" onAction="#increaseSellQuantity" text="▲" />
-                              <Label fx:id="sellAfterBalance" layoutX="233.0" layoutY="378.0" text="0" />
-                              <Label fx:id="sellBalance" layoutX="147.0" layoutY="345.0" text="0" />
-                              <Label fx:id="sellQuantity" layoutX="144.0" layoutY="306.0" text="0" />
-                              <Label fx:id="sellPrice" layoutX="147.0" layoutY="260.0" text="0" />
-                              <Button layoutX="414.0" layoutY="378.0" mnemonicParsing="false" onAction="#sell" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="SELL" />
-                              <Label layoutX="48.0" layoutY="378.0" text="Your credits after purchase:" />
-                              <Label layoutX="48.0" layoutY="345.0" text="Your credits:" />
-                              <Label layoutX="52.0" layoutY="306.0" text="Quantity:" />
-                              <Label layoutX="52.0" layoutY="260.0" text="Price:" />
+                              <ListView fx:id="sellList" layoutX="33.0" layoutY="36.0" prefHeight="207.0" prefWidth="590.0" />
+                              <Pane fx:id="sellPane" layoutX="11.0" layoutY="251.0" prefHeight="173.0" prefWidth="633.0">
+                                 <children>
+                                    <Button layoutX="179.0" layoutY="66.0" mnemonicParsing="false" onAction="#decreaseSellQuantity" text="▼" />
+                                    <Button layoutX="147.0" layoutY="66.0" mnemonicParsing="false" onAction="#increaseSellQuantity" text="▲" />
+                                    <Label fx:id="sellAfterBalance" layoutX="225.0" layoutY="129.0" text="0" />
+                                    <Label fx:id="sellBalance" layoutX="141.0" layoutY="107.0" text="0" />
+                                    <Label fx:id="sellQuantity" layoutX="117.0" layoutY="70.0" text="0" />
+                                    <Label fx:id="sellPrice" layoutX="117.0" layoutY="49.0" text="0" />
+                                    <Button layoutX="490.0" layoutY="115.0" mnemonicParsing="false" onAction="#sell" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="SELL" />
+                                    <Label layoutX="48.0" layoutY="129.0" text="Your credits after purchase:" />
+                                    <Label layoutX="48.0" layoutY="107.0" text="Your credits:" />
+                                    <Label layoutX="48.0" layoutY="70.0" text="Quantity:" />
+                                    <Label layoutX="48.0" layoutY="49.0" text="Price:" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="33.0" layoutY="14.0" text="YOUR INVENTORY" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
               </tabs>
             </TabPane>
             <Button layoutX="617.0" layoutY="27.0" mnemonicParsing="false" onAction="#closeMarketplace" prefHeight="25.0" prefWidth="121.0" text="Return" />
+            <Label fx:id="error" alignment="CENTER" layoutX="84.0" layoutY="556.0" prefHeight="17.0" prefWidth="655.0" textAlignment="CENTER" textFill="RED" />
+            <Label fx:id="cargo" layoutX="32.0" layoutY="550.0" prefHeight="30.0" prefWidth="146.0" text="Cargo: 00/00" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
+      <Button layoutX="14.0" layoutY="569.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" text="EXIT" />
    </children>
 </AnchorPane>
