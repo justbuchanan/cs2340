@@ -14,6 +14,17 @@
 	-fx-font-weight: bold;
 }
 
+.button: hover {
+    -fx-background-color:
+        linear-gradient(#fff685, #ffc451),
+        radial-gradient(center 50% -40%, radius 200%, #eec052 45%, #d59a32 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #533906;
+	-fx-font-weight: bold;
+}
+
 /*.button {
     -fx-background-color:
         linear-gradient(#f0ff35, #a9ff00),

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -13,11 +14,11 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" styleClass="universe_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.GameController">
    <children>
       <Canvas fx:id="canvas" height="600.0" layoutY="8.0" width="800.0" />
-      <Button layoutX="14.0" layoutY="569.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" text="EXIT" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
-      <Button layoutX="130.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
-      <Button layoutX="322.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="JUMP DRIVE" />
-      <Button layoutX="437.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="INVISIBLE" />
+      <Button layoutX="680.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="106.0" text="EXIT" />
+      <Button layoutX="680.0" layoutY="86.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
+      <Button layoutX="680.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
+      <Button layoutX="680.0" layoutY="179.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="JUMP DRIVE" />
+      <Button layoutX="680.0" layoutY="210.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="INVISIBLE" />
       <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets right="30.0" />
@@ -25,6 +26,8 @@
          <font>
             <Font name="Courier New" size="12.0" />
          </font></Label>
+      <Label layoutX="30.0" layoutY="14.0" text="FUEL GAUGE" textFill="WHITE" />
+      <ProgressBar fx:id="fuelGauge" layoutX="22.0" layoutY="30.0" prefHeight="18.0" prefWidth="634.0" progress="1.0" style="-fx-accent: #31af00;" />
       <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);" visible="false">
          <children>
             <Label layoutX="83.0" layoutY="27.0" text="Marketplace" textFill="WHITE">

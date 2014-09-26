@@ -1,6 +1,5 @@
 package spacetrader.controllers;
 
-import spacetrader.models.Universe;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
@@ -28,6 +28,7 @@ import spacetrader.*;
 import spacetrader.data.Item;
 import spacetrader.data.TechLevel;
 import spacetrader.models.*;
+import spacetrader.models.Universe;
 
 /**
  * Game screen controller
@@ -57,8 +58,8 @@ public class GameController implements Initializable {
     private SolarSystem mySS;
     private Marketplace myMarket;
     
-    @FXML
-    private Canvas canvas;
+    @FXML private Canvas canvas;
+    @FXML private ProgressBar fuelGauge;
     
     /**
      * Draws a planet on the canvas
