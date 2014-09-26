@@ -13,6 +13,7 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" styleClass="universe_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.GameController">
    <children>
       <Canvas fx:id="canvas" height="600.0" layoutY="8.0" width="800.0" />
+      <Button layoutX="14.0" layoutY="569.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" text="EXIT" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
       <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0">
          <padding>
@@ -32,20 +33,20 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Label layoutX="27.0" layoutY="21.0" text="MARKETPLACE ITEM LIST" />
-                              <ListView fx:id="buyList" layoutX="28.0" layoutY="48.0" prefHeight="223.0" prefWidth="601.0" />
-                              <Pane fx:id="buyPane" layoutX="6.0" layoutY="263.0" prefHeight="157.0" prefWidth="633.0">
+                              <ListView fx:id="buyList" layoutX="28.0" layoutY="48.0" prefHeight="225.0" prefWidth="601.0" />
+                              <Pane fx:id="buyPane" layoutX="10.0" layoutY="260.0" prefHeight="160.0" prefWidth="633.0">
                                  <children>
-                                    <Label layoutX="48.0" layoutY="30.0" text="Price:" />
-                                    <Label layoutX="48.0" layoutY="51.0" text="Quantity:" />
-                                    <Label layoutX="48.0" layoutY="91.0" text="Your credits:" />
-                                    <Label layoutX="48.0" layoutY="113.0" text="Your credits after purchase:" />
-                                    <Button layoutX="490.0" layoutY="100.0" mnemonicParsing="false" onAction="#buy" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="BUY" />
+                                    <Label layoutX="50.0" layoutY="30.0" text="Price:" />
+                                    <Label layoutX="50.0" layoutY="55.0" text="Quantity:" />
+                                    <Label layoutX="50.0" layoutY="90.0" text="Your credits:" />
+                                    <Label layoutX="50.0" layoutY="115.0" text="Your credits after purchase:" />
+                                    <Button layoutX="490.0" layoutY="110.0" mnemonicParsing="false" onAction="#buy" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="BUY" />
                                     <Label fx:id="buyPrice" layoutX="120.0" layoutY="30.0" text="0" />
-                                    <Label fx:id="buyQuantity" layoutX="120.0" layoutY="51.0" text="0" />
-                                    <Label fx:id="buyBalance" layoutX="140.0" layoutY="91.0" text="0" />
-                                    <Label fx:id="buyAfterBalance" layoutX="218.0" layoutY="113.0" text="0" />
-                                    <Button fx:id="buy_up" layoutX="143.0" layoutY="47.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
-                                    <Button fx:id="buy_down" layoutX="169.0" layoutY="47.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
+                                    <Label fx:id="buyQuantity" layoutX="120.0" layoutY="55.0" text="0" />
+                                    <Label fx:id="buyBalance" layoutX="140.0" layoutY="90.0" text="0" />
+                                    <Label fx:id="buyAfterBalance" layoutX="218.0" layoutY="115.0" text="0" />
+                                    <Button layoutX="145.0" layoutY="50.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
+                                    <Button layoutX="170.0" layoutY="50.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
                                  </children>
                               </Pane>
                            </children>
@@ -56,23 +57,23 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ListView fx:id="sellList" layoutX="33.0" layoutY="36.0" prefHeight="207.0" prefWidth="590.0" />
-                              <Pane fx:id="sellPane" layoutX="11.0" layoutY="251.0" prefHeight="173.0" prefWidth="633.0">
+                              <Label layoutX="27.0" layoutY="21.0" text="YOUR INVENTORY" />
+                              <ListView fx:id="sellList" layoutX="28.0" layoutY="48.0" prefHeight="225.0" prefWidth="601.0" />
+                              <Pane fx:id="sellPane" layoutX="10.0" layoutY="260.0" prefHeight="160.0" prefWidth="633.0">
                                  <children>
-                                    <Button layoutX="179.0" layoutY="66.0" mnemonicParsing="false" onAction="#decreaseSellQuantity" text="▼" />
-                                    <Button layoutX="147.0" layoutY="66.0" mnemonicParsing="false" onAction="#increaseSellQuantity" text="▲" />
-                                    <Label fx:id="sellAfterBalance" layoutX="225.0" layoutY="129.0" text="0" />
-                                    <Label fx:id="sellBalance" layoutX="141.0" layoutY="107.0" text="0" />
-                                    <Label fx:id="sellQuantity" layoutX="117.0" layoutY="70.0" text="0" />
-                                    <Label fx:id="sellPrice" layoutX="117.0" layoutY="49.0" text="0" />
-                                    <Button layoutX="490.0" layoutY="115.0" mnemonicParsing="false" onAction="#sell" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="SELL" />
-                                    <Label layoutX="48.0" layoutY="129.0" text="Your credits after purchase:" />
-                                    <Label layoutX="48.0" layoutY="107.0" text="Your credits:" />
-                                    <Label layoutX="48.0" layoutY="70.0" text="Quantity:" />
-                                    <Label layoutX="48.0" layoutY="49.0" text="Price:" />
+                                    <Label layoutX="50.0" layoutY="30.0" text="Price:" />
+                                    <Label layoutX="50.0" layoutY="55.0" text="Quantity:" />
+                                    <Label layoutX="50.0" layoutY="90.0" text="Your credits:" />
+                                    <Label layoutX="50.0" layoutY="115.0" text="Your credits after purchase:" />
+                                    <Button layoutX="490.0" layoutY="110.0" mnemonicParsing="false" onAction="#sell" prefHeight="25.0" prefWidth="129.0" styleClass="bigbutton" text="SELL" />
+                                    <Label fx:id="sellPrice" layoutX="120.0" layoutY="30.0" text="0" />
+                                    <Label fx:id="sellQuantity" layoutX="120.0" layoutY="55.0" text="0" />
+                                    <Label fx:id="sellBalance" layoutX="140.0" layoutY="90.0" text="0" />
+                                    <Label fx:id="sellAfterBalance" layoutX="218.0" layoutY="115.0" text="0" />
+                                    <Button layoutX="145.0" layoutY="50.0" mnemonicParsing="false" onAction="#increaseSellQuantity" text="▲" />
+                                    <Button layoutX="170.0" layoutY="50.0" mnemonicParsing="false" onAction="#decreaseSellQuantity" text="▼" />
                                  </children>
                               </Pane>
-                              <Label layoutX="33.0" layoutY="14.0" text="YOUR INVENTORY" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -87,6 +88,5 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="14.0" layoutY="569.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="56.0" text="EXIT" />
    </children>
 </AnchorPane>
