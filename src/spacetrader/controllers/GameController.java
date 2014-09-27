@@ -323,7 +323,12 @@ public class GameController implements Initializable {
         mapPane.setVisible(true);
         drawMap();
         createSSTable();
-        ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
+        //ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
+        ssTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SolarSystem>() {
+        public void changed(ObservableValue<? extends SolarSystem> ov, 
+            SolarSystem oldval, SolarSystem newValue) {
+            showSelectedSS(newValue);
+        }});
     }
     
     @FXML
