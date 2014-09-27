@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import javafx.animation.FillTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -28,6 +31,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import spacetrader.*;
 import spacetrader.data.Item;
 import spacetrader.data.Resource;
@@ -59,6 +64,7 @@ public class GameController implements Initializable {
     @FXML private Pane mapPane;
     @FXML private Canvas mapCanvas;
     @FXML private TableView<SolarSystem> ssTable;
+    @FXML private Label flightDistance, fuelLeft, fuelRequired;
     
     //Player and universe objects are passed from config screen
     private Player myPlayer;
@@ -70,19 +76,21 @@ public class GameController implements Initializable {
     @FXML Parent root;
     @FXML private Canvas canvas;
     @FXML private ProgressBar fuelGauge;
+    @FXML private Pane topPane;
     
+//<editor-fold defaultstate="collapsed" desc="MAIN CANVAS DRAWING">
     /**
      * Draws a planet on the canvas
-     * 
+     *
      * @param gc graphics context
      * @param x x-coordinate of the center
      * @param y y-coordinate of the center
      */
     private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
         gc.setFill(new RadialGradient(0, 0, 0.3, 0.3, 1, true,
-               CycleMethod.REFLECT,
-               new Stop(0.0, Color.WHITE),
-               new Stop(1.0, Color.CADETBLUE)));
+                CycleMethod.REFLECT,
+                new Stop(0.0, Color.WHITE),
+                new Stop(1.0, Color.CADETBLUE)));
         gc.fillOval(x-r, y-r, r*2, r*2);
     }
     
@@ -93,7 +101,9 @@ public class GameController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         drawPlanet(gc, 400, 300, 50);
     }
+//</editor-fold>
     
+//<editor-fold defaultstate="collapsed" desc="MARKETPLACE">
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
@@ -107,20 +117,20 @@ public class GameController implements Initializable {
         clearSellWindow();
         clearBuyWindow();
         displayCargo();
-                
+        
         marketTabPane.getSelectionModel().selectedItemProperty().addListener(
-            new ChangeListener<Tab>() {
-            @Override
-            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
-                error.setText("");
-                resetBuyList();
-                resetSellList();
-                clearSellWindow();
-                clearBuyWindow();
-            }
-            }
+                new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                        error.setText("");
+                        resetBuyList();
+                        resetSellList();
+                        clearSellWindow();
+                        clearBuyWindow();
+                    }
+                }
         );
-       
+        
     }
     @FXML
     private void closeMarketplace(ActionEvent event) {
@@ -138,23 +148,23 @@ public class GameController implements Initializable {
         buyList.getSelectionModel().selectFirst();
         clearBuyWindow();
         buyList.getSelectionModel().selectedItemProperty().addListener(
-            new ChangeListener<String>() {
-                public void changed(ObservableValue<? extends String> ov, 
-                    String old_val, String new_val) {
-                    error.setText("");
-                    Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
-                    if(myMarket.isBuyable(item)) {
-                        buyPane.setVisible(true);
-                        int price = myMarket.getBuyPrice(item);
-                        buyPrice.setText(String.valueOf(price));
-                        buyQuantity.setText("1");
-                        int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*price;
-                        buyAfterBalance.setText(String.valueOf(newBalance));
-                    } else {
-                        buyPane.setVisible(false);
+                new ChangeListener<String>() {
+                    public void changed(ObservableValue<? extends String> ov,
+                            String old_val, String new_val) {
+                        error.setText("");
+                        Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+                        if(myMarket.isBuyable(item)) {
+                            buyPane.setVisible(true);
+                            int price = myMarket.getBuyPrice(item);
+                            buyPrice.setText(String.valueOf(price));
+                            buyQuantity.setText("1");
+                            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*price;
+                            buyAfterBalance.setText(String.valueOf(newBalance));
+                        } else {
+                            buyPane.setVisible(false);
+                        }
                     }
-            }
-        });
+                });
     }
     
     private void initSellWindow() {
@@ -169,22 +179,22 @@ public class GameController implements Initializable {
         clearSellWindow();
         
         sellList.getSelectionModel().selectedItemProperty().addListener(
-            new ChangeListener<String>() {
-                public void changed(ObservableValue<? extends String> ov, 
-                    String old_val, String new_val) {                    
-                    Item item = Item.values()[sellList.getSelectionModel().getSelectedIndex()];
-                    if (myMarket.isSellable(item)) {
-                        sellPane.setVisible(true);
-                        int price = myMarket.getSellPrice(item);
-                        sellPrice.setText(String.valueOf(price));
-                        sellQuantity.setText("1");
-                        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*price;
-                        sellAfterBalance.setText(String.valueOf(newBalance));
-                    } else {
-                        sellPane.setVisible(false);
+                new ChangeListener<String>() {
+                    public void changed(ObservableValue<? extends String> ov,
+                            String old_val, String new_val) {
+                        Item item = Item.values()[sellList.getSelectionModel().getSelectedIndex()];
+                        if (myMarket.isSellable(item)) {
+                            sellPane.setVisible(true);
+                            int price = myMarket.getSellPrice(item);
+                            sellPrice.setText(String.valueOf(price));
+                            sellQuantity.setText("1");
+                            int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*price;
+                            sellAfterBalance.setText(String.valueOf(newBalance));
+                        } else {
+                            sellPane.setVisible(false);
+                        }
                     }
-            }
-        });
+                });
     }
 //</editor-fold>
     
@@ -235,7 +245,7 @@ public class GameController implements Initializable {
         int price = myMarket.getBuyPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
         buyPrice.setText(String.valueOf(price));
         buyQuantity.setText("1");
-        buyBalance.setText(String.valueOf(myPlayer.getBalance()));        
+        buyBalance.setText(String.valueOf(myPlayer.getBalance()));
         int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
         buyAfterBalance.setText(String.valueOf(newBalance));
     }
@@ -269,7 +279,7 @@ public class GameController implements Initializable {
         }
     }
     @FXML
-    private void sell(ActionEvent event) {    
+    private void sell(ActionEvent event) {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         int itemIndex = sellList.getSelectionModel().getSelectedIndex();
         Item item = Item.values()[itemIndex];
@@ -284,13 +294,13 @@ public class GameController implements Initializable {
             clearSellWindow();
         }
     }
-    private void clearSellWindow() {        
+    private void clearSellWindow() {
         int price = myMarket.getSellPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
         sellPrice.setText(String.valueOf(price));
         sellQuantity.setText("1");
-        sellBalance.setText(String.valueOf(myPlayer.getBalance()));        
+        sellBalance.setText(String.valueOf(myPlayer.getBalance()));
         int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*Integer.parseInt(sellPrice.getText());
-        sellAfterBalance.setText(String.valueOf(newBalance));      
+        sellAfterBalance.setText(String.valueOf(newBalance));
     }
     private void resetSellList() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
@@ -311,17 +321,14 @@ public class GameController implements Initializable {
         cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo());
     }
 //</editor-fold>
+//</editor-fold>
     
-//<editor-fold defaultstate="collapsed" desc="MAIN WINDOW COMPONENTS">
-    @FXML
-    private void exit(ActionEvent e) {
-        application.showWelcome();
-    }
-    
+//<editor-fold defaultstate="collapsed" desc="JUMP DRIVE">
     @FXML
     private void openMap(ActionEvent event) {
         mapPane.setVisible(true);
         drawMap();
+        fuelLeft.setText(String.valueOf(myPlayer.getShip().getFuelReading()));
         createSSTable();
         //ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
         ssTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SolarSystem>() {
@@ -376,6 +383,39 @@ public class GameController implements Initializable {
         gc.setFill(Color.AQUA);
         gc.fillOval(mySS.getX()*2-2, mySS.getY()*2-2, 4, 4);
     }
+    
+    @FXML
+    private void activateJumpDrive(ActionEvent event) {
+        enterLightTunnel();
+    }
+    
+    private void enterLightTunnel() {
+        topPane.setVisible(true);
+        Label l1 = new Label("Travelling through light tunnel...");
+        Rectangle rect = new Rectangle(0, 0, 800, 600);
+        topPane.getChildren().add(rect);
+        topPane.getChildren().add(l1);
+        
+        FillTransition transition = new FillTransition(Duration.millis(3000), rect, Color.BLACK, Color.WHITE);
+        transition.setCycleCount(4);
+        transition.setAutoReverse(true);
+        transition.play();
+        transition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                topPane.setVisible(false);
+                mapPane.setVisible(false);
+            }
+        }
+        );
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="MAIN WINDOW COMPONENTS">
+    @FXML
+    private void exit(ActionEvent e) {
+        application.showWelcome();
+    }
 //</editor-fold>
     
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
@@ -395,6 +435,7 @@ public class GameController implements Initializable {
         //Hide all popup panes
         marketPane.setVisible(false);
         mapPane.setVisible(false);
+        topPane.setVisible(false);
     }
     
     /**

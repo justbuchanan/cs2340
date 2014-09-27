@@ -34,6 +34,22 @@
 	-fx-font-weight: bold;
 }
 
+.clear-button {
+    -fx-font-family: Courier, "Courier New", monospace;
+    -fx-border-color: rgba(255,255,255,0.5);
+    -fx-border-width: 1;
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255,255,255,0.5);
+}
+
+.clear-button: hover {
+    -fx-font-family: Courier, "Courier New", monospace;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1;
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-text-fill: #ffffff;
+}
+
 /*.button {
     -fx-background-color:
         linear-gradient(#f0ff35, #a9ff00),
