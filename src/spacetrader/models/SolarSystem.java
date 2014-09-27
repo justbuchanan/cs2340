@@ -15,8 +15,8 @@ public class SolarSystem {
 	private int y;
 	private Resource resource;
 	private TechLevel techLevel;
-        private HashMap<Item, Integer> availableItems;
-        private Marketplace mp;
+	private HashMap<Item, Integer> availableItems;
+	private Marketplace mp;
         
     /**
      * Creates a solar system with some initial amount of resources
@@ -30,13 +30,13 @@ public class SolarSystem {
     }
 	
     /**
-     * gets name
+     * Gets name of this SolarSystem
      * @return name
      */
     public String getName() { return name; }
 
     /**
-     * sets name
+     * Sets name of this SolarSystem
      * @param _name
      */
     public void setName(String _name) { name = _name; }
@@ -88,7 +88,10 @@ public class SolarSystem {
      * @param _techLevel
      */
     public void setTechLevel(TechLevel _techLevel) { techLevel = _techLevel; }
-	
+	/**
+	 * String representation of the SolarSystem
+	 * @return descriptive String
+	 */
     @Override
     public String toString() {
             return name+"("+x+","+y+") "+resource.name()+" "+techLevel.name();
