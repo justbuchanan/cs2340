@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -19,6 +20,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -26,6 +30,7 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import spacetrader.*;
 import spacetrader.data.Item;
+import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
 import spacetrader.models.*;
 import spacetrader.models.Universe;
@@ -51,6 +56,10 @@ public class GameController implements Initializable {
     private ObservableList<String> buyItems, sellItems;
 //</editor-fold>
     
+    @FXML private Pane mapPane;
+    @FXML private Canvas mapCanvas;
+    @FXML private TableView<SolarSystem> ssTable;
+    
     //Player and universe objects are passed from config screen
     private Player myPlayer;
     private Universe myUniverse;
@@ -58,6 +67,7 @@ public class GameController implements Initializable {
     private SolarSystem mySS;
     private Marketplace myMarket;
     
+    @FXML Parent root;
     @FXML private Canvas canvas;
     @FXML private ProgressBar fuelGauge;
     
@@ -307,6 +317,60 @@ public class GameController implements Initializable {
     private void exit(ActionEvent e) {
         application.showWelcome();
     }
+    
+    @FXML
+    private void openMap(ActionEvent event) {
+        mapPane.setVisible(true);
+        drawMap();
+        createSSTable();
+        ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
+    }
+    
+    @FXML
+    private void closeMap(ActionEvent event) {
+        mapPane.setVisible(false);
+    }
+    
+    private void createSSTable() {
+        ObservableList<SolarSystem> universe = FXCollections.observableArrayList(myUniverse.getSolarSystems());
+        ssTable.setItems(universe);
+        
+        TableColumn<SolarSystem, String> nameCol = new TableColumn<>("System");
+        nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+        
+        TableColumn<SolarSystem, Integer> xCol = new TableColumn<>("x");
+        xCol.setCellValueFactory(new PropertyValueFactory("x"));
+        TableColumn<SolarSystem, Integer> yCol = new TableColumn<>("y");
+        yCol.setCellValueFactory(new PropertyValueFactory("y"));
+        TableColumn<SolarSystem, Resource> resourceCol = new TableColumn<>("Resource");
+        resourceCol.setCellValueFactory(new PropertyValueFactory("resource"));
+        TableColumn<SolarSystem, TechLevel> techLevelCol = new TableColumn<>("Tech Level");
+        techLevelCol.setCellValueFactory(new PropertyValueFactory("techLevel"));
+        
+        ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol, techLevelCol);
+    }
+    
+    private void showSelectedSS(SolarSystem ss) {
+        if (ss != null) {
+            drawMap();
+            GraphicsContext gc = mapCanvas.getGraphicsContext2D();
+            gc.setFill(Color.RED);
+            gc.fillOval(ss.getX()*2-2, ss.getY()*2-2, 4, 4);
+        }
+    }
+    
+    private void drawMap() {
+        GraphicsContext gc = mapCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
+        for (SolarSystem ss: myUniverse.getSolarSystems()) {
+            int x = ss.getX();
+            int y = ss.getY();
+            gc.setFill(Color.WHITE);
+            gc.fillOval(x*2-1, y*2-1, 2, 2);
+        }
+        gc.setFill(Color.AQUA);
+        gc.fillOval(mySS.getX()*2-2, mySS.getY()*2-2, 4, 4);
+    }
 //</editor-fold>
     
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
@@ -325,6 +389,7 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) { 
         //Hide all popup panes
         marketPane.setVisible(false);
+        mapPane.setVisible(false);
     }
     
     /**
