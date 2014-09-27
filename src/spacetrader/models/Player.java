@@ -24,7 +24,7 @@ public class Player {
     public Player(String _name, int[] _pointsArr) {
         this.name = _name;
         this.points = Arrays.copyOf(_pointsArr, 5);
-        this.ship = new Ship("Gnat");
+        this.ship = new Ship(ShipType.GNAT);
         this.balance = 1000; //New player starts with 1000 credits
     }
 

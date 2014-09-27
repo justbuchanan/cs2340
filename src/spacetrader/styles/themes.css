@@ -3,6 +3,15 @@
     -fx-background-color: black;
 }
 
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
 .button {
     -fx-background-color:
         linear-gradient(#fff035, #ffa900),

@@ -23,6 +23,7 @@ import spacetrader.models.Player;
  */
 public class Main extends Application {
     private Stage stage;
+    private Stage mapStage;
     private final double MINIMUM_WINDOW_WIDTH = 800.0;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
     
