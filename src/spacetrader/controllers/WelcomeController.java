@@ -32,7 +32,7 @@ public class WelcomeController implements Initializable {
     
     @FXML
     private void handleLoadAction(ActionEvent event) {
-        Database db = new Database();
+        DatabaseController db = new DatabaseController();
         Player p = db.getPlayer();
         if (p == null) {
             System.out.println("No saved data available");

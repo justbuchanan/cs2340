@@ -56,7 +56,7 @@ public class ConfigController implements Initializable {
             name_error.setText("Name field is blank.");
         } else {
             myPlayer = new Player(name.getText(), points);
-            Database db = new Database();
+            DatabaseController db = new DatabaseController();
             db.clearTable("PLAYER");
             db.addPlayer(myPlayer);
             messagePane.setVisible(true);

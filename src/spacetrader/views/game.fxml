@@ -106,7 +106,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="mapPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" visible="false" AnchorPane.leftAnchor="0.0">
+      <Pane fx:id="mapPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" AnchorPane.leftAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#838383" height="200.0" layoutX="30.0" layoutY="370.0" opacity="0.16" stroke="WHITE" strokeType="INSIDE" width="200.0" />
             <Canvas fx:id="mapCanvas" height="200.0" layoutX="30.0" layoutY="370.0" width="200.0" />
@@ -176,10 +176,10 @@
                </font></Label>
             <Button layoutX="455.0" layoutY="543.0" mnemonicParsing="false" onAction="#activateJumpDrive" prefHeight="25.0" prefWidth="136.0" text="ACTIVATE" textFill="WHITE" />
             <Button layoutX="604.0" layoutY="543.0" mnemonicParsing="false" onAction="#closeMap" prefHeight="25.0" prefWidth="136.0" text="CANCEL" textFill="WHITE" />
-            <Button layoutX="250.0" layoutY="542.0" mnemonicParsing="false" styleClass="clear-button" text="open interactive map" />
+            <Button layoutX="250.0" layoutY="542.0" mnemonicParsing="false" onAction="#openInteractiveMap" styleClass="clear-button" text="open interactive map" />
             <Button layoutX="250.0" layoutY="372.0" mnemonicParsing="false" styleClass="clear-button" text="travel to nearest planet" />
          </children>
       </Pane>
-      <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" />
+      <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />
    </children>
 </AnchorPane>

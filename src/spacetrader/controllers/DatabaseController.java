@@ -12,11 +12,11 @@ import spacetrader.models.Player;
  * This class provides access to the Database
  * @author Bao
  */
-public class Database {
+public class DatabaseController {
     private final String JDBC = "org.sqlite.JDBC";
     private final String DB_NAME = "jdbc:sqlite:spacetrader.db";
 
-    public Database() {
+    public DatabaseController() {
         if (!hasTable("player")) {
             execSQL("CREATE TABLE PLAYER (NAME TEXT NOT NULL, P0 INT NOT NULL, P1 INT NOT NULL, P2 INT NOT NULL, P3 INT NOT NULL, P4 INT NOT NULL)");
         }

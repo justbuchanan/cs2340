@@ -21,11 +21,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -405,9 +408,66 @@ public class GameController implements Initializable {
             public void handle(ActionEvent event) {
                 topPane.setVisible(false);
                 mapPane.setVisible(false);
+                topPane.getChildren().clear();
             }
         }
         );
+    }
+//</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="INTERACTIVE MAP">
+    @FXML
+    private void openInteractiveMap() {
+        ScrollPane sp = new ScrollPane();
+        Canvas c = new Canvas();
+        int size = 1500;
+        c.setHeight(size);
+        c.setWidth(size);
+        GraphicsContext gc = c.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, c.getHeight(), c.getWidth());
+        gc.setFill(Color.WHITE);
+        int r = 10;
+        int ratio = (int) c.getHeight()/myUniverse.getHeight();
+        
+        gc.setStroke(Color.gray(0.2));
+        for (int x = 0; x < size; x = x + 50) {
+            gc.strokeLine(x, 0, x, size);
+            gc.strokeLine(0, x, size, x);
+        }
+        
+        Random rand = new Random();
+        for (int i = 0; i < 1000; i++) {
+            int r1 = rand.nextInt(3)+1;
+            gc.fillOval(rand.nextInt(size), rand.nextInt(size), r1, r1);
+        }
+        
+        for (SolarSystem ss: myUniverse.getSolarSystems()) {
+            gc.fillOval(ratio*ss.getX()-r, ratio*ss.getY()-r, 2*r, 2*r);
+        }
+        
+        //Set canvas onClick event
+        c.setOnMouseClicked(new EventHandler<MouseEvent>(){
+          @Override
+          public void handle(MouseEvent mouseEvent) {
+            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                if(mouseEvent.getClickCount() == 2){
+                    closeInteractiveMap();
+                }
+            }
+          }
+ 
+        });
+        sp.setPrefSize(800, 600);
+        sp.setPannable(true);
+        sp.setContent(c);
+        topPane.getChildren().add(sp);
+        topPane.setVisible(true);
+    }
+    
+    private void closeInteractiveMap() {
+        topPane.getChildren().clear();
+        topPane.setVisible(false);
     }
 //</editor-fold>
     
