@@ -56,6 +56,9 @@ public class ConfigController implements Initializable {
             name_error.setText("Name field is blank.");
         } else {
             myPlayer = new Player(name.getText(), points);
+            Database db = new Database();
+            db.clearTable("PLAYER");
+            db.addPlayer(myPlayer);
             messagePane.setVisible(true);
             myUniverse = Universe.generateUniverse(100, 100, NUMBER_OF_SOLAR_SYSTEMS);
     	    System.out.println(myUniverse.toString());

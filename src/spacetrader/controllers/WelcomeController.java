@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import spacetrader.Main;
+import spacetrader.models.Player;
 
 /**
  * Welcome screen controller
@@ -31,7 +32,13 @@ public class WelcomeController implements Initializable {
     
     @FXML
     private void handleLoadAction(ActionEvent event) {
-        //do nothing
+        Database db = new Database();
+        Player p = db.getPlayer();
+        if (p == null) {
+            System.out.println("No saved data available");
+        } else {
+            System.out.println(p);
+        }
     }
     
     @Override
