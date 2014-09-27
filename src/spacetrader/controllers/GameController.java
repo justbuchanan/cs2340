@@ -323,7 +323,7 @@ public class GameController implements Initializable {
         mapPane.setVisible(true);
         drawMap();
         createSSTable();
-        ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
+        //ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
     }
     
     @FXML
