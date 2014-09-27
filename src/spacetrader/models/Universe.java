@@ -76,7 +76,10 @@ public class Universe {
 		}
 		return false;
 	}
-	
+	/**
+	 * Returns string representation of the universe.
+	 * @return String universe information
+	 */
 	@Override
 	public String toString() {
 		String str = "";
@@ -87,30 +90,48 @@ public class Universe {
 		}
 		return str;
 	}
-	public void setWidth(int _width) { this.width = _width; }
+	/**
+	 * Sets the width of the Universe
+	 * @param _width
+	 */
+	private void setWidth(int _width) { this.width = _width; }
+	/**
+	 * Returns the width of the universe
+	 * @return 
+	 */
 	public int getWidth() { return width; }
-	public void setHeight(int _height) { this.height = _height; }
+	/**
+	 * Sets the height of the Universe.
+	 * @param _height
+	 */
+	private void setHeight(int _height) { this.height = _height; }
+	/**
+	 * Gets height of the Universe
+	 * @return height of the Universe
+	 */
 	public int getHeight() { return height; }
-        public List<SolarSystem> getSolarSystems() {
-            return solarSystems;
-        }
+	/**
+	 * Returns list of all solar systems in the Universe.
+	 * @return list of SolarSystems
+	 */
+    public List<SolarSystem> getSolarSystems() {
+        return solarSystems;
+    }
         
-        /**
-         * array shuffling helper
-         * @param ar input array
-         */
-        public static void shuffleArray(String[] ar)
-        {
-          Random rnd = new Random();
-          for (int i = ar.length - 1; i > 0; i--)
-          {
-            int index = rnd.nextInt(i + 1);
-            // Simple swap
-            String a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
-          }
-        }
+	/**
+	 * array shuffling helper
+	 * @param ar input array
+	 */
+	public static void shuffleArray(String[] ar) {
+		Random rnd = new Random();
+		for (int i = ar.length - 1; i > 0; i--) {
+			int index = rnd.nextInt(i + 1);
+			// Simple swap
+			String a = ar[index];
+			ar[index] = ar[i];
+			ar[i] = a;
+		}
+	}
 	/**
 	 * Contains all potential names for solar systems
 	 */

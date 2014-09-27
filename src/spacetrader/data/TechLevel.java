@@ -20,13 +20,18 @@ public enum TechLevel {
 		this.value = _value;
 		this.text = _text;
 	}
-	
+	/**
+	 * Returns the text representation of this TechLevel
+	 */
 	@Override
 	public String toString() {
 		return this.text;
 	}
-        
-        public int getValue() {
-            return this.value;
-        }
+	/**
+	 * Gets the value of the TechLevel
+	 * @return numerical value for this type of TechLevel
+	 */
+    public int getValue() {
+        return this.value;
+    }
 }

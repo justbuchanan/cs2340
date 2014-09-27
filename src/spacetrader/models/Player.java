@@ -16,15 +16,15 @@ public class Player {
     
     /**
      * Player constructor
-     * constructs a player with name and allocated skill points
+     * Constructs a player with name and allocated skill points
      * array length must be 5
      * 
-     * @param n name of the player
-     * @param p array of skill points
+     * @param _name name of the player
+     * @param _pointsArr array of skill points
      */
-    public Player(String n, int[] p) {
-        this.name = n;
-        this.points = Arrays.copyOf(p,5);
+    public Player(String _name, int[] _pointsArr) {
+        this.name = _name;
+        this.points = Arrays.copyOf(_pointsArr, 5);
         this.ship = new Ship(ShipType.GNAT);
         this.balance = 1000; //New player starts with 1000 credits
     }
@@ -32,7 +32,6 @@ public class Player {
 //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
     /**
      * Returns player's name
-     *
      * @return
      */
     public String getName() {
@@ -41,7 +40,6 @@ public class Player {
     
     /**
      * Sets player's name
-     *
      * @param name
      */
     public void setName(String name) {
@@ -50,7 +48,6 @@ public class Player {
     
     /**
      * Returns player's skill points
-     *
      * @return
      */
     public int[] getPoints() {
@@ -59,25 +56,36 @@ public class Player {
     
     /**
      * Allocates player's skill points
-     *
      * @param points
      */
     public void setPoints(int[] points) {
         this.points = points;
     }
-        
+    /**
+     * Gets the Player's balance
+     * @return amount of cash Player currently has
+     */
     public int getBalance() {
         return balance;
     }
-
+    /**
+     * Sets the Player's cash to a new amount
+     * @param balance
+     */
     public void setBalance(int balance) {
         this.balance = balance;
     }
-
+    /**
+     * Gets the Player's ship
+     * @return
+     */
     public Ship getShip() {
         return ship;
     }
-
+    /**
+     * Sets the Player's Ship
+     * @param ship new vessel
+     */
     public void setShip(Ship ship) {
         this.ship = ship;
     }

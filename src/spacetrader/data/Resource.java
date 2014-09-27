@@ -26,7 +26,10 @@ public enum Resource {
 		this.value = _value;
 		this.text = _text;
 	}
-	
+	/**
+	 * String representation of this Resource
+	 * @return info string
+	 */
 	@Override
 	public String toString() {
 		return this.text;

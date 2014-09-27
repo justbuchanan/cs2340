@@ -1,7 +1,8 @@
 package spacetrader.data;
 
 /**
- * Radical price increase event, when this even happens on a planet, the price may increase astronomically
+ * Radical price increase event, when this even happens on a planet, the price
+ * may increase astronomically
  * 
  * @author Bao
  */
@@ -20,13 +21,18 @@ public enum RadicalEvent {
             this.priceIncrease = priceIncrease;
             this.name = name;
 	}
-	
+	/**
+	 * String representation of the RadicalEvent
+	 */
 	@Override
 	public String toString() {
             return this.name;
 	}
-        
-        public int getPriceIncrease() {
-            return this.priceIncrease;
-        }
+    /**
+     * Gets the increase due to this RadicalEvent
+     * @return
+     */
+	public int getPriceIncrease() {
+	    return this.priceIncrease;
+	}
 }

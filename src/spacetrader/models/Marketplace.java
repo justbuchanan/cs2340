@@ -75,7 +75,6 @@ public class Marketplace {
     
     /**
      * returns the price of an item in the current solar system's market
-     * 
      * @param item
      * @return selling price
      */
