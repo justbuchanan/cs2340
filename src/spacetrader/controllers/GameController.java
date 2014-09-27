@@ -391,7 +391,7 @@ public class GameController implements Initializable {
     
     private void enterLightTunnel() {
         topPane.setVisible(true);
-        Label l1 = new Label("Travelling through light tunnel...");
+        Label l1 = new Label("Travelling at warp speed...");
         Rectangle rect = new Rectangle(0, 0, 800, 600);
         topPane.getChildren().add(rect);
         topPane.getChildren().add(l1);
