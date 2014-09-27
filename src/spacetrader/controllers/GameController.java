@@ -88,6 +88,7 @@ public class GameController implements Initializable {
      * @param gc graphics context
      * @param x x-coordinate of the center
      * @param y y-coordinate of the center
+     * @param r radius
      */
     private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
         gc.setFill(Color.BLACK);
