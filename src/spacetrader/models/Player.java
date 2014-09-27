@@ -1,6 +1,7 @@
 package spacetrader.models;
 
 import java.util.Arrays;
+import spacetrader.data.ShipType;
 
 /**
  * holds player's information
@@ -97,5 +98,41 @@ public class Player {
      */
     public String toString() {
         return String.format("Name:\t%s\nPilot:\t%s\nFighter:\t%s\nTrader:\t%s\nEngineer:\t%s\nInvestor:\t%s", name, points[0], points[1], points[2], points[3], points[4]);
+    }
+    
+    /**
+     * Returns the points of the player's piloting skill
+     * @return 
+     */
+    public int getPilotPoints() {
+        return points[0];
+    }    
+    /**
+     * Returns the points of the player's fighting skill
+     * @return 
+     */
+    public int getFighterPoints() {
+        return points[1];
+    }    
+    /**
+     * Returns the points of the player's trading skill
+     * @return 
+     */
+    public int getTraderPoints() {
+        return points[2];
+    }    
+    /**
+     * Returns the points of the player's engineering skill
+     * @return 
+     */
+    public int getEngineerPoints() {
+        return points[3];
+    }    
+    /**
+     * Returns the points of the player's investing skill
+     * @return 
+     */
+    public int getInvestorPoints() {
+        return points[4];
     }
 }
