@@ -106,7 +106,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="mapPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" visible="false" AnchorPane.leftAnchor="0.0">
+      <Pane fx:id="mapPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" AnchorPane.leftAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#838383" height="200.0" layoutX="30.0" layoutY="370.0" opacity="0.16" stroke="WHITE" strokeType="INSIDE" width="200.0" />
             <Canvas fx:id="mapCanvas" height="200.0" layoutX="30.0" layoutY="370.0" width="200.0" />
@@ -133,41 +133,64 @@
                   <Font name="Courier New" size="12.0" />
                </font>
             </Label>
-            <GridPane layoutX="455.0" layoutY="395.0" prefHeight="80.0" prefWidth="200.0">
+            <GridPane layoutX="455.0" layoutY="395.0" prefHeight="107.0" prefWidth="237.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="164.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="82.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="142.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="95.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Fuel left:" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label text="Fuel left:" textFill="WHITE" GridPane.rowIndex="4">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font></Label>
-                  <Label text="Fuel required:" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label text="Fuel required:" textFill="WHITE" GridPane.rowIndex="5">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font></Label>
-                  <Label layoutX="10.0" layoutY="41.0" text="Distance:" textFill="WHITE">
+                  <Label layoutX="10.0" layoutY="41.0" text="Distance:" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font></Label>
-                  <Label fx:id="flightDistance" text="0" textFill="WHITE" GridPane.columnIndex="1">
+                  <Label fx:id="flightDistance" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font></Label>
-                  <Label fx:id="fuelLeft" layoutX="133.0" layoutY="15.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="fuelLeft" layoutX="133.0" layoutY="15.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font></Label>
-                  <Label fx:id="fuelRequired" layoutX="133.0" layoutY="41.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="fuelRequired" layoutX="133.0" layoutY="41.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font></Label>
+                  <Label layoutX="10.0" layoutY="55.0" text="[from]----------&gt;" textFill="WHITE">
+                     <font>
+                        <Font name="Courier New" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="13.0" text="[to]" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Courier New" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="fromSS" layoutX="10.0" layoutY="55.0" textFill="AQUA" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Courier New" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="toSS" layoutX="152.0" layoutY="13.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Courier New" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <Label layoutX="455.0" layoutY="370.0" style="-fx-font-weight: bold;" text="FLIGHT INFORMATION" textFill="WHITE">
@@ -178,6 +201,21 @@
             <Button layoutX="604.0" layoutY="543.0" mnemonicParsing="false" onAction="#closeMap" prefHeight="25.0" prefWidth="136.0" text="CANCEL" textFill="WHITE" />
             <Button layoutX="250.0" layoutY="542.0" mnemonicParsing="false" onAction="#openInteractiveMap" styleClass="clear-button" text="open interactive map" />
             <Button layoutX="250.0" layoutY="372.0" mnemonicParsing="false" styleClass="clear-button" text="travel to nearest planet" />
+            <Label layoutX="250.0" layoutY="449.0" text="[current location]" textFill="AQUA">
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="250.0" layoutY="476.0" text="[destination]" textFill="RED">
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="250.0" layoutY="420.0" text="[solar system]" textFill="WHITE">
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />
