@@ -135,11 +135,17 @@ public class GameController implements Initializable {
         );
         
     }
+    /**
+     * Stops the marketplace from being draw
+     * @param event
+     */
     @FXML
     private void closeMarketplace(ActionEvent event) {
         marketPane.setVisible(false);
     }
-    
+    /**
+     * Initializes the purchase screen
+     */
     private void initBuyWindow() {
         List<String> marketListS = new ArrayList<String>(Item.values().length);
         for (int i = 0; i < Item.values().length; i++) {
@@ -169,7 +175,9 @@ public class GameController implements Initializable {
                     }
                 });
     }
-    
+    /**
+     * Initializes the sell screen
+     */
     private void initSellWindow() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         List<String> cargoS = new ArrayList<String>(Item.values().length);
@@ -199,9 +207,10 @@ public class GameController implements Initializable {
                     }
                 });
     }
-//</editor-fold>
-    
-//<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
+    /**
+     * Increases the quantity to purchase by 1
+     * @param event
+     */
     @FXML
     private void increaseBuyQuantity(ActionEvent event) {
         int q = Integer.parseInt(buyQuantity.getText());
@@ -213,6 +222,10 @@ public class GameController implements Initializable {
             buyAfterBalance.setText(String.valueOf(newBalance));
         }
     }
+    /**
+     * Decreases the quantity to purchase by 1
+     * @param event
+     */
     @FXML
     private void decreaseBuyQuantity(ActionEvent event) {
         if (Integer.parseInt(buyQuantity.getText()) != 1) {
@@ -223,6 +236,10 @@ public class GameController implements Initializable {
             buyAfterBalance.setText(String.valueOf(newBalance));
         }
     }
+    /**
+     * Attempts to execute a purchase of goods.
+     * @param event
+     */
     @FXML
     private void buy(ActionEvent event) {
         Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
@@ -244,6 +261,9 @@ public class GameController implements Initializable {
             error.setText("You have insufficient funds");
         }
     }
+    /**
+     * Clears the quantity from the purchase screen
+     */
     private void clearBuyWindow() {
         int price = myMarket.getBuyPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
         buyPrice.setText(String.valueOf(price));
@@ -252,6 +272,9 @@ public class GameController implements Initializable {
         int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
         buyAfterBalance.setText(String.valueOf(newBalance));
     }
+    /**
+     * Re-initializes the purchase screen
+     */
     private void resetBuyList() {
         for (int i = 0; i < Item.values().length; i++) {
             if (myMarket.isBuyable(Item.values()[i])) {
@@ -262,9 +285,10 @@ public class GameController implements Initializable {
         }
         buyList.setItems(buyItems);
     }
-//</editor-fold>
-    
-//<editor-fold defaultstate="collapsed" desc="SELL WINDOW HANDLERS">
+    /**
+     * Increases the number of goods to sell by 1
+     * @param event
+     */
     @FXML
     private void increaseSellQuantity(ActionEvent event) {
         int q = Integer.parseInt(sellQuantity.getText());
@@ -273,6 +297,10 @@ public class GameController implements Initializable {
         int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*Integer.parseInt(sellPrice.getText());
         sellAfterBalance.setText(String.valueOf(newBalance));
     }
+    /**
+     * Decreases the number of goods to sell by 1
+     * @param event
+     */
     @FXML
     private void decreaseSellQuantity(ActionEvent event) {
         if (Integer.parseInt(sellQuantity.getText()) != 1) {
@@ -281,6 +309,10 @@ public class GameController implements Initializable {
             sellQuantity.setText(q + "");
         }
     }
+    /**
+     * Attempts to sell cargo
+     * @param event
+     */
     @FXML
     private void sell(ActionEvent event) {
         List<Integer> cargo = myPlayer.getShip().getCargo();
@@ -297,6 +329,9 @@ public class GameController implements Initializable {
             clearSellWindow();
         }
     }
+    /**
+     * resets the sell quantity of the purchase screen
+     */
     private void clearSellWindow() {
         int price = myMarket.getSellPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
         sellPrice.setText(String.valueOf(price));
@@ -305,6 +340,9 @@ public class GameController implements Initializable {
         int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*Integer.parseInt(sellPrice.getText());
         sellAfterBalance.setText(String.valueOf(newBalance));
     }
+    /**
+     * Recalculates and resets the sell list's items
+     */
     private void resetSellList() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         for (int i = 0; i < Item.values().length; i++) {
@@ -317,16 +355,16 @@ public class GameController implements Initializable {
         }
         sellList.setItems(sellItems);
     }
-//</editor-fold>
-    
-//<editor-fold defaultstate="collapsed" desc="CARGO HELPER METHODS">
+    /**
+     * Sets cargo text screen
+     */
     private void displayCargo() {
         cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo());
     }
-//</editor-fold>
-//</editor-fold>
-    
-//<editor-fold defaultstate="collapsed" desc="JUMP DRIVE">
+    /**
+     * Opens the map
+     * @param event
+     */
     @FXML
     private void openMap(ActionEvent event) {
         mapPane.setVisible(true);
@@ -340,12 +378,17 @@ public class GameController implements Initializable {
             showSelectedSS(newValue);
         }});
     }
-    
+    /**
+     * Closes the map
+     * @param event
+     */
     @FXML
     private void closeMap(ActionEvent event) {
         mapPane.setVisible(false);
     }
-    
+    /**
+     * Creates SolarSystem table
+     */
     private void createSSTable() {
         ObservableList<SolarSystem> universe = FXCollections.observableArrayList(myUniverse.getSolarSystems());
         ssTable.setItems(universe);
@@ -364,7 +407,10 @@ public class GameController implements Initializable {
         
         ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol, techLevelCol);
     }
-    
+    /**
+     * Draws the selected SolarSystem
+     * @param ss
+     */
     private void showSelectedSS(SolarSystem ss) {
         if (ss != null) {
             drawMap();
@@ -373,7 +419,9 @@ public class GameController implements Initializable {
             gc.fillOval(ss.getX()*2-2, ss.getY()*2-2, 4, 4);
         }
     }
-    
+    /**
+     * Draws the Universe
+     */
     private void drawMap() {
         GraphicsContext gc = mapCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
@@ -386,12 +434,17 @@ public class GameController implements Initializable {
         gc.setFill(Color.AQUA);
         gc.fillOval(mySS.getX()*2-2, mySS.getY()*2-2, 4, 4);
     }
-    
+    /**
+     * Occurs when jump drive is activated
+     * @param event
+     */
     @FXML
     private void activateJumpDrive(ActionEvent event) {
         enterLightTunnel();
     }
-    
+    /**
+     * Occurs when player travels to new system
+     */
     private void enterLightTunnel() {
         topPane.setVisible(true);
         Label l1 = new Label("Travelling at warp speed...");
@@ -413,9 +466,9 @@ public class GameController implements Initializable {
         }
         );
     }
-//</editor-fold>
-    
-//<editor-fold defaultstate="collapsed" desc="INTERACTIVE MAP">
+    /**
+     * Opens the universe map
+     */
     @FXML
     private void openInteractiveMap() {
         ScrollPane sp = new ScrollPane();
@@ -469,9 +522,10 @@ public class GameController implements Initializable {
         topPane.getChildren().clear();
         topPane.setVisible(false);
     }
-//</editor-fold>
-    
-//<editor-fold defaultstate="collapsed" desc="MAIN WINDOW COMPONENTS">
+    /**
+     * Closes the GameController, goes to title screen
+     * @param e
+     */
     @FXML
     private void exit(ActionEvent e) {
         application.showWelcome();
