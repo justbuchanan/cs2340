@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Timer;
 import javafx.animation.FillTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -51,36 +50,52 @@ import spacetrader.models.Universe;
 public class GameController implements Initializable {
 
     private Main application;
-    
+
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE DECLARATIONS">
-    @FXML Pane marketPane;
-    @FXML Label coordinates;
-    @FXML TabPane marketTabPane;
-    @FXML Label buyPrice, buyQuantity, buyBalance, buyAfterBalance;
-    @FXML Label sellPrice, sellQuantity, sellBalance, sellAfterBalance;
-    @FXML ListView buyList, sellList;
-    @FXML Label error, cargo;
-    @FXML Pane buyPane, sellPane;
+    @FXML
+    Pane marketPane;
+    @FXML
+    Label coordinates;
+    @FXML
+    TabPane marketTabPane;
+    @FXML
+    Label buyPrice, buyQuantity, buyBalance, buyAfterBalance;
+    @FXML
+    Label sellPrice, sellQuantity, sellBalance, sellAfterBalance;
+    @FXML
+    ListView buyList, sellList;
+    @FXML
+    Label error, cargo;
+    @FXML
+    Pane buyPane, sellPane;
     private ObservableList<String> buyItems, sellItems;
 //</editor-fold>
-    
-    @FXML private Pane mapPane;
-    @FXML private Canvas mapCanvas;
-    @FXML private TableView<SolarSystem> ssTable;
-    @FXML private Label flightDistance, fuelLeft, fuelRequired;
-    
+
+    @FXML
+    private Pane mapPane;
+    @FXML
+    private Canvas mapCanvas;
+    @FXML
+    private TableView<SolarSystem> ssTable;
+    @FXML
+    private Label flightDistance, fuelLeft, fuelRequired;
+
     //Player and universe objects are passed from config screen
     private Player myPlayer;
     private Universe myUniverse;
     private List<SolarSystem> solarSystems;
     private SolarSystem mySS;
     private Marketplace myMarket;
-    
-    @FXML Parent root;
-    @FXML private Canvas canvas;
-    @FXML private ProgressBar fuelGauge;
-    @FXML private Pane topPane;
-    
+
+    @FXML
+    Parent root;
+    @FXML
+    private Canvas canvas;
+    @FXML
+    private ProgressBar fuelGauge;
+    @FXML
+    private Pane topPane;
+
 //<editor-fold defaultstate="collapsed" desc="MAIN CANVAS DRAWING">
     /**
      * Draws a planet on the canvas
@@ -92,33 +107,40 @@ public class GameController implements Initializable {
      */
     private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
         gc.setFill(Color.BLACK);
-        r = (int)(r*(1 + mySS.getTechLevel().getValue()/5.0));
-        int d = 2*r;
+        r = (int) (r * (1 + mySS.getTechLevel().getValue() / 5.0));
+        int d = 2 * r;
         System.out.println(mySS.getTechLevel().getValue());
-        gc.fillOval(x-r, y-r, d, d);
+        gc.fillOval(x - r, y - r, d, d);
         gc.setFill(new RadialGradient(0, 0, 0.3, 0.3, 1, true,
                 CycleMethod.REFLECT,
                 new Stop(0.0, mySS.getPrimaryColor()),
                 new Stop(1.0, mySS.getSecondaryColor())));
-        gc.fillOval(x-r, y-r, d, d);
+        gc.fillOval(x - r, y - r, d, d);
     }
-    
+
     /**
      * Fills the canvas with planets
      */
-    private void fillCanvas() {
+    private void fillMainCanvas() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         drawPlanet(gc, 400, 300, 50);
+        
+        coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
+                + "Solar System: " + mySS.getName() + "\n"
+                + "Resource: " + mySS.getResource() + "\n"
+                + "Tech Level: " + mySS.getTechLevel()
+        );
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE">
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
         //Put marketplace generated code here...
         myMarket = mySS.getMP();
-        
+
         //Display and set up marketPane
         marketPane.setVisible(true);
         resetBuyList();
@@ -126,7 +148,7 @@ public class GameController implements Initializable {
         clearSellWindow();
         clearBuyWindow();
         displayCargo();
-        
+
         marketTabPane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
@@ -139,13 +161,14 @@ public class GameController implements Initializable {
                     }
                 }
         );
-        
+
     }
+
     @FXML
     private void closeMarketplace(ActionEvent event) {
         marketPane.setVisible(false);
     }
-    
+
     private void initBuyWindow() {
         List<String> marketListS = new ArrayList<String>(Item.values().length);
         for (int i = 0; i < Item.values().length; i++) {
@@ -153,7 +176,7 @@ public class GameController implements Initializable {
         }
         buyItems = FXCollections.observableArrayList(marketListS);
         buyList.setItems(buyItems);
-        
+
         buyList.getSelectionModel().selectFirst();
         clearBuyWindow();
         buyList.getSelectionModel().selectedItemProperty().addListener(
@@ -162,12 +185,12 @@ public class GameController implements Initializable {
                             String old_val, String new_val) {
                         error.setText("");
                         Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
-                        if(myMarket.isBuyable(item)) {
+                        if (myMarket.isBuyable(item)) {
                             buyPane.setVisible(true);
                             int price = myMarket.getBuyPrice(item);
                             buyPrice.setText(String.valueOf(price));
                             buyQuantity.setText("1");
-                            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*price;
+                            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * price;
                             buyAfterBalance.setText(String.valueOf(newBalance));
                         } else {
                             buyPane.setVisible(false);
@@ -175,7 +198,7 @@ public class GameController implements Initializable {
                     }
                 });
     }
-    
+
     private void initSellWindow() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         List<String> cargoS = new ArrayList<String>(Item.values().length);
@@ -186,7 +209,7 @@ public class GameController implements Initializable {
         sellList.setItems(sellItems);
         sellList.getSelectionModel().selectFirst();
         clearSellWindow();
-        
+
         sellList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
@@ -197,7 +220,7 @@ public class GameController implements Initializable {
                             int price = myMarket.getSellPrice(item);
                             sellPrice.setText(String.valueOf(price));
                             sellQuantity.setText("1");
-                            int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*price;
+                            int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText()) * price;
                             sellAfterBalance.setText(String.valueOf(newBalance));
                         } else {
                             sellPane.setVisible(false);
@@ -206,7 +229,7 @@ public class GameController implements Initializable {
                 });
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
     @FXML
     private void increaseBuyQuantity(ActionEvent event) {
@@ -215,20 +238,22 @@ public class GameController implements Initializable {
         if (myMarket.getQuantity(item) > q) {
             q++;
             buyQuantity.setText(q + "");
-            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
+            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * Integer.parseInt(buyPrice.getText());
             buyAfterBalance.setText(String.valueOf(newBalance));
         }
     }
+
     @FXML
     private void decreaseBuyQuantity(ActionEvent event) {
         if (Integer.parseInt(buyQuantity.getText()) != 1) {
             int q = Integer.parseInt(buyQuantity.getText());
             q--;
             buyQuantity.setText(q + "");
-            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
+            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * Integer.parseInt(buyPrice.getText());
             buyAfterBalance.setText(String.valueOf(newBalance));
         }
     }
+
     @FXML
     private void buy(ActionEvent event) {
         Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
@@ -250,18 +275,20 @@ public class GameController implements Initializable {
             error.setText("You have insufficient funds");
         }
     }
+
     private void clearBuyWindow() {
         int price = myMarket.getBuyPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
         buyPrice.setText(String.valueOf(price));
         buyQuantity.setText("1");
         buyBalance.setText(String.valueOf(myPlayer.getBalance()));
-        int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText())*Integer.parseInt(buyPrice.getText());
+        int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * Integer.parseInt(buyPrice.getText());
         buyAfterBalance.setText(String.valueOf(newBalance));
     }
+
     private void resetBuyList() {
         for (int i = 0; i < Item.values().length; i++) {
             if (myMarket.isBuyable(Item.values()[i])) {
-                buyItems.set(i, Item.values()[i].getName() + " (Price: " + myMarket.getBuyPrice(Item.values()[i]) + " credits, Quantity: " + myMarket.getQuantity(Item.values()[i])+")");
+                buyItems.set(i, Item.values()[i].getName() + " (Price: " + myMarket.getBuyPrice(Item.values()[i]) + " credits, Quantity: " + myMarket.getQuantity(Item.values()[i]) + ")");
             } else {
                 buyItems.set(i, Item.values()[i].getName() + " is not available");
             }
@@ -269,16 +296,17 @@ public class GameController implements Initializable {
         buyList.setItems(buyItems);
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="SELL WINDOW HANDLERS">
     @FXML
     private void increaseSellQuantity(ActionEvent event) {
         int q = Integer.parseInt(sellQuantity.getText());
         q++;
         sellQuantity.setText(q + "");
-        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*Integer.parseInt(sellPrice.getText());
+        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText()) * Integer.parseInt(sellPrice.getText());
         sellAfterBalance.setText(String.valueOf(newBalance));
     }
+
     @FXML
     private void decreaseSellQuantity(ActionEvent event) {
         if (Integer.parseInt(sellQuantity.getText()) != 1) {
@@ -287,6 +315,7 @@ public class GameController implements Initializable {
             sellQuantity.setText(q + "");
         }
     }
+
     @FXML
     private void sell(ActionEvent event) {
         List<Integer> cargo = myPlayer.getShip().getCargo();
@@ -303,14 +332,16 @@ public class GameController implements Initializable {
             clearSellWindow();
         }
     }
+
     private void clearSellWindow() {
         int price = myMarket.getSellPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
         sellPrice.setText(String.valueOf(price));
         sellQuantity.setText("1");
         sellBalance.setText(String.valueOf(myPlayer.getBalance()));
-        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText())*Integer.parseInt(sellPrice.getText());
+        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText()) * Integer.parseInt(sellPrice.getText());
         sellAfterBalance.setText(String.valueOf(newBalance));
     }
+
     private void resetSellList() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         for (int i = 0; i < Item.values().length; i++) {
@@ -324,14 +355,14 @@ public class GameController implements Initializable {
         sellList.setItems(sellItems);
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="CARGO HELPER METHODS">
     private void displayCargo() {
         cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo());
     }
 //</editor-fold>
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="JUMP DRIVE">
     @FXML
     private void openMap(ActionEvent event) {
@@ -341,24 +372,25 @@ public class GameController implements Initializable {
         createSSTable();
         //ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
         ssTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SolarSystem>() {
-        public void changed(ObservableValue<? extends SolarSystem> ov, 
-            SolarSystem oldval, SolarSystem newValue) {
-            showSelectedSS(newValue);
-        }});
+            public void changed(ObservableValue<? extends SolarSystem> ov,
+                    SolarSystem oldval, SolarSystem newValue) {
+                showSelectedSS(newValue);
+            }
+        });
     }
-    
+
     @FXML
     private void closeMap(ActionEvent event) {
         mapPane.setVisible(false);
     }
-    
+
     private void createSSTable() {
         ObservableList<SolarSystem> universe = FXCollections.observableArrayList(myUniverse.getSolarSystems());
         ssTable.setItems(universe);
-        
+
         TableColumn<SolarSystem, String> nameCol = new TableColumn<>("System");
         nameCol.setCellValueFactory(new PropertyValueFactory("name"));
-        
+
         TableColumn<SolarSystem, Integer> xCol = new TableColumn<>("x");
         xCol.setCellValueFactory(new PropertyValueFactory("x"));
         TableColumn<SolarSystem, Integer> yCol = new TableColumn<>("y");
@@ -367,44 +399,47 @@ public class GameController implements Initializable {
         resourceCol.setCellValueFactory(new PropertyValueFactory("resource"));
         TableColumn<SolarSystem, TechLevel> techLevelCol = new TableColumn<>("Tech Level");
         techLevelCol.setCellValueFactory(new PropertyValueFactory("techLevel"));
-        
+
         ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol, techLevelCol);
     }
-    
+
     private void showSelectedSS(SolarSystem ss) {
         if (ss != null) {
             drawMap();
             GraphicsContext gc = mapCanvas.getGraphicsContext2D();
             gc.setFill(Color.RED);
-            gc.fillOval(ss.getX()*2-2, ss.getY()*2-2, 4, 4);
+            gc.fillOval(ss.getX() * 2 - 2, ss.getY() * 2 - 2, 4, 4);
         }
     }
-    
+
     private void drawMap() {
         GraphicsContext gc = mapCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
-        for (SolarSystem ss: myUniverse.getSolarSystems()) {
+        for (SolarSystem ss : myUniverse.getSolarSystems()) {
             int x = ss.getX();
             int y = ss.getY();
             gc.setFill(Color.WHITE);
-            gc.fillOval(x*2-1, y*2-1, 2, 2);
+            gc.fillOval(x * 2 - 1, y * 2 - 1, 2, 2);
         }
         gc.setFill(Color.AQUA);
-        gc.fillOval(mySS.getX()*2-2, mySS.getY()*2-2, 4, 4);
+        gc.fillOval(mySS.getX() * 2 - 2, mySS.getY() * 2 - 2, 4, 4);
     }
-    
+
     @FXML
     private void activateJumpDrive(ActionEvent event) {
+        mySS = ssTable.getSelectionModel().getSelectedItem();
+        myMarket = new Marketplace(mySS);
+        fillMainCanvas();
         enterLightTunnel();
     }
-    
+
     private void enterLightTunnel() {
         topPane.setVisible(true);
         Label l1 = new Label("Travelling at warp speed...");
         Rectangle rect = new Rectangle(0, 0, 800, 600);
         topPane.getChildren().add(rect);
         topPane.getChildren().add(l1);
-        
+
         FillTransition transition = new FillTransition(Duration.millis(3000), rect, Color.BLACK, Color.WHITE);
         transition.setCycleCount(4);
         transition.setAutoReverse(true);
@@ -420,120 +455,148 @@ public class GameController implements Initializable {
         );
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="INTERACTIVE MAP">
     @FXML
     private void openInteractiveMap() {
         ScrollPane sp = new ScrollPane();
+        Pane cPane = new Pane();
         Canvas c = new Canvas();
+        Canvas c1 = new Canvas();
         int size = 1500;
         c.setHeight(size);
         c.setWidth(size);
+        c1.setHeight(size);
+        c1.setWidth(size);
         GraphicsContext gc = c.getGraphicsContext2D();
+        GraphicsContext gc1 = c1.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, c.getHeight(), c.getWidth());
         gc.setFill(Color.WHITE);
         int r = 10;
-        int ratio = (int) c.getHeight()/myUniverse.getHeight();
-        
+        int ratio = (int) c.getHeight() / myUniverse.getHeight();
+
         gc.setStroke(Color.gray(0.2));
         for (int x = 0; x < size; x = x + 50) {
             gc.strokeLine(x, 0, x, size);
             gc.strokeLine(0, x, size, x);
         }
-        
+
         Random rand = new Random();
         for (int i = 0; i < 1000; i++) {
-            int r1 = rand.nextInt(3)+1;
+            int r1 = rand.nextInt(3) + 1;
             gc.fillOval(rand.nextInt(size), rand.nextInt(size), r1, r1);
         }
-        
-        for (SolarSystem ss: myUniverse.getSolarSystems()) {
-            gc.fillOval(ratio*ss.getX()-r, ratio*ss.getY()-r, 2*r, 2*r);
+
+        for (SolarSystem ss : myUniverse.getSolarSystems()) {
+            gc.fillOval(ratio * ss.getX() - r, ratio * ss.getY() - r, 2 * r, 2 * r);
         }
         
+        gc.setFill(Color.AQUA);
+        gc.fillOval(ratio * mySS.getX() - r, ratio * mySS.getY() - r, 2 * r, 2 * r);
+        gc.fillText("You are here", ratio*mySS.getX()+r, ratio*mySS.getY()+r*2);
+
         //Set canvas onClick event
-        c.setOnMouseClicked(new EventHandler<MouseEvent>(){
-          @Override
-          public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                if(mouseEvent.getClickCount() == 2){
-                    closeInteractiveMap();
+        c1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                SolarSystem clickedSS = hasPlanetAt((int) mouseEvent.getX(), (int) mouseEvent.getY(), r, ratio);
+                if (clickedSS != null) {
+                    gc1.clearRect(0, 0, c1.getWidth(), c1.getHeight());
+                    System.out.println(clickedSS);
+                    gc1.setFill(Color.RED);
+                    gc1.fillOval(ratio*clickedSS.getX() - r, ratio*clickedSS.getY() - r, 2*r, 2*r);
+                    gc1.setFill(Color.WHITE);
+                    String description = String.format("%s (%d, %d)\n%s\n%s", clickedSS.getName(), clickedSS.getX(), clickedSS.getY(), clickedSS.getResource(), clickedSS.getTechLevel());
+                    gc1.fillText(description, ratio*clickedSS.getX()+2*r, ratio*clickedSS.getY()+2*r);
+                    if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                        if (mouseEvent.getClickCount() == 2) {
+                            closeInteractiveMap(clickedSS);
+                        }
+                    }
                 }
             }
-          }
- 
+
         });
         sp.setPrefSize(800, 600);
         sp.setPannable(true);
-        sp.setContent(c);
+        cPane.getChildren().addAll(c, c1);
+        sp.setContent(cPane);
         topPane.getChildren().add(sp);
         topPane.setVisible(true);
     }
-    
-    private void closeInteractiveMap() {
+
+    private void closeInteractiveMap(SolarSystem ss) {
         topPane.getChildren().clear();
         topPane.setVisible(false);
+        showSelectedSS(ss);
+        ssTable.getSelectionModel().select(ss);
+    }
+
+    private SolarSystem hasPlanetAt(int x, int y, int r, int ratio) {
+        for (SolarSystem ss : solarSystems) {
+            int x1 = ratio*ss.getX();
+            int y1 = ratio*ss.getY();
+            if (x1 - r < x && x < x1 + r && y1 - r < y && y < y1 + r) {
+                return ss;
+            }
+        }
+        return null;
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="MAIN WINDOW COMPONENTS">
     @FXML
     private void exit(ActionEvent e) {
         application.showWelcome();
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
     /**
      * Links to main application
+     *
      * @param application
      */
     public void setApp(Main application) {
         this.application = application;
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) { 
+    public void initialize(URL url, ResourceBundle rb) {
         //Hide all popup panes
         marketPane.setVisible(false);
         mapPane.setVisible(false);
         topPane.setVisible(false);
     }
-    
+
     /**
      * Gets configuration info
-     * 
+     *
      * @param p Player
      * @param u Universe
      */
     public void config(Player p, Universe u) {
         Random rand = new Random();
-        
+
         myPlayer = p;
         myUniverse = u;
-        
+
         //Randomly select a solar system as starting point
         solarSystems = myUniverse.getSolarSystems();
         mySS = solarSystems.get(rand.nextInt(solarSystems.size()));
         //mySS.setTechLevel(TechLevel.MEDIEVAL);
-        
-        fillCanvas();
-        
-        coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
-                + "Solar System: " + mySS.getName() + "\n"
-                + "Resource: " + mySS.getResource() + "\n"
-                + "Tech Level: " + mySS.getTechLevel()
-        );
-        
+
+        fillMainCanvas();
+
         //MARKETPLACE INITIALIZATION
         myMarket = new Marketplace(mySS);
         initBuyWindow();
         initSellWindow();
     }
 //</editor-fold>
-    
+
 }

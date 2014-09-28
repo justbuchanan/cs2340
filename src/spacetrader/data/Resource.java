@@ -14,7 +14,7 @@ public enum Resource {
     RICHSOIL(5, "Rich soil"),
     POORSOIL(6, "Poor soil"),
     RICHFAUNA(7, "Rich fauna"),
-    LIFELESS(8, "lifeless"),
+    LIFELESS(8, "Lifeless"),
     WEIRDMUSHROOMS(9, "Weird mushrooms"),
     LOTSOFHERBS(10, "Lots of herbs"),
     ARTISTIC(11, "Artistic"),
