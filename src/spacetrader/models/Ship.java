@@ -8,14 +8,15 @@ import spacetrader.data.ShipType;
 
 /**
  * holds ship information
- * 
+ *
  * @author Bao
  */
 public class Ship {
+
     private List<Integer> cargo;
     private int fuel;
     private ShipType type;
-    
+
     public Ship(ShipType type) {
         cargo = new ArrayList<Integer>(Collections.nCopies(Item.values().length, 0));
         this.type = type;
@@ -24,32 +25,33 @@ public class Ship {
         //Let's fill up your fuel tank
         fuel = type.getFuel();
     }
-    
+
     /**
      * Add item to cargo
-     * 
+     *
      * @param item
-     * @param quantity 
+     * @param quantity
      */
     public void addCargo(Item item, int quantity) {
         int q = cargo.get(item.getValue());
         cargo.set(item.getValue(), q + quantity);
-    } 
-    
+    }
+
     /**
      * Remove item from cargo
-     * 
+     *
      * @param item
-     * @param quantity 
+     * @param quantity
      */
     public void removeCargo(Item item, int quantity) {
         int q = cargo.get(item.getValue());
         cargo.set(item.getValue(), q - quantity);
     }
-    
+
     /**
      * Gets cargo list
-     * @return 
+     *
+     * @return
      */
     public List<Integer> getCargo() {
         return cargo;
@@ -57,7 +59,8 @@ public class Ship {
 
     /**
      * Sets cargo list
-     * @param cargo 
+     *
+     * @param cargo
      */
     public void setCargo(List<Integer> cargo) {
         this.cargo = cargo;
@@ -65,19 +68,21 @@ public class Ship {
 
     /**
      * Gets the max carrying capability of the ship
+     *
      * @return maximum number of cargo bays
      */
     public int getMaxCargo() {
         return type.getCargoBay();
     }
-    
+
     /**
      * Gets the total number of cargo bays
+     *
      * @return current number of cargo bays
      */
     public int getCurrentCargo() {
         int sum = 0;
-        for (int i: cargo) {
+        for (int i : cargo) {
             sum += i;
         }
         return sum;
@@ -85,22 +90,24 @@ public class Ship {
 
     /**
      * Gets the amount of fuel left
+     *
      * @return amount of fuel
      */
     public int getFuelReading() {
         return fuel;
     }
-    
+
     /**
      * Fills the fuel tank fully
      */
     public void refill() {
         this.fuel += type.getFuel();
     }
-    
+
     /**
      * Refills fuel tank with a specific amount of fuel
-     * @param fuel 
+     *
+     * @param fuel
      */
     public void refill(int fuel) {
         this.fuel += fuel;
@@ -108,7 +115,8 @@ public class Ship {
 
     /**
      * Gets type of ship
-     * @return ship type 
+     *
+     * @return ship type
      */
     public ShipType getType() {
         return type;
@@ -116,10 +124,11 @@ public class Ship {
 
     /**
      * Sets type of ship
-     * @param type 
+     *
+     * @param type
      */
     public void setType(ShipType type) {
         this.type = type;
     }
-    
+
 }

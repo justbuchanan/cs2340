@@ -10,30 +10,35 @@ import spacetrader.models.Player;
 
 /**
  * Welcome screen controller
- * 
+ *
  * @author Bao
  */
 public class WelcomeController implements Initializable {
-    
+
     private Main application;
-    
+
     /**
      * Links to main application
-     * @param application 
+     *
+     * @param application
      */
-    public void setApp(Main application){
+    public void setApp(Main application) {
         this.application = application;
     }
+
     /**
      * Handles new game requests
+     *
      * @param event
      */
     @FXML
     private void handleStartAction(ActionEvent event) {
         application.openConfig();
     }
+
     /**
      * Loads a saved game
+     *
      * @param event
      */
     @FXML
@@ -46,12 +51,13 @@ public class WelcomeController implements Initializable {
             System.out.println(p);
         }
     }
+
     /**
-     * 
+     *
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

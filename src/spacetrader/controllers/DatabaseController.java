@@ -14,7 +14,7 @@ import spacetrader.models.Player;
  */
 public class DatabaseController {
     private final String JDBC = "org.sqlite.JDBC";
-    private final String DB_NAME = "jdbc:sqlite:spacetrader.db";
+    private final String DB_NAME = "jdbc:sqlite:savedgame.db";
 
     public DatabaseController() {
         if (!hasTable("player")) {

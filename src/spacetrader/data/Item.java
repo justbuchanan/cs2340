@@ -2,12 +2,13 @@ package spacetrader.data;
 
 /**
  * Types of goods that are tradable.
- * 
+ *
  * @author Bao
  */
 public enum Item {
+
     WATER(0, "Water", 0, 0, 2, 30, 3, 4, RadicalEvent.DROUGHT, Resource.LOTSOFWATER, Resource.DESERT, 30, 50),
-    FURS(1, "Furs", 0 , 0, 0, 250, 10, 10, RadicalEvent.COLD, Resource.RICHFAUNA, Resource.LIFELESS, 230, 280),
+    FURS(1, "Furs", 0, 0, 0, 250, 10, 10, RadicalEvent.COLD, Resource.RICHFAUNA, Resource.LIFELESS, 230, 280),
     FOOD(2, "Food", 1, 0, 1, 100, 5, 5, RadicalEvent.CROPFAIL, Resource.RICHSOIL, Resource.POORSOIL, 90, 160),
     ORE(3, "Ore", 2, 2, 3, 350, 20, 10, RadicalEvent.WAR, Resource.MINERALRICH, Resource.MINERALPOOR, 350, 420),
     GAMES(4, "Games", 3, 1, 6, 250, -10, 5, RadicalEvent.BOREDOM, Resource.ARTISTIC, null, 160, 270),
@@ -16,7 +17,7 @@ public enum Item {
     MACHINES(7, "Machines", 4, 3, 5, 900, -30, 5, RadicalEvent.LACKOFWORKERS, null, null, 600, 800),
     NARCOTICS(8, "Narcotics", 5, 0, 5, 3500, -125, 150, RadicalEvent.BOREDOM, Resource.WEIRDMUSHROOMS, null, 2000, 3000),
     ROBOTS(9, "Robots", 6, 4, 7, 5000, -150, 100, RadicalEvent.LACKOFWORKERS, null, null, 3500, 5000);
-    
+
     private final int key;
     private final String name;
     private final int mtlp;         //  Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
@@ -30,8 +31,7 @@ public enum Item {
     private final Resource er;      //  When this condition is present, the resource is expensive
     private final int mtl;          //  Min price offered in space trade with random trader (not on a planet)
     private final int mth;          //  Max price offered in space trade with random trader (not on a planet)
-    
-    
+
     private Item(int i, String d, int mtlp, int mtlu, int ttp, int base, int ipl, int var, RadicalEvent ie, Resource cr, Resource er, int mtl, int mth) {
         this.key = i;
         this.name = d;
@@ -50,14 +50,16 @@ public enum Item {
 
     /**
      * Gets value of the item
+     *
      * @return value
      */
     public int getValue() {
         return key;
     }
-    
+
     /**
      * Gets name of the item
+     *
      * @return name
      */
     public String getName() {
@@ -66,14 +68,17 @@ public enum Item {
 
     /**
      * Same as getValue();
-     * @return 
+     *
+     * @return
      */
     public int getKey() {
         return key;
     }
-    
+
     /**
-     * Gets Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
+     * Gets Minimum Tech Level to Produce this resource (You can't buy on
+     * planets below this level)
+     *
      * @return MTLP
      */
     public int getMTLP() {
@@ -81,7 +86,9 @@ public enum Item {
     }
 
     /**
-     * Gets Minimum Tech Level to Use this resource (You can't sell on planets below this level)
+     * Gets Minimum Tech Level to Use this resource (You can't sell on planets
+     * below this level)
+     *
      * @return MTLU
      */
     public int getMTLU() {
@@ -90,6 +97,7 @@ public enum Item {
 
     /**
      * Gets Tech Level which produces the most of this item
+     *
      * @return TTP
      */
     public int getTTP() {
@@ -98,6 +106,7 @@ public enum Item {
 
     /**
      * Gets base price of the item
+     *
      * @return basePrice
      */
     public int getBasePrice() {
@@ -106,6 +115,7 @@ public enum Item {
 
     /**
      * Gets Price increase per tech level
+     *
      * @return IPL
      */
     public int getIPL() {
@@ -113,7 +123,9 @@ public enum Item {
     }
 
     /**
-     * Gets variance is the maximum percentage that the price can vary above or below the base
+     * Gets variance is the maximum percentage that the price can vary above or
+     * below the base
+     *
      * @return variance
      */
     public int getVar() {
@@ -121,7 +133,9 @@ public enum Item {
     }
 
     /**
-     * Gets Radical price increase event, when this even happens on a planet, the price may increase astronomically
+     * Gets Radical price increase event, when this even happens on a planet,
+     * the price may increase astronomically
+     *
      * @return increase event
      */
     public RadicalEvent getIE() {
@@ -130,14 +144,16 @@ public enum Item {
 
     /**
      * Gets the condition when the price is unusually low
+     *
      * @return cheap resource
      */
     public Resource getCR() {
         return cr;
     }
-    
+
     /**
      * Gets the condition when the resource is expensive
+     *
      * @return expensive resource
      */
     public Resource getER() {
@@ -145,20 +161,23 @@ public enum Item {
     }
 
     /**
-     * Gets min price offered in space trade with random trader (not on a planet)
+     * Gets min price offered in space trade with random trader (not on a
+     * planet)
+     *
      * @return minPrice
      */
     public int getMTL() {
         return mtl;
     }
-    
+
     /**
-     * Gets max price offered in space trade with random trader (not on a planet)
+     * Gets max price offered in space trade with random trader (not on a
+     * planet)
+     *
      * @return maxPrice
      */
     public int getMTH() {
         return mth;
     }
-    
-}
 
+}

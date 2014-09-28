@@ -71,10 +71,14 @@ public class GameController implements Initializable {
     private ObservableList<String> buyItems, sellItems;
 //</editor-fold>
 
-    @FXML private Pane mapPane;
-    @FXML private Canvas mapCanvas;
-    @FXML private TableView<SolarSystem> ssTable;
-    @FXML private Label flightDistance, fuelLeft, fuelRequired, fromSS, toSS;
+    @FXML
+    private Pane mapPane;
+    @FXML
+    private Canvas mapCanvas;
+    @FXML
+    private TableView<SolarSystem> ssTable;
+    @FXML
+    private Label flightDistance, fuelLeft, fuelRequired, fromSS, toSS;
 
     //Player and universe objects are passed from config screen
     private Player myPlayer;
