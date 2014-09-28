@@ -88,13 +88,19 @@ public class GameController implements Initializable {
      * @param gc graphics context
      * @param x x-coordinate of the center
      * @param y y-coordinate of the center
+     * @param r radius
      */
     private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
+        gc.setFill(Color.BLACK);
+        r = (int)(r*(1 + mySS.getTechLevel().getValue()/5.0));
+        int d = 2*r;
+        System.out.println(mySS.getTechLevel().getValue());
+        gc.fillOval(x-r, y-r, d, d);
         gc.setFill(new RadialGradient(0, 0, 0.3, 0.3, 1, true,
                 CycleMethod.REFLECT,
-                new Stop(0.0, Color.WHITE),
-                new Stop(1.0, Color.CADETBLUE)));
-        gc.fillOval(x-r, y-r, r*2, r*2);
+                new Stop(0.0, mySS.getPrimaryColor()),
+                new Stop(1.0, mySS.getSecondaryColor())));
+        gc.fillOval(x-r, y-r, d, d);
     }
     
     /**

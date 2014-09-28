@@ -1,9 +1,10 @@
 package spacetrader.models;
 
 import java.util.HashMap;
+import javafx.scene.paint.Color;
 import spacetrader.data.Item;
-import spacetrader.data.TechLevel;
 import spacetrader.data.Resource;
+import spacetrader.data.TechLevel;
 
 /**
  * @author Michael
@@ -17,6 +18,8 @@ public class SolarSystem {
 	private TechLevel techLevel;
 	private HashMap<Item, Integer> availableItems;
 	private Marketplace mp;
+        private Color primaryColor;
+        private Color secondaryColor;
         
     /**
      * Creates a solar system with some initial amount of resources
@@ -75,7 +78,34 @@ public class SolarSystem {
      * sets resource
      * @param _resource
      */
-    public void setResource(Resource _resource) { resource = _resource; }
+    public void setResource(Resource _resource) {
+        resource = _resource;
+        primaryColor = Color.WHITE;
+        switch (resource) {
+            case NOSPECIALRESOURCES: primaryColor = Color.color(0.9, 0.9, 0.9); break;
+            case MINERALRICH: primaryColor = Color.color(0.97, 0.9, 0.39); break;
+            case MINERALPOOR: primaryColor = Color.color(0.9, 0.9, 0.9); break;
+            case DESERT: primaryColor = Color.color(1, 0.6, 0.0); break;
+            case LOTSOFWATER: primaryColor = Color.color(0.0, 0.39, 0.93); break;
+            case RICHSOIL: primaryColor = Color.color(0.51, 0.19, 0.0); break;
+            case POORSOIL: primaryColor = Color.color(0.42, 0.25, 0.15); break;
+            case RICHFAUNA: primaryColor = Color.color(0.0, 0.77, 0.0); break;
+            case LIFELESS: primaryColor = Color.color(0.3, 0.3, 0.3); break;
+            case WEIRDMUSHROOMS: primaryColor = Color.color(0.46, 0.20, 0.0); break;
+            case LOTSOFHERBS: primaryColor = Color.color(0.17, 0.95, 0.0); break;
+            case ARTISTIC: primaryColor = Color.color(0.57, 0.0, 0.89); break;
+            case WARLIKE: primaryColor = Color.color(1, 0.0, 0.0);
+        } 
+        secondaryColor = primaryColor.deriveColor(0, 0, -1, 0);
+    }
+
+    public Color getPrimaryColor() {
+        return primaryColor;
+    }
+
+    public Color getSecondaryColor() {
+        return secondaryColor;
+    }
 
     /**
      * gets technology level

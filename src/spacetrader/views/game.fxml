@@ -106,7 +106,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="mapPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" AnchorPane.leftAnchor="0.0">
+      <Pane fx:id="mapPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" visible="false" AnchorPane.leftAnchor="0.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#838383" height="200.0" layoutX="30.0" layoutY="370.0" opacity="0.16" stroke="WHITE" strokeType="INSIDE" width="200.0" />
             <Canvas fx:id="mapCanvas" height="200.0" layoutX="30.0" layoutY="370.0" width="200.0" />
