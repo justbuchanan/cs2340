@@ -235,6 +235,9 @@ public class GameController implements Initializable {
                     }
                 });
     }
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
     /**
      * Increases the quantity to purchase by 1
      * @param event
@@ -313,6 +316,9 @@ public class GameController implements Initializable {
         }
         buyList.setItems(buyItems);
     }
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc="SELL WINDOW HANDLERS">
     /**
      * Increases the number of goods to sell by 1
      * @param event
@@ -383,12 +389,20 @@ public class GameController implements Initializable {
         }
         sellList.setItems(sellItems);
     }
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc="CARGO HELPER METHODS">
     /**
      * Sets cargo text screen
      */
     private void displayCargo() {
         cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo());
     }
+    
+//</editor-fold>
+//</editor-fold>
+
+//<editor-fold defaultstate="collapsed" desc="JUMP DRIVE">
     /**
      * Opens the map
      * @param event
