@@ -24,12 +24,18 @@ public class WelcomeController implements Initializable {
     public void setApp(Main application){
         this.application = application;
     }
-    
+    /**
+     * Handles new game requests
+     * @param event
+     */
     @FXML
     private void handleStartAction(ActionEvent event) {
         application.openConfig();
     }
-    
+    /**
+     * Loads a saved game
+     * @param event
+     */
     @FXML
     private void handleLoadAction(ActionEvent event) {
         DatabaseController db = new DatabaseController();
@@ -40,7 +46,9 @@ public class WelcomeController implements Initializable {
             System.out.println(p);
         }
     }
-    
+    /**
+     * 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

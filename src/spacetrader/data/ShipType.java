@@ -51,75 +51,129 @@ public enum ShipType {
         this.repairCost = repairCost;
         this.size = size;
     }
-
+    /**
+     * Gets ship's name
+     * @return
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * gets number of cargo bays
+     * @return
+     */
     public int getCargoBay() {
         return cargoBay;
     }
-
+    /**
+     * gets number of weapsons slots
+     * @return
+     */
     public int getWeaponSlots() {
         return weaponSlots;
     }
-
+    /**
+     * gets number of shields this ship can carry
+     * @return
+     */
     public int getShieldSlots() {
         return shieldSlots;
     }
-
+    /**
+     * gets the min tech level for a planet to sell this type of ship
+     * @return
+     */
     public int getMinTechLevel() {
         return minTechLevel;
     }
-
+    /**
+     * gets the max number of crew
+     * @return
+     */
     public int getCrew() {
         return crew;
     }
-
+    /**
+     * Gets the cost per unit of fuel for this ship type
+     * @return
+     */
     public int getFuelCost() {
         return fuelCost;
     }
-
+    /**
+     * Gets the default shipyard price for this ship
+     * @return
+     */
     public int getPrice() {
         return price;
     }
-
+    /**
+     * gets the max units of fuel this ship's tank can hold
+     * @return
+     */
     public int getFuel() {
         return fuel;
     }
-
+    /**
+     * gets the total number of gadgets that can be installed in this ship
+     * @return
+     */
     public int getGadgetSlots() {
         return gadgetSlots;
     }
-
+    /**
+     * gets the size of this ship
+     * @return
+     */
     public int getSize() {
         return size;
     }
-
+    /**
+     * gets the cost to repair 1 unit of damage to this ship
+     * @return
+     */
     public int getRepairCost() {
         return repairCost;
     }
-
+    /**
+     * Gets the trader attraction rating from this ship
+     * @return
+     */
     public int getTrader() {
         return trader;
     }
-
+    /**
+     * Gets the pirate attraction rating of this ship
+     * @return
+     */
     public int getPirate() {
         return pirate;
     }
-
+    /**
+     * Gets the police attraction rating from this ship
+     * @return
+     */
     public int getPolice() {
         return police;
     }
-
+    /**
+     * Gets the max hitpoints of this ship
+     * @return
+     */
     public int getHullStrength() {
         return hullStrength;
     }
-
+    /**
+     * Gets the frequency of this ship being used by the AI?
+     * @return
+     */
     public int getOccurrence() {
         return occurrence;
     }
-
+    /**
+     * ?
+     * @return
+     */
     public int getBounty() {
         return bounty;
     }
