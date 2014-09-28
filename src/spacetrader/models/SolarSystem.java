@@ -20,7 +20,6 @@ public class SolarSystem {
     private HashMap<Item, Integer> availableItems;
     private Marketplace mp;
     private Color primaryColor;
-    private Color secondaryColor;
 
     /**
      * Creates a solar system with some initial amount of resources
@@ -144,15 +143,10 @@ public class SolarSystem {
             case WARLIKE:
                 primaryColor = Color.color(1, 0.0, 0.0);
         }
-        secondaryColor = primaryColor.deriveColor(0, 0, -1, 0);
     }
 
     public Color getPrimaryColor() {
         return primaryColor;
-    }
-
-    public Color getSecondaryColor() {
-        return secondaryColor;
     }
 
     /**
