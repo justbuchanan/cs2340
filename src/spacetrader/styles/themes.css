@@ -3,25 +3,62 @@
     -fx-background-color: black;
 }
 
-.green {
-    -fx-background-color:
-        linear-gradient(#f0ff35, #a9ff00),
-        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
-    -fx-background-radius: 6, 5;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: #395306;
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
 }
 
 .button {
     -fx-background-color:
+        linear-gradient(#fff035, #ffa900),
+        radial-gradient(center 50% -40%, radius 200%, #eeb836 45%, #c88000 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #533906;
+	-fx-font-weight: bold;
+}
+
+.button: hover {
+    -fx-background-color:
+        linear-gradient(#fff685, #ffc451),
+        radial-gradient(center 50% -40%, radius 200%, #eec052 45%, #d59a32 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #533906;
+	-fx-font-weight: bold;
+}
+
+.clear-button {
+    -fx-font-family: Courier, "Courier New", monospace;
+    -fx-border-color: rgba(255,255,255,0.5);
+    -fx-border-width: 1;
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255,255,255,0.5);
+}
+
+.clear-button: hover {
+    -fx-font-family: Courier, "Courier New", monospace;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1;
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-text-fill: #ffffff;
+}
+
+/*.button {
+    -fx-background-color:
         linear-gradient(#f0ff35, #a9ff00),
         radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
     -fx-background-radius: 6, 5;
     -fx-background-insets: 0, 1;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
     -fx-text-fill: #395306;
-}
+}*/
 
 .bigbutton {
 	-fx-font-size: 20;
@@ -34,9 +71,9 @@
 }
 
 .ws_background {
-	-fx-background-image: url("../../img/background.jpg");
+	-fx-background-image: url("../resources/img/burningearth.jpg");
 }
 
 .universe_background {
-	-fx-background-image: url("../../img/universe.jpg");
+	-fx-background-image: url("../resources/img/universe.jpg");
 }

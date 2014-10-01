@@ -1,5 +1,6 @@
 package spacetrader;
 
+import spacetrader.models.Universe;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,14 +18,19 @@ import spacetrader.models.Player;
 
 /**
  * JavaFX main application
- * 
+ *
  * @author Bao
  */
 public class Main extends Application {
+
     private Stage stage;
+    private Stage mapStage;
     private final double MINIMUM_WINDOW_WIDTH = 800.0;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
-    
+
+    /**
+     * Starts the Application
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -33,31 +39,31 @@ public class Main extends Application {
             stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
             stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
             stage.setResizable(false);
-            gotoWelcome();
+            showWelcome();
             primaryStage.show();
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Opens configuration screen
      */
     public void openConfig() {
-        gotoConfig();
+        showConfig();
     }
-    
+
     /**
      * Closes configuration screen
      */
     public void closeConfig() {
-        gotoWelcome();
+        showWelcome();
     }
-    
+
     /**
      * Goes to configuration screen
      */
-    private void gotoConfig() {
+    public void showConfig() {
         try {
             ConfigController config = (ConfigController) replaceSceneContent("views/config.fxml");
             config.setApp(this);
@@ -65,11 +71,11 @@ public class Main extends Application {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
+
     /**
      * Goes to welcome (starting) screen
      */
-    private void gotoWelcome() {
+    public void showWelcome() {
         try {
             WelcomeController Welcome = (WelcomeController) replaceSceneContent("views/welcome.fxml");
             Welcome.setApp(this);
@@ -77,8 +83,7 @@ public class Main extends Application {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-            
+
     /**
      * Goes to game screen
      */
@@ -88,25 +93,25 @@ public class Main extends Application {
             game.setApp(this);
             game.config(myPlayer, myUniverse);
             /*TestController test = (TestController) replaceSceneContent("test.fxml");
-            test.setApp(this);*/
+             test.setApp(this);*/
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     /**
      * Replaces scene content
-     * 
+     *
      * @param target fxml
      * @return controller
-     * @throws Exception 
+     * @throws Exception
      */
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -118,11 +123,11 @@ public class Main extends Application {
             page = (AnchorPane) loader.load(in);
         } finally {
             in.close();
-        } 
+        }
         Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
     }
-    
+
 }

@@ -10,19 +10,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" styleClass="ws_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.WelcomeController">
     <children>
-        <Button layoutX="296.0" layoutY="404.0" onAction="#handleStartAction" prefHeight="42.0" prefWidth="185.0" text="START">
-         <styleClass>
-            <String fx:value="green" />
-            <String fx:value="welcome_button" />
-         </styleClass></Button>
-        <Label fx:id="label" alignment="CENTER" layoutY="126.0" minHeight="16.0" minWidth="69.0" text="SPACE TRADER" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Button layoutX="296.0" layoutY="404.0" onAction="#handleStartAction" prefHeight="42.0" prefWidth="185.0" styleClass="welcome_button" text="START" />
+        <Label fx:id="label" alignment="CENTER" layoutY="126.0" minHeight="16.0" minWidth="69.0" text="SPACE MERCHANT" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="Broadway" size="65.0" />
          </font></Label>
-      <Button fx:id="button1" layoutX="296.0" layoutY="462.0" onAction="#handleLoadAction" prefHeight="42.0" prefWidth="185.0" text="LOAD GAME">
-         <styleClass>
-            <String fx:value="green" />
-            <String fx:value="welcome_button" />
-         </styleClass></Button>
+      <Button fx:id="button1" layoutX="296.0" layoutY="462.0" onAction="#handleLoadAction" prefHeight="42.0" prefWidth="185.0" styleClass="welcome_button" text="LOAD GAME" />
     </children>
 </AnchorPane>

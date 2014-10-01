@@ -13,20 +13,12 @@
          <font>
             <Font size="37.0" />
          </font></Label>
-      <Button layoutX="351.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleOKAction" prefHeight="44.0" prefWidth="173.0" stylesheets="@../styles/themes.css" text="OK">
-         <styleClass>
-            <String fx:value="green" />
-            <String fx:value="bigbutton" />
-         </styleClass></Button>
+      <Button layoutX="351.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleOKAction" prefHeight="44.0" prefWidth="173.0" styleClass="bigbutton" stylesheets="@../styles/themes.css" text="OK" />
       <Label layoutX="135.0" layoutY="215.0" text="Allocate your skill points" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font></Label>
-      <Button layoutX="564.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="44.0" prefWidth="173.0" text="Cancel">
-         <styleClass>
-            <String fx:value="green" />
-            <String fx:value="bigbutton" />
-         </styleClass></Button>
+      <Button layoutX="564.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="44.0" prefWidth="173.0" styleClass="bigbutton" text="Cancel" />
       <VBox layoutX="201.0" layoutY="254.0">
          <children>
             <Label layoutX="201.0" layoutY="254.0" text="Pilot" textFill="WHITE">
@@ -120,15 +112,15 @@
          </font>
       </Label>
       <Label fx:id="name_error" layoutX="207.0" layoutY="176.0" textFill="RED" />
-      <Pane fx:id="messagePane" layoutX="14.0" layoutY="107.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="messagePane" layoutX="14.0" layoutY="107.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="CENTER" layoutX="186.0" layoutY="248.0" text="Player has been successfully created&#10;Generating the universe... Completed&#10;Game is ready to play" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
-            <Button layoutX="340.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleGoToHomeScreen" styleClass="green" text="Go to Home Screen" />
-            <Button layoutX="340.0" layoutY="408.0" mnemonicParsing="false" onAction="#handlePlay" prefHeight="25.0" prefWidth="120.0" styleClass="green" text="Play" />
+            <Button layoutX="338.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleGoToHomeScreen" styleClass="green" text="Go to Home Screen" />
+            <Button layoutX="340.0" layoutY="408.0" mnemonicParsing="false" onAction="#handlePlay" prefHeight="25.0" prefWidth="120.0" styleClass="green" text="PLAY!!!" />
          </children>
       </Pane>
    </children>
