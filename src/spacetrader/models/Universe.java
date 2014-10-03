@@ -27,7 +27,7 @@ public class Universe {
 	 * @param destSS destination SolarSystem
 	 * @return true if this trip is possible
 	 */
-	public boolean shipCanTravel(Ship ship, SolarSystem curSS, SolarSystem destSS) {
+	public static boolean shipCanTravel(Ship ship, SolarSystem curSS, SolarSystem destSS) {
 		if (ship.getFuelReading() >= calcFuelRequired(curSS, destSS)) return true;
 		else return false;
 	}
@@ -37,7 +37,7 @@ public class Universe {
 	 * @param destSS destination SolarSystem
 	 * @return fuel required for this trip
 	 */
-	public int calcFuelRequired(SolarSystem startSS, SolarSystem destSS) {
+	public static int calcFuelRequired(SolarSystem startSS, SolarSystem destSS) {
 		return (int)calcDistance(startSS, destSS);
 	}
 	/**
@@ -46,7 +46,7 @@ public class Universe {
 	 * @param ss2 second planet
 	 * @return Euclidean distance
 	 */
-	public double calcDistance(SolarSystem ss1, SolarSystem ss2) {
+	public static double calcDistance(SolarSystem ss1, SolarSystem ss2) {
 		int xDist = Math.abs(ss1.getX() - ss2.getX());
 		int yDist = Math.abs(ss1.getY() - ss2.getY());
 		return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
