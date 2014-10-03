@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 /**
- * This is an API that will modify a top-layer pane from the controller to display message
+ * This is an API that will modify a top-level pane from the controller to display message
  * @author Bao
  */
 public class MessageAPI {
