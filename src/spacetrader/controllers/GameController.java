@@ -517,10 +517,18 @@ public class GameController implements Initializable {
      */
     @FXML
     private void activateJumpDrive(ActionEvent event) {
-        mySS = ssTable.getSelectionModel().getSelectedItem();
-        myMarket = new Marketplace(mySS);
-        fillMainCanvas();
-        enterLightTunnel();
+    	SolarSystem current = mySS;
+    	SolarSystem dest = ssTable.getSelectionModel().getSelectedItem();
+    	if (!(mySS.getX()==dest.getX() && mySS.getY()==dest.getY())) {
+	    	if (Universe.shipCanTravel(myPlayer.getShip(), current, dest)) {
+	    		int fuelUnits = Universe.calcFuelRequired(current, dest);
+	    		myPlayer.getShip().refill(-1 * fuelUnits);
+			    mySS = dest;
+			    myMarket = new Marketplace(mySS);
+			    fillMainCanvas();
+			    enterLightTunnel();
+	    	}
+    	}
     }
 
     /**
@@ -556,19 +564,19 @@ public class GameController implements Initializable {
         ScrollPane sp = new ScrollPane();
         Pane cPane = new Pane();
         Canvas c = new Canvas();
-        Canvas c1 = new Canvas();
-        int size = 1500;
+        final Canvas c1 = new Canvas();
+        final int size = 1500;
         c.setHeight(size);
         c.setWidth(size);
         c1.setHeight(size);
         c1.setWidth(size);
         GraphicsContext gc = c.getGraphicsContext2D();
-        GraphicsContext gc1 = c1.getGraphicsContext2D();
+        final GraphicsContext gc1 = c1.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, c.getHeight(), c.getWidth());
         gc.setFill(Color.WHITE);
-        int r = 10;
-        int ratio = (int) c.getHeight() / myUniverse.getHeight();
+        final int r = 10;
+        final int ratio = (int) c.getHeight() / myUniverse.getHeight();
 
         gc.setStroke(Color.gray(0.2));
         for (int x = 0; x < size; x = x + 50) {
