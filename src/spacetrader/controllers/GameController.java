@@ -36,6 +36,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import spacetrader.*;
+import spacetrader.api.MessageAPI;
 import spacetrader.data.Item;
 import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
@@ -481,16 +482,20 @@ public class GameController implements Initializable {
 
     /**
      * Draws the selected SolarSystem
+     * shows flightDistance, fuelLeft, fuelRequired
      *
      * @param ss
      */
-    private void showSelectedSS(SolarSystem ss) {
-        if (ss != null) {
+    private void showSelectedSS(SolarSystem targetSS) {
+        if (targetSS != null) {            
             drawMap();
             GraphicsContext gc = mapCanvas.getGraphicsContext2D();
             gc.setFill(Color.RED);
-            gc.fillOval(ss.getX() * 2 - 2, ss.getY() * 2 - 2, 4, 4);
-            toSS.setText(ss.getName());
+            gc.fillOval(targetSS.getX() * 2 - 2, targetSS.getY() * 2 - 2, 4, 4);
+            toSS.setText(targetSS.getName());
+            flightDistance.setText(Universe.calcDistance(mySS, targetSS)+"");
+            fuelLeft.setText(myPlayer.getShip().getFuelReading()+"");
+            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS)+"");
         }
     }
 
@@ -523,11 +528,14 @@ public class GameController implements Initializable {
 	    	if (Universe.shipCanTravel(myPlayer.getShip(), current, dest)) {
 	    		int fuelUnits = Universe.calcFuelRequired(current, dest);
 	    		myPlayer.getShip().refill(-1 * fuelUnits);
-			    mySS = dest;
-			    myMarket = new Marketplace(mySS);
-			    fillMainCanvas();
-			    enterLightTunnel();
-	    	}
+			mySS = dest;
+			myMarket = new Marketplace(mySS);
+			fillMainCanvas();
+			enterLightTunnel();
+	    	} else {
+                    MessageAPI msgAPI = new MessageAPI(topPane);
+                    msgAPI.showMessage("The destination is out of range");
+                }
     	}
     }
 
