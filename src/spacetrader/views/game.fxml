@@ -200,7 +200,7 @@
             <Button layoutX="455.0" layoutY="543.0" mnemonicParsing="false" onAction="#activateJumpDrive" prefHeight="25.0" prefWidth="136.0" text="ACTIVATE" textFill="WHITE" />
             <Button layoutX="604.0" layoutY="543.0" mnemonicParsing="false" onAction="#closeMap" prefHeight="25.0" prefWidth="136.0" text="CANCEL" textFill="WHITE" />
             <Button layoutX="250.0" layoutY="542.0" mnemonicParsing="false" onAction="#openInteractiveMap" styleClass="clear-button" text="open interactive map" />
-            <Button layoutX="250.0" layoutY="372.0" mnemonicParsing="false" styleClass="clear-button" text="travel to nearest planet" />
+            <Button layoutX="250.0" layoutY="372.0" mnemonicParsing="false" onAction="#toNearestPlanet" styleClass="clear-button" text="travel to nearest planet" />
             <Label layoutX="250.0" layoutY="449.0" text="[current location]" textFill="AQUA">
                <font>
                   <Font name="Courier New" size="12.0" />
