@@ -112,7 +112,6 @@ public class GameController implements Initializable {
     private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
         r = (int) (r * (1 + mySS.getTechLevel().getValue() / 5.0));
         int d = 2 * r;
-        System.out.println(mySS.getTechLevel().getValue());
         int b = r/4;
         gc.setFill(new RadialGradient(0, 0, 0.5, 0.5, 0.5, true,
                 CycleMethod.REFLECT,
