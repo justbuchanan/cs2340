@@ -59,7 +59,7 @@ public class GameController implements Initializable {
     @FXML
     Pane marketPane;
     @FXML
-    Label coordinates;
+    Label coordinates, shipInfo, fuelGaugeLabel;
     @FXML
     TabPane marketTabPane;
     @FXML
@@ -142,6 +142,20 @@ public class GameController implements Initializable {
                 + "Tech Level: " + mySS.getTechLevel()
         );
     }
+    
+    /**
+     * Displays ship information such as ship type, status, cargo...
+     */
+    private void displayShipInfo() {
+        shipInfo.setText("Ship: " + myPlayer.getShip().getType() + "\n" +
+            "Status: Healthy\n" +
+            "Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo() + "\n" +
+            "Credits: " + myPlayer.getBalance());
+    }
+    
+    private void updateFuelGauge() {
+        fuelGauge.setProgress((double) myPlayer.getShip().getFuelReading() / myPlayer.getShip().getFuelCapacity());
+    }
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE">
@@ -182,6 +196,7 @@ public class GameController implements Initializable {
     @FXML
     private void closeMarketplace(ActionEvent event) {
         marketPane.setVisible(false);
+        displayShipInfo();
     }
 
     /**
@@ -543,6 +558,7 @@ public class GameController implements Initializable {
 			myMarket = new Marketplace(mySS);
 			fillMainCanvas();
 			enterLightTunnel();
+                        updateFuelGauge();
 	    	} else {
                     MessageAPI msgAPI = new MessageAPI(topPane);
                     msgAPI.showMessage("The destination is out of range");
@@ -744,6 +760,7 @@ public class GameController implements Initializable {
         //mySS.setTechLevel(TechLevel.MEDIEVAL);
 
         fillMainCanvas();
+        displayShipInfo();
 
         //MARKETPLACE INITIALIZATION
         myMarket = new Marketplace(mySS);

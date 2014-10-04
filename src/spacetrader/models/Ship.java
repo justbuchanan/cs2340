@@ -96,6 +96,15 @@ public class Ship {
     public int getFuelReading() {
         return fuel;
     }
+    
+    /**
+     * Gets fuel capacity of the ship
+     *
+     * @return amount of fuel
+     */
+    public int getFuelCapacity() {
+        return type.getFuel();
+    }
 
     /**
      * Fills the fuel tank fully
