@@ -43,13 +43,13 @@ public class WelcomeController implements Initializable {
      */
     @FXML
     private void handleLoadAction(ActionEvent event) {
-        DatabaseController db = new DatabaseController();
+        /*DatabaseController db = new DatabaseController();
         Player p = db.getPlayer();
         if (p == null) {
             System.out.println("No saved data available");
         } else {
             System.out.println(p);
-        }
+        }*/
     }
 
     /**
