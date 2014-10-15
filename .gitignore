@@ -4,3 +4,6 @@ build/
 dist/
 /bin/
 *.db
+.idea/
+2340.iml
+out/
