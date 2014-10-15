@@ -1,13 +1,11 @@
 package spacetrader.models;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.lang.Exception;
-import java.util.Random;
-
 import spacetrader.data.Item;
 import spacetrader.data.RadicalEvent;
-import spacetrader.models.SolarSystem;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Random;
 
 /**
  * Player comes to marketplace to buys and sells goods
@@ -25,6 +23,8 @@ public class Marketplace {
 
     private SolarSystem solarSystem;
     private Random rand = new Random();
+
+    private final double DEPRECIATION_FACTOR = .9;
 
     public Marketplace(SolarSystem mySS) {
         solarSystem = mySS;
@@ -82,7 +82,7 @@ public class Marketplace {
      * @return selling price
      */
     public int getSellPrice(Item item) {
-        return (int) (getBuyPrice(item) * 0.9);
+        return (int) (getBuyPrice(item) * DEPRECIATION_FACTOR);
     }
 
     /**

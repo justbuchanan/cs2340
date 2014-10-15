@@ -1,12 +1,12 @@
 package spacetrader.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import spacetrader.Main;
-import spacetrader.models.Player;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Welcome screen controller

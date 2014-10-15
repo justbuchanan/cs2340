@@ -12,6 +12,7 @@ public enum ShipType {
     FIREFLY("Firefly", 20, 1, 1, 1, 1, 17, 5, 3, 25000, 75, 20, 100, 0, 0, 0, 1, 1),
     MOSQUITO("Mosquito", 15, 2, 1, 1, 1, 13, 5, 5, 30000, 100, 20, 100, 0, 1, 0, 1, 1),
     BUMBLEBEE("BumbleBee", 25, 1, 2, 2, 2, 15, 5, 7, 60000, 125, 15, 100, 0, 1, 0, 1, 2);
+
     private final String name;
     private final int cargoBay;
     private final int weaponSlots;
@@ -32,8 +33,8 @@ public enum ShipType {
     private final int bounty;
 
     private ShipType(String name, int cargoBay, int weaponSlots, int shieldSlots, int gadgetSlots,
-            int crew, int fuel, int minTechLevel, int fuelCost, int price, int bounty, int occurrence, int hullStrength,
-            int police, int pirate, int trader, int repairCost, int size) {
+                     int crew, int fuel, int minTechLevel, int fuelCost, int price, int bounty, int occurrence, int hullStrength,
+                     int police, int pirate, int trader, int repairCost, int size) {
         this.name = name;
         this.cargoBay = cargoBay;
         this.weaponSlots = weaponSlots;

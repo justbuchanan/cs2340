@@ -1,10 +1,11 @@
 package spacetrader.models;
 
+import spacetrader.data.Item;
+import spacetrader.data.ShipType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import spacetrader.data.Item;
-import spacetrader.data.ShipType;
 
 /**
  * holds ship information
@@ -96,7 +97,7 @@ public class Ship {
     public int getFuelReading() {
         return fuel;
     }
-    
+
     /**
      * Gets fuel capacity of the ship
      *

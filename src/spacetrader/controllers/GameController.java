@@ -1,10 +1,5 @@
 package spacetrader.controllers;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
 import javafx.animation.FillTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
@@ -18,15 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -38,13 +26,21 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import spacetrader.*;
+import spacetrader.Main;
 import spacetrader.api.MessageAPI;
 import spacetrader.data.Item;
 import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
-import spacetrader.models.*;
+import spacetrader.models.Marketplace;
+import spacetrader.models.Player;
+import spacetrader.models.SolarSystem;
 import spacetrader.models.Universe;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 /**
  * Game screen controller
@@ -55,7 +51,7 @@ public class GameController implements Initializable {
 
     private Main application;
 
-//<editor-fold defaultstate="collapsed" desc="MARKETPLACE DECLARATIONS">
+    //<editor-fold defaultstate="collapsed" desc="MARKETPLACE DECLARATIONS">
     @FXML
     Pane marketPane;
     @FXML
@@ -101,30 +97,31 @@ public class GameController implements Initializable {
     private Pane topPane;
 
 //<editor-fold defaultstate="collapsed" desc="MAIN CANVAS DRAWING">
+
     /**
      * Draws a planet on the canvas
      *
      * @param gc graphics context
-     * @param x x-coordinate of the center
-     * @param y y-coordinate of the center
-     * @param r radius
+     * @param x  x-coordinate of the center
+     * @param y  y-coordinate of the center
+     * @param r  radius
      */
     private void drawPlanet(GraphicsContext gc, int x, int y, int r) {
         r = (int) (r * (1 + mySS.getTechLevel().getValue() / 5.0));
         int d = 2 * r;
-        int b = r/4;
+        int b = r / 4;
         gc.setFill(new RadialGradient(0, 0, 0.5, 0.5, 0.5, true,
                 CycleMethod.REFLECT,
                 new Stop(0.0, mySS.getPrimaryColor().deriveColor(0, 1, 1, 0.8)),
                 new Stop(1.0, Color.TRANSPARENT)));
-        gc.fillOval(x - r - b, y - r - b, d + 2*b , d + 2*b);
-        
+        gc.fillOval(x - r - b, y - r - b, d + 2 * b, d + 2 * b);
+
         gc.setFill(new RadialGradient(0, 0, 0.3, 0.3, 1, true,
                 CycleMethod.REFLECT,
                 new Stop(0.0, mySS.getPrimaryColor()),
                 new Stop(1.0, Color.BLACK)));
         gc.fillOval(x - r, y - r, d, d);
-        
+
     }
 
     /**
@@ -136,28 +133,28 @@ public class GameController implements Initializable {
         drawPlanet(gc, 400, 300, 50);
 
         coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
-                + "Solar System: " + mySS.getName() + "\n"
-                + "Resource: " + mySS.getResource() + "\n"
-                + "Tech Level: " + mySS.getTechLevel()
+                        + "Solar System: " + mySS.getName() + "\n"
+                        + "Resource: " + mySS.getResource() + "\n"
+                        + "Tech Level: " + mySS.getTechLevel()
         );
     }
-    
+
     /**
      * Displays ship information such as ship type, status, cargo...
      */
     private void displayShipInfo() {
         shipInfo.setText("Ship: " + myPlayer.getShip().getType() + "\n" +
-            "Status: Healthy\n" +
-            "Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo() + "\n" +
-            "Credits: " + myPlayer.getBalance());
+                "Status: Healthy\n" +
+                "Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo() + "\n" +
+                "Credits: " + myPlayer.getBalance());
     }
-    
+
     private void updateFuelGauge() {
         fuelGauge.setProgress((double) myPlayer.getShip().getFuelReading() / myPlayer.getShip().getFuelCapacity());
     }
 //</editor-fold>
 
-//<editor-fold defaultstate="collapsed" desc="MARKETPLACE">
+    //<editor-fold defaultstate="collapsed" desc="MARKETPLACE">
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
@@ -214,7 +211,7 @@ public class GameController implements Initializable {
         buyList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
-                            String old_val, String new_val) {
+                                        String old_val, String new_val) {
                         error.setText("");
                         Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
                         if (myMarket.isBuyable(item)) {
@@ -248,7 +245,7 @@ public class GameController implements Initializable {
         sellList.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
-                            String old_val, String new_val) {
+                                        String old_val, String new_val) {
                         Item item = Item.values()[sellList.getSelectionModel().getSelectedIndex()];
                         if (myMarket.isSellable(item)) {
                             sellPane.setVisible(true);
@@ -266,6 +263,7 @@ public class GameController implements Initializable {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
+
     /**
      * Increases the quantity to purchase by 1
      *
@@ -354,6 +352,7 @@ public class GameController implements Initializable {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="SELL WINDOW HANDLERS">
+
     /**
      * Increases the number of goods to sell by 1
      *
@@ -434,6 +433,7 @@ public class GameController implements Initializable {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="CARGO HELPER METHODS">
+
     /**
      * Sets cargo text screen
      */
@@ -443,8 +443,9 @@ public class GameController implements Initializable {
 
 //</editor-fold>
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="JUMP DRIVE">
+
     /**
      * Opens the map
      *
@@ -459,7 +460,7 @@ public class GameController implements Initializable {
         //ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
         ssTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SolarSystem>() {
             public void changed(ObservableValue<? extends SolarSystem> ov,
-                    SolarSystem oldval, SolarSystem newValue) {
+                                SolarSystem oldval, SolarSystem newValue) {
                 showSelectedSS(newValue);
             }
         });
@@ -481,9 +482,9 @@ public class GameController implements Initializable {
      */
     private void createSSTable() {
         ObservableList<SolarSystem> universe = FXCollections.observableArrayList(myUniverse.getSolarSystems());
-                
+
         ssTable.setItems(universe);
-        
+
         TableColumn<SolarSystem, String> nameCol = new TableColumn<>("System");
         nameCol.setCellValueFactory(new PropertyValueFactory("name"));
         TableColumn<SolarSystem, Integer> xCol = new TableColumn<>("x");
@@ -500,7 +501,7 @@ public class GameController implements Initializable {
                 double d = (double) Math.round(Universe.calcDistance(mySS, ss.getValue()) * 1000) / 1000;
                 return new ReadOnlyObjectWrapper(d);
             }
-         });
+        });
 
         ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol, techLevelCol, distanceCol);
     }
@@ -512,15 +513,15 @@ public class GameController implements Initializable {
      * @param ss
      */
     private void showSelectedSS(SolarSystem targetSS) {
-        if (targetSS != null) {            
+        if (targetSS != null) {
             drawMap();
             GraphicsContext gc = mapCanvas.getGraphicsContext2D();
             gc.setFill(Color.RED);
             gc.fillOval(targetSS.getX() * 2 - 2, targetSS.getY() * 2 - 2, 4, 4);
             toSS.setText(targetSS.getName());
-            flightDistance.setText(Universe.calcDistance(mySS, targetSS)+"");
-            fuelLeft.setText(myPlayer.getShip().getFuelReading()+"");
-            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS)+"");
+            flightDistance.setText(Universe.calcDistance(mySS, targetSS) + "");
+            fuelLeft.setText(myPlayer.getShip().getFuelReading() + "");
+            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS) + "");
         }
     }
 
@@ -547,24 +548,24 @@ public class GameController implements Initializable {
      */
     @FXML
     private void activateJumpDrive(ActionEvent event) {
-    	SolarSystem current = mySS;
-    	SolarSystem dest = ssTable.getSelectionModel().getSelectedItem();
-    	if (!(dest == current)) {
-	    	if (Universe.shipCanTravel(myPlayer.getShip(), current, dest)) {
-	    		int fuelUnits = Universe.calcFuelRequired(current, dest);
-	    		myPlayer.getShip().refill(-1 * fuelUnits);
-			mySS = dest;
-			myMarket = new Marketplace(mySS);
-			fillMainCanvas();
-			enterLightTunnel();
-                        updateFuelGauge();
-	    	} else {
-                    MessageAPI msgAPI = new MessageAPI(topPane);
-                    msgAPI.showMessage("The destination is out of range");
-                }
-    	} else {
-                    MessageAPI msgAPI = new MessageAPI(topPane);
-                    msgAPI.showMessage("Please choose a system different than your current system.");
+        SolarSystem current = mySS;
+        SolarSystem dest = ssTable.getSelectionModel().getSelectedItem();
+        if (!(dest == current)) {
+            if (Universe.shipCanTravel(myPlayer.getShip(), current, dest)) {
+                int fuelUnits = Universe.calcFuelRequired(current, dest);
+                myPlayer.getShip().refill(-1 * fuelUnits);
+                mySS = dest;
+                myMarket = new Marketplace(mySS);
+                fillMainCanvas();
+                enterLightTunnel();
+                updateFuelGauge();
+            } else {
+                MessageAPI msgAPI = new MessageAPI(topPane);
+                msgAPI.showMessage("The destination is out of range");
+            }
+        } else {
+            MessageAPI msgAPI = new MessageAPI(topPane);
+            msgAPI.showMessage("Please choose a system different than your current system.");
         }
     }
 
@@ -583,16 +584,16 @@ public class GameController implements Initializable {
         transition.setAutoReverse(true);
         transition.play();
         transition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                topPane.setVisible(false);
-                mapPane.setVisible(false);
-                topPane.getChildren().clear();
-            }
-        }
+                                     @Override
+                                     public void handle(ActionEvent event) {
+                                         topPane.setVisible(false);
+                                         mapPane.setVisible(false);
+                                         topPane.getChildren().clear();
+                                     }
+                                 }
         );
     }
-    
+
     @FXML
     private void toNearestPlanet() {
         ssTable.getSortOrder().add(ssTable.getColumns().get(5));
@@ -601,8 +602,9 @@ public class GameController implements Initializable {
         ssTable.getSelectionModel().select(nearestSS);
         ssTable.scrollTo(nearestSS);
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="INTERACTIVE MAP">
+
     /**
      * Opens the universe map
      */
@@ -624,27 +626,27 @@ public class GameController implements Initializable {
         gc.setFill(Color.WHITE);
         final int r = 10;
         final int ratio = (int) c.getHeight() / myUniverse.getHeight();
-        
+
         gc.setStroke(Color.gray(0.2));
         for (int x = 0; x < size; x = x + 50) {
             gc.strokeLine(x, 0, x, size);
             gc.strokeLine(0, x, size, x);
         }
-        
+
         Random rand = new Random();
         for (int i = 0; i < 1000; i++) {
             int r1 = rand.nextInt(3) + 1;
             gc.fillOval(rand.nextInt(size), rand.nextInt(size), r1, r1);
         }
-        
+
         for (SolarSystem ss : myUniverse.getSolarSystems()) {
             gc.fillOval(ratio * ss.getX() - r, ratio * ss.getY() - r, 2 * r, 2 * r);
         }
-        
+
         gc.setFill(Color.AQUA);
         gc.fillOval(ratio * mySS.getX() - r, ratio * mySS.getY() - r, 2 * r, 2 * r);
         gc.fillText("You are here", ratio * mySS.getX() + r, ratio * mySS.getY() + r * 2);
-        
+
         //Set canvas onClick event
         c1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -677,7 +679,7 @@ public class GameController implements Initializable {
                     }
                 }
             }
-            
+
         });
         sp.setPrefSize(800, 600);
         sp.setPannable(true);
@@ -686,7 +688,7 @@ public class GameController implements Initializable {
         topPane.getChildren().add(sp);
         topPane.setVisible(true);
     }
-    
+
     private void closeInteractiveMap(SolarSystem ss) {
         topPane.getChildren().clear();
         topPane.setVisible(false);
@@ -696,7 +698,7 @@ public class GameController implements Initializable {
             ssTable.scrollTo(ss);
         }
     }
-    
+
     private SolarSystem hasPlanetAt(int x, int y, int r, int ratio) {
         for (SolarSystem ss : solarSystems) {
             int x1 = ratio * ss.getX();
@@ -707,7 +709,7 @@ public class GameController implements Initializable {
         }
         return null;
     }
-    
+
     /**
      * Closes the GameController, goes to title screen
      *
@@ -721,6 +723,7 @@ public class GameController implements Initializable {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
+
     /**
      * Links to main application
      *

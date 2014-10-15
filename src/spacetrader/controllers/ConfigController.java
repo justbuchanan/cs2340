@@ -1,7 +1,5 @@
 package spacetrader.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +11,9 @@ import spacetrader.Main;
 import spacetrader.models.Player;
 import spacetrader.models.Universe;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Configuration screen controller
  *
@@ -20,7 +21,7 @@ import spacetrader.models.Universe;
  */
 public class ConfigController implements Initializable {
 
-//<editor-fold defaultstate="collapsed" desc="FXML objects">
+    //<editor-fold defaultstate="collapsed" desc="FXML objects">
     @FXML
     Label p0, p1, p2, p3, p4;
     @FXML

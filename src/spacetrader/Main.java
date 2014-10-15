@@ -1,9 +1,5 @@
 package spacetrader;
 
-import spacetrader.models.Universe;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +11,11 @@ import spacetrader.controllers.ConfigController;
 import spacetrader.controllers.GameController;
 import spacetrader.controllers.WelcomeController;
 import spacetrader.models.Player;
+import spacetrader.models.Universe;
+
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * JavaFX main application

@@ -1,14 +1,15 @@
 package spacetrader.models;
 
-import java.util.HashMap;
 import javafx.scene.paint.Color;
 import spacetrader.data.Item;
 import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
 
+import java.util.HashMap;
+
 /**
  * @author Michael Represents a single solar system. For now, this means a
- * planet.
+ *         planet.
  */
 public class SolarSystem {
 
@@ -21,14 +22,16 @@ public class SolarSystem {
     private Marketplace mp;
     private Color primaryColor;
 
+    final int QUANTITIES[] = {30, 30, 30, 30, 30, 30, 30, 30, 30, 30};
+
     /**
      * Creates a solar system with some initial amount of resources
      */
     public SolarSystem() {
-        int quantity[] = {30, 30, 30, 30, 30, 30, 30, 30, 30, 30};
+
         availableItems = new HashMap<>();
-        for (int i = 0; i < quantity.length; i++) {
-            availableItems.put(Item.values()[i], quantity[i]);
+        for (int i = 0; i < QUANTITIES.length; i++) {
+            availableItems.put(Item.values()[i], QUANTITIES[i]);
         }
     }
 

@@ -1,6 +1,5 @@
 package spacetrader.models;
 
-import java.util.Arrays;
 import spacetrader.data.ShipType;
 
 /**
@@ -13,23 +12,36 @@ public class Player {
     private String name;
     private int balance;
     private Ship ship;
-    private int[] points;
+
+    private Skill pilot = Skill.PILOT;
+    private Skill fighter = Skill.FIGHTER;
+    private Skill trader = Skill.TRADER;
+    private Skill engineer = Skill.ENGINEER;
+    private Skill investor = Skill.INVESTOR;
 
     /**
      * Player constructor Constructs a player with name and allocated skill
      * points array length must be 5
      *
-     * @param _name name of the player
-     * @param _pointsArr array of skill points
+     * @param name      name of the player
+     * @param pointsArr array of skill points
      */
-    public Player(String _name, int[] _pointsArr) {
-        this.name = _name;
-        this.points = Arrays.copyOf(_pointsArr, 5);
+    public Player(String name, int[] pointsArr) {
+        this.name = name;
         this.ship = new Ship(ShipType.GNAT);
         this.balance = 1000; //New player starts with 1000 credits
+        pilot.setPoints(pointsArr[0]);
+        fighter.setPoints(pointsArr[1]);
+        trader.setPoints(pointsArr[2]);
+        engineer.setPoints(pointsArr[3]);
+        investor.setPoints(pointsArr[4]);
+
+        System.out.println("Created new player");
+        System.out.println(this);
     }
 
 //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
+
     /**
      * Returns player's name
      *
@@ -46,24 +58,6 @@ public class Player {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Returns player's skill points
-     *
-     * @return
-     */
-    public int[] getPoints() {
-        return points;
-    }
-
-    /**
-     * Allocates player's skill points
-     *
-     * @param points
-     */
-    public void setPoints(int[] points) {
-        this.points = points;
     }
 
     /**
@@ -109,51 +103,31 @@ public class Player {
      * @return player's info
      */
     public String toString() {
-        return String.format("Name:\t%s\nPilot:\t%s\nFighter:\t%s\nTrader:\t%s\nEngineer:\t%s\nInvestor:\t%s", name, points[0], points[1], points[2], points[3], points[4]);
+        return String.format("Name:\t%s\nPilot:\t%s\nFighter:\t%s\nTrader:\t%s\nEngineer:\t%s\nInvestor:\t%s", name,
+                pilot.getPoints(), fighter.getPoints(), trader.getPoints(), engineer.getPoints(), investor.getPoints());
     }
 
-    /**
-     * Returns the points of the player's piloting skill
-     *
-     * @return
-     */
-    public int getPilotPoints() {
-        return points[0];
+    public Skill getSkill(Skill skill) {
+        switch (skill) {
+            case PILOT:
+                return pilot;
+            case FIGHTER:
+                return fighter;
+            case TRADER:
+                return trader;
+            case ENGINEER:
+                return engineer;
+            case INVESTOR:
+                return investor;
+            default:
+                return null;
+        }
     }
 
-    /**
-     * Returns the points of the player's fighting skill
-     *
-     * @return
-     */
-    public int getFighterPoints() {
-        return points[1];
-    }
-
-    /**
-     * Returns the points of the player's trading skill
-     *
-     * @return
-     */
-    public int getTraderPoints() {
-        return points[2];
-    }
-
-    /**
-     * Returns the points of the player's engineering skill
-     *
-     * @return
-     */
-    public int getEngineerPoints() {
-        return points[3];
-    }
-
-    /**
-     * Returns the points of the player's investing skill
-     *
-     * @return
-     */
-    public int getInvestorPoints() {
-        return points[4];
+    public void setSkill(Skill skill, int points) {
+        Skill s = getSkill(skill);
+        if (s != null) {
+            s.setPoints(points);
+        }
     }
 }

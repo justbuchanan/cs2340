@@ -4,25 +4,24 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 /**
  * This is an API that will modify a top-level pane from the controller to display message
+ *
  * @author Bao
  */
 public class MessageAPI {
     private Pane pane;
-    
+
     public MessageAPI(Pane pane) {
         this.pane = pane;
         clear();
     }
-    
+
     /**
      * Displays message
      */
@@ -47,7 +46,7 @@ public class MessageAPI {
         });
         show();
     }
-    
+
     /**
      * Clears everything inside the pane
      */
@@ -55,14 +54,14 @@ public class MessageAPI {
         pane.getChildren().clear();
         pane.setOnMouseClicked(null);
     }
-    
+
     /**
      * Sets pane visibility to true
      */
     public void show() {
         pane.setVisible(true);
     }
-    
+
     /**
      * Sets pane visibility to false
      */

@@ -17,9 +17,9 @@ public enum TechLevel {
     private int value;
     private String text;
 
-    private TechLevel(int _value, String _text) {
-        this.value = _value;
-        this.text = _text;
+    private TechLevel(int value, String text) {
+        this.value = value;
+        this.text = text;
     }
 
     /**

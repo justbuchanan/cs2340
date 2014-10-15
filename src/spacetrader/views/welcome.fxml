@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" styleClass="ws_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.WelcomeController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;"
+            styleClass="ws_background" stylesheets="@../styles/themes.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="spacetrader.controllers.WelcomeController">
     <children>
-        <Button layoutX="296.0" layoutY="404.0" onAction="#handleStartAction" prefHeight="42.0" prefWidth="185.0" styleClass="welcome_button" text="START" />
-        <Label fx:id="label" alignment="CENTER" layoutY="126.0" minHeight="16.0" minWidth="69.0" text="SPACE MERCHANT" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <font>
-            <Font name="Broadway" size="65.0" />
-         </font></Label>
-      <Button fx:id="button1" layoutX="296.0" layoutY="462.0" onAction="#handleLoadAction" prefHeight="42.0" prefWidth="185.0" styleClass="welcome_button" text="LOAD GAME" />
+        <Button layoutX="296.0" layoutY="404.0" onAction="#handleStartAction" prefHeight="42.0" prefWidth="185.0"
+                styleClass="welcome_button" text="START"/>
+        <Label fx:id="label" alignment="CENTER" layoutY="126.0" minHeight="16.0" minWidth="69.0" text="SPACE MERCHANT"
+               textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font name="Broadway" size="65.0"/>
+            </font>
+        </Label>
+        <Button fx:id="button1" layoutX="296.0" layoutY="462.0" onAction="#handleLoadAction" prefHeight="42.0"
+                prefWidth="185.0" styleClass="welcome_button" text="LOAD GAME"/>
     </children>
 </AnchorPane>
