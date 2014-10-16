@@ -36,7 +36,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             stage = primaryStage;
-            stage.setTitle("Space Trader by Vanguard");
+            stage.setTitle("Space Merchant by Vanguard");
             stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
             stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
             stage.setResizable(false);
