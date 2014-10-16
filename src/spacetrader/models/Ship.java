@@ -48,6 +48,16 @@ public class Ship {
         int q = cargo.get(item.getValue());
         cargo.set(item.getValue(), q - quantity);
     }
+    
+    /**
+     * Counts the number of the given item type in cargo
+     * 
+     * @param item The item
+     * @return the number of @item in cargo
+     */
+    public int countItemInCargo(Item item) {
+        return cargo.get(item.getValue());
+    }
 
     /**
      * Gets cargo list

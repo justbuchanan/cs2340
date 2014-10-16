@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import spacetrader.data.RandomEvent;
+import spacetrader.data.random_events.*;
 
 /**
  * Game screen controller
@@ -559,6 +561,49 @@ public class GameController implements Initializable {
                 fillMainCanvas();
                 enterLightTunnel();
                 updateFuelGauge();
+                
+                //  random events
+                ////////////////////////////////////////////////////////////////
+                
+                //  the chance of an event happening mid-travel is proportional to the distance travelled
+                //  here, we normalize by the max travellable distance and create a distance multiplier that we multiply
+                //  by individual RandomEvent probabilities
+                int w = myUniverse.getWidth(), h = myUniverse.getHeight();
+                double maxDist = Math.sqrt(w*w + h*h);
+                double distMultiplier = (Universe.calcDistance(current, dest) / maxDist);
+                
+                ArrayList<RandomEvent> allEvents = new ArrayList<>();
+                allEvents.add(new PirateRaid());
+                allEvents.add(new PoliceSearch());
+                allEvents.add(new MeteorStrike());
+                
+//                double eventProbabilitySum = 0;
+//                for (RandomEvent potentialEvent : allEvents) {
+//                    eventProbabilitySum += potentialEvent.getProbabilityMultiplier();
+//                }
+                
+                //  picture the probabilities of different events as slices on a circular spinner
+                //  create a random number @spin between zero and one and see which 'slice' (event) it landed on, if any
+                Random rand = new Random();
+                double spin = rand.nextFloat();
+                double probabilitiesSoFar = 0;
+                RandomEvent randEvent = null;
+                for (RandomEvent potentialEvent : allEvents) {
+                    probabilitiesSoFar += potentialEvent.getProbabilityMultiplier() * distMultiplier;
+                    if (spin < probabilitiesSoFar) {
+                        randEvent = potentialEvent;
+                        break;
+                    }
+                }
+                
+                //  FIXME: remove
+                randEvent = new PoliceSearch();
+                
+                //  if an event happened, we apply it and display a description of what happened
+                if (randEvent != null) {
+                    String eventDesc = randEvent.apply(myPlayer);
+                    //  FIXME: update label
+                }
             } else {
                 MessageAPI msgAPI = new MessageAPI(topPane);
                 msgAPI.showMessage("The destination is out of range");
