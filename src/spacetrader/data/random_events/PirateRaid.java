@@ -14,7 +14,8 @@ import spacetrader.models.Player;
 import spacetrader.models.Ship;
 
 /**
- *
+ * A random event where pirates steal some of your cargo
+ * 
  * @author justbuchanan
  */
 public class PirateRaid extends RandomEvent {
@@ -22,10 +23,16 @@ public class PirateRaid extends RandomEvent {
         super(0.2, "Pirate Raid");
     }
 
+    /**
+     * The pirates steal 3 items from you if you have any cargo.
+     * 
+     * @param player The player this happened to
+     * @return A description of the encounter
+     */
     @Override
     public String apply(Player player) {
         Ship ship = player.getShip();
-        String desc = "You've been raieded by pirates!  They stole: ";
+        String desc = "You've been raided by pirates!  They stole: ";
 
         int countToSteal = 3;
         List<Item> itemList = Arrays.asList(Item.values());

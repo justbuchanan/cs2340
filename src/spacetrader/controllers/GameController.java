@@ -583,7 +583,8 @@ public class GameController implements Initializable {
                 ArrayList<RandomEvent> allEvents = new ArrayList<>();
                 allEvents.add(new PirateRaid());
                 allEvents.add(new PoliceSearch());
-                allEvents.add(new MeteorStrike());
+                allEvents.add(new WaterLeak());
+                allEvents.add(new TreasureChest());
                 
                 //  picture the probabilities of different events as slices on a circular spinner
                 //  create a random number @spin between zero and one and see which 'slice' (event) it landed on, if any
@@ -600,7 +601,7 @@ public class GameController implements Initializable {
                 }
                 
                 
-//                randEvent = new PoliceSearch();   //  uncomment this to test random event functionality
+//                randEvent = new PirateRaid();   //  uncomment this to test random event functionality
                 
                 
                 //  if an event happened, we apply it and display a description of what happened

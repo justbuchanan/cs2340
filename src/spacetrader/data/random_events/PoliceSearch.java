@@ -11,7 +11,8 @@ import spacetrader.models.Player;
 import spacetrader.models.Ship;
 
 /**
- *
+ * An event where the police search your vehicle for drugs and guns.
+ * 
  * @author justbuchanan
  */
 public class PoliceSearch extends RandomEvent {
@@ -19,6 +20,12 @@ public class PoliceSearch extends RandomEvent {
         super(0.3, "Police Search");
     }
 
+    /**
+     * If the player has narcotics or firearms, removes them.
+     * 
+     * @param player The player the event happened to.
+     * @return A description of the encounter
+     */
     @Override
     public String apply(Player player) {
         Ship ship = player.getShip();
