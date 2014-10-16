@@ -97,6 +97,14 @@ public class GameController implements Initializable {
     private ProgressBar fuelGauge;
     @FXML
     private Pane topPane;
+    
+    //  random events
+    @FXML
+    private Pane randomEventPane;
+    @FXML
+    private Label randomEventDescriptionLabel;
+    @FXML
+    private Button randomEventDismissButton;
 
 //<editor-fold defaultstate="collapsed" desc="MAIN CANVAS DRAWING">
 
@@ -570,17 +578,12 @@ public class GameController implements Initializable {
                 //  by individual RandomEvent probabilities
                 int w = myUniverse.getWidth(), h = myUniverse.getHeight();
                 double maxDist = Math.sqrt(w*w + h*h);
-                double distMultiplier = (Universe.calcDistance(current, dest) / maxDist);
+                double distMultiplier = 0.5 + 0.5*(Universe.calcDistance(current, dest) / maxDist);
                 
                 ArrayList<RandomEvent> allEvents = new ArrayList<>();
                 allEvents.add(new PirateRaid());
                 allEvents.add(new PoliceSearch());
                 allEvents.add(new MeteorStrike());
-                
-//                double eventProbabilitySum = 0;
-//                for (RandomEvent potentialEvent : allEvents) {
-//                    eventProbabilitySum += potentialEvent.getProbabilityMultiplier();
-//                }
                 
                 //  picture the probabilities of different events as slices on a circular spinner
                 //  create a random number @spin between zero and one and see which 'slice' (event) it landed on, if any
@@ -596,13 +599,16 @@ public class GameController implements Initializable {
                     }
                 }
                 
-                //  FIXME: remove
-                randEvent = new PoliceSearch();
+                
+//                randEvent = new PoliceSearch();   //  uncomment this to test random event functionality
+                
                 
                 //  if an event happened, we apply it and display a description of what happened
                 if (randEvent != null) {
                     String eventDesc = randEvent.apply(myPlayer);
-                    //  FIXME: update label
+                    randomEventDescriptionLabel.setText(eventDesc);
+                } else {
+                    randomEventDescriptionLabel.setText(null);
                 }
             } else {
                 MessageAPI msgAPI = new MessageAPI(topPane);
@@ -612,6 +618,15 @@ public class GameController implements Initializable {
             MessageAPI msgAPI = new MessageAPI(topPane);
             msgAPI.showMessage("Please choose a system different than your current system.");
         }
+    }
+    
+    /**
+     * When the user presses the 'Ok' button on the random event pane, this gets
+     * called to dismiss it.
+     */
+    @FXML
+    private void dismissRandomEventPane(ActionEvent event) {
+        randomEventPane.setVisible(false);
     }
 
     /**
@@ -634,6 +649,10 @@ public class GameController implements Initializable {
                                          topPane.setVisible(false);
                                          mapPane.setVisible(false);
                                          topPane.getChildren().clear();
+                                         
+                                         if (randomEventDescriptionLabel.getText() != null) {
+                                             randomEventPane.setVisible(true);
+                                         }
                                      }
                                  }
         );

@@ -46,7 +46,7 @@ public abstract class RandomEvent {
     }
     
     /**
-     * Applies the random event to the given universe and returns a description
+     * Applies the random event to the given player and returns a description
      * of what happened.
      * @param player The player the event happened to
      * @return A description of what happened
