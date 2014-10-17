@@ -35,7 +35,12 @@ public class DbMethods {
         }
     }
 
+    /**
+     * Handles appropriate table creation
+     */
     private void onCreate() {
+
+
         if (!db.hasTable(DbTables.PLAYER)) {
             db.execSQL(CREATE_PLAYER_TABLE);
         }
@@ -49,6 +54,11 @@ public class DbMethods {
         }
     }
 
+    /**
+     * Loads the saved state
+     *
+     * @return The loaded player
+     */
     public Player load() {
         Player p = loadPlayer();
 
@@ -60,6 +70,11 @@ public class DbMethods {
         return p;
     }
 
+    /**
+     * Saves the player
+     *
+     * @param p The player to save
+     */
     public void save(Player p) {
         db.clearTable(DbTables.PLAYER);
         db.execSQL(String.format(INSERT_PLAYER_TABLE,
@@ -80,6 +95,11 @@ public class DbMethods {
     }
 
 
+    /**
+     * Loads the player
+     *
+     * @return The loaded player
+     */
     public Player loadPlayer() {
         DbResponse d = db.select(DbTables.PLAYER);
         Player player = null;
@@ -103,6 +123,11 @@ public class DbMethods {
         return player;
     }
 
+    /**
+     * Loads the players ship
+     *
+     * @return the Loaded ship
+     */
     public Ship loadShip() {
         DbResponse d = db.select(DbTables.SHIP);
         Ship ship = null;
@@ -124,10 +149,15 @@ public class DbMethods {
         return ship;
     }
 
+    /**
+     * Loads the cargo
+     *
+     * @return The loaded cargo
+     */
     public List<Integer> loadCargo() {
         DbResponse d = db.select(DbTables.CARGO);
         List<Integer> cargo = new ArrayList<>();
-        
+
         try {
             if (d.r != null) {
                 do {
