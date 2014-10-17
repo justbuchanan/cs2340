@@ -27,7 +27,7 @@ public class Player {
      * @param pointsArr array of skill points
      */
     public Player(String name, int[] pointsArr) {
-        this(name, 1000, pointsArr[0], pointsArr[1], pointsArr[2], pointsArr[3], pointsArr[4]);
+        this(name, 1000, null,  pointsArr[0], pointsArr[1], pointsArr[2], pointsArr[3], pointsArr[4]);
         System.out.println("Created new player");
         System.out.println(this);
     }
@@ -43,7 +43,7 @@ public class Player {
      * @param engineerPoints players engineer points
      * @param investorPoints players investor points
      */
-    public Player(String name, int balance, int pilotPoints, int fighterPoints, int traderPoints, int engineerPoints, int investorPoints) {
+    public Player(String name, int balance, Ship ship, int pilotPoints, int fighterPoints, int traderPoints, int engineerPoints, int investorPoints) {
         this.name = name;
         this.balance = balance; //New player starts with 1000 credits
         this.pilot.setPoints(pilotPoints);
@@ -51,8 +51,7 @@ public class Player {
         this.trader.setPoints(traderPoints);
         this.engineer.setPoints(engineerPoints);
         this.investor.setPoints(investorPoints);
-
-        this.ship = new Ship(ShipType.GNAT); // Base case
+        this.ship = ship == null ?  new Ship(ShipType.GNAT) : ship;
     }
 
 //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">

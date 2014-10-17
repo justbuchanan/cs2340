@@ -31,6 +31,8 @@ public class Main extends Application {
 
     public final int NUMBER_OF_SOLAR_SYSTEMS = 40;
 
+    private Player player;
+
     /**
      * Starts the Application
      */
@@ -92,6 +94,7 @@ public class Main extends Application {
      */
     public void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
+            player = myPlayer;
             GameController game = (GameController) replaceSceneContent("views/game.fxml");
             game.setApp(this);
             game.config(myPlayer, myUniverse);
@@ -112,7 +115,7 @@ public class Main extends Application {
     /**
      * Replaces scene content
      *
-     * @param target fxml
+     * @param fxml target fxml
      * @return controller
      * @throws Exception
      */
@@ -131,6 +134,14 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
+    }
+
+    /**
+     * Gets the current player
+     * @return The current player
+     */
+    public Player getPlayer() {
+        return player;
     }
 
 }

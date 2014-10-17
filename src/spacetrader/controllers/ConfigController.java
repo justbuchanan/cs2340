@@ -69,7 +69,7 @@ public class ConfigController implements Initializable {
         } else {
             myPlayer = new Player(name.getText(), points);
             DbMethods db = new DbMethods();
-            db.savePlayer(myPlayer);
+            db.save(myPlayer);
 
             messagePane.setVisible(true);
             myUniverse = Universe.generateUniverse(100, 100, application.NUMBER_OF_SOLAR_SYSTEMS);

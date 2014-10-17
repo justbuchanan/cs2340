@@ -31,6 +31,7 @@ import spacetrader.api.MessageAPI;
 import spacetrader.data.Item;
 import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
+import spacetrader.database.DbMethods;
 import spacetrader.models.Marketplace;
 import spacetrader.models.Player;
 import spacetrader.models.SolarSystem;
@@ -520,7 +521,7 @@ public class GameController implements Initializable {
      * Draws the selected SolarSystem
      * shows flightDistance, fuelLeft, fuelRequired
      *
-     * @param ss
+     * @param targetSS
      */
     private void showSelectedSS(SolarSystem targetSS) {
         if (targetSS != null) {
@@ -782,6 +783,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void exit(ActionEvent e) {
+        new DbMethods().save(application.getPlayer());
         application.showWelcome();
     }
 //</editor-fold>

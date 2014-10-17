@@ -19,12 +19,16 @@ public class Ship {
     private ShipType type;
 
     public Ship(ShipType type) {
+        this(type, type.getFuel());
+    }
+
+    public Ship(ShipType type, int fuel) {
         cargo = new ArrayList<Integer>(Collections.nCopies(Item.values().length, 0));
         this.type = type;
         //Freebies: 1 cargo bay of water. Yummy!
         addCargo(Item.WATER, 1);
         //Let's fill up your fuel tank
-        fuel = type.getFuel();
+        this.fuel = fuel;
     }
 
     /**
