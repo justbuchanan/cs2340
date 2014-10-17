@@ -567,9 +567,7 @@ public class GameController implements Initializable {
                 myPlayer.getShip().refill(-1 * fuelUnits);
                 mySS = dest;
                 myMarket = new Marketplace(mySS);
-                fillMainCanvas();
                 enterLightTunnel();
-                updateFuelGauge();
                 
                 //  random events
                 ////////////////////////////////////////////////////////////////
@@ -612,6 +610,9 @@ public class GameController implements Initializable {
                 } else {
                     randomEventDescriptionLabel.setText(null);
                 }
+                fillMainCanvas();
+                updateFuelGauge();
+                displayShipInfo();
             } else {
                 MessageAPI msgAPI = new MessageAPI(topPane);
                 msgAPI.showMessage("The destination is out of range");
@@ -642,7 +643,7 @@ public class GameController implements Initializable {
         topPane.getChildren().add(l1);
 
         FillTransition transition = new FillTransition(Duration.millis(3000), rect, Color.BLACK, Color.WHITE);
-        transition.setCycleCount(4);
+        transition.setCycleCount(2);
         transition.setAutoReverse(true);
         transition.play();
         transition.setOnFinished(new EventHandler<ActionEvent>() {

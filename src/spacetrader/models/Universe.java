@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Universe {
     private ArrayList<SolarSystem> solarSystems;
+    private static final double FUEL_TO_DISTANCE_RATIO = 0.5;
     private int width;
     private int height;
 
@@ -41,7 +42,7 @@ public class Universe {
      * @return fuel required for this trip
      */
     public static int calcFuelRequired(SolarSystem startSS, SolarSystem destSS) {
-        return (int) calcDistance(startSS, destSS);
+        return (int) (calcDistance(startSS, destSS)*FUEL_TO_DISTANCE_RATIO);
     }
 
     /**
