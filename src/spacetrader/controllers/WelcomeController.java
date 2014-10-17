@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import spacetrader.Main;
+import spacetrader.database.DbMethods;
+import spacetrader.models.Player;
+import spacetrader.models.Universe;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,13 +46,15 @@ public class WelcomeController implements Initializable {
      */
     @FXML
     private void handleLoadAction(ActionEvent event) {
-        /*DatabaseController db = new DatabaseController();
-        Player p = db.getPlayer();
+        DbMethods db = new DbMethods();
+        Player p = db.loadPlayer();
         if (p == null) {
             System.out.println("No saved data available");
         } else {
             System.out.println(p);
-        }*/
+        }
+
+        application.gotoGame(p, Universe.generateUniverse(100, 100, application.NUMBER_OF_SOLAR_SYSTEMS));
     }
 
     /**

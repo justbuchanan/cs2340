@@ -8,8 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import spacetrader.Main;
+import spacetrader.database.DbMethods;
+import spacetrader.database.DbTables;
 import spacetrader.models.Player;
 import spacetrader.models.Universe;
+import spacetrader.database.DatabaseDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,7 +46,7 @@ public class ConfigController implements Initializable {
     private Universe myUniverse;
     private int[] points = new int[5];
     private final int MAX_POINTS = 15;
-    private final int NUMBER_OF_SOLAR_SYSTEMS = 40;
+
 
     /**
      * Links to main application
@@ -65,12 +68,11 @@ public class ConfigController implements Initializable {
             name_error.setText("Name field is blank.");
         } else {
             myPlayer = new Player(name.getText(), points);
-            /*
-            DatabaseController db = new DatabaseController();
-            db.clearTable("PLAYER");
-            db.addPlayer(myPlayer); */
+            DbMethods db = new DbMethods();
+            db.savePlayer(myPlayer);
+
             messagePane.setVisible(true);
-            myUniverse = Universe.generateUniverse(100, 100, NUMBER_OF_SOLAR_SYSTEMS);
+            myUniverse = Universe.generateUniverse(100, 100, application.NUMBER_OF_SOLAR_SYSTEMS);
             System.out.println(myUniverse.toString());
             //System.out.println(newPlayer);
         }

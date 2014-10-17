@@ -29,6 +29,8 @@ public class Main extends Application {
     private final double MINIMUM_WINDOW_WIDTH = 800.0;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
 
+    public final int NUMBER_OF_SOLAR_SYSTEMS = 40;
+
     /**
      * Starts the Application
      */

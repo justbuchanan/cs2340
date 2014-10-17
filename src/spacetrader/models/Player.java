@@ -27,17 +27,32 @@ public class Player {
      * @param pointsArr array of skill points
      */
     public Player(String name, int[] pointsArr) {
-        this.name = name;
-        this.ship = new Ship(ShipType.GNAT);
-        this.balance = 1000; //New player starts with 1000 credits
-        pilot.setPoints(pointsArr[0]);
-        fighter.setPoints(pointsArr[1]);
-        trader.setPoints(pointsArr[2]);
-        engineer.setPoints(pointsArr[3]);
-        investor.setPoints(pointsArr[4]);
-
+        this(name, 1000, pointsArr[0], pointsArr[1], pointsArr[2], pointsArr[3], pointsArr[4]);
         System.out.println("Created new player");
         System.out.println(this);
+    }
+
+
+    /**
+     *
+     * @param name name of the player
+     * @param balance players balance
+     * @param pilotPoints players pilot points
+     * @param fighterPoints players fighter points
+     * @param traderPoints players trader points
+     * @param engineerPoints players engineer points
+     * @param investorPoints players investor points
+     */
+    public Player(String name, int balance, int pilotPoints, int fighterPoints, int traderPoints, int engineerPoints, int investorPoints) {
+        this.name = name;
+        this.balance = balance; //New player starts with 1000 credits
+        this.pilot.setPoints(pilotPoints);
+        this.fighter.setPoints(fighterPoints);
+        this.trader.setPoints(traderPoints);
+        this.engineer.setPoints(engineerPoints);
+        this.investor.setPoints(investorPoints);
+
+        this.ship = new Ship(ShipType.GNAT); // Base case
     }
 
 //<editor-fold defaultstate="collapsed" desc="GETTERS AND SETTERS">
