@@ -75,7 +75,7 @@ public class GameController implements Initializable {
 //</editor-fold>
 
     @FXML
-    private Pane mapPane;
+    private Pane mapPane, shipyardPane;
     @FXML
     private Canvas mapCanvas;
     @FXML
@@ -801,6 +801,35 @@ public class GameController implements Initializable {
 //</editor-fold>
 //</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="SHIPYARD">
+    /**
+     * Opens shipyard window
+     * @param event
+     */
+    @FXML
+    private void openShipyard(ActionEvent event) {
+        shipyardPane.setVisible(true);
+    }
+    
+    /**
+     * Closes shipyard window
+     * @param event
+     */
+    @FXML
+    private void closeShipyard(ActionEvent event) {
+        shipyardPane.setVisible(false);
+    }
+    
+    /**
+     * Handles Buy Ship button
+     * @param event
+     */
+    @FXML
+    private void buyShip(ActionEvent event) {
+        //TODO: Fill the table and write code to allow buying ships
+    }
+//</editor-fold>
+    
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
 
     /**

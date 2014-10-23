@@ -17,7 +17,7 @@
         <Canvas fx:id="canvas" height="600.0" width="800.0" />
         <Button layoutX="680.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="106.0" text="EXIT" />
         <Button layoutX="680.0" layoutY="86.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
-        <Button layoutX="680.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
+        <Button layoutX="680.0" layoutY="118.0" mnemonicParsing="false" onAction="#openShipyard" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
         <Button layoutX="680.0" layoutY="179.0" mnemonicParsing="false" onAction="#openMap" prefHeight="25.0" prefWidth="106.0" text="JUMP DRIVE" />
         <Button layoutX="680.0" layoutY="210.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="STEALTHMODE" />
         <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -239,5 +239,17 @@
          </children>
       </Pane>
       <Button layoutX="680.0" layoutY="48.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="106.0" text="SAVE" />
+      <Pane fx:id="shipyardPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" visible="false">
+         <children>
+            <TableView fx:id="shipyardTable" layoutX="31.0" layoutY="27.0" prefHeight="320.0" prefWidth="737.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="C1" />
+                  <TableColumn prefWidth="75.0" text="C2" />
+               </columns>
+            </TableView>
+            <Button layoutX="455.0" layoutY="543.0" mnemonicParsing="false" onAction="#buyShip" prefHeight="25.0" prefWidth="136.0" text="BUY SHIP" textFill="WHITE" />
+            <Button layoutX="604.0" layoutY="543.0" mnemonicParsing="false" onAction="#closeShipyard" prefHeight="25.0" prefWidth="136.0" text="CANCEL" textFill="WHITE" />
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
