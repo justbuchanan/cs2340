@@ -238,5 +238,6 @@
                </font></Label>
          </children>
       </Pane>
+      <Button layoutX="680.0" layoutY="48.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="106.0" text="SAVE" />
     </children>
 </AnchorPane>

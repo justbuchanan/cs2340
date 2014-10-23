@@ -787,6 +787,17 @@ public class GameController implements Initializable {
         new DbMethods().save(application.getPlayer());
         application.showWelcome();
     }
+    
+    
+    /**
+     * Saves the GameController, goes to title screen
+     *
+     * @param e
+     */
+    @FXML
+    private void save(ActionEvent e) {
+        new DbMethods().save(application.getPlayer());
+    }
 //</editor-fold>
 //</editor-fold>
 
