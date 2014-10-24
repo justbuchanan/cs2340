@@ -17,6 +17,7 @@ public class Ship {
     private List<Integer> cargo;
     private int fuel;
     private ShipType type;
+    private int hullStrength;
 
     public Ship(ShipType type) {
         this(type, type.getFuel());
@@ -29,6 +30,7 @@ public class Ship {
         addCargo(Item.WATER, 1);
         //Let's fill up your fuel tank
         this.fuel = fuel;
+        this.hullStrength = type.getHullStrength();
     }
 
     /**
@@ -153,6 +155,22 @@ public class Ship {
      */
     public void setType(ShipType type) {
         this.type = type;
+    }
+
+    /**
+     * Gets hull strength
+     * @return hull strength
+     */
+    public int getHullStrength() {
+        return hullStrength;
+    }
+
+    /**
+     * Sets hull strength
+     * @param hullStrength
+     */
+    public void setHullStrength(int hullStrength) {
+        this.hullStrength = hullStrength;
     }
 
 }

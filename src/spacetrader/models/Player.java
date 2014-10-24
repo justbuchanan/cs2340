@@ -27,7 +27,7 @@ public class Player {
      * @param pointsArr array of skill points
      */
     public Player(String name, int[] pointsArr) {
-        this(name, 1000, null,  pointsArr[0], pointsArr[1], pointsArr[2], pointsArr[3], pointsArr[4]);
+        this(name, 100000, null,  pointsArr[0], pointsArr[1], pointsArr[2], pointsArr[3], pointsArr[4]);
         System.out.println("Created new player");
         System.out.println(this);
     }

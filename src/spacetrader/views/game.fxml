@@ -249,6 +249,7 @@
             </TableView>
             <Button layoutX="455.0" layoutY="543.0" mnemonicParsing="false" onAction="#buyShip" prefHeight="25.0" prefWidth="136.0" text="BUY SHIP" textFill="WHITE" />
             <Button layoutX="604.0" layoutY="543.0" mnemonicParsing="false" onAction="#closeShipyard" prefHeight="25.0" prefWidth="136.0" text="CANCEL" textFill="WHITE" />
+            <Button layoutX="307.0" layoutY="543.0" mnemonicParsing="false" onAction="#repairShip" prefHeight="25.0" prefWidth="136.0" text="REPAIR SHIP" textFill="WHITE" />
          </children>
       </Pane>
     </children>

@@ -28,22 +28,19 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import spacetrader.Main;
 import spacetrader.api.MessageAPI;
-import spacetrader.data.Item;
-import spacetrader.data.Resource;
-import spacetrader.data.TechLevel;
+import spacetrader.data.*;
+import spacetrader.data.random_events.PirateRaid;
+import spacetrader.data.random_events.PoliceSearch;
+import spacetrader.data.random_events.TreasureChest;
+import spacetrader.data.random_events.WaterLeak;
 import spacetrader.database.DbMethods;
-import spacetrader.models.Marketplace;
-import spacetrader.models.Player;
-import spacetrader.models.SolarSystem;
-import spacetrader.models.Universe;
+import spacetrader.models.*;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
-import spacetrader.data.RandomEvent;
-import spacetrader.data.random_events.*;
 
 /**
  * Game screen controller
@@ -81,7 +78,11 @@ public class GameController implements Initializable {
     @FXML
     private TableView<SolarSystem> ssTable;
     @FXML
+    private TableView<ShipType> shipyardTable;
+    @FXML
     private Label flightDistance, fuelLeft, fuelRequired, fromSS, toSS;
+    @FXML
+    private Label shipCost, fuelCost, cargoSize, minTechLevel;
 
     //Player and universe objects are passed from config screen
     private Player myPlayer;
@@ -98,7 +99,7 @@ public class GameController implements Initializable {
     private ProgressBar fuelGauge;
     @FXML
     private Pane topPane;
-    
+
     //  random events
     @FXML
     private Pane randomEventPane;
@@ -568,23 +569,23 @@ public class GameController implements Initializable {
                 mySS = dest;
                 myMarket = new Marketplace(mySS);
                 enterLightTunnel();
-                
+
                 //  random events
                 ////////////////////////////////////////////////////////////////
-                
+
                 //  the chance of an event happening mid-travel is proportional to the distance travelled
                 //  here, we normalize by the max travellable distance and create a distance multiplier that we multiply
                 //  by individual RandomEvent probabilities
                 int w = myUniverse.getWidth(), h = myUniverse.getHeight();
-                double maxDist = Math.sqrt(w*w + h*h);
-                double distMultiplier = 0.5 + 0.5*(Universe.calcDistance(current, dest) / maxDist);
-                
+                double maxDist = Math.sqrt(w * w + h * h);
+                double distMultiplier = 0.5 + 0.5 * (Universe.calcDistance(current, dest) / maxDist);
+
                 ArrayList<RandomEvent> allEvents = new ArrayList<>();
                 allEvents.add(new PirateRaid());
                 allEvents.add(new PoliceSearch());
                 allEvents.add(new WaterLeak());
                 allEvents.add(new TreasureChest());
-                
+
                 //  picture the probabilities of different events as slices on a circular spinner
                 //  create a random number @spin between zero and one and see which 'slice' (event) it landed on, if any
                 Random rand = new Random();
@@ -598,11 +599,11 @@ public class GameController implements Initializable {
                         break;
                     }
                 }
-                
-                
+
+
 //                randEvent = new PirateRaid();   //  uncomment this to test random event functionality
-                
-                
+
+
                 //  if an event happened, we apply it and display a description of what happened
                 if (randEvent != null) {
                     String eventDesc = randEvent.apply(myPlayer);
@@ -622,7 +623,7 @@ public class GameController implements Initializable {
             msgAPI.showMessage("Please choose a system different than your current system.");
         }
     }
-    
+
     /**
      * When the user presses the 'Ok' button on the random event pane, this gets
      * called to dismiss it.
@@ -652,7 +653,7 @@ public class GameController implements Initializable {
                                          topPane.setVisible(false);
                                          mapPane.setVisible(false);
                                          topPane.getChildren().clear();
-                                         
+
                                          if (randomEventDescriptionLabel.getText() != null) {
                                              randomEventPane.setVisible(true);
                                          }
@@ -787,8 +788,8 @@ public class GameController implements Initializable {
         new DbMethods().save(application.getPlayer());
         application.showWelcome();
     }
-    
-    
+
+
     /**
      * Saves the GameController, goes to title screen
      *
@@ -802,34 +803,162 @@ public class GameController implements Initializable {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="SHIPYARD">
+
     /**
      * Opens shipyard window
+     *
      * @param event
      */
     @FXML
     private void openShipyard(ActionEvent event) {
         shipyardPane.setVisible(true);
+        createShipyardTable();
+        shipyardTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ShipType>() {
+            public void changed(ObservableValue<? extends ShipType> ov,
+                                ShipType oldval, ShipType newValue) {
+                showSelectedShipType(newValue);
+            }
+        });
     }
-    
+
+    /**
+     * Creates Shipyard table
+     */
+    private void createShipyardTable() {
+        ObservableList<ShipType> shipTypes = FXCollections.observableArrayList(ShipType.values());
+
+        shipyardTable.setItems(shipTypes);
+
+        TableColumn<ShipType, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+        TableColumn<ShipType, Integer> priceCol = new TableColumn<>("Price");
+        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        TableColumn<ShipType, Integer> cargoCol = new TableColumn<>("Cargo");
+        cargoCol.setCellValueFactory(new PropertyValueFactory("cargoBay"));
+        TableColumn<ShipType, TechLevel> techLevelCol = new TableColumn<>("Tech Level");
+        techLevelCol.setCellValueFactory(new PropertyValueFactory("minTechLevel"));
+        TableColumn<ShipType, Integer> crewCol = new TableColumn<>("Crew");
+        crewCol.setCellValueFactory(new PropertyValueFactory("crew"));
+        TableColumn<ShipType, Integer> weaponsCol = new TableColumn<>("Weapons");
+        weaponsCol.setCellValueFactory(new PropertyValueFactory("weaponSlots"));
+        TableColumn<ShipType, Integer> sheildsCol = new TableColumn<>("Shields");
+        sheildsCol.setCellValueFactory(new PropertyValueFactory("shieldSlots"));
+        TableColumn<ShipType, Integer> gadgetsCol = new TableColumn<>("Gadgets");
+        gadgetsCol.setCellValueFactory(new PropertyValueFactory("gadgetSlots"));
+        TableColumn<ShipType, Integer> fuelCol = new TableColumn<>("Fuel");
+        fuelCol.setCellValueFactory(new PropertyValueFactory("fuel"));
+        TableColumn<ShipType, Integer> sizeCol = new TableColumn<>("Size");
+        sizeCol.setCellValueFactory(new PropertyValueFactory("size"));
+        TableColumn<ShipType, Integer> bountyCol = new TableColumn<>("Bounty");
+        bountyCol.setCellValueFactory(new PropertyValueFactory("bounty"));
+        TableColumn<ShipType, Integer> repairCol = new TableColumn<>("Repair");
+        repairCol.setCellValueFactory(new PropertyValueFactory("repairCost"));
+        TableColumn<ShipType, Integer> hullCol = new TableColumn<>("Hull");
+        hullCol.setCellValueFactory(new PropertyValueFactory("hullStrength"));
+
+        shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, techLevelCol, crewCol, weaponsCol, sheildsCol, gadgetsCol, fuelCol, sizeCol, bountyCol, repairCol, hullCol);
+    }
+
+    /**
+     * Draws the selected ShipType
+     *
+     * @param targetShipType
+     */
+    private void showSelectedShipType(ShipType targetShipType) {
+        if (targetShipType != null) {
+            drawShip(targetShipType);
+            GraphicsContext gc = mapCanvas.getGraphicsContext2D();
+            gc.setFill(Color.RED);
+            /*
+            gc.fillOval(targetSS.getX() * 2 - 2, targetSS.getY() * 2 - 2, 4, 4);
+            toSS.setText(targetSS.getName());
+            flightDistance.setText(Universe.calcDistance(mySS, targetSS) + "");
+            fuelLeft.setText(myPlayer.getShip().getFuelReading() + "");
+            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS) + ""); */
+        }
+    }
+
+    /**
+     * Draws the ship
+     */
+    private void drawShip(ShipType shipType) {
+        GraphicsContext gc = mapCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
+        //TODO draw image
+        //gc.drawImage(new Image(this.getClass().getResource("img/" + shipType.getImageName()).getPath()), 0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
+    }
+
     /**
      * Closes shipyard window
+     *
      * @param event
      */
     @FXML
     private void closeShipyard(ActionEvent event) {
         shipyardPane.setVisible(false);
     }
-    
+
     /**
      * Handles Buy Ship button
+     *
      * @param event
      */
     @FXML
     private void buyShip(ActionEvent event) {
-        //TODO: Fill the table and write code to allow buying ships
+        ShipType shipType = shipyardTable.getSelectionModel().getSelectedItem();
+        int shipWorth = myPlayer.getShip().getType().getPrice();
+        Marketplace m = new Marketplace(mySS);
+        for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
+            if (myPlayer.getShip().getCargo().get(i) != null) {
+                shipWorth += m.getBuyPrice(Item.values()[i]) * myPlayer.getShip().getCargo().get(i);
+            }
+        }
+
+        shipWorth *= .9; // Depreciation
+
+        if (myPlayer.getBalance() + shipWorth < shipType.getPrice()) {
+            closeShipyard(event);
+            MessageAPI msgAPI = new MessageAPI(topPane);
+            msgAPI.showMessage("Our balance isn't high enough!");
+
+        } else {
+            myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice() + shipWorth);
+            myPlayer.setShip(new Ship(shipType));
+            fillMainCanvas();
+            updateFuelGauge();
+            displayShipInfo();
+            closeShipyard(event);
+        }
+
+    }
+
+    /**
+     * Handles Repair Ship button
+     *
+     * @param event
+     */
+    @FXML
+    private void repairShip(ActionEvent event) {
+        if (myPlayer.getBalance() < myPlayer.getShip().getType().getRepairCost()) {
+            closeShipyard(event);
+            MessageAPI msgAPI = new MessageAPI(topPane);
+            msgAPI.showMessage("Our balance isn't high enough!");
+
+        } else if (myPlayer.getShip().getHullStrength() == myPlayer.getShip().getType().getHullStrength()) {
+            closeShipyard(event);
+            MessageAPI msgAPI = new MessageAPI(topPane);
+            msgAPI.showMessage("Our hull is full strength!");
+        } else {
+            myPlayer.setBalance(myPlayer.getBalance() - myPlayer.getShip().getType().getRepairCost());
+            myPlayer.getShip().setHullStrength(myPlayer.getShip().getType().getHullStrength());
+            fillMainCanvas();
+            updateFuelGauge();
+            displayShipInfo();
+            closeShipyard(event);
+        }
     }
 //</editor-fold>
-    
+
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
 
     /**
