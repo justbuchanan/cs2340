@@ -17,6 +17,7 @@
         <Canvas fx:id="canvas" height="600.0" width="800.0" />
         <Button layoutX="680.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="106.0" text="EXIT" />
         <Button layoutX="680.0" layoutY="86.0" mnemonicParsing="false" onAction="#openMarketplace" prefHeight="25.0" prefWidth="106.0" text="MARKETPLACE" />
+      <Button layoutX="680.0" layoutY="48.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="106.0" text="SAVE" />
         <Button layoutX="680.0" layoutY="118.0" mnemonicParsing="false" onAction="#openShipyard" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
         <Button layoutX="680.0" layoutY="179.0" mnemonicParsing="false" onAction="#openMap" prefHeight="25.0" prefWidth="106.0" text="JUMP DRIVE" />
         <Button layoutX="680.0" layoutY="210.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="STEALTHMODE" />
@@ -227,18 +228,6 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />
-      <Pane id="randomEventPane" fx:id="randomEventPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a82d11" height="614.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="810.0" />
-            <Button layoutX="369.0" layoutY="287.0" mnemonicParsing="false" onAction="#dismissRandomEventPane" prefHeight="26.0" prefWidth="73.0" text="Ok" />
-            <Label fx:id="randomEventDescriptionLabel" layoutX="173.0" layoutY="140.0" prefHeight="133.0" prefWidth="474.0" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="24.0" />
-               </font></Label>
-         </children>
-      </Pane>
-      <Button layoutX="680.0" layoutY="48.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="106.0" text="SAVE" />
       <Pane fx:id="shipyardPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" visible="false">
          <children>
             <TableView fx:id="shipyardTable" layoutX="31.0" layoutY="27.0" prefHeight="320.0" prefWidth="737.0">
@@ -250,6 +239,39 @@
             <Button layoutX="455.0" layoutY="543.0" mnemonicParsing="false" onAction="#buyShip" prefHeight="25.0" prefWidth="136.0" text="BUY SHIP" textFill="WHITE" />
             <Button layoutX="604.0" layoutY="543.0" mnemonicParsing="false" onAction="#closeShipyard" prefHeight="25.0" prefWidth="136.0" text="CANCEL" textFill="WHITE" />
             <Button layoutX="307.0" layoutY="543.0" mnemonicParsing="false" onAction="#repairShip" prefHeight="25.0" prefWidth="136.0" text="REPAIR SHIP" textFill="WHITE" />
+            <GridPane layoutX="455.0" layoutY="403.0" prefHeight="99.0" prefWidth="200.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Your balance" textFill="WHITE" />
+                  <Label layoutX="10.0" layoutY="17.0" text="Cost" textFill="WHITE" GridPane.rowIndex="2" />
+                  <Label layoutX="10.0" layoutY="47.0" text="New balance" textFill="WHITE" GridPane.rowIndex="3" />
+                  <Label fx:id="syBalance" layoutX="10.0" layoutY="17.0" text="0" textFill="WHITE" GridPane.columnIndex="1" />
+                  <Label fx:id="syCost" layoutX="110.0" layoutY="17.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="syNewBalance" layoutX="110.0" layoutY="47.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label layoutX="10.0" layoutY="17.0" text="Ship worth" textFill="WHITE" GridPane.rowIndex="1" />
+                  <Label fx:id="syShipWorth" layoutX="110.0" layoutY="17.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+        <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />
+      <Pane id="randomEventPane" fx:id="randomEventPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a82d11" height="614.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="810.0" />
+            <Button layoutX="369.0" layoutY="287.0" mnemonicParsing="false" onAction="#dismissRandomEventPane" prefHeight="26.0" prefWidth="73.0" text="Ok" />
+            <Label fx:id="randomEventDescriptionLabel" layoutX="173.0" layoutY="140.0" prefHeight="133.0" prefWidth="474.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
          </children>
       </Pane>
     </children>

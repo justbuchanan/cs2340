@@ -80,6 +80,8 @@ public class GameController implements Initializable {
     @FXML
     private TableView<ShipType> shipyardTable;
     @FXML
+    private Label syBalance, syShipWorth, syCost, syNewBalance;
+    @FXML
     private Label flightDistance, fuelLeft, fuelRequired, fromSS, toSS;
     @FXML
     private Label shipCost, fuelCost, cargoSize, minTechLevel;
@@ -567,7 +569,8 @@ public class GameController implements Initializable {
                 int fuelUnits = Universe.calcFuelRequired(current, dest);
                 myPlayer.getShip().refill(-1 * fuelUnits);
                 mySS = dest;
-                myMarket = new Marketplace(mySS);
+                mySS.setMP();
+                myMarket = mySS.getMP();
                 enterLightTunnel();
 
                 //  random events
@@ -855,7 +858,22 @@ public class GameController implements Initializable {
         repairCol.setCellValueFactory(new PropertyValueFactory("repairCost"));
         TableColumn<ShipType, Integer> hullCol = new TableColumn<>("Hull");
         hullCol.setCellValueFactory(new PropertyValueFactory("hullStrength"));
-
+        
+        int PREFERRED_WIDTH = 60;
+        nameCol.setMinWidth(PREFERRED_WIDTH);
+        priceCol.setMinWidth(PREFERRED_WIDTH);
+        cargoCol.setMinWidth(PREFERRED_WIDTH);
+        techLevelCol.setMinWidth(PREFERRED_WIDTH);
+        crewCol.setMinWidth(PREFERRED_WIDTH);
+        weaponsCol.setMinWidth(PREFERRED_WIDTH);
+        sheildsCol.setMinWidth(PREFERRED_WIDTH);
+        gadgetsCol.setMinWidth(PREFERRED_WIDTH);
+        fuelCol.setMinWidth(PREFERRED_WIDTH);
+        sizeCol.setMinWidth(PREFERRED_WIDTH);
+        bountyCol.setMinWidth(PREFERRED_WIDTH);
+        repairCol.setMinWidth(PREFERRED_WIDTH);
+        hullCol.setMinWidth(PREFERRED_WIDTH);
+        
         shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, techLevelCol, crewCol, weaponsCol, sheildsCol, gadgetsCol, fuelCol, sizeCol, bountyCol, repairCol, hullCol);
     }
 
@@ -869,12 +887,17 @@ public class GameController implements Initializable {
             drawShip(targetShipType);
             GraphicsContext gc = mapCanvas.getGraphicsContext2D();
             gc.setFill(Color.RED);
-            /*
-            gc.fillOval(targetSS.getX() * 2 - 2, targetSS.getY() * 2 - 2, 4, 4);
-            toSS.setText(targetSS.getName());
-            flightDistance.setText(Universe.calcDistance(mySS, targetSS) + "");
-            fuelLeft.setText(myPlayer.getShip().getFuelReading() + "");
-            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS) + ""); */
+            syBalance.setText(myPlayer.getBalance() + " ");
+            int shipWorth = myPlayer.getShip().getType().getPrice();
+            for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
+                if (myPlayer.getShip().getCargo().get(i) != null) {
+                    shipWorth += myMarket.getBuyPrice(Item.values()[i]) * myPlayer.getShip().getCargo().get(i);
+                }
+            }
+            shipWorth *= .9;
+            syShipWorth.setText(shipWorth + " ");
+            syCost.setText(targetShipType.getPrice() + " ");
+            syNewBalance.setText((myPlayer.getBalance() + shipWorth - targetShipType.getPrice()) + " ");
         }
     }
 
@@ -905,31 +928,33 @@ public class GameController implements Initializable {
      */
     @FXML
     private void buyShip(ActionEvent event) {
+        MessageAPI msgAPI = new MessageAPI(topPane);
         ShipType shipType = shipyardTable.getSelectionModel().getSelectedItem();
-        int shipWorth = myPlayer.getShip().getType().getPrice();
-        Marketplace m = new Marketplace(mySS);
-        for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
-            if (myPlayer.getShip().getCargo().get(i) != null) {
-                shipWorth += m.getBuyPrice(Item.values()[i]) * myPlayer.getShip().getCargo().get(i);
+        if (shipType.getMinTechLevel() > mySS.getTechLevel().getValue()) {
+            msgAPI.showMessage("This ship is not available in the current solar system");
+        } else {
+            int shipWorth = myPlayer.getShip().getType().getPrice();
+            for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
+                if (myPlayer.getShip().getCargo().get(i) != null) {
+                    shipWorth += myMarket.getBuyPrice(Item.values()[i]) * myPlayer.getShip().getCargo().get(i);
+                }
+            }
+
+            shipWorth *= .9; // Depreciation
+
+            if (myPlayer.getBalance() + shipWorth < shipType.getPrice()) {
+                closeShipyard(event);
+                msgAPI.showMessage("Our balance isn't high enough!");
+
+            } else {
+                myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice() + shipWorth);
+                myPlayer.setShip(new Ship(shipType));
+                fillMainCanvas();
+                updateFuelGauge();
+                displayShipInfo();
+                closeShipyard(event);
             }
         }
-
-        shipWorth *= .9; // Depreciation
-
-        if (myPlayer.getBalance() + shipWorth < shipType.getPrice()) {
-            closeShipyard(event);
-            MessageAPI msgAPI = new MessageAPI(topPane);
-            msgAPI.showMessage("Our balance isn't high enough!");
-
-        } else {
-            myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice() + shipWorth);
-            myPlayer.setShip(new Ship(shipType));
-            fillMainCanvas();
-            updateFuelGauge();
-            displayShipInfo();
-            closeShipyard(event);
-        }
-
     }
 
     /**
@@ -1002,7 +1027,8 @@ public class GameController implements Initializable {
         displayShipInfo();
 
         //MARKETPLACE INITIALIZATION
-        myMarket = new Marketplace(mySS);
+        mySS.setMP();
+        myMarket = mySS.getMP();
         initBuyWindow();
         initSellWindow();
     }
