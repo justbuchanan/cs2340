@@ -177,7 +177,8 @@ public class SolarSystem {
      */
     @Override
     public String toString() {
-        return name + "(" + x + "," + y + ") " + resource.name() + " " + techLevel.name();
+        return name + "(" + x + "," + y + ") " + resource.name() + " "
+                + techLevel.name();
     }
 
     /**
