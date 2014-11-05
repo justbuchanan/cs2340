@@ -79,7 +79,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * "Cancel" button is pressed
+     * "Cancel" button is pressed.
      *
      * @param event
      */
@@ -89,7 +89,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * "Up" button is pressed
+     * "Up" button is pressed.
      *
      * @param event
      */
@@ -115,7 +115,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * "Down" button is pressed
+     * "Down" button is pressed.
      *
      * @param event
      */
@@ -136,7 +136,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * "Play" is pressed
+     * "Play" is pressed.
      *
      * @param event
      */
@@ -146,7 +146,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * "Go to Home Screen" is pressed
+     * "Go to Home Screen" is pressed.
      *
      * @param event
      */
@@ -169,7 +169,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * Show remaining points in Label remain
+     * Show remaining points in Label remain.
      */
     private void showRemainingPoints() {
         remain.setText(getRemainingPoints() + "");

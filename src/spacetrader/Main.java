@@ -79,11 +79,12 @@ public class Main extends Application {
     }
 
     /**
-     * Goes to welcome (starting) screen
+     * Goes to welcome (starting) screen.
      */
     public void showWelcome() {
         try {
-            WelcomeController Welcome = (WelcomeController) replaceSceneContent("views/welcome.fxml");
+            WelcomeController Welcome = (WelcomeController)
+                    replaceSceneContent("views/welcome.fxml");
             Welcome.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,12 +92,13 @@ public class Main extends Application {
     }
 
     /**
-     * Goes to game screen
+     * Goes to game screen.
      */
     public void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
             player = myPlayer;
-            GameController game = (GameController) replaceSceneContent("views/game.fxml");
+            GameController game = (GameController)
+                    replaceSceneContent("views/game.fxml");
             game.setApp(this);
             game.config(myPlayer, myUniverse);
             /*TestController test = (TestController) replaceSceneContent("test.fxml");
@@ -114,7 +116,7 @@ public class Main extends Application {
     }
 
     /**
-     * Replaces scene content
+     * Replaces scene content.
      *
      * @param fxml target fxml
      * @return controller
@@ -138,7 +140,7 @@ public class Main extends Application {
     }
 
     /**
-     * Gets the current player
+     * Gets the current player.
      * @return The current player
      */
     public Player getPlayer() {

@@ -12,7 +12,7 @@ import spacetrader.models.Ship;
 
 /**
  * An event where the police search your vehicle for drugs and guns.
- * 
+ *
  * @author justbuchanan
  */
 public class PoliceSearch extends RandomEvent {
@@ -36,8 +36,8 @@ public class PoliceSearch extends RandomEvent {
             ship.removeCargo(Item.FIREARMS, gunsAmount);
             ship.removeCargo(Item.NARCOTICS, drugsAmount);
 
-            return "The police searched your ship and confiscated " + 
-                    gunsAmount + " firearms and " + drugsAmount + 
+            return "The police searched your ship and confiscated " +
+                    gunsAmount + " firearms and " + drugsAmount +
                     " units of narcotics.";
         } else {
             return "The police searched your ship and found no illegal goods. "

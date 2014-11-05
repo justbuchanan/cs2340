@@ -5,10 +5,8 @@
  */
 package spacetrader.data.random_events;
 
-import spacetrader.data.Item;
 import spacetrader.data.RandomEvent;
 import spacetrader.models.Player;
-import spacetrader.models.Ship;
 
 /**
  * A random event where the player finds money.

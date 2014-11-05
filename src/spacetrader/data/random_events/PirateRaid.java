@@ -15,7 +15,7 @@ import spacetrader.models.Ship;
 
 /**
  * A random event where pirates steal some of your cargo.
- * 
+ *
  * @author justbuchanan
  */
 public class PirateRaid extends RandomEvent {
