@@ -5,5 +5,5 @@ dist/
 /bin/
 *.db
 .idea/
-2340.iml
+*.iml
 out/
