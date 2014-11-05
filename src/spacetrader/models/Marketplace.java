@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * Player comes to marketplace to buys and sells goods
+ * Player comes to marketplace to buy and sells goods
  *
  * @author Bao
  */
