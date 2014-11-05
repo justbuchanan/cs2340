@@ -27,7 +27,8 @@ public class Player {
      * @param pointsArr array of skill points
      */
     public Player(String name, int[] pointsArr) {
-        this(name, 100000, null,  pointsArr[0], pointsArr[1], pointsArr[2], pointsArr[3], pointsArr[4]);
+        this(name, 100000, null,  pointsArr[0], pointsArr[1], pointsArr[2], 
+                pointsArr[3], pointsArr[4]);
         System.out.println("Created new player");
         System.out.println(this);
     }
@@ -37,13 +38,16 @@ public class Player {
      *
      * @param name name of the player
      * @param balance players balance
+     * @param ship
      * @param pilotPoints players pilot points
      * @param fighterPoints players fighter points
      * @param traderPoints players trader points
      * @param engineerPoints players engineer points
      * @param investorPoints players investor points
      */
-    public Player(String name, int balance, Ship ship, int pilotPoints, int fighterPoints, int traderPoints, int engineerPoints, int investorPoints) {
+    public Player(String name, int balance, Ship ship, int pilotPoints,
+            int fighterPoints, int traderPoints, int engineerPoints,
+            int investorPoints) {
         this.name = name;
         this.balance = balance; //New player starts with 1000 credits
         this.pilot.setPoints(pilotPoints);
@@ -116,9 +120,11 @@ public class Player {
      *
      * @return player's info
      */
+    @Override
     public String toString() {
         return String.format("Name:\t%s\nPilot:\t%s\nFighter:\t%s\nTrader:\t%s\nEngineer:\t%s\nInvestor:\t%s", name,
-                pilot.getPoints(), fighter.getPoints(), trader.getPoints(), engineer.getPoints(), investor.getPoints());
+                pilot.getPoints(), fighter.getPoints(), trader.getPoints(),
+                engineer.getPoints(), investor.getPoints());
     }
 
     public Skill getSkill(Skill skill) {

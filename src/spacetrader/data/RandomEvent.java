@@ -16,7 +16,7 @@ import spacetrader.models.Ship;
 
 /**
  * A random event that can happen during space travel.
- * 
+ *
  * @author Justin
  */
 public abstract class RandomEvent {
@@ -30,7 +30,7 @@ public abstract class RandomEvent {
     }
 
     /**
-     * String representation of the RadicalEvent
+     * String representation of the RadicalEvent.
      */
     @Override
     public String toString() {
@@ -38,7 +38,7 @@ public abstract class RandomEvent {
     }
     
     /**
-     * Gets the probability multiplier
+     * Gets the probability multiplier.
      * @return A value representing how likely this event is to happen
      */
     public double getProbabilityMultiplier() {

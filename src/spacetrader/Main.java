@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * JavaFX main application
+ * JavaFX main application.
  *
  * @author Bao
  */
@@ -34,7 +34,7 @@ public class Main extends Application {
     private Player player;
 
     /**
-     * Starts the Application
+     * Starts the Application.
      */
     @Override
     public void start(Stage primaryStage) {
@@ -52,25 +52,26 @@ public class Main extends Application {
     }
 
     /**
-     * Opens configuration screen
+     * Opens configuration screen.
      */
     public void openConfig() {
         showConfig();
     }
 
     /**
-     * Closes configuration screen
+     * Closes configuration screen.
      */
     public void closeConfig() {
         showWelcome();
     }
 
     /**
-     * Goes to configuration screen
+     * Goes to configuration screen.
      */
     public void showConfig() {
         try {
-            ConfigController config = (ConfigController) replaceSceneContent("views/config.fxml");
+            ConfigController config = (ConfigController)
+                    replaceSceneContent("views/config.fxml");
             config.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

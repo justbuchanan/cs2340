@@ -12,7 +12,7 @@ import spacetrader.models.Ship;
 
 
 /**
- * A random event where the ship springs a leak
+ * A random event where the ship springs a leak.
  * 
  * @author justbuchanan
  */

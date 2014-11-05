@@ -22,7 +22,7 @@ public class PoliceSearch extends RandomEvent {
 
     /**
      * If the player has narcotics or firearms, removes them.
-     * 
+     *
      * @param player The player the event happened to.
      * @return A description of the encounter
      */
@@ -36,9 +36,12 @@ public class PoliceSearch extends RandomEvent {
             ship.removeCargo(Item.FIREARMS, gunsAmount);
             ship.removeCargo(Item.NARCOTICS, drugsAmount);
 
-            return "The police searched your ship and confiscated " + gunsAmount + " firearms and " + drugsAmount + " units of narcotics.";
+            return "The police searched your ship and confiscated " + 
+                    gunsAmount + " firearms and " + drugsAmount + 
+                    " units of narcotics.";
         } else {
-            return "The police searched your ship and found no illegal goods.  Carry on now.";
+            return "The police searched your ship and found no illegal goods. "
+                    + "Carry on now.";
         }
     }
 }

@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * @author Michael
- *         Represents the game universe. Holds solar systems and spatial dimensions.
+ * Represents the game universe. Holds solar systems and spatial dimensions.
  */
 public class Universe {
     private ArrayList<SolarSystem> solarSystems;
@@ -29,13 +29,15 @@ public class Universe {
      * @param destSS destination SolarSystem
      * @return true if this trip is possible
      */
-    public static boolean shipCanTravel(Ship ship, SolarSystem curSS, SolarSystem destSS) {
-        if (ship.getFuelReading() >= calcFuelRequired(curSS, destSS)) return true;
+    public static boolean shipCanTravel(Ship ship, SolarSystem curSS, 
+            SolarSystem destSS) {
+        if (ship.getFuelReading() >= calcFuelRequired(curSS, destSS)) 
+            return true;
         else return false;
     }
 
     /**
-     * Calculates the amount of fuel required to travel between SolarSystems
+     * Calculates the amount of fuel required to travel between SolarSystems.
      *
      * @param startSS starting SolarSystem
      * @param destSS  destination SolarSystem
@@ -46,7 +48,7 @@ public class Universe {
     }
 
     /**
-     * Calculates the distance between 2 SolarSystems
+     * Calculates the distance between 2 SolarSystems.
      *
      * @param ss1 first planet
      * @param ss2 second planet
@@ -59,20 +61,22 @@ public class Universe {
     }
 
     /**
-     * Creates a new universe based on the given parameters
+     * Creates a new universe based on the given parameters.
      *
      * @param _width          width of the universe
      * @param _height         height of the universe
      * @param numSolarSystems number of solar systems in the universe
      * @return the newly created Universe
      */
-    public static Universe generateUniverse(int _width, int _height, int numSolarSystems) {
+    public static Universe generateUniverse(int _width, int _height,
+            int numSolarSystems) {
         shuffleArray(SolarSystemName);
         Random rand = new Random();
         Universe universe = new Universe();
         universe.width = _width;
         universe.height = _height;
-        for (int i = 0; i < numSolarSystems && i < SolarSystemName.length; i++) {
+        for (int i = 0; i < numSolarSystems && i < SolarSystemName.length;
+                i++) {
             SolarSystem ss = new SolarSystem();
             ss.setName(SolarSystemName[i]);
             int xCoord, yCoord;
@@ -82,9 +86,11 @@ public class Universe {
             } while (universe.hasSolarSystemAt(xCoord, yCoord));
             ss.setX(xCoord);
             ss.setY(yCoord);
-            Resource rsc = Resource.values()[rand.nextInt(Resource.values().length)];
+            Resource rsc =
+                    Resource.values()[rand.nextInt(Resource.values().length)];
             ss.setResource(rsc);
-            TechLevel tech = TechLevel.values()[rand.nextInt(TechLevel.values().length)];
+            TechLevel tech =
+                    TechLevel.values()[rand.nextInt(TechLevel.values().length)];
             ss.setTechLevel(tech);
             ss.setMP();
             universe.solarSystems.add(ss);
@@ -93,7 +99,7 @@ public class Universe {
     }
 
     /**
-     * Checks whether a solar system exists at a given point in space
+     * Checks whether a solar system exists at a given point in space.
      *
      * @param _x x coordinate
      * @param _y y coordinate
@@ -108,7 +114,7 @@ public class Universe {
     }
 
     /**
-     * Finds a solar system by name
+     * Finds a solar system by name.
      *
      * @param _name name to search for
      * @return true if a solar system with this name exists in the Universe
@@ -137,7 +143,7 @@ public class Universe {
     }
 
     /**
-     * Sets the width of the Universe
+     * Sets the width of the Universe.
      *
      * @param _width
      */
@@ -146,7 +152,7 @@ public class Universe {
     }
 
     /**
-     * Returns the width of the universe
+     * Returns the width of the universe.
      *
      * @return
      */
@@ -164,7 +170,7 @@ public class Universe {
     }
 
     /**
-     * Gets height of the Universe
+     * Gets height of the Universe.
      *
      * @return height of the Universe
      */
@@ -182,7 +188,7 @@ public class Universe {
     }
 
     /**
-     * array shuffling helper
+     * array shuffling helper.
      *
      * @param ar input array
      */
@@ -198,22 +204,22 @@ public class Universe {
     }
 
     /**
-     * Contains all potential names for solar systems
+     * Contains all potential names for solar systems.
      */
     public static String[] SolarSystemName =
             {
                     "Acamar",
-                    "Adahn",        // The alternate personality for The Nameless One in "Planescape: Torment"
+                    "Adahn",        
                     "Aldea",
                     "Andevian",
                     "Antedi",
                     "Balosnee",
                     "Baratas",
                     "Brax",        // One of the heroes in Master of Magic
-                    "Bretel",        // This is a Dutch device for keeping your pants up.
+                    "Bretel",        
                     "Calondia",
                     "Campor",
-                    "Capelle",        // The city I lived in while programming this game
+                    "Capelle",        
                     "Carzon",
                     "Castor",        // A Greek demi-god
                     "Cestus",
@@ -228,14 +234,14 @@ public class Universe {
                     "Draylon",
                     "Drema",
                     "Endor",
-                    "Esmee",        // One of the witches in Pratchett's Discworld
+                    "Esmee",        
                     "Exo",
                     "Ferris",        // Iron
                     "Festen",        // A great Scandinavian movie
                     "Fourmi",        // An ant, in French
-                    "Frolix",        // A solar system in one of Philip K. Dick's novels
+                    "Frolix",        
                     "Gemulon",
-                    "Guinifer",        // One way of writing the name of king Arthur's wife
+                    "Guinifer",        
                     "Hades",        // The underworld
                     "Hamlet",        // From Shakespeare
                     "Helena",        // Of Troy
@@ -252,33 +258,33 @@ public class Universe {
                     "Klaatu",        // From a classic SF movie
                     "Klaestron",
                     "Korma",        // An Indian sauce
-                    "Kravat",        // Interesting spelling of the French word for "tie"
+                    "Kravat",        
                     "Krios",
                     "Laertes",        // A king in a Greek tragedy
                     "Largo",
                     "Lave",        // The starting system in Elite
                     "Ligon",
-                    "Lowry",            // The name of the "hero" in Terry Gilliam's "Brazil"
+                    "Lowry",            
                     "Lylat",
-                    "Magrat",        // The second of the witches in Pratchett's Discworld
+                    "Magrat",        
                     "Malcoria",
                     "Melina",
-                    "Mentar",        // The Psilon home system in Master of Orion
+                    "Mentar",        
                     "Merik",
                     "Mintaka",
-                    "Montor",        // A city in Ultima III and Ultima VII part 2
+                    "Montor",        
                     "Mordan",
                     "Myrthe",        // The name of my daughter
                     "Nelvana",
-                    "Nix",        // An interesting spelling of a word meaning "nothing" in Dutch
+                    "Nix",        
                     "Nyle",        // An interesting spelling of the great river
                     "Odet",
-                    "Og",        // The last of the witches in Pratchett's Discworld
+                    "Og",        
                     "Omega",        // The end of it all
                     "Omphalos",        // Greek for navel
                     "Orias",
                     "Othello",        // From Shakespeare
-                    "Parade",        // This word means the same in Dutch and in English
+                    "Parade",        
                     "Penthara",
                     "Picard",        // The enigmatic captain from ST:TNG
                     "Pollux",        // Brother of Castor
@@ -289,7 +295,7 @@ public class Universe {
                     "Relva",
                     "Rhymus",
                     "Rochani",
-                    "Rubicum",        // The river Ceasar crossed to get into Rome
+                    "Rubicum",        
                     "Rutia",
                     "Sarpeidon",
                     "Sefalla",
@@ -311,7 +317,7 @@ public class Universe {
                     "Triacus",
                     "Turkana",
                     "Tyrus",
-                    "Umberlee",        // A god from AD&D, which has a prominent role in Baldur's Gate
+                    "Umberlee",        
                     "Utopia",        // The ultimate goal
                     "Vadera",
                     "Vagra",
@@ -319,7 +325,7 @@ public class Universe {
                     "Ventax",
                     "Xenon",
                     "Xerxes",        // A Greek hero
-                    "Yew",        // A city which is in almost all of the Ultima games
+                    "Yew",        
                     "Yojimbo",        // A film by Akira Kurosawa
                     "Zalkon",
                     "Zuul"        // From the first Ghostbusters movie

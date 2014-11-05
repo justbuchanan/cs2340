@@ -14,7 +14,7 @@ import spacetrader.models.Player;
 import spacetrader.models.Ship;
 
 /**
- * A random event where pirates steal some of your cargo
+ * A random event where pirates steal some of your cargo.
  * 
  * @author justbuchanan
  */
@@ -25,7 +25,7 @@ public class PirateRaid extends RandomEvent {
 
     /**
      * The pirates steal 3 items from you if you have any cargo.
-     * 
+     *
      * @param player The player this happened to
      * @return A description of the encounter
      */

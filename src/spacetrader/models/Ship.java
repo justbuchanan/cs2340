@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * holds ship information
+ * holds ship information.
  *
  * @author Bao
  */
@@ -18,13 +18,23 @@ public class Ship {
     private int fuel;
     private ShipType type;
     private int hullStrength;
-
+    
+    /**
+     * 
+     * @param type 
+     */
     public Ship(ShipType type) {
         this(type, type.getFuel());
     }
-
+    
+    /**
+     * 
+     * @param type
+     * @param fuel 
+     */
     public Ship(ShipType type, int fuel) {
-        cargo = new ArrayList<Integer>(Collections.nCopies(Item.values().length, 0));
+        cargo = new ArrayList<Integer>(Collections.nCopies(Item.values().length,
+                0));
         this.type = type;
         //Freebies: 1 cargo bay of water. Yummy!
         addCargo(Item.WATER, 1);
@@ -34,7 +44,7 @@ public class Ship {
     }
 
     /**
-     * Add item to cargo
+     * Add item to cargo.
      *
      * @param item
      * @param quantity
@@ -45,7 +55,7 @@ public class Ship {
     }
 
     /**
-     * Remove item from cargo
+     * Remove item from cargo.
      *
      * @param item
      * @param quantity
@@ -54,10 +64,10 @@ public class Ship {
         int q = cargo.get(item.getValue());
         cargo.set(item.getValue(), q - quantity);
     }
-    
+
     /**
-     * Counts the number of the given item type in cargo
-     * 
+     * Counts the number of the given item type in cargo.
+     *
      * @param item The item
      * @return the number of @item in cargo
      */
@@ -66,7 +76,7 @@ public class Ship {
     }
 
     /**
-     * Gets cargo list
+     * Gets cargo list.
      *
      * @return
      */
@@ -75,7 +85,7 @@ public class Ship {
     }
 
     /**
-     * Sets cargo list
+     * Sets cargo list.
      *
      * @param cargo
      */
@@ -84,7 +94,7 @@ public class Ship {
     }
 
     /**
-     * Gets the max carrying capability of the ship
+     * Gets the max carrying capability of the ship.
      *
      * @return maximum number of cargo bays
      */
@@ -93,7 +103,7 @@ public class Ship {
     }
 
     /**
-     * Gets the total number of cargo bays
+     * Gets the total number of cargo bays.
      *
      * @return current number of cargo bays
      */
@@ -115,7 +125,7 @@ public class Ship {
     }
 
     /**
-     * Gets fuel capacity of the ship
+     * Gets fuel capacity of the ship.
      *
      * @return amount of fuel
      */
@@ -124,14 +134,14 @@ public class Ship {
     }
 
     /**
-     * Fills the fuel tank fully
+     * Fills the fuel tank fully.
      */
     public void refill() {
         this.fuel += type.getFuel();
     }
 
     /**
-     * Refills fuel tank with a specific amount of fuel
+     * Refills fuel tank with a specific amount of fuel.
      *
      * @param fuel
      */
@@ -140,7 +150,7 @@ public class Ship {
     }
 
     /**
-     * Gets type of ship
+     * Gets type of ship.
      *
      * @return ship type
      */
@@ -149,7 +159,7 @@ public class Ship {
     }
 
     /**
-     * Sets type of ship
+     * Sets type of ship.
      *
      * @param type
      */
@@ -158,7 +168,7 @@ public class Ship {
     }
 
     /**
-     * Gets hull strength
+     * Gets hull strength.
      * @return hull strength
      */
     public int getHullStrength() {
@@ -166,7 +176,7 @@ public class Ship {
     }
 
     /**
-     * Sets hull strength
+     * Sets hull strength.
      * @param hullStrength
      */
     public void setHullStrength(int hullStrength) {

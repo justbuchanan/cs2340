@@ -32,7 +32,9 @@ public enum Item {
     private final int mtl;          //  Min price offered in space trade with random trader (not on a planet)
     private final int mth;          //  Max price offered in space trade with random trader (not on a planet)
 
-    private Item(int i, String d, int mtlp, int mtlu, int ttp, int base, int ipl, int var, RadicalEvent ie, Resource cr, Resource er, int mtl, int mth) {
+    private Item(int i, String d, int mtlp, int mtlu, int ttp, int base,
+            int ipl, int var, RadicalEvent ie, Resource cr, Resource er,
+            int mtl, int mth) {
         this.key = i;
         this.name = d;
         this.mtlp = mtlp;
@@ -49,7 +51,7 @@ public enum Item {
     }
 
     /**
-     * Gets value of the item
+     * Gets value of the item.
      *
      * @return value
      */
@@ -58,7 +60,7 @@ public enum Item {
     }
 
     /**
-     * Gets name of the item
+     * Gets name of the item.
      *
      * @return name
      */
@@ -67,7 +69,7 @@ public enum Item {
     }
 
     /**
-     * Same as getValue();
+     * Same as getValue.
      *
      * @return
      */
@@ -76,8 +78,8 @@ public enum Item {
     }
 
     /**
-     * Gets Minimum Tech Level to Produce this resource (You can't buy on
-     * planets below this level)
+     * Gets Minimum Tech Level to Produce this resource.
+     * (You can't buy on planets below this level)
      *
      * @return MTLP
      */
@@ -86,8 +88,8 @@ public enum Item {
     }
 
     /**
-     * Gets Minimum Tech Level to Use this resource (You can't sell on planets
-     * below this level)
+     * Gets Minimum Tech Level to Use this resource.
+     * (You can't sell on planets below this level)
      *
      * @return MTLU
      */
@@ -96,7 +98,7 @@ public enum Item {
     }
 
     /**
-     * Gets Tech Level which produces the most of this item
+     * Gets Tech Level which produces the most of this item.
      *
      * @return TTP
      */
@@ -105,7 +107,7 @@ public enum Item {
     }
 
     /**
-     * Gets base price of the item
+     * Gets base price of the item.
      *
      * @return basePrice
      */
@@ -114,7 +116,7 @@ public enum Item {
     }
 
     /**
-     * Gets Price increase per tech level
+     * Gets Price increase per tech level.
      *
      * @return IPL
      */
@@ -124,7 +126,7 @@ public enum Item {
 
     /**
      * Gets variance is the maximum percentage that the price can vary above or
-     * below the base
+     * below the base.
      *
      * @return variance
      */
@@ -134,7 +136,7 @@ public enum Item {
 
     /**
      * Gets Radical price increase event, when this even happens on a planet,
-     * the price may increase astronomically
+     * the price may increase astronomically.
      *
      * @return increase event
      */
@@ -143,7 +145,7 @@ public enum Item {
     }
 
     /**
-     * Gets the condition when the price is unusually low
+     * Gets the condition when the price is unusually low.
      *
      * @return cheap resource
      */
@@ -152,7 +154,7 @@ public enum Item {
     }
 
     /**
-     * Gets the condition when the resource is expensive
+     * Gets the condition when the resource is expensive.
      *
      * @return expensive resource
      */
@@ -162,7 +164,7 @@ public enum Item {
 
     /**
      * Gets min price offered in space trade with random trader (not on a
-     * planet)
+     * planet).
      *
      * @return minPrice
      */
@@ -172,7 +174,7 @@ public enum Item {
 
     /**
      * Gets max price offered in space trade with random trader (not on a
-     * planet)
+     * planet).
      *
      * @return maxPrice
      */

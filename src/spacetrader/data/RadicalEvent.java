@@ -25,7 +25,9 @@ public enum RadicalEvent {
     }
 
     /**
-     * String representation of the RadicalEvent
+     * String representation of the RadicalEvent.
+     * 
+     * @return
      */
     @Override
     public String toString() {
@@ -33,7 +35,7 @@ public enum RadicalEvent {
     }
 
     /**
-     * Gets the increase due to this RadicalEvent
+     * Gets the increase due to this RadicalEvent.
      *
      * @return
      */

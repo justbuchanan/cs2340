@@ -45,13 +45,15 @@ public class Marketplace {
     public int getPrice(Item item) {
         int price = item.getBasePrice();
 
-        //  if a radical event is taking place that affects this item, apply the increase in cost
+        //  if a radical event is taking place that affects this item, apply the
+        //  increase in cost
         if (currentRadicalEvents.contains(item.getIE())) {
             price += item.getIE().getPriceIncrease();
         }
 
         //  the price increases per tech level
-        price += (this.solarSystem.getTechLevel().getValue() - item.getMTLP()) * item.getIPL();
+        price += (this.solarSystem.getTechLevel().getValue() - item.getMTLP())
+                * item.getIPL();
         boolean head = rand.nextBoolean();
         int variance = rand.nextInt(item.getVar() + 1);
         if (head) {
@@ -92,7 +94,8 @@ public class Marketplace {
      * @return buy-able
      */
     public boolean isBuyable(Item item) {
-        if (this.solarSystem.getTechLevel().getValue() >= item.getMTLP() && availableItems.get(item) > 0) {
+        if (this.solarSystem.getTechLevel().getValue() >= item.getMTLP() && 
+                availableItems.get(item) > 0) {
             return true;
         }
         return false;
