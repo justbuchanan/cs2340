@@ -12,8 +12,8 @@ import spacetrader.models.Ship;
 
 
 /**
- * A random event where the ship springs a leak
- * 
+ * A random event where the ship springs a leak.
+ *
  * @author justbuchanan
  */
 public class WaterLeak extends RandomEvent {
@@ -30,12 +30,13 @@ public class WaterLeak extends RandomEvent {
     public String apply(Player player) {
         Ship ship = player.getShip();
         int waterUnits = ship.countItemInCargo(Item.WATER);
-        
+
         if (waterUnits > 0) {
             ship.removeCargo(Item.WATER, waterUnits);
             return "Your ship sprung a leak and all of your water is gone";
         } else {
-            return "Your ship's water container is leaky, but you didn't have any water";
+            return "Your ship's water container is leaky, but you didn't have"
+                    + "any water";
         }
     }
 }

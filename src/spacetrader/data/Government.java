@@ -22,14 +22,14 @@ public enum Government {
 
     private int value;
     private String text;
-
+    
     private Government(int _value, String _text) {
         this.value = _value;
         this.text = _text;
     }
 
     /**
-     * Returns the text representation of this Government
+     * Returns the text representation of this Government.
      */
     @Override
     public String toString() {
@@ -37,7 +37,7 @@ public enum Government {
     }
 
     /**
-     * Gets the value of the Government
+     * Gets the value of the Government.
      *
      * @return numerical value for this type of Government
      */

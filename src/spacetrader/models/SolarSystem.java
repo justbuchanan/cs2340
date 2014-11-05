@@ -25,7 +25,7 @@ public class SolarSystem {
     final int QUANTITIES[] = {30, 30, 30, 30, 30, 30, 30, 30, 30, 30};
 
     /**
-     * Creates a solar system with some initial amount of resources
+     * Creates a solar system with some initial amount of resources.
      */
     public SolarSystem() {
 
@@ -36,7 +36,7 @@ public class SolarSystem {
     }
 
     /**
-     * Gets name of this SolarSystem
+     * Gets name of this SolarSystem.
      *
      * @return name
      */
@@ -45,7 +45,7 @@ public class SolarSystem {
     }
 
     /**
-     * Sets name of this SolarSystem
+     * Sets name of this SolarSystem.
      *
      * @param _name
      */
@@ -54,7 +54,7 @@ public class SolarSystem {
     }
 
     /**
-     * gets x coordinate
+     * gets x coordinate.
      *
      * @return
      */
@@ -63,7 +63,7 @@ public class SolarSystem {
     }
 
     /**
-     * sets x coordinate
+     * sets x coordinate.
      *
      * @param _x
      */
@@ -72,7 +72,7 @@ public class SolarSystem {
     }
 
     /**
-     * gets y coordinate
+     * gets y coordinate.
      *
      * @return
      */
@@ -81,7 +81,7 @@ public class SolarSystem {
     }
 
     /**
-     * sets y coordinate
+     * sets y coordinate.
      *
      * @param _y
      */
@@ -90,7 +90,7 @@ public class SolarSystem {
     }
 
     /**
-     * gets resource
+     * gets resource.
      *
      * @return
      */
@@ -99,7 +99,7 @@ public class SolarSystem {
     }
 
     /**
-     * sets resource
+     * sets resource.
      *
      * @param _resource
      */
@@ -153,7 +153,7 @@ public class SolarSystem {
     }
 
     /**
-     * gets technology level
+     * gets technology level.
      *
      * @return
      */
@@ -162,7 +162,7 @@ public class SolarSystem {
     }
 
     /**
-     * sets technology level
+     * sets technology level.
      *
      * @param _techLevel
      */
@@ -171,17 +171,18 @@ public class SolarSystem {
     }
 
     /**
-     * String representation of the SolarSystem
+     * String representation of the SolarSystem.
      *
      * @return descriptive String
      */
     @Override
     public String toString() {
-        return name + "(" + x + "," + y + ") " + resource.name() + " " + techLevel.name();
+        return name + "(" + x + "," + y + ") " + resource.name() + " "
+                + techLevel.name();
     }
 
     /**
-     * Gets a map of items available on the solar system
+     * Gets a map of items available on the solar system.
      *
      * @return
      */
@@ -190,7 +191,7 @@ public class SolarSystem {
     }
 
     /**
-     * Sets what items are available on the solar systems
+     * Sets what items are available on the solar systems.
      *
      * @param availableItems
      */
@@ -199,7 +200,7 @@ public class SolarSystem {
     }
 
     /**
-     * Gets the marketplace of the solar system
+     * Gets the marketplace of the solar system.
      *
      * @return
      */
@@ -208,7 +209,7 @@ public class SolarSystem {
     }
 
     /**
-     * Sets the marketplace of the solar system
+     * Sets the marketplace of the solar system.
      *
      * @return
      */

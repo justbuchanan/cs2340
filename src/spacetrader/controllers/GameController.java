@@ -518,6 +518,8 @@ public class GameController implements Initializable {
         });
 
         ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol, techLevelCol, distanceCol);
+        toNearestPlanet();
+        
     }
 
     /**
@@ -836,49 +838,42 @@ public class GameController implements Initializable {
         nameCol.setCellValueFactory(new PropertyValueFactory("name"));
         TableColumn<ShipType, Integer> priceCol = new TableColumn<>("Price");
         priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-        TableColumn<ShipType, Integer> cargoCol = new TableColumn<>("Cargo");
+        TableColumn<ShipType, Integer> cargoCol =
+                new TableColumn<>("Cargo Space");
         cargoCol.setCellValueFactory(new PropertyValueFactory("cargoBay"));
-        TableColumn<ShipType, TechLevel> techLevelCol = new TableColumn<>("Tech Level");
-        techLevelCol.setCellValueFactory(new PropertyValueFactory("minTechLevel"));
         TableColumn<ShipType, Integer> crewCol = new TableColumn<>("Crew");
         crewCol.setCellValueFactory(new PropertyValueFactory("crew"));
-        TableColumn<ShipType, Integer> weaponsCol = new TableColumn<>("Weapons");
+        TableColumn<ShipType, Integer> weaponsCol =
+                new TableColumn<>("Weapon Slots");
         weaponsCol.setCellValueFactory(new PropertyValueFactory("weaponSlots"));
-        TableColumn<ShipType, Integer> sheildsCol = new TableColumn<>("Shields");
+        TableColumn<ShipType, Integer> sheildsCol =
+                new TableColumn<>("Shield Slots");
         sheildsCol.setCellValueFactory(new PropertyValueFactory("shieldSlots"));
-        TableColumn<ShipType, Integer> gadgetsCol = new TableColumn<>("Gadgets");
+        TableColumn<ShipType, Integer> gadgetsCol =
+                new TableColumn<>("Gadget Slots");
         gadgetsCol.setCellValueFactory(new PropertyValueFactory("gadgetSlots"));
-        TableColumn<ShipType, Integer> fuelCol = new TableColumn<>("Fuel");
+        TableColumn<ShipType, Integer> fuelCol =
+                new TableColumn<>("Fuel Capacity");
         fuelCol.setCellValueFactory(new PropertyValueFactory("fuel"));
         TableColumn<ShipType, Integer> sizeCol = new TableColumn<>("Size");
         sizeCol.setCellValueFactory(new PropertyValueFactory("size"));
-        TableColumn<ShipType, Integer> bountyCol = new TableColumn<>("Bounty");
-        bountyCol.setCellValueFactory(new PropertyValueFactory("bounty"));
-        TableColumn<ShipType, Integer> repairCol = new TableColumn<>("Repair");
-        repairCol.setCellValueFactory(new PropertyValueFactory("repairCost"));
-        TableColumn<ShipType, Integer> hullCol = new TableColumn<>("Hull");
-        hullCol.setCellValueFactory(new PropertyValueFactory("hullStrength"));
-        
+
         int PREFERRED_WIDTH = 60;
-        nameCol.setMinWidth(PREFERRED_WIDTH);
+        nameCol.setMinWidth(PREFERRED_WIDTH + 15);
         priceCol.setMinWidth(PREFERRED_WIDTH);
         cargoCol.setMinWidth(PREFERRED_WIDTH);
-        techLevelCol.setMinWidth(PREFERRED_WIDTH);
         crewCol.setMinWidth(PREFERRED_WIDTH);
         weaponsCol.setMinWidth(PREFERRED_WIDTH);
         sheildsCol.setMinWidth(PREFERRED_WIDTH);
         gadgetsCol.setMinWidth(PREFERRED_WIDTH);
         fuelCol.setMinWidth(PREFERRED_WIDTH);
-        sizeCol.setMinWidth(PREFERRED_WIDTH);
-        bountyCol.setMinWidth(PREFERRED_WIDTH);
-        repairCol.setMinWidth(PREFERRED_WIDTH);
-        hullCol.setMinWidth(PREFERRED_WIDTH);
-        
-        shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, techLevelCol, crewCol, weaponsCol, sheildsCol, gadgetsCol, fuelCol, sizeCol, bountyCol, repairCol, hullCol);
+
+        shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, crewCol,
+                weaponsCol, sheildsCol, gadgetsCol, fuelCol);
     }
 
     /**
-     * Draws the selected ShipType
+     * Draws the selected ShipType.
      *
      * @param targetShipType
      */
@@ -936,7 +931,8 @@ public class GameController implements Initializable {
             int shipWorth = myPlayer.getShip().getType().getPrice();
             for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
                 if (myPlayer.getShip().getCargo().get(i) != null) {
-                    shipWorth += myMarket.getBuyPrice(Item.values()[i]) * myPlayer.getShip().getCargo().get(i);
+                    shipWorth += myMarket.getBuyPrice(Item.values()[i]) *
+                            myPlayer.getShip().getCargo().get(i);
                 }
             }
 
@@ -947,7 +943,8 @@ public class GameController implements Initializable {
                 msgAPI.showMessage("Our balance isn't high enough!");
 
             } else {
-                myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice() + shipWorth);
+                myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice()
+                        + shipWorth);
                 myPlayer.setShip(new Ship(shipType));
                 fillMainCanvas();
                 updateFuelGauge();

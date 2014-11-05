@@ -1,7 +1,7 @@
 package spacetrader.models;
 
 /**
- * Holds skill info
+ * Holds skill info.
  *
  */
 public enum Skill {
@@ -10,7 +10,8 @@ public enum Skill {
     private int points = 0;
 
     /**
-     * Gets points for a skill
+     * Gets points for a skill.
+     *
      * @return Point value
      */
     public int getPoints() {
@@ -18,7 +19,8 @@ public enum Skill {
     }
 
     /**
-     *  Sets points for a skill
+     *  Sets points for a skill.
+     *
      * @param points - The point value
      */
     public void setPoints(int points) {

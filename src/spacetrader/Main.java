@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * JavaFX main application
+ * JavaFX main application.
  *
  * @author Bao
  */
@@ -34,7 +34,7 @@ public class Main extends Application {
     private Player player;
 
     /**
-     * Starts the Application
+     * Starts the Application.
      */
     @Override
     public void start(Stage primaryStage) {
@@ -52,25 +52,26 @@ public class Main extends Application {
     }
 
     /**
-     * Opens configuration screen
+     * Opens configuration screen.
      */
     public void openConfig() {
         showConfig();
     }
 
     /**
-     * Closes configuration screen
+     * Closes configuration screen.
      */
     public void closeConfig() {
         showWelcome();
     }
 
     /**
-     * Goes to configuration screen
+     * Goes to configuration screen.
      */
     public void showConfig() {
         try {
-            ConfigController config = (ConfigController) replaceSceneContent("views/config.fxml");
+            ConfigController config = (ConfigController)
+                    replaceSceneContent("views/config.fxml");
             config.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,11 +79,12 @@ public class Main extends Application {
     }
 
     /**
-     * Goes to welcome (starting) screen
+     * Goes to welcome (starting) screen.
      */
     public void showWelcome() {
         try {
-            WelcomeController Welcome = (WelcomeController) replaceSceneContent("views/welcome.fxml");
+            WelcomeController Welcome = (WelcomeController)
+                    replaceSceneContent("views/welcome.fxml");
             Welcome.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,12 +92,13 @@ public class Main extends Application {
     }
 
     /**
-     * Goes to game screen
+     * Goes to game screen.
      */
     public void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
             player = myPlayer;
-            GameController game = (GameController) replaceSceneContent("views/game.fxml");
+            GameController game = (GameController)
+                    replaceSceneContent("views/game.fxml");
             game.setApp(this);
             game.config(myPlayer, myUniverse);
             /*TestController test = (TestController) replaceSceneContent("test.fxml");
@@ -113,7 +116,7 @@ public class Main extends Application {
     }
 
     /**
-     * Replaces scene content
+     * Replaces scene content.
      *
      * @param fxml target fxml
      * @return controller
@@ -137,7 +140,7 @@ public class Main extends Application {
     }
 
     /**
-     * Gets the current player
+     * Gets the current player.
      * @return The current player
      */
     public Player getPlayer() {
