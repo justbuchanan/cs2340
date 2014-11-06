@@ -45,7 +45,7 @@ public class CommandProcessor {
              undoStack.add(cmd);
          } else {
              //otherwise we have done something that cannot be undone, clear stack
-             undoStack.removeAll(undoStack);
+             //undoStack.removeAll(undoStack);
          }
      }
      
@@ -57,9 +57,7 @@ public class CommandProcessor {
          if (!redoStack.isEmpty()) {
              //Then pop the command and execute it
              AbstractCommand cmd = redoStack.remove(redoStack.size() - 1);
-             cmd.doIt();
-             //Then push it on the undo stack
-             undoStack.add(cmd);
+             doCommand(cmd);
          }
      }
      
@@ -76,4 +74,8 @@ public class CommandProcessor {
              redoStack.add(cmd);
          }
      }
+
+    void undoCommand(BuyItemCommand cmd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

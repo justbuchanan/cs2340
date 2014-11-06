@@ -346,6 +346,10 @@ public class GameController implements Initializable {
         }
     }
     
+    /**
+     * Undoes the purchases made earlier
+     * @param e action event
+     */
     @FXML
     public void undoBuy(ActionEvent e) {
         cp.undoCommand();
@@ -354,6 +358,11 @@ public class GameController implements Initializable {
         clearBuyWindow();
     }
     
+    
+    /**
+     * Redoes the purchases that had been undone
+     * @param e action event
+     */
     @FXML
     public void redoBuy(ActionEvent e) {
         cp.redoCommand();

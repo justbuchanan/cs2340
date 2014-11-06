@@ -28,10 +28,14 @@ public class BuyItemCommand extends AbstractCommand {
      */
     @Override
     public boolean doIt() {
-        theMarketplace.buy(theItem, theQuantity);
-        thePlayer.getShip().addCargo(theItem, theQuantity);
-        thePlayer.setBalance(thePlayer.getBalance() - theQuantity*theMarketplace.getBuyPrice(theItem));
-        return true;
+        int newBalance = thePlayer.getBalance() - theQuantity*theMarketplace.getBuyPrice(theItem);
+        if (newBalance >= 0 && thePlayer.getShip().getCurrentCargo() + theQuantity <= thePlayer.getShip().getMaxCargo()) {
+            theMarketplace.buy(theItem, theQuantity);
+            thePlayer.getShip().addCargo(theItem, theQuantity);
+            thePlayer.setBalance(newBalance);
+            return true;
+        }
+        return false;
     }
 
     /* (non-Javadoc)
