@@ -23,9 +23,9 @@ public enum Government {
     private int value;
     private String text;
     
-    private Government(int _value, String _text) {
-        this.value = _value;
-        this.text = _text;
+    private Government(int val, String txt) {
+        this.value = val;
+        this.text = txt;
     }
 
     /**
