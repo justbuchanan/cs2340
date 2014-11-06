@@ -41,6 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import spacetrader.controllers.market.AbstractCommand;
+import spacetrader.controllers.market.BuyItemCommand;
+import spacetrader.controllers.market.CommandProcessor;
 
 /**
  * Game screen controller
@@ -50,6 +53,7 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     private Main application;
+    private CommandProcessor cp  = AbstractCommand.INSTANCE;
 
     //<editor-fold defaultstate="collapsed" desc="MARKETPLACE DECLARATIONS">
     @FXML
@@ -324,10 +328,14 @@ public class GameController implements Initializable {
         int quantity = Integer.parseInt(buyQuantity.getText());
         if (newBalance >= 0) {
             if (myPlayer.getShip().getCurrentCargo() + quantity <= myPlayer.getShip().getMaxCargo()) {
+                BuyItemCommand cmd = new BuyItemCommand(myPlayer, myMarket, item, quantity);
+                cp.doCommand(cmd);
+                /*
                 myMarket.buy(item, quantity);
                 myPlayer.getShip().addCargo(item, quantity);
-                displayCargo();
                 myPlayer.setBalance(newBalance);
+                */
+                displayCargo();
                 resetBuyList();
                 clearBuyWindow();
             } else {
@@ -336,6 +344,22 @@ public class GameController implements Initializable {
         } else {
             error.setText("You have insufficient funds");
         }
+    }
+    
+    @FXML
+    public void undoBuy(ActionEvent e) {
+        cp.undoCommand();
+        displayCargo();
+        resetBuyList();
+        clearBuyWindow();
+    }
+    
+    @FXML
+    public void redoBuy(ActionEvent e) {
+        cp.redoCommand();
+        displayCargo();
+        resetBuyList();
+        clearBuyWindow();
     }
 
     /**

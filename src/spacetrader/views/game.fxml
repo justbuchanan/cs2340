@@ -39,7 +39,7 @@
                 <Insets bottom="20.0" left="30.0" />
             </padding>
         </Label>
-        <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);" visible="false">
+        <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);">
             <children>
                 <Label layoutX="83.0" layoutY="27.0" text="Marketplace" textFill="WHITE">
                     <font>
@@ -67,6 +67,8 @@
                                                 <Label fx:id="buyAfterBalance" layoutX="218.0" layoutY="115.0" text="0" />
                                                 <Button layoutX="145.0" layoutY="50.0" mnemonicParsing="false" onAction="#increaseBuyQuantity" text="▲" />
                                                 <Button layoutX="170.0" layoutY="50.0" mnemonicParsing="false" onAction="#decreaseBuyQuantity" text="▼" />
+                                    <Button layoutX="490.0" layoutY="26.0" mnemonicParsing="false" onAction="#undoBuy" prefHeight="25.0" prefWidth="73.0" text="UNDO" />
+                                    <Button layoutX="490.0" layoutY="60.0" mnemonicParsing="false" onAction="#redoBuy" prefHeight="25.0" prefWidth="73.0" text="REDO" />
                                             </children>
                                         </Pane>
                                     </children>
