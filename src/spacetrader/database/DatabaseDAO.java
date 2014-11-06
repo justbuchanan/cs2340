@@ -3,6 +3,12 @@ package spacetrader.database;
 import spacetrader.models.Player;
 
 import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * This class provides access to the Database
@@ -14,15 +20,15 @@ public class DatabaseDAO {
     private final String DB_NAME = "jdbc:sqlite:savedgame.db";
 
     public void execSQL(String sql) {
-        Connection c = null;
+        Connection con = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC);
-            c = DriverManager.getConnection(DB_NAME);
-            stmt = c.createStatement();
+            con = DriverManager.getConnection(DB_NAME);
+            stmt = con.createStatement();
             stmt.execute(sql);
             stmt.close();
-            c.close();
+            con.close();
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -30,16 +36,16 @@ public class DatabaseDAO {
     }
 
     public DbResponse select(DbTables table) {
-        Connection c = null;
+        Connection con = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC);
-            c = DriverManager.getConnection(DB_NAME);
-            stmt = c.createStatement();
-            Player p = null;
+            con = DriverManager.getConnection(DB_NAME);
+            stmt = con.createStatement();
+            //Player player = null;
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + table.name() + ";");
             if (rs.next()) {
-                return new DbResponse(c, stmt, rs);
+                return new DbResponse(con, stmt, rs);
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -52,18 +58,18 @@ public class DatabaseDAO {
 
     public boolean hasTable(DbTables table) {
         boolean bool;
-        Connection c = null;
+        Connection con = null;
         try {
             Class.forName(JDBC);
-            c = DriverManager.getConnection(DB_NAME);
-            DatabaseMetaData dbm = c.getMetaData();
+            con = DriverManager.getConnection(DB_NAME);
+            DatabaseMetaData dbm = con.getMetaData();
             ResultSet tables = dbm.getTables(null, null, table.name(), null);
             if (tables.next()) {
                 bool = true;
             } else {
                 bool = false;
             }
-            c.close();
+            con.close();
             return bool;
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -73,15 +79,15 @@ public class DatabaseDAO {
     }
 
     public void dropTable(DbTables table) {
-        Connection c = null;
+        Connection con = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC);
-            c = DriverManager.getConnection(DB_NAME);
-            stmt = c.createStatement();
+            con = DriverManager.getConnection(DB_NAME);
+            stmt = con.createStatement();
             stmt.executeUpdate("DROP TABLE " + table.name());
             stmt.close();
-            c.close();
+            con.close();
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -89,15 +95,15 @@ public class DatabaseDAO {
     }
 
     public void clearTable(DbTables table) {
-        Connection c = null;
+        Connection con = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC);
-            c = DriverManager.getConnection(DB_NAME);
-            stmt = c.createStatement();
+            con = DriverManager.getConnection(DB_NAME);
+            stmt = con.createStatement();
             stmt.executeUpdate("DELETE FROM " + table.name());
             stmt.close();
-            c.close();
+            con.close();
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

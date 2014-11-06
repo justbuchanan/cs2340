@@ -23,7 +23,7 @@
 	-fx-font-weight: bold;
 }
 
-.button: hover {
+.button:hover {
     -fx-background-color:
         linear-gradient(#fff685, #ffc451),
         radial-gradient(center 50% -40%, radius 200%, #eec052 45%, #d59a32 50%);
@@ -42,7 +42,7 @@
     -fx-text-fill: rgba(255,255,255,0.5);
 }
 
-.clear-button: hover {
+.clear-button:hover {
     -fx-font-family: Courier, "Courier New", monospace;
     -fx-border-color: #ffffff;
     -fx-border-width: 1;

@@ -1,12 +1,13 @@
 package spacetrader.data.random_events;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import spacetrader.data.Item;
 import spacetrader.data.RandomEvent;
 import spacetrader.models.Player;
 import spacetrader.models.Ship;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A random event where pirates steal some of your cargo.

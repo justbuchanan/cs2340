@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package spacetrader.data.random_events;
 
 import spacetrader.data.Item;
@@ -36,9 +37,9 @@ public class PoliceSearch extends RandomEvent {
             ship.removeCargo(Item.FIREARMS, gunsAmount);
             ship.removeCargo(Item.NARCOTICS, drugsAmount);
 
-            return "The police searched your ship and confiscated " +
-                    gunsAmount + " firearms and " + drugsAmount +
-                    " units of narcotics.";
+            return "The police searched your ship and confiscated "
+            + gunsAmount + " firearms and " + drugsAmount
+            + " units of narcotics.";
         } else {
             return "The police searched your ship and found no illegal goods. "
                     + "Carry on now.";

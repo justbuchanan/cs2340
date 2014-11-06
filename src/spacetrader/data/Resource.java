@@ -24,9 +24,9 @@ public enum Resource {
     private int value;
     private String text;
 
-    private Resource(int _value, String _text) {
-        this.value = _value;
-        this.text = _text;
+    private Resource(int val, String txt) {
+        this.value = val;
+        this.text = txt;
     }
 
     /**

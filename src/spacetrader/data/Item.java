@@ -32,20 +32,20 @@ public enum Item {
     private final int mtl;          //  Min price offered in space trade with random trader (not on a planet)
     private final int mth;          //  Max price offered in space trade with random trader (not on a planet)
 
-    private Item(int i, String d, int mtlp, int mtlu, int ttp, int base,
-            int ipl, int var, RadicalEvent ie, Resource cr, Resource er,
+    private Item(int _key, String _name, int mtlp, int mtlu, int ttp, int base,
+            int ipl, int var, RadicalEvent radEvent, Resource rscCheap, Resource rscCostly,
             int mtl, int mth) {
-        this.key = i;
-        this.name = d;
+        this.key = _key;
+        this.name = _name;
         this.mtlp = mtlp;
         this.mtlu = mtlu;
         this.ttp = ttp;
         this.basePrice = base;
         this.ipl = ipl;
         this.var = var;
-        this.ie = ie;
-        this.cr = cr;
-        this.er = er;
+        this.ie = radEvent;
+        this.cr = rscCheap;
+        this.er = rscCostly;
         this.mtl = mtl;
         this.mth = mth;
     }
