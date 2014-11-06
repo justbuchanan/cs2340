@@ -9,10 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import spacetrader.Main;
 import spacetrader.database.DbMethods;
-import spacetrader.database.DbTables;
 import spacetrader.models.Player;
 import spacetrader.models.Universe;
-import spacetrader.database.DatabaseDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;

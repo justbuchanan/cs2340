@@ -78,7 +78,7 @@ public enum Item {
     }
 
     /**
-     * Gets Minimum Tech Level to Produce this resource.
+     * Gets Minimum Tech Level to produce this resource.
      * (You can't buy on planets below this level)
      *
      * @return MTLP
@@ -88,7 +88,7 @@ public enum Item {
     }
 
     /**
-     * Gets Minimum Tech Level to Use this resource.
+     * Gets Minimum Tech Level to use this resource.
      * (You can't sell on planets below this level)
      *
      * @return MTLU
@@ -116,7 +116,7 @@ public enum Item {
     }
 
     /**
-     * Gets Price increase per tech level.
+     * Gets price increase per tech level.
      *
      * @return IPL
      */
@@ -125,7 +125,7 @@ public enum Item {
     }
 
     /**
-     * Gets variance is the maximum percentage that the price can vary above or
+     * Gets variance, which is the maximum percentage that the price can vary above or
      * below the base.
      *
      * @return variance
@@ -135,7 +135,8 @@ public enum Item {
     }
 
     /**
-     * Gets Radical price increase event, when this even happens on a planet,
+     * Gets Radical price increase event
+     * When this event happens on a planet,
      * the price may increase astronomically.
      *
      * @return increase event
@@ -163,7 +164,7 @@ public enum Item {
     }
 
     /**
-     * Gets min price offered in space trade with random trader (not on a
+     * Gets min price offered in space trade with random traders (not on a
      * planet).
      *
      * @return minPrice
@@ -173,7 +174,7 @@ public enum Item {
     }
 
     /**
-     * Gets max price offered in space trade with random trader (not on a
+     * Gets max price offered in space trade with random traders (not on a
      * planet).
      *
      * @return maxPrice
