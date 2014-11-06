@@ -23,5 +23,13 @@ public enum Gadget {
         this.techLevel = techLevel;
         this.statBoost = statBoost;
     }
+    
+    public int getTechLevel() {
+        return techLevel;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
 
 }

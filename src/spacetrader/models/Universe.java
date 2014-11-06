@@ -93,6 +93,7 @@ public class Universe {
                     TechLevel.values()[rand.nextInt(TechLevel.values().length)];
             ss.setTechLevel(tech);
             ss.setMP();
+            ss.setSy();
             universe.solarSystems.add(ss);
         }
         return universe;

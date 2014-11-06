@@ -21,6 +21,7 @@ public class SolarSystem {
     private HashMap<Item, Integer> availableItems;
     private Marketplace mp;
     private Color primaryColor;
+    private ShipYard sy;
 
     final int QUANTITIES[] = {30, 30, 30, 30, 30, 30, 30, 30, 30, 30};
 
@@ -215,5 +216,21 @@ public class SolarSystem {
      */
     public Marketplace setMP() {
         return mp = new Marketplace(this);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public ShipYard getSy() {
+        return sy;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public ShipYard setSy() {
+        return sy = new ShipYard(this);
     }
 }

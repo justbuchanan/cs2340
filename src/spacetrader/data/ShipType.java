@@ -7,11 +7,11 @@ package spacetrader.data;
  */
 public enum ShipType {
 
-    FLEA("Flea", 10, 0, 0, 0, 1, 20, 4, 1, 2000, 5, 2, 25, -1, -1, 0, 1, 0, "flea.png"),
-    GNAT("Gnat", 15, 1, 0, 1, 1, 14, 5, 2, 10000, 50, 28, 100, 0, 0, 0, 1, 1, "gnat.png"),
-    FIREFLY("Firefly", 20, 1, 1, 1, 1, 17, 5, 3, 25000, 75, 20, 100, 0, 0, 0, 1, 1, null),
-    MOSQUITO("Mosquito", 15, 2, 1, 1, 1, 13, 5, 5, 30000, 100, 20, 100, 0, 1, 0, 1, 1, "mosquito.png"),
-    BUMBLEBEE("BumbleBee", 25, 1, 2, 2, 2, 15, 5, 7, 60000, 125, 15, 100, 0, 1, 0, 1, 2, null);
+    FLEA("Flea", 10, 0, 0, 4, 1, 20, 4, 1, 2000, 5, 2, 25, -1, -1, 0, 1, 0, "flea.png"),
+    GNAT("Gnat", 15, 1, 0, 4, 1, 14, 5, 2, 10000, 50, 28, 100, 0, 0, 0, 1, 1, "gnat.png"),
+    FIREFLY("Firefly", 20, 1, 1, 5, 1, 17, 5, 3, 25000, 75, 20, 100, 0, 0, 0, 1, 1, null),
+    MOSQUITO("Mosquito", 15, 2, 1, 5, 1, 13, 5, 5, 30000, 100, 20, 100, 0, 1, 0, 1, 1, "mosquito.png"),
+    BUMBLEBEE("BumbleBee", 25, 1, 2, 6, 2, 15, 5, 7, 60000, 125, 15, 100, 0, 1, 0, 1, 2, null);
 
     private final String name;
     private final int cargoBay;
@@ -33,9 +33,11 @@ public enum ShipType {
     private final int bounty;
     private final String imageName;
 
-    private ShipType(String name, int cargoBay, int weaponSlots, int shieldSlots, int gadgetSlots,
-                     int crew, int fuel, int minTechLevel, int fuelCost, int price, int bounty, int occurrence, int hullStrength,
-                     int police, int pirate, int trader, int repairCost, int size, String imageName) {
+    private ShipType(String name, int cargoBay, int weaponSlots,
+            int shieldSlots, int gadgetSlots, int crew, int fuel,
+            int minTechLevel, int fuelCost, int price, int bounty,
+            int occurrence, int hullStrength, int police, int pirate,
+            int trader, int repairCost, int size, String imageName) {
         this.name = name;
         this.cargoBay = cargoBay;
         this.weaponSlots = weaponSlots;
@@ -58,7 +60,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets ship's name
+     * Gets ship's name.
      *
      * @return
      */
@@ -67,7 +69,7 @@ public enum ShipType {
     }
 
     /**
-     * gets number of cargo bays
+     * gets number of cargo bays.
      *
      * @return
      */
@@ -76,7 +78,7 @@ public enum ShipType {
     }
 
     /**
-     * gets number of weapsons slots
+     * gets number of weapon slots.
      *
      * @return
      */
@@ -85,7 +87,7 @@ public enum ShipType {
     }
 
     /**
-     * gets number of shields this ship can carry
+     * gets number of shields this ship can carry.
      *
      * @return
      */
@@ -94,7 +96,7 @@ public enum ShipType {
     }
 
     /**
-     * gets the min tech level for a planet to sell this type of ship
+     * gets the min tech level for a planet to sell this type of ship.
      *
      * @return
      */
@@ -103,7 +105,7 @@ public enum ShipType {
     }
 
     /**
-     * gets the max number of crew
+     * gets the max number of crew.
      *
      * @return
      */
@@ -112,7 +114,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the cost per unit of fuel for this ship type
+     * Gets the cost per unit of fuel for this ship type.
      *
      * @return
      */
@@ -121,7 +123,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the default shipyard price for this ship
+     * Gets the default shipyard price for this ship.
      *
      * @return
      */
@@ -130,7 +132,7 @@ public enum ShipType {
     }
 
     /**
-     * gets the max units of fuel this ship's tank can hold
+     * gets the max units of fuel this ship's tank can hold.
      *
      * @return
      */
@@ -139,7 +141,7 @@ public enum ShipType {
     }
 
     /**
-     * gets the total number of gadgets that can be installed in this ship
+     * gets the total number of gadgets that can be installed in this ship.
      *
      * @return
      */
@@ -148,7 +150,7 @@ public enum ShipType {
     }
 
     /**
-     * gets the size of this ship
+     * gets the size of this ship.
      *
      * @return
      */
@@ -157,7 +159,7 @@ public enum ShipType {
     }
 
     /**
-     * gets the cost to repair 1 unit of damage to this ship
+     * gets the cost to repair 1 unit of damage to this ship.
      *
      * @return
      */
@@ -166,7 +168,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the trader attraction rating from this ship
+     * Gets the trader attraction rating from this ship.
      *
      * @return
      */
@@ -175,7 +177,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the pirate attraction rating of this ship
+     * Gets the pirate attraction rating of this ship.
      *
      * @return
      */
@@ -184,7 +186,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the police attraction rating from this ship
+     * Gets the police attraction rating from this ship.
      *
      * @return
      */
@@ -193,7 +195,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the max hitpoints of this ship
+     * Gets the max hitpoints of this ship.
      *
      * @return
      */
@@ -220,7 +222,7 @@ public enum ShipType {
     }
 
     /**
-     * Gets the ships image name
+     * Gets the ships image name.
      * @return Image name
      */
     public String getImageName() {

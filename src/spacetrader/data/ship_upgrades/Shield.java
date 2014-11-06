@@ -18,5 +18,13 @@ public enum Shield {
         this.price = price;
         this.techLevel = techLevel;
     }
+    
+    public int getTechLevel() {
+        return techLevel;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
 
 }

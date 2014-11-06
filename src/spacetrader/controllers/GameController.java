@@ -96,6 +96,7 @@ public class GameController implements Initializable {
     private List<SolarSystem> solarSystems;
     private SolarSystem mySS;
     private Marketplace myMarket;
+    private ShipYard mySy;
 
     @FXML
     Parent root;
@@ -850,6 +851,7 @@ public class GameController implements Initializable {
     @FXML
     private void openShipyard(ActionEvent event) {
         shipyardPane.setVisible(true);
+        mySy = mySS.getSy();
         createShipyardTable();
         shipyardTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ShipType>() {
             public void changed(ObservableValue<? extends ShipType> ov,
@@ -863,46 +865,51 @@ public class GameController implements Initializable {
      * Creates Shipyard table
      */
     private void createShipyardTable() {
-        ObservableList<ShipType> shipTypes = FXCollections.observableArrayList(ShipType.values());
+        if (mySS.getTechLevel().getValue() >= 4) {
+            List<ShipType> shipList = new ArrayList(mySy.getAvailableShips().keySet());
+            ObservableList<ShipType> shipTypes = FXCollections.observableArrayList(shipList);
+        
+        //ObservableList<ShipType> shipTypes = FXCollections.observableArrayList(ShipType.values());
 
-        shipyardTable.setItems(shipTypes);
+            shipyardTable.setItems(shipTypes);
 
-        TableColumn<ShipType, String> nameCol = new TableColumn<>("Name");
-        nameCol.setCellValueFactory(new PropertyValueFactory("name"));
-        TableColumn<ShipType, Integer> priceCol = new TableColumn<>("Price");
-        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-        TableColumn<ShipType, Integer> cargoCol =
+            TableColumn<ShipType, String> nameCol = new TableColumn<>("Name");
+            nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+            TableColumn<ShipType, Integer> priceCol = new TableColumn<>("Price");
+            priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+            TableColumn<ShipType, Integer> cargoCol =
                 new TableColumn<>("Cargo Space");
-        cargoCol.setCellValueFactory(new PropertyValueFactory("cargoBay"));
-        TableColumn<ShipType, Integer> crewCol = new TableColumn<>("Crew");
-        crewCol.setCellValueFactory(new PropertyValueFactory("crew"));
-        TableColumn<ShipType, Integer> weaponsCol =
+            cargoCol.setCellValueFactory(new PropertyValueFactory("cargoBay"));
+            TableColumn<ShipType, Integer> crewCol = new TableColumn<>("Crew");
+            crewCol.setCellValueFactory(new PropertyValueFactory("crew"));
+            TableColumn<ShipType, Integer> weaponsCol =
                 new TableColumn<>("Weapon Slots");
-        weaponsCol.setCellValueFactory(new PropertyValueFactory("weaponSlots"));
-        TableColumn<ShipType, Integer> sheildsCol =
+            weaponsCol.setCellValueFactory(new PropertyValueFactory("weaponSlots"));
+            TableColumn<ShipType, Integer> sheildsCol =
                 new TableColumn<>("Shield Slots");
-        sheildsCol.setCellValueFactory(new PropertyValueFactory("shieldSlots"));
-        TableColumn<ShipType, Integer> gadgetsCol =
+            sheildsCol.setCellValueFactory(new PropertyValueFactory("shieldSlots"));
+            TableColumn<ShipType, Integer> gadgetsCol =
                 new TableColumn<>("Gadget Slots");
-        gadgetsCol.setCellValueFactory(new PropertyValueFactory("gadgetSlots"));
-        TableColumn<ShipType, Integer> fuelCol =
+            gadgetsCol.setCellValueFactory(new PropertyValueFactory("gadgetSlots"));
+            TableColumn<ShipType, Integer> fuelCol =
                 new TableColumn<>("Fuel Capacity");
-        fuelCol.setCellValueFactory(new PropertyValueFactory("fuel"));
-        TableColumn<ShipType, Integer> sizeCol = new TableColumn<>("Size");
-        sizeCol.setCellValueFactory(new PropertyValueFactory("size"));
+            fuelCol.setCellValueFactory(new PropertyValueFactory("fuel"));
+            TableColumn<ShipType, Integer> sizeCol = new TableColumn<>("Size");
+            sizeCol.setCellValueFactory(new PropertyValueFactory("size"));
 
-        int PREFERRED_WIDTH = 60;
-        nameCol.setMinWidth(PREFERRED_WIDTH + 15);
-        priceCol.setMinWidth(PREFERRED_WIDTH);
-        cargoCol.setMinWidth(PREFERRED_WIDTH);
-        crewCol.setMinWidth(PREFERRED_WIDTH);
-        weaponsCol.setMinWidth(PREFERRED_WIDTH);
-        sheildsCol.setMinWidth(PREFERRED_WIDTH);
-        gadgetsCol.setMinWidth(PREFERRED_WIDTH);
-        fuelCol.setMinWidth(PREFERRED_WIDTH);
+            int PREFERRED_WIDTH = 60;
+            nameCol.setMinWidth(PREFERRED_WIDTH + 15);
+            priceCol.setMinWidth(PREFERRED_WIDTH);
+            cargoCol.setMinWidth(PREFERRED_WIDTH);
+            crewCol.setMinWidth(PREFERRED_WIDTH);
+            weaponsCol.setMinWidth(PREFERRED_WIDTH);
+            sheildsCol.setMinWidth(PREFERRED_WIDTH);
+            gadgetsCol.setMinWidth(PREFERRED_WIDTH);
+            fuelCol.setMinWidth(PREFERRED_WIDTH);
 
-        shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, crewCol,
-                weaponsCol, sheildsCol, gadgetsCol, fuelCol);
+            shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, crewCol,
+                    weaponsCol, sheildsCol, gadgetsCol, fuelCol);
+        }
     }
 
     /**

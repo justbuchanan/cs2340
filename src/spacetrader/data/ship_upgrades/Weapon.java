@@ -19,4 +19,12 @@ public enum Weapon {
         this.price = price;
         this.techLevel = techLevel;
     }
+    
+    public int getTechLevel() {
+        return techLevel;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
 }
