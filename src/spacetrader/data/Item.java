@@ -116,7 +116,7 @@ public enum Item {
     }
 
     /**
-     * Gets Price increase per tech level.
+     * Gets price increase per tech level.
      *
      * @return IPL
      */
