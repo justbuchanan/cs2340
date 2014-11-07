@@ -266,17 +266,6 @@
             <Button layoutX="160.0" layoutY="543.0" mnemonicParsing="false" onAction="#openUpgrades" prefHeight="25.0" prefWidth="136.0" text="UPGRADE SHIP" textFill="WHITE" />
          </children>
       </Pane>
-        <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />
-      <Pane id="randomEventPane" fx:id="randomEventPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a82d11" height="614.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="810.0" />
-            <Button layoutX="369.0" layoutY="287.0" mnemonicParsing="false" onAction="#dismissRandomEventPane" prefHeight="26.0" prefWidth="73.0" text="Ok" />
-            <Label fx:id="randomEventDescriptionLabel" layoutX="173.0" layoutY="140.0" prefHeight="133.0" prefWidth="474.0" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="24.0" />
-               </font></Label>
-         </children>
-      </Pane>
       <Pane fx:id="upgradePane" layoutX="35.0" layoutY="79.0" prefHeight="434.0" prefWidth="634.0" style="-fx-background-color: rgba(100,50,0,0.90);">
          <children>
             <TableView fx:id="upgradeTable" prefHeight="434.0" prefWidth="641.0">
@@ -288,5 +277,16 @@
             <Button layoutX="468.0" layoutY="391.0" mnemonicParsing="false" onAction="#closeUpgrade" prefHeight="9.0" prefWidth="123.0" text="CANCEL" textFill="WHITE" />
             <Button layoutX="321.0" layoutY="392.0" mnemonicParsing="false" onAction="#buyUpgrade" prefHeight="25.0" prefWidth="123.0" text="BUY UPGRADE" textFill="WHITE" />
          </children></Pane>
+      <Pane id="randomEventPane" fx:id="randomEventPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a82d11" height="614.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="810.0" />
+            <Button layoutX="369.0" layoutY="287.0" mnemonicParsing="false" onAction="#dismissRandomEventPane" prefHeight="26.0" prefWidth="73.0" text="Ok" />
+            <Label fx:id="randomEventDescriptionLabel" layoutX="173.0" layoutY="140.0" prefHeight="133.0" prefWidth="474.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+         </children>
+      </Pane>
+        <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />
     </children>
 </AnchorPane>
