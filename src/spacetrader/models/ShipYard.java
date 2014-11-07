@@ -1,10 +1,8 @@
 package spacetrader.models;
 
 import java.util.HashMap;
-import spacetrader.data.ship_upgrades.Shield;
-import spacetrader.data.ship_upgrades.Weapon;
-import spacetrader.data.ship_upgrades.Gadget;
 import spacetrader.data.ShipType;
+import spacetrader.data.Upgrade;
 
 /**
  * A little something to make all of our lives WAY easier in terms of handling
@@ -16,16 +14,12 @@ public class ShipYard {
 
     private SolarSystem ss;
     private HashMap<ShipType, Integer> availableShips;
-    private HashMap<Shield, Integer> availableShield;
-    private HashMap<Weapon, Integer> availableWeapon;
-    private HashMap<Gadget, Integer> availableGadget;
+    private HashMap<Upgrade, Integer> allUpgrades;
 
     public ShipYard(SolarSystem ss) {
         this.ss = ss;
         availableShips = new HashMap<>();
-        availableShield = new HashMap<>();
-        availableWeapon = new HashMap<>();
-        availableGadget = new HashMap<>();
+        allUpgrades = new HashMap<>();
         setAvailabilities();
     }
 
@@ -34,21 +28,11 @@ public class ShipYard {
             if (s.getMinTechLevel() >= ss.getTechLevel().getValue()) {
                 availableShips.put(s, s.getPrice());
             }
-            
         }
-        for (Shield sh : Shield.values()) {
-            if (sh.getTechLevel() >= ss.getTechLevel().getValue()) {
-                availableShield.put(sh, sh.getPrice());
-            }
-        }
-        for (Weapon w : Weapon.values()) {
-            if (w.getTechLevel() >= ss.getTechLevel().getValue()) {
-                availableWeapon.put(w, w.getPrice());
-            }
-        }
-        for (Gadget g : Gadget.values()) {
+
+        for (Upgrade g : Upgrade.values()) {
             if (g.getTechLevel() >= ss.getTechLevel().getValue()) {
-                availableGadget.put(g, g.getPrice());
+                allUpgrades.put(g, g.getPrice());
             }
         }
     }
@@ -56,17 +40,8 @@ public class ShipYard {
     public HashMap getAvailableShips() {
         return availableShips;
     }
-
-    public HashMap getAvailableShield() {
-        return availableShield;
+    
+    public HashMap getAllUpgrades() {
+        return allUpgrades;
     }
-
-    public HashMap getAvaiableWeapon() {
-        return availableWeapon;
-    }
-
-    public HashMap getAvailableGadget() {
-        return availableGadget;
-    }
-
 }

@@ -39,7 +39,7 @@
                 <Insets bottom="20.0" left="30.0" />
             </padding>
         </Label>
-        <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);">
+        <Pane fx:id="marketPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0,0,0,0.85);" visible="false">
             <children>
                 <Label layoutX="83.0" layoutY="27.0" text="Marketplace" textFill="WHITE">
                     <font>
@@ -230,7 +230,7 @@
                 </Label>
             </children>
         </Pane>
-      <Pane fx:id="shipyardPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);" visible="false">
+      <Pane fx:id="shipyardPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(100,50,0,0.90);">
          <children>
             <TableView fx:id="shipyardTable" layoutX="31.0" layoutY="27.0" prefHeight="320.0" prefWidth="737.0">
                <columns>
@@ -263,6 +263,7 @@
                   <Label fx:id="syShipWorth" layoutX="110.0" layoutY="17.0" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
+            <Button layoutX="160.0" layoutY="543.0" mnemonicParsing="false" onAction="#openUpgrades" prefHeight="25.0" prefWidth="136.0" text="UPGRADE SHIP" textFill="WHITE" />
          </children>
       </Pane>
         <Pane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" visible="false" />

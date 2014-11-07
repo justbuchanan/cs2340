@@ -29,6 +29,7 @@ import javafx.util.Duration;
 import spacetrader.Main;
 import spacetrader.api.MessageAPI;
 import spacetrader.data.*;
+import spacetrader.data.Upgrade;
 import spacetrader.data.random_events.PirateRaid;
 import spacetrader.data.random_events.PoliceSearch;
 import spacetrader.data.random_events.TreasureChest;
@@ -76,13 +77,15 @@ public class GameController implements Initializable {
 //</editor-fold>
 
     @FXML
-    private Pane mapPane, shipyardPane;
+    private Pane mapPane, shipyardPane, upgradePane;
     @FXML
     private Canvas mapCanvas;
     @FXML
     private TableView<SolarSystem> ssTable;
     @FXML
     private TableView<ShipType> shipyardTable;
+    @FXML
+    private TableView<Upgrade> upgradeTable;
     @FXML
     private Label syBalance, syShipWorth, syCost, syNewBalance;
     @FXML
@@ -860,16 +863,42 @@ public class GameController implements Initializable {
             }
         });
     }
+    
+    /**
+     * Creates the table of upgrades.
+     */
+    private void createUpgradeTable() {
+        if (mySS.getTechLevel().getValue() >= 4) {
+            List<Upgrade> upgradeList =
+                    new ArrayList(mySy.getAllUpgrades().keySet());
+            ObservableList<Upgrade> upgrades =
+                    FXCollections.observableArrayList(upgradeList);
+            upgradeTable.setItems(upgrades);
 
+            TableColumn<Upgrade, String> nameCol =
+                    new TableColumn<>("Upgrade Name");
+            nameCol.setCellValueFactory(new PropertyValueFactory("name"));
+            TableColumn<Upgrade, Integer> priceCol = new TableColumn<>("Price");
+            priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+            TableColumn<Upgrade, String> typeCol = new TableColumn<>("Type of Upgrade");
+            typeCol.setCellValueFactory(new PropertyValueFactory("type"));
+            
+            int PREFERRED_WIDTH = 100;
+            nameCol.setMinWidth(PREFERRED_WIDTH);
+            priceCol.setMinWidth(PREFERRED_WIDTH);
+            typeCol.setMinWidth(PREFERRED_WIDTH);
+            upgradeTable.getColumns().setAll(nameCol, priceCol, typeCol);
+        }
+    }
     /**
      * Creates Shipyard table
      */
     private void createShipyardTable() {
         if (mySS.getTechLevel().getValue() >= 4) {
-            List<ShipType> shipList = new ArrayList(mySy.getAvailableShips().keySet());
-            ObservableList<ShipType> shipTypes = FXCollections.observableArrayList(shipList);
-        
-        //ObservableList<ShipType> shipTypes = FXCollections.observableArrayList(ShipType.values());
+            List<ShipType> shipList =
+                    new ArrayList(mySy.getAvailableShips().keySet());
+            ObservableList<ShipType> shipTypes =
+                    FXCollections.observableArrayList(shipList);
 
             shipyardTable.setItems(shipTypes);
 
@@ -897,8 +926,8 @@ public class GameController implements Initializable {
             TableColumn<ShipType, Integer> sizeCol = new TableColumn<>("Size");
             sizeCol.setCellValueFactory(new PropertyValueFactory("size"));
 
-            int PREFERRED_WIDTH = 60;
-            nameCol.setMinWidth(PREFERRED_WIDTH + 15);
+            int PREFERRED_WIDTH = 70;
+            nameCol.setMinWidth(PREFERRED_WIDTH);
             priceCol.setMinWidth(PREFERRED_WIDTH);
             cargoCol.setMinWidth(PREFERRED_WIDTH);
             crewCol.setMinWidth(PREFERRED_WIDTH);
@@ -936,6 +965,14 @@ public class GameController implements Initializable {
         }
     }
 
+    private void showUpgrade(Upgrade targetUpgrade) {
+        GraphicsContext gc = mapCanvas.getGraphicsContext2D();
+        gc.setFill(Color.RED);
+        syBalance.setText(myPlayer.getBalance() + " ");
+        syCost.setText(targetUpgrade.getPrice() + " ");
+        syNewBalance.setText((myPlayer.getBalance() - targetUpgrade.getPrice()) + " ");
+    }
+
     /**
      * Draws the ship
      */
@@ -955,7 +992,54 @@ public class GameController implements Initializable {
     private void closeShipyard(ActionEvent event) {
         shipyardPane.setVisible(false);
     }
-
+    
+    /**
+     * 
+     * @param event 
+     */
+    @FXML
+    private void openUpgrades(ActionEvent event) {
+        shipyardPane.setVisible(false);
+        upgradePane.setVisible(true);
+        createUpgradeTable();
+        upgradeTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Upgrade>() {
+            public void changed(ObservableValue<? extends Upgrade> o,
+                                Upgrade oldType, Upgrade newType) {
+                    showUpgrade(newType);
+            }
+        });
+    }
+    
+    /**
+     * Handles buying the upgrade
+     */
+    @FXML
+    private void buyUpgrade(ActionEvent event) {
+        MessageAPI msgAPI = new MessageAPI(topPane);
+        Upgrade select = upgradeTable.getSelectionModel().getSelectedItem();
+        if (select.getType() == Upgrade.UPGRADE_TYPE.Weapon) {
+            if ((myPlayer.getShip().getType().getWeaponSlots() > 0) &&
+                    myPlayer.getBalance() > select.getPrice()) {
+                myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+            }
+        } else if (select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
+            if ((myPlayer.getShip().getType().getShieldSlots() > 0) &&
+                    myPlayer.getBalance() > select.getPrice()) {
+                myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+            }
+        } else if (select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
+            if ((myPlayer.getShip().getType().getGadgetSlots() > 0) &&
+                    myPlayer.getBalance() > select.getPrice()) {
+                myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+            }
+        }
+    }
+    
+    @FXML
+    private void closeUpgrade(ActionEvent event) {
+        upgradePane.setVisible(false);
+    }
+    
     /**
      * Handles Buy Ship button
      *
@@ -965,32 +1049,27 @@ public class GameController implements Initializable {
     private void buyShip(ActionEvent event) {
         MessageAPI msgAPI = new MessageAPI(topPane);
         ShipType shipType = shipyardTable.getSelectionModel().getSelectedItem();
-        if (shipType.getMinTechLevel() > mySS.getTechLevel().getValue()) {
-            msgAPI.showMessage("This ship is not available in the current solar system");
+        int shipWorth = myPlayer.getShip().getType().getPrice();
+        for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
+            if (myPlayer.getShip().getCargo().get(i) != null) {
+                shipWorth += myMarket.getBuyPrice(Item.values()[i]) *
+                    myPlayer.getShip().getCargo().get(i);
+            }
+        }
+
+        shipWorth *= .9; // Depreciation
+
+        if (myPlayer.getBalance() + shipWorth < shipType.getPrice()) {
+            closeShipyard(event);
+            msgAPI.showMessage("Our balance isn't high enough!");
         } else {
-            int shipWorth = myPlayer.getShip().getType().getPrice();
-            for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
-                if (myPlayer.getShip().getCargo().get(i) != null) {
-                    shipWorth += myMarket.getBuyPrice(Item.values()[i]) *
-                            myPlayer.getShip().getCargo().get(i);
-                }
-            }
-
-            shipWorth *= .9; // Depreciation
-
-            if (myPlayer.getBalance() + shipWorth < shipType.getPrice()) {
-                closeShipyard(event);
-                msgAPI.showMessage("Our balance isn't high enough!");
-
-            } else {
-                myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice()
-                        + shipWorth);
-                myPlayer.setShip(new Ship(shipType));
-                fillMainCanvas();
-                updateFuelGauge();
-                displayShipInfo();
-                closeShipyard(event);
-            }
+            myPlayer.setBalance(myPlayer.getBalance() - shipType.getPrice()
+                    + shipWorth);
+            myPlayer.setShip(new Ship(shipType));
+            fillMainCanvas();
+            updateFuelGauge();
+            displayShipInfo();
+            closeShipyard(event);
         }
     }
 
