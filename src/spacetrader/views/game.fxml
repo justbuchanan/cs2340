@@ -277,5 +277,16 @@
                </font></Label>
          </children>
       </Pane>
+      <Pane fx:id="upgradePane" layoutX="35.0" layoutY="79.0" prefHeight="434.0" prefWidth="634.0" style="-fx-background-color: rgba(100,50,0,0.90);">
+         <children>
+            <TableView fx:id="upgradeTable" prefHeight="434.0" prefWidth="641.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button layoutX="468.0" layoutY="391.0" mnemonicParsing="false" onAction="#closeUpgrade" prefHeight="9.0" prefWidth="123.0" text="CANCEL" textFill="WHITE" />
+            <Button layoutX="321.0" layoutY="392.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="BUY UPGRADE" textFill="WHITE" />
+         </children></Pane>
     </children>
 </AnchorPane>

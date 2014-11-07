@@ -1038,6 +1038,7 @@ public class GameController implements Initializable {
     @FXML
     private void closeUpgrade(ActionEvent event) {
         upgradePane.setVisible(false);
+        shipyardPane.setVisible(true);
     }
     
     /**
@@ -1120,6 +1121,8 @@ public class GameController implements Initializable {
         marketPane.setVisible(false);
         mapPane.setVisible(false);
         topPane.setVisible(false);
+        shipyardPane.setVisible(false);
+        upgradePane.setVisible(false);
     }
 
     /**
