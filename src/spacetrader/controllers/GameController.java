@@ -1018,23 +1018,26 @@ public class GameController implements Initializable {
         MessageAPI msgAPI = new MessageAPI(topPane);
         Upgrade select = upgradeTable.getSelectionModel().getSelectedItem();
         if (select.getType() == Upgrade.UPGRADE_TYPE.Weapon) {
-            if ((myPlayer.getShip().getType().getWeaponSlots() > 0) &&
+            if ((myPlayer.getShip().getWeaponSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+                myPlayer.getShip().fillWeapon();
                 displayShipInfo();
                 closeUpgrade(event);
             } 
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
-            if ((myPlayer.getShip().getType().getShieldSlots() > 0) &&
+            if ((myPlayer.getShip().getShieldSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+                myPlayer.getShip().fillShield();
                 displayShipInfo();
                 closeUpgrade(event);
             }
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
-            if ((myPlayer.getShip().getType().getGadgetSlots() > 0) &&
+            if ((myPlayer.getShip().getGadgetSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+                myPlayer.getShip().fillGadget();
                 displayShipInfo();
                 closeUpgrade(event);
             }

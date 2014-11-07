@@ -18,6 +18,9 @@ public class Ship {
     private int fuel;
     private ShipType type;
     private int hullStrength;
+    private int weaponSlots;
+    private int shieldSlots;
+    private int gadgetSlots;
     
     /**
      * 
@@ -41,6 +44,9 @@ public class Ship {
         //Let's fill up your fuel tank
         this.fuel = fuel;
         this.hullStrength = type.getHullStrength();
+        this.weaponSlots = type.getWeaponSlots();
+        this.shieldSlots = type.getShieldSlots();
+        this.gadgetSlots = type.getGadgetSlots();
     }
 
     /**
@@ -181,6 +187,30 @@ public class Ship {
      */
     public void setHullStrength(int hullStrength) {
         this.hullStrength = hullStrength;
+    }
+    
+    public int getWeaponSlots() {
+        return weaponSlots;
+    }
+    
+    public int getShieldSlots() {
+        return shieldSlots;
+    }
+    
+    public int getGadgetSlots() {
+        return gadgetSlots;
+    }
+    
+    public void fillWeapon() {
+        weaponSlots--;
+    }
+
+    public void fillShield() {
+        shieldSlots--;
+    }
+
+    public void fillGadget() {
+        gadgetSlots--;
     }
 
 }
