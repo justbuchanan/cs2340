@@ -1003,7 +1003,7 @@ public class GameController implements Initializable {
         upgradeTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Upgrade>() {
             public void changed(ObservableValue<? extends Upgrade> o,
                                 Upgrade oldType, Upgrade newType) {
-                    showUpgrade(newType);
+                    //showUpgrade(newType);
             }
         });
     }
