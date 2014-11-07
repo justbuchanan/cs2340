@@ -31,6 +31,10 @@ public enum Upgrade {
         this.type = type;
     }
     
+    public String getName() {
+        return name;
+    }
+    
     public int getTechLevel() {
         return techLevel;
     }

@@ -286,7 +286,7 @@
               </columns>
             </TableView>
             <Button layoutX="468.0" layoutY="391.0" mnemonicParsing="false" onAction="#closeUpgrade" prefHeight="9.0" prefWidth="123.0" text="CANCEL" textFill="WHITE" />
-            <Button layoutX="321.0" layoutY="392.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="BUY UPGRADE" textFill="WHITE" />
+            <Button layoutX="321.0" layoutY="392.0" mnemonicParsing="false" onAction="#buyUpgrade" prefHeight="25.0" prefWidth="123.0" text="BUY UPGRADE" textFill="WHITE" />
          </children></Pane>
     </children>
 </AnchorPane>

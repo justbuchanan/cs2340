@@ -1021,16 +1021,22 @@ public class GameController implements Initializable {
             if ((myPlayer.getShip().getType().getWeaponSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
-            }
+                displayShipInfo();
+                closeUpgrade(event);
+            } 
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
             if ((myPlayer.getShip().getType().getShieldSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+                displayShipInfo();
+                closeUpgrade(event);
             }
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
             if ((myPlayer.getShip().getType().getGadgetSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
+                displayShipInfo();
+                closeUpgrade(event);
             }
         }
     }
