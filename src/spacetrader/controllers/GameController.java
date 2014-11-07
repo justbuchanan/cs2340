@@ -894,7 +894,6 @@ public class GameController implements Initializable {
      * Creates Shipyard table
      */
     private void createShipyardTable() {
-        if (mySS.getTechLevel().getValue() >= 4) {
             List<ShipType> shipList =
                     new ArrayList(mySy.getAvailableShips().keySet());
             ObservableList<ShipType> shipTypes =
@@ -926,7 +925,7 @@ public class GameController implements Initializable {
             TableColumn<ShipType, Integer> sizeCol = new TableColumn<>("Size");
             sizeCol.setCellValueFactory(new PropertyValueFactory("size"));
 
-            int PREFERRED_WIDTH = 70;
+            int PREFERRED_WIDTH = 100;
             nameCol.setMinWidth(PREFERRED_WIDTH);
             priceCol.setMinWidth(PREFERRED_WIDTH);
             cargoCol.setMinWidth(PREFERRED_WIDTH);
@@ -938,7 +937,6 @@ public class GameController implements Initializable {
 
             shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, crewCol,
                     weaponsCol, sheildsCol, gadgetsCol, fuelCol);
-        }
     }
 
     /**
@@ -1022,24 +1020,39 @@ public class GameController implements Initializable {
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
                 myPlayer.getShip().fillWeapon();
+                msgAPI.showMessage("Upgrade item is added.\nWeapon slots available: " + myPlayer.getShip().getWeaponSlots()
+                        + " / " + myPlayer.getShip().getType().getWeaponSlots() + " total");
                 displayShipInfo();
                 closeUpgrade(event);
-            } 
+            } else {
+                msgAPI.showMessage("Unable to upgrade. Check if you have available slots and enough money.");
+            }
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
             if ((myPlayer.getShip().getShieldSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
                 myPlayer.getShip().fillShield();
+                msgAPI.showMessage("Upgrade item is added.\nShield slots available: " + myPlayer.getShip().getShieldSlots()
+                        + " / " + myPlayer.getShip().getType().getShieldSlots() + " total");
                 displayShipInfo();
                 closeUpgrade(event);
+            } else {
+                msgAPI.showMessage("Unable to upgrade. Check if you have available slots and enough money.");
             }
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
             if ((myPlayer.getShip().getGadgetSlots() > 0) &&
                     myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
                 myPlayer.getShip().fillGadget();
+                if (select == Upgrade.INVENTORY) {
+                    myPlayer.getShip().setExtraCargo(5);
+                }
+                msgAPI.showMessage("Upgrade item is added.\nGadget slots available: " + myPlayer.getShip().getGadgetSlots()
+                        + " / " + myPlayer.getShip().getType().getGadgetSlots() + " total");
                 displayShipInfo();
                 closeUpgrade(event);
+            } else {
+                msgAPI.showMessage("Unable to upgrade. Check if you have available slots and enough money.");
             }
         }
     }

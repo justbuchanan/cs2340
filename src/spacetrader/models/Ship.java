@@ -21,6 +21,7 @@ public class Ship {
     private int weaponSlots;
     private int shieldSlots;
     private int gadgetSlots;
+    private int extraCargo;
     
     /**
      * 
@@ -47,6 +48,7 @@ public class Ship {
         this.weaponSlots = type.getWeaponSlots();
         this.shieldSlots = type.getShieldSlots();
         this.gadgetSlots = type.getGadgetSlots();
+        extraCargo = 0;
     }
 
     /**
@@ -105,7 +107,7 @@ public class Ship {
      * @return maximum number of cargo bays
      */
     public int getMaxCargo() {
-        return type.getCargoBay();
+        return type.getCargoBay() + extraCargo;
     }
 
     /**
@@ -200,6 +202,18 @@ public class Ship {
     public int getGadgetSlots() {
         return gadgetSlots;
     }
+
+    public void setWeaponSlots(int weaponSlots) {
+        this.weaponSlots = weaponSlots;
+    }
+
+    public void setShieldSlots(int shieldSlots) {
+        this.shieldSlots = shieldSlots;
+    }
+
+    public void setGadgetSlots(int gadgetSlots) {
+        this.gadgetSlots = gadgetSlots;
+    }
     
     public void fillWeapon() {
         weaponSlots--;
@@ -211,6 +225,10 @@ public class Ship {
 
     public void fillGadget() {
         gadgetSlots--;
+    }
+
+    public void setExtraCargo(int extraCargo) {
+        this.extraCargo = extraCargo;
     }
 
 }

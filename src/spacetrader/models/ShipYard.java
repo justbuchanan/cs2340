@@ -25,13 +25,13 @@ public class ShipYard {
 
     private void setAvailabilities() {
         for (ShipType s : ShipType.values()) {
-            if (s.getMinTechLevel() >= ss.getTechLevel().getValue()) {
+            if (s.getMinTechLevel() <= ss.getTechLevel().getValue()) {
                 availableShips.put(s, s.getPrice());
             }
         }
 
         for (Upgrade g : Upgrade.values()) {
-            if (g.getTechLevel() >= ss.getTechLevel().getValue()) {
+            if (g.getTechLevel() <= ss.getTechLevel().getValue()) {
                 allUpgrades.put(g, g.getPrice());
             }
         }
