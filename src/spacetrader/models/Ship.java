@@ -190,43 +190,80 @@ public class Ship {
     public void setHullStrength(int hullStrength) {
         this.hullStrength = hullStrength;
     }
-    
+
+    /**
+     * Gets weapon slots
+     * @return weapon slots
+     */
     public int getWeaponSlots() {
         return weaponSlots;
     }
-    
+
+    /**
+     * Gets shield slots
+     * @return shield slots
+     */
     public int getShieldSlots() {
         return shieldSlots;
     }
     
+    /**
+     * Gets gadget slots
+     * @return gadget slots
+     */
     public int getGadgetSlots() {
         return gadgetSlots;
     }
-
+    
+    /**
+     * Sets weapon slot number
+     * @param weaponSlots 
+     */
     public void setWeaponSlots(int weaponSlots) {
         this.weaponSlots = weaponSlots;
     }
 
+    /**
+     * Sets shield slot number
+     * @param shieldSlots 
+     */
     public void setShieldSlots(int shieldSlots) {
         this.shieldSlots = shieldSlots;
     }
 
+    /**
+     * Sets gadget slot number
+     * @param gadgetSlots 
+     */
     public void setGadgetSlots(int gadgetSlots) {
         this.gadgetSlots = gadgetSlots;
     }
     
+    /**
+     * Fills one weapon slot
+     */
     public void fillWeapon() {
         weaponSlots--;
     }
-
+    
+    /**
+     * Fills one shield slot
+     */
     public void fillShield() {
         shieldSlots--;
     }
-
+    
+    /**
+     * Fills one gadget slot
+     */
     public void fillGadget() {
         gadgetSlots--;
     }
-
+    
+    /**
+     * Adds the extra cargo slots to the ship
+     * @param extraCargo 
+     */
     public void setExtraCargo(int extraCargo) {
         this.extraCargo = extraCargo;
     }

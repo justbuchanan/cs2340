@@ -990,9 +990,9 @@ public class GameController implements Initializable {
     private void closeShipyard(ActionEvent event) {
         shipyardPane.setVisible(false);
     }
-    
+
     /**
-     * 
+     * Opens upgrade table
      * @param event 
      */
     @FXML
@@ -1007,7 +1007,7 @@ public class GameController implements Initializable {
             }
         });
     }
-    
+
     /**
      * Handles buying the upgrade
      */
@@ -1056,7 +1056,7 @@ public class GameController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void closeUpgrade(ActionEvent event) {
         upgradePane.setVisible(false);

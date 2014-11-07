@@ -36,11 +36,19 @@ public class ShipYard {
             }
         }
     }
-
+    
+    /**
+     * Returns list of available ships + their price
+     * @return 
+     */
     public HashMap getAvailableShips() {
         return availableShips;
     }
-    
+
+    /**
+     * Returns list of available upgrades + their price
+     * @return 
+     */
     public HashMap getAllUpgrades() {
         return allUpgrades;
     }
