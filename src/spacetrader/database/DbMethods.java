@@ -22,8 +22,8 @@ public class DbMethods {
     private final String INSERT_PLAYER_TABLE = "INSERT INTO " + DbTables.PLAYER + " (name, balance, pilot_points, " +
             "fighter_points, trader_points, engineer_points, investor_points) VALUES ('%s', %d, %d, %d, %d, %d, %d)";
 
-    private final String CREATE_SHIP_TABLE = "CREATE TABLE " + DbTables.SHIP + " (ship_type INT, fuel INT);";
-    private final String INSERT_SHIP_TABLE = "INSERT INTO " + DbTables.SHIP + " (ship_type, fuel) VALUES (%d, %d);";
+    private final String CREATE_SHIP_TABLE = "CREATE TABLE " + DbTables.SHIP + " (ship_type INT, fuel INT, weapon INT, gadget INT, shield INT);";
+    private final String INSERT_SHIP_TABLE = "INSERT INTO " + DbTables.SHIP + " (ship_type, fuel, weapon, gadget, shield) VALUES (%d, %d, %d, %d, %d);";
 
     private final String CREATE_CARGO_TABLE = "CREATE TABLE " + DbTables.CARGO + " (key INT, value INT);";
     private final String INSERT_CARGO_TABLE = "INSERT INTO " + DbTables.CARGO + " (key, value) VALUES (%d, %d);";
@@ -76,6 +76,7 @@ public class DbMethods {
      * @param p The player to save
      */
     public void save(Player p) {
+    	
         db.clearTable(DbTables.PLAYER);
         db.execSQL(String.format(INSERT_PLAYER_TABLE,
                 p.getName(), p.getBalance(), p.getSkill(Skill.PILOT).getPoints(), p.getSkill(Skill.FIGHTER).getPoints(),
@@ -84,7 +85,7 @@ public class DbMethods {
 
         db.clearTable(DbTables.SHIP);
         db.execSQL(String.format(INSERT_SHIP_TABLE,
-                p.getShip().getType().ordinal(), p.getShip().getFuelReading()));
+                p.getShip().getType().ordinal(), p.getShip().getFuelReading(), p.getShip().getWeaponSlots(), p.getShip().getGadgetSlots(), p.getShip().getShieldSlots()));
 
         db.clearTable(DbTables.CARGO);
         for (int i = 0; i < p.getShip().getCargo().size(); i++) {
@@ -136,6 +137,9 @@ public class DbMethods {
             if (d.r != null) {
                 ResultSet rs = d.r;
                 ship = new Ship(ShipType.values()[rs.getInt("ship_type")], rs.getInt("fuel"));
+                ship.setWeaponSlots(rs.getInt("weapon"));
+                ship.setGadgetSlots(rs.getInt("gadget"));
+                ship.setShieldSlots(rs.getInt("shield"));
                 d.r.close();
                 d.s.close();
                 d.c.close();

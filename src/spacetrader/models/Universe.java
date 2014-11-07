@@ -73,8 +73,8 @@ public class Universe {
         shuffleArray(SolarSystemName);
         Random rand = new Random();
         Universe universe = new Universe();
-        universe.width = _width;
-        universe.height = _height;
+        universe.setWidth(_width);
+        universe.setHeight(_height);
         for (int i = 0; i < numSolarSystems && i < SolarSystemName.length;
                 i++) {
             SolarSystem ss = new SolarSystem();
@@ -93,7 +93,6 @@ public class Universe {
                     TechLevel.values()[rand.nextInt(TechLevel.values().length)];
             ss.setTechLevel(tech);
             ss.setMP();
-            ss.setSy();
             universe.solarSystems.add(ss);
         }
         return universe;
