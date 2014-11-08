@@ -24,17 +24,17 @@ public class Ship {
     private int extraCargo;
     
     /**
-     * 
-     * @param type 
+     * Creates a new ship with initial type given and full fuel
+     * @param type ship type
      */
     public Ship(ShipType type) {
         this(type, type.getFuel());
     }
     
     /**
-     * 
-     * @param type
-     * @param fuel 
+     *  Creates a new ship with type and amount of fuel given
+     * @param type ship type
+     * @param fuel amount of fuel
      */
     public Ship(ShipType type, int fuel) {
         cargo = new ArrayList<Integer>(Collections.nCopies(Item.values().length,
@@ -52,7 +52,7 @@ public class Ship {
     }
 
     /**
-     * Add item to cargo.
+     * Adds item to cargo.
      *
      * @param item
      * @param quantity
@@ -63,7 +63,7 @@ public class Ship {
     }
 
     /**
-     * Remove item from cargo.
+     * Removes item from cargo.
      *
      * @param item
      * @param quantity
