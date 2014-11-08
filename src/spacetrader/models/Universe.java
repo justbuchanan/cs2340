@@ -6,6 +6,7 @@ import spacetrader.data.TechLevel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import spacetrader.data.Government;
 
 /**
  * @author Michael
@@ -93,6 +94,10 @@ public class Universe {
                     TechLevel.values()[rand.nextInt(TechLevel.values().length)];
             ss.setTechLevel(tech);
             ss.setMP();
+            ss.setSy();
+            Government gov =
+                Government.values()[rand.nextInt(Government.values().length)];
+            ss.setGovernment(gov);
             universe.solarSystems.add(ss);
         }
         return universe;

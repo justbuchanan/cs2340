@@ -22,7 +22,7 @@ public enum Government {
 
     private int value;
     private String text;
-    
+
     private Government(int val, String txt) {
         this.value = val;
         this.text = txt;

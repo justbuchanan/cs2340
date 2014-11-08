@@ -154,10 +154,11 @@ public class GameController implements Initializable {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         drawPlanet(gc, 400, 300, 50);
 
-        coordinates.setText("Coordinates: (" + mySS.getX() + ", " + mySS.getY() + ")\n"
-                        + "Solar System: " + mySS.getName() + "\n"
-                        + "Resource: " + mySS.getResource() + "\n"
-                        + "Tech Level: " + mySS.getTechLevel()
+        coordinates.setText("Coordinates: (" + mySS.getX() + ", "
+                + mySS.getY() + ")\n" + "Solar System: " + mySS.getName() + "\n"
+                + "Government: " + mySS.getGov().toString() + "\n" 
+                + "Resource: " + mySS.getResource() + "\n"
+                + "Tech Level: " + mySS.getTechLevel()
         );
     }
 

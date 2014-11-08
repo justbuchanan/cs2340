@@ -6,6 +6,7 @@ import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
 
 import java.util.HashMap;
+import spacetrader.data.Government;
 
 /**
  * @author Michael Represents a single solar system. For now, this means a
@@ -22,6 +23,7 @@ public class SolarSystem {
     private Marketplace mp;
     private Color primaryColor;
     private ShipYard sy;
+    private Government gov;
 
     final int QUANTITIES[] = {30, 30, 30, 30, 30, 30, 30, 30, 30, 30};
 
@@ -29,7 +31,6 @@ public class SolarSystem {
      * Creates a solar system with some initial amount of resources.
      */
     public SolarSystem() {
-
         availableItems = new HashMap<>();
         for (int i = 0; i < QUANTITIES.length; i++) {
             availableItems.put(Item.values()[i], QUANTITIES[i]);
@@ -169,7 +170,6 @@ public class SolarSystem {
      */
     public void setTechLevel(TechLevel _techLevel) {
         techLevel = _techLevel;
-        setSy();
     }
 
     /**
@@ -179,8 +179,8 @@ public class SolarSystem {
      */
     @Override
     public String toString() {
-        return name + "(" + x + "," + y + ") " + resource.name() + " "
-                + techLevel.name();
+        return gov.toString() + " " + name + "(" + x + "," + y + ") "
+                + resource.name() + " " + techLevel.name();
     }
 
     /**
@@ -220,18 +220,34 @@ public class SolarSystem {
     }
 
     /**
-     * 
-     * @return 
+     * Gets the ship yard that belongs to this solar system.
+     * @return ship yard
      */
     public ShipYard getSy() {
         return sy;
     }
-    
+
     /**
-     * 
-     * @return 
+     * Sets the solar system up with a ship yard.
+     * @return a brand new ship yard
      */
     public ShipYard setSy() {
         return sy = new ShipYard(this);
+    }
+
+    /**
+     * Sets the government for this system.
+     * @param gov: government to be assigned 
+     */
+    public void setGovernment(Government gov) {
+        this.gov = gov;
+    }
+
+    /**
+     * Gets the government system for this solar system.
+     * @return government
+     */
+    public Government getGov() {
+        return gov;
     }
 }
