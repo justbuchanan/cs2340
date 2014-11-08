@@ -7,7 +7,7 @@ package spacetrader.data;
  */
 public enum Upgrade {
     
-    INVENTORY("5 Extra Cargo Slots", 5000, 1, UPGRADE_TYPE.Gadget),
+    INVENTORY("5 Extra Cargo Slots", 5000, 4, UPGRADE_TYPE.Gadget),
     NAV("Navigation System", 3000, 5, UPGRADE_TYPE.Gadget),
     AUTOREPAIR("Auto-Repair", 10000, 7, UPGRADE_TYPE.Gadget),
     TARGET("Targetting System", 7000, 6, UPGRADE_TYPE.Gadget),

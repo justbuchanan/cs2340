@@ -1162,6 +1162,9 @@ public class GameController implements Initializable {
         //Randomly select a solar system as starting point
         solarSystems = myUniverse.getSolarSystems();
         mySS = solarSystems.get(rand.nextInt(solarSystems.size()));
+        
+        //mySS.setTechLevel(TechLevel.INDUSTRIAL);
+        //mySS.setResource(Resource.LOTSOFWATER);
         //mySS.setTechLevel(TechLevel.MEDIEVAL);
 
         fillMainCanvas();

@@ -169,6 +169,7 @@ public class SolarSystem {
      */
     public void setTechLevel(TechLevel _techLevel) {
         techLevel = _techLevel;
+        setSy();
     }
 
     /**
