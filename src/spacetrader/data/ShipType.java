@@ -1,5 +1,4 @@
 package spacetrader.data;
-
 /**
  * This class details different types of spaceships and their capabilities
  *
@@ -7,11 +6,11 @@ package spacetrader.data;
  */
 public enum ShipType {
 
-    FLEA("Flea", 10, 0, 0, 4, 1, 20, 4, 1, 2000, 5, 2, 25, -1, -1, 0, 1, 0, "flea.png"),
-    GNAT("Gnat", 15, 1, 0, 4, 1, 14, 5, 2, 10000, 50, 28, 100, 0, 0, 0, 1, 1, "gnat.png"),
-    FIREFLY("Firefly", 20, 1, 1, 5, 1, 17, 5, 3, 25000, 75, 20, 100, 0, 0, 0, 1, 1, null),
-    MOSQUITO("Mosquito", 15, 2, 1, 5, 1, 13, 5, 5, 30000, 100, 20, 100, 0, 1, 0, 1, 1, "mosquito.png"),
-    BUMBLEBEE("BumbleBee", 25, 1, 2, 6, 2, 15, 5, 7, 60000, 125, 15, 100, 0, 1, 0, 1, 2, null);
+    FLEA("Flea", 10, 0, 0, 4, 1, 20, 0, 1, 2000, 5, 2, 25, -1, -1, 0, 1, 0, "flea.png"),
+    GNAT("Gnat", 15, 1, 0, 4, 1, 14, 1, 2, 10000, 50, 28, 100, 0, 0, 0, 1, 1, "gnat.png"),
+    FIREFLY("Firefly", 20, 1, 1, 5, 1, 17, 1, 3, 25000, 75, 20, 100, 0, 0, 0, 1, 1, null),
+    MOSQUITO("Mosquito", 15, 2, 1, 5, 1, 13, 1, 5, 30000, 100, 20, 100, 0, 1, 0, 1, 1, "mosquito.png"),
+    BUMBLEBEE("BumbleBee", 25, 1, 2, 6, 2, 15, 2, 7, 60000, 125, 15, 100, 0, 1, 0, 1, 2, null);
 
     private final String name;
     private final int cargoBay;
@@ -19,33 +18,33 @@ public enum ShipType {
     private final int shieldSlots;
     private final int minTechLevel;
     private final int crew;
-    private final int fuelCost;
-    private final int price;
     private final int fuel;
     private final int gadgetSlots;
+    private final int fuelCost;
+    private final int price;
+    private final int bounty; 
+    private final int occurrence;
+    private final int hullStrength;
+    private final int police;
+    private final int pirate;
+    private final int trader;
     private final int size;
     private final int repairCost;
-    private final int trader;
-    private final int pirate;
-    private final int police;
-    private final int hullStrength;
-    private final int occurrence;
-    private final int bounty;
     private final String imageName;
 
     private ShipType(String name, int cargoBay, int weaponSlots,
-            int shieldSlots, int gadgetSlots, int crew, int fuel,
-            int minTechLevel, int fuelCost, int price, int bounty,
+            int shieldSlots, int minTechLevel, int crew, int fuel,
+            int gadgetSlots, int fuelCost, int price, int bounty,
             int occurrence, int hullStrength, int police, int pirate,
             int trader, int repairCost, int size, String imageName) {
         this.name = name;
         this.cargoBay = cargoBay;
         this.weaponSlots = weaponSlots;
         this.shieldSlots = shieldSlots;
-        this.gadgetSlots = gadgetSlots;
+        this.minTechLevel = minTechLevel;
         this.crew = crew;
         this.fuel = fuel;
-        this.minTechLevel = minTechLevel;
+        this.gadgetSlots = gadgetSlots;
         this.fuelCost = fuelCost;
         this.price = price;
         this.bounty = bounty;
