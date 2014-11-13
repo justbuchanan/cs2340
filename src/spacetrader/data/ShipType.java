@@ -1,16 +1,21 @@
 package spacetrader.data;
 /**
- * This class details different types of spaceships and their capabilities
+ * This class details different types of spaceships and their capabilities.
  *
  * @author Bao
  */
 public enum ShipType {
 
-    FLEA("Flea", 10, 0, 0, 4, 1, 20, 0, 1, 2000, 5, 2, 25, -1, -1, 0, 1, 0, "flea.png"),
-    GNAT("Gnat", 15, 1, 0, 4, 1, 14, 1, 2, 10000, 50, 28, 100, 0, 0, 0, 1, 1, "gnat.png"),
-    FIREFLY("Firefly", 20, 1, 1, 5, 1, 17, 1, 3, 25000, 75, 20, 100, 0, 0, 0, 1, 1, null),
-    MOSQUITO("Mosquito", 15, 2, 1, 5, 1, 13, 1, 5, 30000, 100, 20, 100, 0, 1, 0, 1, 1, "mosquito.png"),
-    BUMBLEBEE("BumbleBee", 25, 1, 2, 6, 2, 15, 2, 7, 60000, 125, 15, 100, 0, 1, 0, 1, 2, null);
+    FLEA("Flea", 10, 0, 0, 4, 1, 20, 0, 1, 2000, 5, 2, 25, -1, -1, 0, 1, 0,
+            "flea.png"),
+    GNAT("Gnat", 15, 1, 0, 4, 1, 14, 1, 2, 10000, 50, 28, 100, 0, 0, 0, 1, 1,
+            "gnat.png"),
+    FIREFLY("Firefly", 20, 1, 1, 5, 1, 17, 1, 3, 25000, 75, 20, 100, 0, 0, 0,
+            1, 1, null),
+    MOSQUITO("Mosquito", 15, 2, 1, 5, 1, 13, 1, 5, 30000, 100, 20, 100, 0, 1, 0,
+            1, 1, "mosquito.png"),
+    BUMBLEBEE("BumbleBee", 25, 1, 2, 6, 2, 15, 2, 7, 60000, 125, 15, 100, 0, 1,
+            0, 1, 2, null);
 
     private final String name;
     private final int cargoBay;

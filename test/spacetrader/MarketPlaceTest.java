@@ -25,12 +25,12 @@ import spacetrader.models.Marketplace;
  * @author justbuchanan
  */
 public class MarketPlaceTest {
-    
+
     private SolarSystem ss;
-    
+
     public MarketPlaceTest() {
     }
-    
+
     @Before
     public void setUp() {
         ss = new SolarSystem();
@@ -41,7 +41,7 @@ public class MarketPlaceTest {
         ss.setAvailableItems(items);
         ss.setMP();
     }
-    
+
     @After
     public void tearDown() {
         ss = null;
@@ -51,7 +51,7 @@ public class MarketPlaceTest {
     public void testSell() {
         ss.getMP().sell(Item.FIREARMS, 5);
         assertEquals(5, ss.getMP().getQuantity(Item.FIREARMS));
-        
+
         ss.getMP().sell(Item.FIREARMS, 3);
         assertEquals(8, ss.getMP().getQuantity(Item.FIREARMS));
     }

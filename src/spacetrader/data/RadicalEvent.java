@@ -2,7 +2,7 @@ package spacetrader.data;
 
 /**
  * Radical price increase event, when this even happens on a planet, the price
- * may increase astronomically
+ * may increase astronomically.
  *
  * @author Bao
  */

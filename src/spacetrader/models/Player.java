@@ -3,7 +3,7 @@ package spacetrader.models;
 import spacetrader.data.ShipType;
 
 /**
- * holds player's information
+ * holds player's information.
  *
  * @author Bao
  */
@@ -21,13 +21,13 @@ public class Player {
 
     /**
      * Player constructor Constructs a player with name and allocated skill
-     * points array length must be 5
+     * points array length must be 5.
      *
      * @param name      name of the player
      * @param pointsArr array of skill points
      */
     public Player(String name, int[] pointsArr) {
-        this(name, 100000, null,  pointsArr[0], pointsArr[1], pointsArr[2], 
+        this(name, 100000, null,  pointsArr[0], pointsArr[1], pointsArr[2],
                 pointsArr[3], pointsArr[4]);
         System.out.println("Created new player");
         System.out.println(this);
@@ -116,13 +116,15 @@ public class Player {
 //</editor-fold>
 
     /**
-     * Returns player's info in a readable format
+     * Returns player's info in a readable format.
      *
      * @return player's info
      */
     @Override
     public String toString() {
-        return String.format("Name:\t%s\nPilot:\t%s\nFighter:\t%s\nTrader:\t%s\nEngineer:\t%s\nInvestor:\t%s", name,
+        return String.format(
+                "Name:\t%s\nPilot:\t%s\nFighter:\t%s\nTrader:\t%s\nEngineer:"
+                        + "\t%s\nInvestor:\t%s", name,
                 pilot.getPoints(), fighter.getPoints(), trader.getPoints(),
                 engineer.getPoints(), investor.getPoints());
     }

@@ -30,7 +30,8 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        player = new Player("TestPlayer", 1000, new Ship(ShipType.MOSQUITO), 1, 2, 3, 4, 5);
+        player = new Player("TestPlayer", 1000,
+                new Ship(ShipType.MOSQUITO), 1, 2, 3, 4, 5);
         player.setSkill(Skill.ENGINEER, 200);
         for (int i = 0; i < 10; i++) {
             player.getShip().addCargo(Item.values()[i], i);

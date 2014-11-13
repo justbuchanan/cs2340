@@ -237,7 +237,7 @@ public class SolarSystem {
 
     /**
      * Sets the government for this system.
-     * @param gov: government to be assigned 
+     * @param gov government to be assigned
      */
     public void setGovernment(Government gov) {
         this.gov = gov;

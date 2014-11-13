@@ -15,5 +15,5 @@ public abstract class AbstractCommand {
       public static final CommandProcessor INSTANCE = new CommandProcessor();
       public abstract boolean doIt();
       public abstract boolean undoIt();
-      
+
 }

@@ -16,41 +16,41 @@ import java.util.List;
  */
 public class CommandProcessor {
     /**
-     * Push the commands here as we do them
-     * Pop commands from here when they are undone
+     * Push the commands here as we do them.
+     * Pop commands from here when they are undone.
      */
      private List<AbstractCommand> undoStack;
      /**
-      * Push the commands here as we undo them
-      * Pop commands from here when they are redone
+      * Push the commands here as we undo them.
+      * Pop commands from here when they are redone.
       */
      private List<AbstractCommand> redoStack;
-     
+
      /**
-      * 
-      * Makes a new CommandProcessor
+      *
+      * Makes a new CommandProcessor.
       */
      public CommandProcessor() {
          undoStack = new ArrayList<AbstractCommand>();
          redoStack = new ArrayList<AbstractCommand>();
      }
-     
+
      /**
-      * Actually does the command
+      * Actually does the command.
       * @param cmd the command to execute
       */
      public void doCommand(AbstractCommand cmd) {
          //if command is undoable, push on stack
          if (cmd.doIt()) {
              undoStack.add(cmd);
-         } else {
-             //otherwise we have done something that cannot be undone, clear stack
+         //} else {
+             //otherwisewe have done something that cannot be undone,clear stack
              //undoStack.removeAll(undoStack);
          }
      }
-     
+
      /**
-      * Redo a command
+      * Redo a command.
       */
      public void redoCommand() {
          //if there is something on the redo stack
@@ -60,9 +60,9 @@ public class CommandProcessor {
              doCommand(cmd);
          }
      }
-     
+
      /**
-      * undo a command
+      * undo a command.
       */
      public void undoCommand() {
          //If there are actually commands to be undone
@@ -76,6 +76,7 @@ public class CommandProcessor {
      }
 
     void undoCommand(BuyItemCommand cmd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
+    //To change body of generated methods, choose Tools | Templates.
     }
 }

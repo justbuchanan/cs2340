@@ -18,6 +18,9 @@ public class Universe {
     private int width;
     private int height;
 
+    /**
+     *
+     */
     public Universe() {
         solarSystems = new ArrayList<SolarSystem>();
     }
@@ -44,7 +47,8 @@ public class Universe {
      * @param destSS  destination SolarSystem
      * @return fuel required for this trip
      */
-    public static int calcFuelRequired(SolarSystem startSS, SolarSystem destSS) {
+    public static int calcFuelRequired(SolarSystem startSS,
+            SolarSystem destSS) {
         return (int) (calcDistance(startSS, destSS)*FUEL_TO_DISTANCE_RATIO);
     }
 
@@ -214,17 +218,17 @@ public class Universe {
     public static String[] SolarSystemName =
             {
                     "Acamar",
-                    "Adahn",        
+                    "Adahn",
                     "Aldea",
                     "Andevian",
                     "Antedi",
                     "Balosnee",
                     "Baratas",
                     "Brax",        // One of the heroes in Master of Magic
-                    "Bretel",        
+                    "Bretel",
                     "Calondia",
                     "Campor",
-                    "Capelle",        
+                    "Capelle",
                     "Carzon",
                     "Castor",        // A Greek demi-god
                     "Cestus",
@@ -239,14 +243,14 @@ public class Universe {
                     "Draylon",
                     "Drema",
                     "Endor",
-                    "Esmee",        
+                    "Esmee",
                     "Exo",
                     "Ferris",        // Iron
                     "Festen",        // A great Scandinavian movie
                     "Fourmi",        // An ant, in French
-                    "Frolix",        
+                    "Frolix",
                     "Gemulon",
-                    "Guinifer",        
+                    "Guinifer",
                     "Hades",        // The underworld
                     "Hamlet",        // From Shakespeare
                     "Helena",        // Of Troy
@@ -263,33 +267,33 @@ public class Universe {
                     "Klaatu",        // From a classic SF movie
                     "Klaestron",
                     "Korma",        // An Indian sauce
-                    "Kravat",        
+                    "Kravat",
                     "Krios",
                     "Laertes",        // A king in a Greek tragedy
                     "Largo",
                     "Lave",        // The starting system in Elite
                     "Ligon",
-                    "Lowry",            
+                    "Lowry",
                     "Lylat",
-                    "Magrat",        
+                    "Magrat",
                     "Malcoria",
                     "Melina",
-                    "Mentar",        
+                    "Mentar",
                     "Merik",
                     "Mintaka",
-                    "Montor",        
+                    "Montor",
                     "Mordan",
                     "Myrthe",        // The name of my daughter
                     "Nelvana",
-                    "Nix",        
+                    "Nix",
                     "Nyle",        // An interesting spelling of the great river
                     "Odet",
-                    "Og",        
+                    "Og",
                     "Omega",        // The end of it all
                     "Omphalos",        // Greek for navel
                     "Orias",
                     "Othello",        // From Shakespeare
-                    "Parade",        
+                    "Parade",
                     "Penthara",
                     "Picard",        // The enigmatic captain from ST:TNG
                     "Pollux",        // Brother of Castor
@@ -300,7 +304,7 @@ public class Universe {
                     "Relva",
                     "Rhymus",
                     "Rochani",
-                    "Rubicum",        
+                    "Rubicum",
                     "Rutia",
                     "Sarpeidon",
                     "Sefalla",
@@ -322,7 +326,7 @@ public class Universe {
                     "Triacus",
                     "Turkana",
                     "Tyrus",
-                    "Umberlee",        
+                    "Umberlee",
                     "Utopia",        // The ultimate goal
                     "Vadera",
                     "Vagra",
@@ -330,7 +334,7 @@ public class Universe {
                     "Ventax",
                     "Xenon",
                     "Xerxes",        // A Greek hero
-                    "Yew",        
+                    "Yew",
                     "Yojimbo",        // A film by Akira Kurosawa
                     "Zalkon",
                     "Zuul"        // From the first Ghostbusters movie

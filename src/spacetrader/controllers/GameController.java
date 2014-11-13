@@ -47,7 +47,7 @@ import spacetrader.controllers.market.BuyItemCommand;
 import spacetrader.controllers.market.CommandProcessor;
 
 /**
- * Game screen controller
+ * Game screen controller.
  *
  * @author Bao
  */
@@ -121,7 +121,7 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="MAIN CANVAS DRAWING">
 
     /**
-     * Draws a planet on the canvas
+     * Draws a planet on the canvas.
      *
      * @param gc graphics context
      * @param x  x-coordinate of the center
@@ -147,7 +147,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Fills the canvas with planets
+     * Fills the canvas with planets.
      */
     private void fillMainCanvas() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -156,7 +156,7 @@ public class GameController implements Initializable {
 
         coordinates.setText("Coordinates: (" + mySS.getX() + ", "
                 + mySS.getY() + ")\n" + "Solar System: " + mySS.getName() + "\n"
-                + "Government: " + mySS.getGov().toString() + "\n" 
+                + "Government: " + mySS.getGov().toString() + "\n"
                 + "Resource: " + mySS.getResource() + "\n"
                 + "Tech Level: " + mySS.getTechLevel()
         );
@@ -166,14 +166,19 @@ public class GameController implements Initializable {
      * Displays ship information such as ship type, status, cargo...
      */
     private void displayShipInfo() {
-        shipInfo.setText("Ship: " + myPlayer.getShip().getType() + "\n" +
-                "Status: Healthy\n" +
-                "Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo() + "\n" +
-                "Credits: " + myPlayer.getBalance());
+        shipInfo.setText("Ship: " + myPlayer.getShip().getType() + "\n"
+                + "Status: Healthy\n"
+                + "Cargo: " + myPlayer.getShip().getCurrentCargo() + "/"
+                + myPlayer.getShip().getMaxCargo() + "\n"
+                + "Credits: " + myPlayer.getBalance());
     }
-
+    
+    /**
+     * Updates fuel gauge.
+     */
     private void updateFuelGauge() {
-        fuelGauge.setProgress((double) myPlayer.getShip().getFuelReading() / myPlayer.getShip().getFuelCapacity());
+        fuelGauge.setProgress((double) myPlayer.getShip().getFuelReading()
+                / myPlayer.getShip().getFuelCapacity());
     }
 //</editor-fold>
 
@@ -195,7 +200,8 @@ public class GameController implements Initializable {
         marketTabPane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
-                    public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                    public void changed(ObservableValue<? extends Tab>
+                            observable, Tab oldValue, Tab newValue) {
                         error.setText("");
                         resetBuyList();
                         resetSellList();
@@ -208,7 +214,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Stops the marketplace from being draw
+     * Stops the marketplace from being draw.
      *
      * @param event
      */
@@ -219,7 +225,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Initializes the purchase screen
+     * Initializes the purchase screen.
      */
     private void initBuyWindow() {
         List<String> marketListS = new ArrayList<String>(Item.values().length);
@@ -236,13 +242,16 @@ public class GameController implements Initializable {
                     public void changed(ObservableValue<? extends String> ov,
                                         String old_val, String new_val) {
                         error.setText("");
-                        Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+                        Item item = Item.values()[
+                                buyList.getSelectionModel().getSelectedIndex()];
                         if (myMarket.isBuyable(item)) {
                             buyPane.setVisible(true);
                             int price = myMarket.getBuyPrice(item);
                             buyPrice.setText(String.valueOf(price));
                             buyQuantity.setText("1");
-                            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * price;
+                            int newBalance = myPlayer.getBalance()
+                                    - Integer.parseInt(buyQuantity.getText())
+                                    * price;
                             buyAfterBalance.setText(String.valueOf(newBalance));
                         } else {
                             buyPane.setVisible(false);
@@ -252,7 +261,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Initializes the sell screen
+     * Initializes the sell screen.
      */
     private void initSellWindow() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
@@ -269,14 +278,18 @@ public class GameController implements Initializable {
                 new ChangeListener<String>() {
                     public void changed(ObservableValue<? extends String> ov,
                                         String old_val, String new_val) {
-                        Item item = Item.values()[sellList.getSelectionModel().getSelectedIndex()];
+                        Item item = Item.values()[
+                               sellList.getSelectionModel().getSelectedIndex()];
                         if (myMarket.isSellable(item)) {
                             sellPane.setVisible(true);
                             int price = myMarket.getSellPrice(item);
                             sellPrice.setText(String.valueOf(price));
                             sellQuantity.setText("1");
-                            int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText()) * price;
-                            sellAfterBalance.setText(String.valueOf(newBalance));
+                            int newBalance = myPlayer.getBalance()
+                                    + Integer.parseInt(sellQuantity.getText())
+                                    * price;
+                            sellAfterBalance.setText(
+                                    String.valueOf(newBalance));
                         } else {
                             sellPane.setVisible(false);
                         }
@@ -288,24 +301,27 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="BUY WINDOW HANDLERS">
 
     /**
-     * Increases the quantity to purchase by 1
+     * Increases the quantity to purchase by 1.
      *
      * @param event
      */
     @FXML
     private void increaseBuyQuantity(ActionEvent event) {
         int q = Integer.parseInt(buyQuantity.getText());
-        Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+        Item item = Item.values()[
+                buyList.getSelectionModel().getSelectedIndex()];
         if (myMarket.getQuantity(item) > q) {
             q++;
             buyQuantity.setText(q + "");
-            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * Integer.parseInt(buyPrice.getText());
+            int newBalance = myPlayer.getBalance()
+                    - Integer.parseInt(buyQuantity.getText())
+                    * Integer.parseInt(buyPrice.getText());
             buyAfterBalance.setText(String.valueOf(newBalance));
         }
     }
 
     /**
-     * Decreases the quantity to purchase by 1
+     * Decreases the quantity to purchase by 1.
      *
      * @param event
      */
@@ -315,7 +331,9 @@ public class GameController implements Initializable {
             int q = Integer.parseInt(buyQuantity.getText());
             q--;
             buyQuantity.setText(q + "");
-            int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * Integer.parseInt(buyPrice.getText());
+            int newBalance = myPlayer.getBalance()
+                    - Integer.parseInt(buyQuantity.getText())
+                    * Integer.parseInt(buyPrice.getText());
             buyAfterBalance.setText(String.valueOf(newBalance));
         }
     }
@@ -327,13 +345,16 @@ public class GameController implements Initializable {
      */
     @FXML
     private void buy(ActionEvent event) {
-        Item item = Item.values()[buyList.getSelectionModel().getSelectedIndex()];
+        Item item = Item.values()[
+                buyList.getSelectionModel().getSelectedIndex()];
         int newBalance = Integer.parseInt(buyAfterBalance.getText());
         error.setText("");
         int quantity = Integer.parseInt(buyQuantity.getText());
         if (newBalance >= 0) {
-            if (myPlayer.getShip().getCurrentCargo() + quantity <= myPlayer.getShip().getMaxCargo()) {
-                BuyItemCommand cmd = new BuyItemCommand(myPlayer, myMarket, item, quantity);
+            if (myPlayer.getShip().getCurrentCargo() + quantity
+                    <= myPlayer.getShip().getMaxCargo()) {
+                BuyItemCommand cmd = new BuyItemCommand(
+                        myPlayer, myMarket, item, quantity);
                 cp.doCommand(cmd);
                 /*
                 myMarket.buy(item, quantity);
@@ -352,7 +373,7 @@ public class GameController implements Initializable {
     }
     
     /**
-     * Undoes the purchases made earlier
+     * Undoes the purchases made earlier.
      * @param e action event
      */
     @FXML
@@ -365,7 +386,7 @@ public class GameController implements Initializable {
     
     
     /**
-     * Redoes the purchases that had been undone
+     * Redoes the purchases that had been undone.
      * @param e action event
      */
     @FXML
@@ -377,26 +398,33 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Clears the quantity from the purchase screen
+     * Clears the quantity from the purchase screen.
      */
     private void clearBuyWindow() {
-        int price = myMarket.getBuyPrice(Item.values()[buyList.getSelectionModel().getSelectedIndex()]);
+        int price = myMarket.getBuyPrice(Item.values()[
+                buyList.getSelectionModel().getSelectedIndex()]);
         buyPrice.setText(String.valueOf(price));
         buyQuantity.setText("1");
         buyBalance.setText(String.valueOf(myPlayer.getBalance()));
-        int newBalance = myPlayer.getBalance() - Integer.parseInt(buyQuantity.getText()) * Integer.parseInt(buyPrice.getText());
+        int newBalance = myPlayer.getBalance()
+                - Integer.parseInt(buyQuantity.getText())
+                * Integer.parseInt(buyPrice.getText());
         buyAfterBalance.setText(String.valueOf(newBalance));
     }
 
     /**
-     * Re-initializes the purchase screen
+     * Re-initializes the purchase screen.
      */
     private void resetBuyList() {
         for (int i = 0; i < Item.values().length; i++) {
             if (myMarket.isBuyable(Item.values()[i])) {
-                buyItems.set(i, Item.values()[i].getName() + " (Price: " + myMarket.getBuyPrice(Item.values()[i]) + " credits, Quantity: " + myMarket.getQuantity(Item.values()[i]) + ")");
+                buyItems.set(i, Item.values()[i].getName() + " (Price: "
+                        + myMarket.getBuyPrice(Item.values()[i])
+                        + " credits, Quantity: " + myMarket.getQuantity(
+                                Item.values()[i]) + ")");
             } else {
-                buyItems.set(i, Item.values()[i].getName() + " is not available");
+                buyItems.set(i, Item.values()[i].getName()
+                        + " is not available");
             }
         }
         buyList.setItems(buyItems);
@@ -406,7 +434,7 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="SELL WINDOW HANDLERS">
 
     /**
-     * Increases the number of goods to sell by 1
+     * Increases the number of goods to sell by 1.
      *
      * @param event
      */
@@ -415,12 +443,14 @@ public class GameController implements Initializable {
         int q = Integer.parseInt(sellQuantity.getText());
         q++;
         sellQuantity.setText(q + "");
-        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText()) * Integer.parseInt(sellPrice.getText());
+        int newBalance = myPlayer.getBalance()
+                + Integer.parseInt(sellQuantity.getText())
+                * Integer.parseInt(sellPrice.getText());
         sellAfterBalance.setText(String.valueOf(newBalance));
     }
 
     /**
-     * Decreases the number of goods to sell by 1
+     * Decreases the number of goods to sell by 1.
      *
      * @param event
      */
@@ -434,7 +464,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Attempts to sell cargo
+     * Attempts to sell cargo.
      *
      * @param event
      */
@@ -456,28 +486,34 @@ public class GameController implements Initializable {
     }
 
     /**
-     * resets the sell quantity of the purchase screen
+     * resets the sell quantity of the purchase screen.
      */
     private void clearSellWindow() {
-        int price = myMarket.getSellPrice(Item.values()[sellList.getSelectionModel().getSelectedIndex()]);
+        int price = myMarket.getSellPrice(Item.values()[
+                sellList.getSelectionModel().getSelectedIndex()]);
         sellPrice.setText(String.valueOf(price));
         sellQuantity.setText("1");
         sellBalance.setText(String.valueOf(myPlayer.getBalance()));
-        int newBalance = myPlayer.getBalance() + Integer.parseInt(sellQuantity.getText()) * Integer.parseInt(sellPrice.getText());
+        int newBalance = myPlayer.getBalance()
+                + Integer.parseInt(sellQuantity.getText())
+                * Integer.parseInt(sellPrice.getText());
         sellAfterBalance.setText(String.valueOf(newBalance));
     }
 
     /**
-     * Recalculates and resets the sell list's items
+     * Recalculates and resets the sell list's items.
      */
     private void resetSellList() {
         List<Integer> cargo = myPlayer.getShip().getCargo();
         for (int i = 0; i < Item.values().length; i++) {
             Item item = Item.values()[i];
             if (myMarket.isSellable(item)) {
-                sellItems.set(i, cargo.get(i) + " " + item.getName() + " (Price: " + myMarket.getSellPrice(item) + " credits)");
+                sellItems.set(i, cargo.get(i) + " " + item.getName()
+                        + " (Price: " + myMarket.getSellPrice(item)
+                        + " credits)");
             } else {
-                sellItems.set(i, "Cannot sell " + item.getName() + " on this solar system");
+                sellItems.set(i, "Cannot sell " + item.getName()
+                        + " on this solar system");
             }
         }
         sellList.setItems(sellItems);
@@ -487,10 +523,11 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="CARGO HELPER METHODS">
 
     /**
-     * Sets cargo text screen
+     * Sets cargo text screen.
      */
     private void displayCargo() {
-        cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/" + myPlayer.getShip().getMaxCargo());
+        cargo.setText("Cargo: " + myPlayer.getShip().getCurrentCargo() + "/"
+                + myPlayer.getShip().getMaxCargo());
     }
 
 //</editor-fold>
@@ -499,7 +536,7 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="JUMP DRIVE">
 
     /**
-     * Opens the map
+     * Opens the map.
      *
      * @param event
      */
@@ -509,8 +546,10 @@ public class GameController implements Initializable {
         drawMap();
         fuelLeft.setText(String.valueOf(myPlayer.getShip().getFuelReading()));
         createSSTable();
-        //ssTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> showSelectedSS(newValue));
-        ssTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SolarSystem>() {
+        //ssTable.getSelectionModel().selectedItemProperty().addListener((
+        //observableValue, oldValue, newValue) -> showSelectedSS(newValue));
+        ssTable.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<SolarSystem>() {
             public void changed(ObservableValue<? extends SolarSystem> ov,
                                 SolarSystem oldval, SolarSystem newValue) {
                 showSelectedSS(newValue);
@@ -520,7 +559,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Closes the map
+     * Closes the map.
      *
      * @param event
      */
@@ -530,10 +569,11 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Creates SolarSystem table
+     * Creates SolarSystem table.
      */
     private void createSSTable() {
-        ObservableList<SolarSystem> universe = FXCollections.observableArrayList(myUniverse.getSolarSystems());
+        ObservableList<SolarSystem> universe =
+                FXCollections.observableArrayList(myUniverse.getSolarSystems());
 
         ssTable.setItems(universe);
 
@@ -543,25 +583,33 @@ public class GameController implements Initializable {
         xCol.setCellValueFactory(new PropertyValueFactory("x"));
         TableColumn<SolarSystem, Integer> yCol = new TableColumn<>("y");
         yCol.setCellValueFactory(new PropertyValueFactory("y"));
-        TableColumn<SolarSystem, Resource> resourceCol = new TableColumn<>("Resource");
+        TableColumn<SolarSystem, Resource> resourceCol =
+                new TableColumn<>("Resource");
         resourceCol.setCellValueFactory(new PropertyValueFactory("resource"));
-        TableColumn<SolarSystem, TechLevel> techLevelCol = new TableColumn<>("Tech Level");
+        TableColumn<SolarSystem, TechLevel> techLevelCol =
+                new TableColumn<>("Tech Level");
         techLevelCol.setCellValueFactory(new PropertyValueFactory("techLevel"));
-        TableColumn<SolarSystem, Double> distanceCol = new TableColumn<>("Distance");
-        distanceCol.setCellValueFactory(new Callback<CellDataFeatures<SolarSystem, Double>, ObservableValue<Double>>() {
-            public ObservableValue<Double> call(CellDataFeatures<SolarSystem, Double> ss) {
-                double d = (double) Math.round(Universe.calcDistance(mySS, ss.getValue()) * 1000) / 1000;
+        TableColumn<SolarSystem, Double> distanceCol =
+                new TableColumn<>("Distance");
+        distanceCol.setCellValueFactory(
+                new Callback<CellDataFeatures<SolarSystem, Double>,
+                        ObservableValue<Double>>() {
+            public ObservableValue<Double>
+                call(CellDataFeatures<SolarSystem, Double> ss) {
+                double d = (double) Math.round(Universe.calcDistance(
+                        mySS, ss.getValue()) * 1000) / 1000;
                 return new ReadOnlyObjectWrapper(d);
             }
         });
 
-        ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol, techLevelCol, distanceCol);
+        ssTable.getColumns().setAll(nameCol, xCol, yCol, resourceCol,
+                techLevelCol, distanceCol);
         toNearestPlanet();
         
     }
 
     /**
-     * Draws the selected SolarSystem
+     * Draws the selected SolarSystem.
      * shows flightDistance, fuelLeft, fuelRequired
      *
      * @param targetSS
@@ -575,12 +623,13 @@ public class GameController implements Initializable {
             toSS.setText(targetSS.getName());
             flightDistance.setText(Universe.calcDistance(mySS, targetSS) + "");
             fuelLeft.setText(myPlayer.getShip().getFuelReading() + "");
-            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS) + "");
+            fuelRequired.setText(Universe.calcFuelRequired(mySS, targetSS)
+                    + "");
         }
     }
 
     /**
-     * Draws the Universe
+     * Draws the Universe.
      */
     private void drawMap() {
         GraphicsContext gc = mapCanvas.getGraphicsContext2D();
@@ -596,7 +645,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Occurs when jump drive is activated
+     * Occurs when jump drive is activated.
      *
      * @param event
      */
@@ -616,12 +665,15 @@ public class GameController implements Initializable {
                 //  random events
                 ////////////////////////////////////////////////////////////////
 
-                //  the chance of an event happening mid-travel is proportional to the distance travelled
-                //  here, we normalize by the max travellable distance and create a distance multiplier that we multiply
-                //  by individual RandomEvent probabilities
+                // the chance of an event happening mid-travel is proportional
+                // to the distance travelled
+                //  here, we normalize by the max travellable distance and
+                // create a distance multiplier that we multiply
+                // by individual RandomEvent probabilities
                 int w = myUniverse.getWidth(), h = myUniverse.getHeight();
                 double maxDist = Math.sqrt(w * w + h * h);
-                double distMultiplier = 0.5 + 0.5 * (Universe.calcDistance(current, dest) / maxDist);
+                double distMultiplier = 0.5 + 0.5 * (Universe.calcDistance(
+                        current, dest) / maxDist);
 
                 ArrayList<RandomEvent> allEvents = new ArrayList<>();
                 allEvents.add(new PirateRaid());
@@ -629,14 +681,18 @@ public class GameController implements Initializable {
                 allEvents.add(new WaterLeak());
                 allEvents.add(new TreasureChest());
 
-                //  picture the probabilities of different events as slices on a circular spinner
-                //  create a random number @spin between zero and one and see which 'slice' (event) it landed on, if any
+                // picture the probabilities of different events as slices on a
+                // circular spinner
+                // create a random number @spin between zero and one and see 
+                // which 'slice' (event) it landed on, if any
                 Random rand = new Random();
                 double spin = rand.nextFloat();
                 double probabilitiesSoFar = 0;
                 RandomEvent randEvent = null;
                 for (RandomEvent potentialEvent : allEvents) {
-                    probabilitiesSoFar += potentialEvent.getProbabilityMultiplier() * distMultiplier;
+                    probabilitiesSoFar +=
+                            potentialEvent.getProbabilityMultiplier()
+                            * distMultiplier;
                     if (spin < probabilitiesSoFar) {
                         randEvent = potentialEvent;
                         break;
@@ -644,10 +700,12 @@ public class GameController implements Initializable {
                 }
 
 
-//                randEvent = new PirateRaid();   //  uncomment this to test random event functionality
+//                randEvent = new PirateRaid();
+//  uncomment this to test random event functionality
 
 
-                //  if an event happened, we apply it and display a description of what happened
+                // if an event happened, we apply it and display a description 
+                // of what happened
                 if (randEvent != null) {
                     String eventDesc = randEvent.apply(myPlayer);
                     randomEventDescriptionLabel.setText(eventDesc);
@@ -663,7 +721,8 @@ public class GameController implements Initializable {
             }
         } else {
             MessageAPI msgAPI = new MessageAPI(topPane);
-            msgAPI.showMessage("Please choose a system different than your current system.");
+            msgAPI.showMessage("Please choose a system different than your"
+                    + " current system.");
         }
     }
 
@@ -677,7 +736,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Occurs when player travels to new system
+     * Occurs when player travels to new system.
      */
     private void enterLightTunnel() {
         topPane.setVisible(true);
@@ -686,7 +745,8 @@ public class GameController implements Initializable {
         topPane.getChildren().add(rect);
         topPane.getChildren().add(l1);
 
-        FillTransition transition = new FillTransition(Duration.millis(3000), rect, Color.BLACK, Color.WHITE);
+        FillTransition transition = new FillTransition(Duration.millis(3000),
+                rect, Color.BLACK, Color.WHITE);
         transition.setCycleCount(2);
         transition.setAutoReverse(true);
         transition.play();
@@ -704,7 +764,10 @@ public class GameController implements Initializable {
                                  }
         );
     }
-
+    
+    /**
+     * Sorts nearest planet.
+     */
     @FXML
     private void toNearestPlanet() {
         ssTable.getSortOrder().add(ssTable.getColumns().get(5));
@@ -717,7 +780,7 @@ public class GameController implements Initializable {
     //<editor-fold defaultstate="collapsed" desc="INTERACTIVE MAP">
 
     /**
-     * Opens the universe map
+     * Opens the universe map.
      */
     @FXML
     private void openInteractiveMap() {
@@ -751,25 +814,33 @@ public class GameController implements Initializable {
         }
 
         for (SolarSystem ss : myUniverse.getSolarSystems()) {
-            gc.fillOval(ratio * ss.getX() - r, ratio * ss.getY() - r, 2 * r, 2 * r);
+            gc.fillOval(ratio * ss.getX() - r, ratio * ss.getY() - r, 2 * r,
+                    2 * r);
         }
 
         gc.setFill(Color.AQUA);
-        gc.fillOval(ratio * mySS.getX() - r, ratio * mySS.getY() - r, 2 * r, 2 * r);
-        gc.fillText("You are here", ratio * mySS.getX() + r, ratio * mySS.getY() + r * 2);
+        gc.fillOval(ratio * mySS.getX() - r, ratio * mySS.getY() - r, 2 * r,
+                2 * r);
+        gc.fillText("You are here", ratio * mySS.getX() + r, ratio * mySS.getY()
+                + r * 2);
 
         //Set canvas onClick event
         c1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                SolarSystem clickedSS = hasPlanetAt((int) mouseEvent.getX(), (int) mouseEvent.getY(), r, ratio);
+                SolarSystem clickedSS = hasPlanetAt((int) mouseEvent.getX(),
+                        (int) mouseEvent.getY(), r, ratio);
                 if (clickedSS != null) {
                     gc1.clearRect(0, 0, c1.getWidth(), c1.getHeight());
                     System.out.println(clickedSS);
                     gc1.setFill(Color.RED);
-                    gc1.fillOval(ratio * clickedSS.getX() - r, ratio * clickedSS.getY() - r, 2 * r, 2 * r);
+                    gc1.fillOval(ratio * clickedSS.getX() - r, ratio
+                            * clickedSS.getY() - r, 2 * r, 2 * r);
                     gc1.setFill(Color.WHITE);
-                    String description = String.format("%s (%d, %d)\n%s\n%s", clickedSS.getName(), clickedSS.getX(), clickedSS.getY(), clickedSS.getResource(), clickedSS.getTechLevel());
+                    String description = String.format("%s (%d, %d)\n%s\n%s",
+                            clickedSS.getName(), clickedSS.getX(),
+                            clickedSS.getY(), clickedSS.getResource(),
+                            clickedSS.getTechLevel());
                     int x_des = ratio * clickedSS.getX();
                     int y_des = ratio * clickedSS.getY();
                     if (x_des > size - 100) {
@@ -799,7 +870,11 @@ public class GameController implements Initializable {
         topPane.getChildren().add(sp);
         topPane.setVisible(true);
     }
-
+    
+    /**
+     * Closes map.
+     * @param ss 
+     */
     private void closeInteractiveMap(SolarSystem ss) {
         topPane.getChildren().clear();
         topPane.setVisible(false);
@@ -809,7 +884,15 @@ public class GameController implements Initializable {
             ssTable.scrollTo(ss);
         }
     }
-
+    
+    /**
+     * Checks for planets.
+     * @param x
+     * @param y
+     * @param r
+     * @param ratio
+     * @return 
+     */
     private SolarSystem hasPlanetAt(int x, int y, int r, int ratio) {
         for (SolarSystem ss : solarSystems) {
             int x1 = ratio * ss.getX();
@@ -822,7 +905,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Closes the GameController, goes to title screen
+     * Closes the GameController, goes to title screen.
      *
      * @param e
      */
@@ -834,7 +917,7 @@ public class GameController implements Initializable {
 
 
     /**
-     * Saves the GameController, goes to title screen
+     * Saves the GameController, goes to title screen.
      *
      * @param e
      */
@@ -848,7 +931,7 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="SHIPYARD">
 
     /**
-     * Opens shipyard window
+     * Opens shipyard window.
      *
      * @param event
      */
@@ -857,7 +940,8 @@ public class GameController implements Initializable {
         shipyardPane.setVisible(true);
         mySy = mySS.getSy();
         createShipyardTable();
-        shipyardTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ShipType>() {
+        shipyardTable.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<ShipType>() {
             public void changed(ObservableValue<? extends ShipType> ov,
                                 ShipType oldval, ShipType newValue) {
                 showSelectedShipType(newValue);
@@ -881,9 +965,9 @@ public class GameController implements Initializable {
             nameCol.setCellValueFactory(new PropertyValueFactory("name"));
             TableColumn<Upgrade, Integer> priceCol = new TableColumn<>("Price");
             priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-            TableColumn<Upgrade, String> typeCol = new TableColumn<>("Type of Upgrade");
+            TableColumn<Upgrade, String> typeCol =
+                    new TableColumn<>("Type of Upgrade");
             typeCol.setCellValueFactory(new PropertyValueFactory("type"));
-            
             int PREFERRED_WIDTH = 100;
             nameCol.setMinWidth(PREFERRED_WIDTH);
             priceCol.setMinWidth(PREFERRED_WIDTH);
@@ -892,7 +976,7 @@ public class GameController implements Initializable {
         }
     }
     /**
-     * Creates Shipyard table
+     * Creates Shipyard table.
      */
     private void createShipyardTable() {
             List<ShipType> shipList =
@@ -904,7 +988,8 @@ public class GameController implements Initializable {
 
             TableColumn<ShipType, String> nameCol = new TableColumn<>("Name");
             nameCol.setCellValueFactory(new PropertyValueFactory("name"));
-            TableColumn<ShipType, Integer> priceCol = new TableColumn<>("Price");
+            TableColumn<ShipType, Integer> priceCol =
+                    new TableColumn<>("Price");
             priceCol.setCellValueFactory(new PropertyValueFactory("price"));
             TableColumn<ShipType, Integer> cargoCol =
                 new TableColumn<>("Cargo Space");
@@ -913,13 +998,16 @@ public class GameController implements Initializable {
             crewCol.setCellValueFactory(new PropertyValueFactory("crew"));
             TableColumn<ShipType, Integer> weaponsCol =
                 new TableColumn<>("Weapon Slots");
-            weaponsCol.setCellValueFactory(new PropertyValueFactory("weaponSlots"));
+            weaponsCol.setCellValueFactory(
+                    new PropertyValueFactory("weaponSlots"));
             TableColumn<ShipType, Integer> sheildsCol =
                 new TableColumn<>("Shield Slots");
-            sheildsCol.setCellValueFactory(new PropertyValueFactory("shieldSlots"));
+            sheildsCol.setCellValueFactory(
+                    new PropertyValueFactory("shieldSlots"));
             TableColumn<ShipType, Integer> gadgetsCol =
                 new TableColumn<>("Gadget Slots");
-            gadgetsCol.setCellValueFactory(new PropertyValueFactory("gadgetSlots"));
+            gadgetsCol.setCellValueFactory(
+                    new PropertyValueFactory("gadgetSlots"));
             TableColumn<ShipType, Integer> fuelCol =
                 new TableColumn<>("Fuel Capacity");
             fuelCol.setCellValueFactory(new PropertyValueFactory("fuel"));
@@ -936,8 +1024,8 @@ public class GameController implements Initializable {
             gadgetsCol.setMinWidth(PREFERRED_WIDTH);
             fuelCol.setMinWidth(PREFERRED_WIDTH);
 
-            shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol, crewCol,
-                    weaponsCol, sheildsCol, gadgetsCol, fuelCol);
+            shipyardTable.getColumns().setAll(nameCol, priceCol, cargoCol,
+                    crewCol, weaponsCol, sheildsCol, gadgetsCol, fuelCol);
     }
 
     /**
@@ -954,13 +1042,15 @@ public class GameController implements Initializable {
             int shipWorth = myPlayer.getShip().getType().getPrice();
             for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
                 if (myPlayer.getShip().getCargo().get(i) != null) {
-                    shipWorth += myMarket.getBuyPrice(Item.values()[i]) * myPlayer.getShip().getCargo().get(i);
+                    shipWorth += myMarket.getBuyPrice(Item.values()[i])
+                            * myPlayer.getShip().getCargo().get(i);
                 }
             }
             shipWorth *= .9;
             syShipWorth.setText(shipWorth + " ");
             syCost.setText(targetShipType.getPrice() + " ");
-            syNewBalance.setText((myPlayer.getBalance() + shipWorth - targetShipType.getPrice()) + " ");
+            syNewBalance.setText((myPlayer.getBalance() + shipWorth
+                    - targetShipType.getPrice()) + " ");
         }
     }
 
@@ -969,7 +1059,8 @@ public class GameController implements Initializable {
         gc.setFill(Color.RED);
         syBalance.setText(myPlayer.getBalance() + " ");
         syCost.setText(targetUpgrade.getPrice() + " ");
-        syNewBalance.setText((myPlayer.getBalance() - targetUpgrade.getPrice()) + " ");
+        syNewBalance.setText((myPlayer.getBalance()
+                - targetUpgrade.getPrice()) + " ");
     }
 
     /**
@@ -979,11 +1070,13 @@ public class GameController implements Initializable {
         GraphicsContext gc = mapCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
         //TODO draw image
-        //gc.drawImage(new Image(this.getClass().getResource("img/" + shipType.getImageName()).getPath()), 0, 0, mapCanvas.getWidth(), mapCanvas.getHeight());
+        //gc.drawImage(new Image(this.getClass().getResource(
+        //"img/" + shipType.getImageName()).getPath()), 0, 0,
+        //mapCanvas.getWidth(), mapCanvas.getHeight());
     }
 
     /**
-     * Closes shipyard window
+     * Closes shipyard window.
      *
      * @param event
      */
@@ -993,7 +1086,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Opens upgrade table
+     * Opens upgrade table.
      * @param event 
      */
     @FXML
@@ -1001,7 +1094,8 @@ public class GameController implements Initializable {
         shipyardPane.setVisible(false);
         upgradePane.setVisible(true);
         createUpgradeTable();
-        upgradeTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Upgrade>() {
+        upgradeTable.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Upgrade>() {
             public void changed(ObservableValue<? extends Upgrade> o,
                                 Upgrade oldType, Upgrade newType) {
                     //showUpgrade(newType);
@@ -1010,62 +1104,75 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Handles buying the upgrade
+     * Handles buying the upgrade.
      */
     @FXML
     private void buyUpgrade(ActionEvent event) {
         MessageAPI msgAPI = new MessageAPI(topPane);
         Upgrade select = upgradeTable.getSelectionModel().getSelectedItem();
         if (select.getType() == Upgrade.UPGRADE_TYPE.Weapon) {
-            if ((myPlayer.getShip().getWeaponSlots() > 0) &&
-                    myPlayer.getBalance() > select.getPrice()) {
+            if ((myPlayer.getShip().getWeaponSlots() > 0)
+                    && myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
                 myPlayer.getShip().fillWeapon();
-                msgAPI.showMessage("Upgrade item is added.\nWeapon slots available: " + myPlayer.getShip().getWeaponSlots()
-                        + " / " + myPlayer.getShip().getType().getWeaponSlots() + " total");
+                msgAPI.showMessage("Upgrade item is added.\nWeapon slots"
+                        + " available: " + myPlayer.getShip().getWeaponSlots()
+                        + " / " + myPlayer.getShip().getType().getWeaponSlots()
+                        + " total");
                 displayShipInfo();
                 closeUpgrade(event);
             } else {
-                msgAPI.showMessage("Unable to upgrade. Check if you have available slots and enough money.");
+                msgAPI.showMessage("Unable to upgrade. Check if you have"
+                        + " available slots and enough money.");
             }
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
-            if ((myPlayer.getShip().getShieldSlots() > 0) &&
-                    myPlayer.getBalance() > select.getPrice()) {
+            if ((myPlayer.getShip().getShieldSlots() > 0)
+                     && myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
                 myPlayer.getShip().fillShield();
-                msgAPI.showMessage("Upgrade item is added.\nShield slots available: " + myPlayer.getShip().getShieldSlots()
-                        + " / " + myPlayer.getShip().getType().getShieldSlots() + " total");
+                msgAPI.showMessage("Upgrade item is added.\nShield slots"
+                        + " available: " + myPlayer.getShip().getShieldSlots()
+                        + " / " + myPlayer.getShip().getType().getShieldSlots()
+                        + " total");
                 displayShipInfo();
                 closeUpgrade(event);
             } else {
-                msgAPI.showMessage("Unable to upgrade. Check if you have available slots and enough money.");
+                msgAPI.showMessage("Unable to upgrade. Check if you have"
+                        + "available slots and enough money.");
             }
         } else if (select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
-            if ((myPlayer.getShip().getGadgetSlots() > 0) &&
-                    myPlayer.getBalance() > select.getPrice()) {
+            if ((myPlayer.getShip().getGadgetSlots() > 0)
+                    && myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
                 myPlayer.getShip().fillGadget();
                 if (select == Upgrade.INVENTORY) {
                     myPlayer.getShip().setExtraCargo(5);
                 }
-                msgAPI.showMessage("Upgrade item is added.\nGadget slots available: " + myPlayer.getShip().getGadgetSlots()
-                        + " / " + myPlayer.getShip().getType().getGadgetSlots() + " total");
+                msgAPI.showMessage("Upgrade item is added.\nGadget slots"
+                        + "available: " + myPlayer.getShip().getGadgetSlots()
+                        + " / " + myPlayer.getShip().getType().getGadgetSlots()
+                        + " total");
                 displayShipInfo();
                 closeUpgrade(event);
             } else {
-                msgAPI.showMessage("Unable to upgrade. Check if you have available slots and enough money.");
+                msgAPI.showMessage("Unable to upgrade. Check if you have"
+                        + "available slots and enough money.");
             }
         }
     }
-
+    
+    /**
+     * Closes upgrade window.
+     * @param event 
+     */
     @FXML
     private void closeUpgrade(ActionEvent event) {
         upgradePane.setVisible(false);
         shipyardPane.setVisible(true);
     }
-    
+
     /**
-     * Handles Buy Ship button
+     * Handles Buy Ship button.
      *
      * @param event
      */
@@ -1076,8 +1183,8 @@ public class GameController implements Initializable {
         int shipWorth = myPlayer.getShip().getType().getPrice();
         for (int i = 0; i < myPlayer.getShip().getCargo().size(); i++) {
             if (myPlayer.getShip().getCargo().get(i) != null) {
-                shipWorth += myMarket.getBuyPrice(Item.values()[i]) *
-                    myPlayer.getShip().getCargo().get(i);
+                shipWorth += myMarket.getBuyPrice(Item.values()[i])
+                    * myPlayer.getShip().getCargo().get(i);
             }
         }
 
@@ -1098,24 +1205,28 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Handles Repair Ship button
+     * Handles Repair Ship button.
      *
      * @param event
      */
     @FXML
     private void repairShip(ActionEvent event) {
-        if (myPlayer.getBalance() < myPlayer.getShip().getType().getRepairCost()) {
+        if (myPlayer.getBalance()
+                < myPlayer.getShip().getType().getRepairCost()) {
             closeShipyard(event);
             MessageAPI msgAPI = new MessageAPI(topPane);
             msgAPI.showMessage("Our balance isn't high enough!");
 
-        } else if (myPlayer.getShip().getHullStrength() == myPlayer.getShip().getType().getHullStrength()) {
+        } else if (myPlayer.getShip().getHullStrength()
+                == myPlayer.getShip().getType().getHullStrength()) {
             closeShipyard(event);
             MessageAPI msgAPI = new MessageAPI(topPane);
             msgAPI.showMessage("Our hull is full strength!");
         } else {
-            myPlayer.setBalance(myPlayer.getBalance() - myPlayer.getShip().getType().getRepairCost());
-            myPlayer.getShip().setHullStrength(myPlayer.getShip().getType().getHullStrength());
+            myPlayer.setBalance(myPlayer.getBalance()
+                    - myPlayer.getShip().getType().getRepairCost());
+            myPlayer.getShip().setHullStrength(
+                    myPlayer.getShip().getType().getHullStrength());
             fillMainCanvas();
             updateFuelGauge();
             displayShipInfo();
@@ -1127,7 +1238,7 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="CONTROLLER INITIALIZATION">
 
     /**
-     * Links to main application
+     * Links to main application.
      *
      * @param application
      */
@@ -1149,7 +1260,7 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Gets configuration info
+     * Gets configuration info.
      *
      * @param p Player
      * @param u Universe

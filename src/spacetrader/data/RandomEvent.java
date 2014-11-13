@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package spacetrader.data;
 
 import spacetrader.models.Player;
@@ -14,7 +8,7 @@ import spacetrader.models.Player;
  * @author Justin
  */
 public abstract class RandomEvent {
-    
+
     private double probabilityMultiplier;
     private String name;
 
@@ -30,7 +24,7 @@ public abstract class RandomEvent {
     public String toString() {
         return this.name;
     }
-    
+
     /**
      * Gets the probability multiplier.
      * @return A value representing how likely this event is to happen
@@ -38,7 +32,7 @@ public abstract class RandomEvent {
     public double getProbabilityMultiplier() {
         return this.probabilityMultiplier;
     }
-    
+
     /**
      * Applies the random event to the given player and returns a description
      * of what happened.
@@ -46,6 +40,5 @@ public abstract class RandomEvent {
      * @return A description of what happened
      */
     public abstract String apply(Player player);
-    
-    
+
 }

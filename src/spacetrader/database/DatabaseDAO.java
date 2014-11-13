@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
- * This class provides access to the Database
+ * This class provides access to the Database.
  *
  * @author Bao
  */
@@ -43,7 +43,8 @@ public class DatabaseDAO {
             con = DriverManager.getConnection(DB_NAME);
             stmt = con.createStatement();
             //Player player = null;
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + table.name() + ";");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM " + table.name()
+                    + ";");
             if (rs.next()) {
                 return new DbResponse(con, stmt, rs);
             }

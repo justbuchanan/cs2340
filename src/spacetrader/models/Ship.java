@@ -22,17 +22,17 @@ public class Ship {
     private int shieldSlots;
     private int gadgetSlots;
     private int extraCargo;
-    
+
     /**
-     * Creates a new ship with initial type given and full fuel
+     * Creates a new ship with initial type given and full fuel.
      * @param type ship type
      */
     public Ship(ShipType type) {
         this(type, type.getFuel());
     }
-    
+
     /**
-     *  Creates a new ship with type and amount of fuel given
+     *  Creates a new ship with type and amount of fuel given.
      * @param type ship type
      * @param fuel amount of fuel
      */
@@ -192,7 +192,7 @@ public class Ship {
     }
 
     /**
-     * Gets weapon slots
+     * Gets weapon slots.
      * @return weapon slots
      */
     public int getWeaponSlots() {
@@ -200,69 +200,69 @@ public class Ship {
     }
 
     /**
-     * Gets shield slots
+     * Gets shield slots.
      * @return shield slots
      */
     public int getShieldSlots() {
         return shieldSlots;
     }
-    
+
     /**
-     * Gets gadget slots
+     * Gets gadget slots.
      * @return gadget slots
      */
     public int getGadgetSlots() {
         return gadgetSlots;
     }
-    
+
     /**
-     * Sets weapon slot number
-     * @param weaponSlots 
+     * Sets weapon slot number.
+     * @param weaponSlots
      */
     public void setWeaponSlots(int weaponSlots) {
         this.weaponSlots = weaponSlots;
     }
 
     /**
-     * Sets shield slot number
-     * @param shieldSlots 
+     * Sets shield slot number.
+     * @param shieldSlots
      */
     public void setShieldSlots(int shieldSlots) {
         this.shieldSlots = shieldSlots;
     }
 
     /**
-     * Sets gadget slot number
-     * @param gadgetSlots 
+     * Sets gadget slot number.
+     * @param gadgetSlots
      */
     public void setGadgetSlots(int gadgetSlots) {
         this.gadgetSlots = gadgetSlots;
     }
-    
+
     /**
-     * Fills one weapon slot
+     * Fills one weapon slot.
      */
     public void fillWeapon() {
         weaponSlots--;
     }
-    
+
     /**
-     * Fills one shield slot
+     * Fills one shield slot.
      */
     public void fillShield() {
         shieldSlots--;
     }
-    
+
     /**
-     * Fills one gadget slot
+     * Fills one gadget slot.
      */
     public void fillGadget() {
         gadgetSlots--;
     }
-    
+
     /**
-     * Adds the extra cargo slots to the ship
-     * @param extraCargo 
+     * Adds the extra cargo slots to the ship.
+     * @param extraCargo
      */
     public void setExtraCargo(int extraCargo) {
         this.extraCargo = extraCargo;

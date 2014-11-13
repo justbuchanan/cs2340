@@ -10,20 +10,25 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
- * This is an API that will modify a top-level pane from the controller to display message
+ * This is an API that will modify a top-level pane from the
+ * controller to display message.
  *
  * @author Bao
  */
 public class MessageAPI {
     private Pane pane;
-
+    
+    /**
+     * @param pane 
+     */
     public MessageAPI(Pane pane) {
         this.pane = pane;
         clear();
     }
 
     /**
-     * Displays message
+     * Displays message.
+     * @param msg
      */
     public void showMessage(String msg) {
         StackPane stack = new StackPane();
@@ -48,7 +53,7 @@ public class MessageAPI {
     }
 
     /**
-     * Clears everything inside the pane
+     * Clears everything inside the pane.
      */
     public void clear() {
         pane.getChildren().clear();
@@ -56,14 +61,14 @@ public class MessageAPI {
     }
 
     /**
-     * Sets pane visibility to true
+     * Sets pane visibility to true.
      */
     public void show() {
         pane.setVisible(true);
     }
 
     /**
-     * Sets pane visibility to false
+     * Sets pane visibility to false.
      */
     public void hide() {
         pane.setVisible(false);

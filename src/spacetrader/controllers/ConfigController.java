@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Configuration screen controller
+ * Configuration screen controller.
  *
  * @author Bao
  */
@@ -47,7 +47,7 @@ public class ConfigController implements Initializable {
 
 
     /**
-     * Links to main application
+     * Links to main application.
      *
      * @param application
      */
@@ -56,7 +56,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * "OK" button is pressed
+     * "OK" button is pressed.
      *
      * @param event
      */
@@ -109,7 +109,8 @@ public class ConfigController implements Initializable {
             showRemainingPoints();
         }
         //Debug
-        //System.out.printf("%d %d %d %d %d - %d%n", points[0], points[1], points[2], points[3], points[4], sum);
+        //System.out.printf("%d %d %d %d %d - %d%n", points[0], points[1],
+        //points[2], points[3], points[4], sum);
     }
 
     /**
@@ -154,7 +155,7 @@ public class ConfigController implements Initializable {
     }
 
     /**
-     * Return remaining skill points
+     * Return remaining skill points.
      *
      * @return remaining points
      */
@@ -175,6 +176,8 @@ public class ConfigController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

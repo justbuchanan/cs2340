@@ -16,6 +16,13 @@ public class BuyItemCommand extends AbstractCommand {
     private Item theItem;
     private int theQuantity;
 
+    /**
+     *
+     * @param p
+     * @param m
+     * @param i
+     * @param q
+     */
     public BuyItemCommand(Player p, Marketplace m, Item i, int q) {
         thePlayer = p;
         theMarketplace = m;
@@ -28,8 +35,10 @@ public class BuyItemCommand extends AbstractCommand {
      */
     @Override
     public boolean doIt() {
-        int newBalance = thePlayer.getBalance() - theQuantity*theMarketplace.getBuyPrice(theItem);
-        if (newBalance >= 0 && thePlayer.getShip().getCurrentCargo() + theQuantity <= thePlayer.getShip().getMaxCargo()) {
+        int newBalance = thePlayer.getBalance()
+                - theQuantity * theMarketplace.getBuyPrice(theItem);
+        if (newBalance >= 0 && thePlayer.getShip().getCurrentCargo()
+                + theQuantity <= thePlayer.getShip().getMaxCargo()) {
             theMarketplace.buy(theItem, theQuantity);
             thePlayer.getShip().addCargo(theItem, theQuantity);
             thePlayer.setBalance(newBalance);
@@ -45,7 +54,8 @@ public class BuyItemCommand extends AbstractCommand {
     public boolean undoIt() {
         theMarketplace.buy(theItem, -theQuantity);
         thePlayer.getShip().addCargo(theItem, -theQuantity);
-        thePlayer.setBalance(thePlayer.getBalance() + theQuantity*theMarketplace.getBuyPrice(theItem));
+        thePlayer.setBalance(thePlayer.getBalance()
+                + theQuantity * theMarketplace.getBuyPrice(theItem));
         return true;
     }
 

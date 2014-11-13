@@ -93,6 +93,8 @@ public class Main extends Application {
 
     /**
      * Goes to game screen.
+     * @param myPlayer
+     * @param myUniverse
      */
     public void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
@@ -101,7 +103,8 @@ public class Main extends Application {
                     replaceSceneContent("views/game.fxml");
             game.setApp(this);
             game.config(myPlayer, myUniverse);
-            /*TestController test = (TestController) replaceSceneContent("test.fxml");
+            /*TestController test = (TestController)
+            replaceSceneContent("test.fxml");
              test.setApp(this);*/
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

@@ -17,13 +17,18 @@ public enum TechLevel {
     private int value;
     private String text;
 
+    /**
+     *
+     * @param value
+     * @param text
+     */
     private TechLevel(int value, String text) {
         this.value = value;
         this.text = text;
     }
 
     /**
-     * Returns the text representation of this TechLevel
+     * Returns the text representation of this TechLevel.
      */
     @Override
     public String toString() {
@@ -31,7 +36,7 @@ public enum TechLevel {
     }
 
     /**
-     * Gets the value of the TechLevel
+     * Gets the value of the TechLevel.
      *
      * @return numerical value for this type of TechLevel
      */

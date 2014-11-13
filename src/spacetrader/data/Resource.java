@@ -30,7 +30,7 @@ public enum Resource {
     }
 
     /**
-     * String representation of this Resource
+     * String representation of this Resource.
      *
      * @return info string
      */
@@ -39,6 +39,10 @@ public enum Resource {
         return this.text;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getValue() {
         return value;
     }

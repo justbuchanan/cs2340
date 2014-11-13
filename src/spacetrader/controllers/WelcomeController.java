@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Welcome screen controller
+ * Welcome screen controller.
  *
  * @author Bao
  */
@@ -21,7 +21,7 @@ public class WelcomeController implements Initializable {
     private Main application;
 
     /**
-     * Links to main application
+     * Links to main application.
      *
      * @param application
      */
@@ -30,7 +30,7 @@ public class WelcomeController implements Initializable {
     }
 
     /**
-     * Handles new game requests
+     * Handles new game requests.
      *
      * @param event
      */
@@ -40,7 +40,7 @@ public class WelcomeController implements Initializable {
     }
 
     /**
-     * Loads a saved game
+     * Loads a saved game.
      *
      * @param event
      */
@@ -54,7 +54,8 @@ public class WelcomeController implements Initializable {
             System.out.println(p);
         }
 
-        application.gotoGame(p, Universe.generateUniverse(100, 100, application.NUMBER_OF_SOLAR_SYSTEMS));
+        application.gotoGame(p, Universe.generateUniverse(100, 100,
+                application.NUMBER_OF_SOLAR_SYSTEMS));
     }
 
     /**

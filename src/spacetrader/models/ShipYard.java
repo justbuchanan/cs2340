@@ -16,6 +16,10 @@ public class ShipYard {
     private HashMap<ShipType, Integer> availableShips;
     private HashMap<Upgrade, Integer> allUpgrades;
 
+    /**
+     *
+     * @param ss
+     */
     public ShipYard(SolarSystem ss) {
         this.ss = ss;
         availableShips = new HashMap<>();
@@ -23,6 +27,9 @@ public class ShipYard {
         setAvailabilities();
     }
 
+    /**
+     *
+     */
     private void setAvailabilities() {
         for (ShipType s : ShipType.values()) {
             if (s.getMinTechLevel() <= ss.getTechLevel().getValue()) {
@@ -36,18 +43,18 @@ public class ShipYard {
             }
         }
     }
-    
+
     /**
-     * Returns list of available ships + their price
-     * @return 
+     * Returns list of available ships + their price.
+     * @return
      */
     public HashMap getAvailableShips() {
         return availableShips;
     }
 
     /**
-     * Returns list of available upgrades + their price
-     * @return 
+     * Returns list of available upgrades + their price.
+     * @return
      */
     public HashMap getAllUpgrades() {
         return allUpgrades;

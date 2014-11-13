@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package spacetrader.data.random_events;
 
 import spacetrader.data.RandomEvent;
@@ -19,7 +13,7 @@ public class TreasureChest extends RandomEvent {
     public TreasureChest() {
         super(0.3, "Treasure Chest");
     }
-    
+
     /**
      * 1000 Credits are added to the player's balance.
      * @param player The player this happened to
