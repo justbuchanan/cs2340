@@ -25,7 +25,11 @@ public class ShipYardTest {
         ss1.setTechLevel(TechLevel.PREAGRICULTURAL);
         ss4.setTechLevel(TechLevel.EARLYINDUSTRIAL);
         ss7.setTechLevel(TechLevel.HIGHTECH);
+        ss1.setSy();
+        ss4.setSy();
+        ss7.setSy();
         sy1 = ss1.getSy();
+        sy4 = ss4.getSy();
         sy7 = ss7.getSy();
     }
 

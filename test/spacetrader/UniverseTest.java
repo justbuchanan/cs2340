@@ -27,7 +27,7 @@ public class UniverseTest {
     }
     @Test
     public void testUni() {
-	assertNotEquals(uni, null);
+	assertEquals(false, (uni == null));
     }
     @Test
     public void testUniWidth() {
