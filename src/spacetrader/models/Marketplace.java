@@ -31,8 +31,8 @@ public class Marketplace {
         availableItems = mySS.getAvailableItems();
         currentRadicalEvents = new HashSet<>();
         priceList = new HashMap<>();
-        for (int i = 0; i < Item.values().length; i++) {
-            priceList.put(Item.values()[i], getPrice(Item.values()[i]));
+        for (Item value : Item.values()) {
+            priceList.put(value, getPrice(value));
         }
     }
 
@@ -42,7 +42,7 @@ public class Marketplace {
      * @param item
      * @return price
      */
-    public int getPrice(Item item) {
+    private int getPrice(Item item) {
         int price = item.getBasePrice();
 
         //  if a radical event is taking place that affects this item, apply the
@@ -94,11 +94,8 @@ public class Marketplace {
      * @return buy-able
      */
     public boolean isBuyable(Item item) {
-        if (this.solarSystem.getTechLevel().getValue() >= item.getMTLP() && 
-                availableItems.get(item) > 0) {
-            return true;
-        }
-        return false;
+        return this.solarSystem.getTechLevel().getValue() >= item.getMTLP() && 
+                availableItems.get(item) > 0;
     }
 
     /**
@@ -108,10 +105,7 @@ public class Marketplace {
      * @return isSellable
      */
     public boolean isSellable(Item item) {
-        if (this.solarSystem.getTechLevel().getValue() >= item.getMTLU()) {
-            return true;
-        }
-        return false;
+        return this.solarSystem.getTechLevel().getValue() >= item.getMTLU();
     }
 
     /**

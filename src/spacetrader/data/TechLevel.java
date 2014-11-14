@@ -29,6 +29,7 @@ public enum TechLevel {
 
     /**
      * Returns the text representation of this TechLevel.
+     * @return string representation
      */
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package spacetrader.database;
 
-import spacetrader.data.Item;
 import spacetrader.data.ShipType;
 import spacetrader.models.Player;
 import spacetrader.models.Ship;

@@ -942,6 +942,7 @@ public class GameController implements Initializable {
         createShipyardTable();
         shipyardTable.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<ShipType>() {
+            @Override
             public void changed(ObservableValue<? extends ShipType> ov,
                                 ShipType oldval, ShipType newValue) {
                 showSelectedShipType(newValue);
@@ -1096,6 +1097,7 @@ public class GameController implements Initializable {
         createUpgradeTable();
         upgradeTable.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Upgrade>() {
+            @Override
             public void changed(ObservableValue<? extends Upgrade> o,
                                 Upgrade oldType, Upgrade newType) {
                     //showUpgrade(newType);

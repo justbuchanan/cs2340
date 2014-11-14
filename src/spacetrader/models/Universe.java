@@ -22,7 +22,7 @@ public class Universe {
      *
      */
     public Universe() {
-        solarSystems = new ArrayList<SolarSystem>();
+        solarSystems = new ArrayList<>();
     }
 
     /**
@@ -35,9 +35,7 @@ public class Universe {
      */
     public static boolean shipCanTravel(Ship ship, SolarSystem curSS, 
             SolarSystem destSS) {
-        if (ship.getFuelReading() >= calcFuelRequired(curSS, destSS)) 
-            return true;
-        else return false;
+        return ship.getFuelReading() >= calcFuelRequired(curSS, destSS);
     }
 
     /**

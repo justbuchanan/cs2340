@@ -30,6 +30,7 @@ public enum Government {
 
     /**
      * Returns the text representation of this Government.
+     * @return text string
      */
     @Override
     public String toString() {

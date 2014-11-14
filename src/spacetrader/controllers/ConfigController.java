@@ -14,6 +14,7 @@ import spacetrader.models.Universe;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import spacetrader.models.Skill;
 
 /**
  * Configuration screen controller.
@@ -42,7 +43,7 @@ public class ConfigController implements Initializable {
     private Main application;
     private Player myPlayer;
     private Universe myUniverse;
-    private int[] points = new int[5];
+    private final int[] points = new int[Skill.values().length];
     private final int MAX_POINTS = 15;
 
 
@@ -79,7 +80,7 @@ public class ConfigController implements Initializable {
     /**
      * "Cancel" button is pressed.
      *
-     * @param event
+     * @param ActionEvent event
      */
     @FXML
     private void handleCancelAction(ActionEvent event) {
@@ -89,7 +90,7 @@ public class ConfigController implements Initializable {
     /**
      * "Up" button is pressed.
      *
-     * @param event
+     * @param ActionEvent event
      */
     @FXML
     private void handleUp(ActionEvent event) {
@@ -116,7 +117,7 @@ public class ConfigController implements Initializable {
     /**
      * "Down" button is pressed.
      *
-     * @param event
+     * @param ActionEvent event
      */
     @FXML
     private void handleDown(ActionEvent event) {
@@ -137,7 +138,7 @@ public class ConfigController implements Initializable {
     /**
      * "Play" is pressed.
      *
-     * @param event
+     * @param ActionEvent event
      */
     @FXML
     private void handlePlay(ActionEvent event) {
@@ -147,7 +148,7 @@ public class ConfigController implements Initializable {
     /**
      * "Go to Home Screen" is pressed.
      *
-     * @param event
+     * @param ActionEvent event
      */
     @FXML
     private void handleGoToHomeScreen(ActionEvent event) {
@@ -176,11 +177,11 @@ public class ConfigController implements Initializable {
 
     /**
      * Initializes the controller class.
-     * @param url
-     * @param rb
+     * @param URL url
+     * @param ResourceBundle rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public final void initialize(URL url, ResourceBundle rb) {
         messagePane.setVisible(false);
         showRemainingPoints();
     }

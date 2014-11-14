@@ -24,9 +24,13 @@ import java.util.logging.Logger;
  */
 public class Main extends Application {
 
+    //Stage that displays the main screen
     private Stage stage;
-    private Stage mapStage;
+
+    //Minimum width of the window
     private final double MINIMUM_WINDOW_WIDTH = 800.0;
+
+    //Minimum height of the window
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
 
     public final int NUMBER_OF_SOLAR_SYSTEMS = 40;
@@ -54,24 +58,23 @@ public class Main extends Application {
     /**
      * Opens configuration screen.
      */
-    public void openConfig() {
+    public final void openConfig() {
         showConfig();
     }
 
     /**
      * Closes configuration screen.
      */
-    public void closeConfig() {
+    public final void closeConfig() {
         showWelcome();
     }
 
     /**
      * Goes to configuration screen.
      */
-    public void showConfig() {
+    public final void showConfig() {
         try {
-            ConfigController config = (ConfigController)
-                    replaceSceneContent("views/config.fxml");
+            ConfigController config = (ConfigController) replaceSceneContent("views/config.fxml");
             config.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,11 +84,10 @@ public class Main extends Application {
     /**
      * Goes to welcome (starting) screen.
      */
-    public void showWelcome() {
+    public final void showWelcome() {
         try {
-            WelcomeController Welcome = (WelcomeController)
-                    replaceSceneContent("views/welcome.fxml");
-            Welcome.setApp(this);
+            WelcomeController welcome = (WelcomeController) replaceSceneContent("views/welcome.fxml");
+            welcome.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,10 +95,11 @@ public class Main extends Application {
 
     /**
      * Goes to game screen.
-     * @param myPlayer
-     * @param myUniverse
+     *
+     * @param myPlayer the player
+     * @param myUniverse the universe
      */
-    public void gotoGame(Player myPlayer, Universe myUniverse) {
+    public final void gotoGame(Player myPlayer, Universe myUniverse) {
         try {
             player = myPlayer;
             GameController game = (GameController)
@@ -104,7 +107,7 @@ public class Main extends Application {
             game.setApp(this);
             game.config(myPlayer, myUniverse);
             /*TestController test = (TestController)
-            replaceSceneContent("test.fxml");
+             replaceSceneContent("test.fxml");
              test.setApp(this);*/
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +126,7 @@ public class Main extends Application {
      *
      * @param fxml target fxml
      * @return controller
-     * @throws Exception
+     * @throws Exception exception
      */
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -136,7 +139,8 @@ public class Main extends Application {
         } finally {
             in.close();
         }
-        Scene scene = new Scene(page, 800, 600);
+        Scene scene = new Scene(page,
+                MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
@@ -144,9 +148,10 @@ public class Main extends Application {
 
     /**
      * Gets the current player.
+     *
      * @return The current player
      */
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 
