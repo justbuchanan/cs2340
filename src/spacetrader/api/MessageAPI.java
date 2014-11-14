@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
  * @author Bao
  */
 public class MessageAPI {
-    private Pane pane;
+    private final Pane pane;
     
     /**
      * @param pane 
@@ -55,7 +55,7 @@ public class MessageAPI {
     /**
      * Clears everything inside the pane.
      */
-    public void clear() {
+    private void clear() {
         pane.getChildren().clear();
         pane.setOnMouseClicked(null);
     }

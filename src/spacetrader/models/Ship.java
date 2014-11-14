@@ -37,7 +37,7 @@ public class Ship {
      * @param fuel amount of fuel
      */
     public Ship(ShipType type, int fuel) {
-        cargo = new ArrayList<Integer>(Collections.nCopies(Item.values().length,
+        cargo = new ArrayList<>(Collections.nCopies(Item.values().length,
                 0));
         this.type = type;
         //Freebies: 1 cargo bay of water. Yummy!

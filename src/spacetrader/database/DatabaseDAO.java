@@ -1,8 +1,5 @@
 package spacetrader.database;
 
-import spacetrader.models.Player;
-
-import java.sql.*;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -20,8 +17,8 @@ public class DatabaseDAO {
     private final String DB_NAME = "jdbc:sqlite:savedgame.db";
 
     public void execSQL(String sql) {
-        Connection con = null;
-        Statement stmt = null;
+        Connection con;
+        Statement stmt;
         try {
             Class.forName(JDBC);
             con = DriverManager.getConnection(DB_NAME);
@@ -36,8 +33,9 @@ public class DatabaseDAO {
     }
 
     public DbResponse select(DbTables table) {
-        Connection con = null;
-        Statement stmt = null;
+        Connection con;
+        Statement stmt;
+        DbResponse dbr = null;
         try {
             Class.forName(JDBC);
             con = DriverManager.getConnection(DB_NAME);
@@ -46,42 +44,35 @@ public class DatabaseDAO {
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + table.name()
                     + ";");
             if (rs.next()) {
-                return new DbResponse(con, stmt, rs);
+                dbr = new DbResponse(con, stmt, rs);
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
-            return null;
         }
-
-        return null;
+        return dbr;
     }
 
     public boolean hasTable(DbTables table) {
-        boolean bool;
-        Connection con = null;
+        boolean bool = false;
+        Connection con;
         try {
             Class.forName(JDBC);
             con = DriverManager.getConnection(DB_NAME);
             DatabaseMetaData dbm = con.getMetaData();
             ResultSet tables = dbm.getTables(null, null, table.name(), null);
-            if (tables.next()) {
-                bool = true;
-            } else {
-                bool = false;
-            }
+            bool = tables.next();
             con.close();
-            return bool;
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
-            return false;
         }
+        return bool;
     }
 
     public void dropTable(DbTables table) {
-        Connection con = null;
-        Statement stmt = null;
+        Connection con;
+        Statement stmt;
         try {
             Class.forName(JDBC);
             con = DriverManager.getConnection(DB_NAME);
@@ -96,8 +87,8 @@ public class DatabaseDAO {
     }
 
     public void clearTable(DbTables table) {
-        Connection con = null;
-        Statement stmt = null;
+        Connection con;
+        Statement stmt;
         try {
             Class.forName(JDBC);
             con = DriverManager.getConnection(DB_NAME);

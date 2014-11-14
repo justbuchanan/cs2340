@@ -19,6 +19,7 @@ public abstract class RandomEvent {
 
     /**
      * String representation of the RadicalEvent.
+     * @return string representation
      */
     @Override
     public String toString() {
