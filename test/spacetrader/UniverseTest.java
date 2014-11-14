@@ -27,11 +27,7 @@ public class UniverseTest {
     }
     @Test
     public void testUni() {
-<<<<<<< HEAD
-	assertEquals(false, (uni == null));
-=======
 	assertEquals(uni==null, false);
->>>>>>> origin/master
     }
     @Test
     public void testUniWidth() {
