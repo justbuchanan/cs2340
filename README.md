@@ -1,4 +1,4 @@
-### Final Project Description
+### Final Project Description [![Build Status](https://travis-ci.org/justbuchanan/cs2340.svg)](https://travis-ci.org/justbuchanan/cs2340)
 
 Projects are usually somewhat open-ended. If we do not specify how you have to do something, then you are free to use your own imagination. I have put some information in the description, but you may design and organize your application as you wish, as long as it meets the basic requirements.
 
