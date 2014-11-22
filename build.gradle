@@ -1,0 +1,25 @@
+
+apply plugin: 'java'
+
+dependencies {
+    testCompile group: 'junit', name: '4.+'
+    compile fileTree(dir: 'lib', include: 'sqlite-jdbc-3.8.5-pre1.jav')
+}
+
+
+compileJava {
+    source = ['src',
+              'src/api',
+              'src/controllers',
+              'src/data',
+              'src/database',
+              'src/models']
+}
+
+/*
+javafx {
+    appID 'cs2340spacetrader'
+    appName 'Spacetrader'
+    mainClass 'spacetrader.Main'
+}
+*/
