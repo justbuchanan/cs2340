@@ -1,0 +1,9 @@
+language: java
+
+before_install:
+    - sudo apt-get update -qq
+
+script: gradle test
+
+notifications:
+    email: false
