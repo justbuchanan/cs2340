@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 import spacetrader.models.SolarSystem;
 import spacetrader.models.Universe;
 
+/**
+ * @author Mike
+ */
 public class UniverseTest {
 
     private Universe uni;

@@ -85,7 +85,7 @@ public class CommandProcessorTest {
         int initialBalance = myPlayer.getBalance();
         cp.doCommand(cmd);
         assertEquals("Balance is not correct", initialBalance, myPlayer.getBalance());
-        assertEquals("Number of items is not correct", initialItems, myPlayer.getShip().getCurrentCargo());
+        assertEquals("Number of items is not correct", initialItems, myPlayer.getShip().getCurrentCargo());  
     }
 
     /**

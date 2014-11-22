@@ -50,6 +50,7 @@ public class PlayerTest {
         assertEquals(3, player.getSkill(Skill.TRADER).getPoints());
         assertEquals(200, player.getSkill(Skill.ENGINEER).getPoints());
         assertEquals(5, player.getSkill(Skill.INVESTOR).getPoints());
+        assertNull(player.getSkill(null));
         assertEquals(ShipType.MOSQUITO, player.getShip().getType());
         assertEquals("TestPlayer", player.getName());
         // Account for the combinatorics of the loop
