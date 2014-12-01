@@ -6,30 +6,9 @@ apply from: 'javafx.plugin'
 
 dependencies {
     testCompile group: 'junit', name: '4.+'
-    compile fileTree(dir: 'lib', include: 'sqlite-jdbc-3.8.5-pre1.jav')
+    compile fileTree(dir: 'lib', include: 'sqlite-jdbc-3.8.5-pre1.jar')
 }
 
-
-compileJava {
-    source = ['src',
-              'src/api',
-              'src/controllers',
-              'src/data',
-              'src/database',
-              'src/views',
-              'src/models']
-}
-
-/*
-jar {
-    configurations.compile.collect { it.isDirectory() ? it: zipTree(it) }
-    from (configurations.compile) {
-    }
-    manifest {
-        attributes("Main-Class": "spacetrader.Main");
-    }
-}
-*/
 
 javafx {
     appID 'cs2340spacetrader'
