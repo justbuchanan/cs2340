@@ -47,7 +47,7 @@ public class Universe {
      */
     public static int calcFuelRequired(SolarSystem startSS,
             SolarSystem destSS) {
-        return (int) (calcDistance(startSS, destSS)*FUEL_TO_DISTANCE_RATIO);
+        return (int) (calcDistance(startSS, destSS) * FUEL_TO_DISTANCE_RATIO);
     }
 
     /**
@@ -61,6 +61,16 @@ public class Universe {
         int xDist = Math.abs(ss1.getX() - ss2.getX());
         int yDist = Math.abs(ss1.getY() - ss2.getY());
         return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+    }
+    
+    /**
+     * Calculates the radius of space the ship can travel to
+     * 
+     * @param ship containing fuel info
+     * @return radius
+     */
+    public static int calcFuelRadius(Ship ship) {
+        return (int) (ship.getFuelReading() / FUEL_TO_DISTANCE_RATIO);
     }
 
     /**

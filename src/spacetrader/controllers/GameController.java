@@ -800,7 +800,6 @@ public class GameController implements Initializable {
         gc.setFill(Color.WHITE);
         final int r = 10;
         final int ratio = (int) c.getHeight() / myUniverse.getHeight();
-
         gc.setStroke(Color.gray(0.2));
         for (int x = 0; x < size; x = x + 50) {
             gc.strokeLine(x, 0, x, size);
@@ -817,12 +816,17 @@ public class GameController implements Initializable {
             gc.fillOval(ratio * ss.getX() - r, ratio * ss.getY() - r, 2 * r,
                     2 * r);
         }
+        
+        gc.setFill(Color.rgb(255, 255, 255, 0.05));
+        int fuelRadius = Universe.calcFuelRadius(myPlayer.getShip()) + 2;
+        gc.fillOval(ratio * (mySS.getX() - fuelRadius), ratio * (mySS.getY() - fuelRadius), 2 * (fuelRadius * ratio),
+                2 * (fuelRadius * ratio));
 
         gc.setFill(Color.AQUA);
         gc.fillOval(ratio * mySS.getX() - r, ratio * mySS.getY() - r, 2 * r,
                 2 * r);
-        gc.fillText("You are here", ratio * mySS.getX() + r, ratio * mySS.getY()
-                + r * 2);
+        gc.fillText("You are here", ratio * mySS.getX() - r, ratio * mySS.getY()
+                - r * 2);
 
         //Set canvas onClick event
         c1.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -830,9 +834,20 @@ public class GameController implements Initializable {
             public void handle(MouseEvent mouseEvent) {
                 SolarSystem clickedSS = hasPlanetAt((int) mouseEvent.getX(),
                         (int) mouseEvent.getY(), r, ratio);
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        closeInteractiveMap(clickedSS);
+                    }
+                }
+            }
+        });
+        c1.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                SolarSystem clickedSS = hasPlanetAt((int) mouseEvent.getX(),
+                        (int) mouseEvent.getY(), r, ratio);
                 if (clickedSS != null) {
                     gc1.clearRect(0, 0, c1.getWidth(), c1.getHeight());
-                    System.out.println(clickedSS);
                     gc1.setFill(Color.RED);
                     gc1.fillOval(ratio * clickedSS.getX() - r, ratio
                             * clickedSS.getY() - r, 2 * r, 2 * r);
@@ -855,11 +870,6 @@ public class GameController implements Initializable {
                     }
                     gc1.fillText(description, x_des, y_des);
                 }
-                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-                    if (mouseEvent.getClickCount() == 2) {
-                        closeInteractiveMap(clickedSS);
-                    }
-                }
             }
 
         });
@@ -870,7 +880,7 @@ public class GameController implements Initializable {
         topPane.getChildren().add(sp);
         topPane.setVisible(true);
     }
-    
+
     /**
      * Closes map.
      * @param ss 
