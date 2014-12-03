@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import spacetrader.Main;
+import spacetrader.api.SoundPlayer;
 import spacetrader.database.DbMethods;
 import spacetrader.models.Player;
 import spacetrader.models.Universe;
@@ -36,6 +37,8 @@ public class WelcomeController implements Initializable {
      */
     @FXML
     private void handleStartAction(ActionEvent event) {
+        SoundPlayer s = new SoundPlayer();
+        SoundPlayer.playClick();
         application.openConfig();
     }
 
