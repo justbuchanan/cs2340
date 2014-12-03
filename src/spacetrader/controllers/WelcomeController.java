@@ -37,7 +37,6 @@ public class WelcomeController implements Initializable {
      */
     @FXML
     private void handleStartAction(ActionEvent event) {
-        SoundPlayer s = new SoundPlayer();
         SoundPlayer.playClick();
         application.openConfig();
     }
@@ -49,6 +48,7 @@ public class WelcomeController implements Initializable {
      */
     @FXML
     private void handleLoadAction(ActionEvent event) {
+        SoundPlayer.playClick();
         DbMethods db = new DbMethods();
         Player p = db.load();
         if (p == null) {

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import spacetrader.Main;
+import spacetrader.api.SoundPlayer;
 import spacetrader.database.DbMethods;
 import spacetrader.models.Player;
 import spacetrader.models.Universe;
@@ -63,6 +64,7 @@ public class ConfigController implements Initializable {
      */
     @FXML
     private void handleOKAction(ActionEvent event) {
+        SoundPlayer.playClick();
         if (name.getText().equals("")) {
             name_error.setText("Name field is blank.");
         } else {
@@ -84,6 +86,7 @@ public class ConfigController implements Initializable {
      */
     @FXML
     private void handleCancelAction(ActionEvent event) {
+        SoundPlayer.playClick();
         application.closeConfig();
     }
 
@@ -142,6 +145,7 @@ public class ConfigController implements Initializable {
      */
     @FXML
     private void handlePlay(ActionEvent event) {
+        SoundPlayer.playClick();
         application.gotoGame(myPlayer, myUniverse);
     }
 
@@ -152,6 +156,7 @@ public class ConfigController implements Initializable {
      */
     @FXML
     private void handleGoToHomeScreen(ActionEvent event) {
+        SoundPlayer.playClick();
         application.closeConfig();
     }
 

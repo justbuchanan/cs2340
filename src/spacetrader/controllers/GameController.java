@@ -28,6 +28,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import spacetrader.Main;
 import spacetrader.api.MessageAPI;
+import spacetrader.api.SoundPlayer;
 import spacetrader.data.*;
 import spacetrader.data.Upgrade;
 import spacetrader.data.random_events.PirateRaid;
@@ -186,6 +187,7 @@ public class GameController implements Initializable {
 //<editor-fold defaultstate="collapsed" desc="MARKETPLACE PANE OPEN/CLOSE HANDLERS">
     @FXML
     private void openMarketplace(ActionEvent event) {
+        SoundPlayer.playClick();
         //Put marketplace generated code here...
         myMarket = mySS.getMP();
 
@@ -220,6 +222,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void closeMarketplace(ActionEvent event) {
+        SoundPlayer.playClick();
         marketPane.setVisible(false);
         displayShipInfo();
     }
@@ -345,6 +348,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void buy(ActionEvent event) {
+        SoundPlayer.playCoin();
         Item item = Item.values()[
                 buyList.getSelectionModel().getSelectedIndex()];
         int newBalance = Integer.parseInt(buyAfterBalance.getText());
@@ -470,6 +474,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void sell(ActionEvent event) {
+        SoundPlayer.playCoin();
         List<Integer> cargo = myPlayer.getShip().getCargo();
         int itemIndex = sellList.getSelectionModel().getSelectedIndex();
         Item item = Item.values()[itemIndex];
@@ -542,6 +547,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void openMap(ActionEvent event) {
+        SoundPlayer.playClick();
         mapPane.setVisible(true);
         drawMap();
         fuelLeft.setText(String.valueOf(myPlayer.getShip().getFuelReading()));
@@ -565,6 +571,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void closeMap(ActionEvent event) {
+        SoundPlayer.playClick();
         mapPane.setVisible(false);
     }
 
@@ -651,6 +658,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void activateJumpDrive(ActionEvent event) {
+        SoundPlayer.playPowerup();
         SolarSystem current = mySS;
         SolarSystem dest = ssTable.getSelectionModel().getSelectedItem();
         if (!(dest == current)) {
@@ -739,6 +747,7 @@ public class GameController implements Initializable {
      * Occurs when player travels to new system.
      */
     private void enterLightTunnel() {
+        SoundPlayer.playPowerup();
         topPane.setVisible(true);
         Label l1 = new Label("Travelling at warp speed...");
         Rectangle rect = new Rectangle(0, 0, 800, 600);
@@ -784,6 +793,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void openInteractiveMap() {
+        SoundPlayer.playClick();
         ScrollPane sp = new ScrollPane();
         Pane cPane = new Pane();
         Canvas c = new Canvas();
@@ -921,6 +931,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void exit(ActionEvent e) {
+        SoundPlayer.playClick();
         new DbMethods().save(application.getPlayer());
         application.showWelcome();
     }
@@ -933,6 +944,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void save(ActionEvent e) {
+        SoundPlayer.playClick();
         new DbMethods().save(application.getPlayer());
     }
 //</editor-fold>
@@ -947,6 +959,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void openShipyard(ActionEvent event) {
+        SoundPlayer.playClick();
         shipyardPane.setVisible(true);
         mySy = mySS.getSy();
         createShipyardTable();
@@ -1093,6 +1106,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void closeShipyard(ActionEvent event) {
+        SoundPlayer.playClick();
         shipyardPane.setVisible(false);
     }
 
@@ -1120,6 +1134,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void buyUpgrade(ActionEvent event) {
+        SoundPlayer.playCoin();
         MessageAPI msgAPI = new MessageAPI(topPane);
         Upgrade select = upgradeTable.getSelectionModel().getSelectedItem();
         if (select.getType() == Upgrade.UPGRADE_TYPE.Weapon) {
@@ -1179,6 +1194,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void closeUpgrade(ActionEvent event) {
+        SoundPlayer.playClick();
         upgradePane.setVisible(false);
         shipyardPane.setVisible(true);
     }
@@ -1190,6 +1206,7 @@ public class GameController implements Initializable {
      */
     @FXML
     private void buyShip(ActionEvent event) {
+        SoundPlayer.playCoin();
         MessageAPI msgAPI = new MessageAPI(topPane);
         ShipType shipType = shipyardTable.getSelectionModel().getSelectedItem();
         int shipWorth = myPlayer.getShip().getType().getPrice();
