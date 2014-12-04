@@ -1,5 +1,6 @@
 package spacetrader.models;
 
+import spacetrader.data.Government;
 import spacetrader.data.Item;
 import spacetrader.data.RadicalEvent;
 
@@ -64,6 +65,7 @@ public class Marketplace {
         if (price < 0) {
             price = 0;
         }
+
         return price;
     }
 
@@ -74,17 +76,70 @@ public class Marketplace {
      * @return buying price
      */
     public int getBuyPrice(Item item) {
-        return priceList.get(item);
+    	int cost = priceList.get(item);
+    	//adjust price based on Government
+    	switch (solarSystem.getGov()) {
+    	case DICTATORSHIP:
+    		cost = (cost * 9) / 10;
+    		break;
+    	case SOCIALIST:
+    		if (item == Item.MEDICINE) cost = (cost * 3) / 4;
+    		break;
+    	}
+        //return priceList.get(item);
+        return cost;
     }
 
     /**
-     * returns the price of an item in the current solar system's market
+     * returns the price the Player gets from selling the Item in this MarketPlace
      *
      * @param item
      * @return selling price
      */
     public int getSellPrice(Item item) {
-        return (int) (getBuyPrice(item) * DEPRECIATION_FACTOR);
+    	int cost = (int)(getBuyPrice(item) * DEPRECIATION_FACTOR);
+        // adjust the price based on the Government of this system
+     /*   if (solarSystem.getGov() == Government.CAPITALIST && item == Item.ORE) {
+        	cost *= 2;
+        }*/
+        switch (solarSystem.getGov()) {
+        case CAPITALIST:
+        	if (item == Item.ORE) cost *= 2;
+        	break;
+        case CONFEDERACY:
+        	if (item == Item.GAMES) cost *= 2;
+        	break;        	
+        case CORPORATE:
+        	if (item == Item.ROBOTS) cost *= 2;
+        	break;
+        case CYBERNETIC: 
+        	if (item == Item.ROBOTS || item == Item.MACHINES) cost = (cost * 3) / 2;
+        	break;
+        case DEMOCRACY:
+        	if (item == Item.GAMES || item == Item.NARCOTICS) cost *= 2;
+        	break;
+        case FASCIST:
+        	if (item == Item.MACHINES) cost *= 2;
+        	break;
+        case FEUDAL:
+        	if (item == Item.FIREARMS) cost *= 2;
+        	break;
+        case MILITARY:
+        	if (item == Item.ROBOTS) cost *= 2;
+        	break;
+        case MONARCHY:
+        	if (item == Item.MEDICINE) cost *= 2;
+        	break;
+        case TECHNOCRACY:
+        	if (item == Item.WATER) cost *= 2;
+        	break;
+        case THEOCRACY:
+        	if (item == Item.NARCOTICS) cost *= 2;
+        	break;        	
+        }
+        
+        return cost;
+        //return (int) (getBuyPrice(item) * DEPRECIATION_FACTOR);
     }
 
     /**
@@ -105,6 +160,7 @@ public class Marketplace {
      * @return isSellable
      */
     public boolean isSellable(Item item) {
+    	if (solarSystem.getGov() == Government.SATORI && item == Item.FIREARMS) return false;    	
         return this.solarSystem.getTechLevel().getValue() >= item.getMTLU();
     }
 

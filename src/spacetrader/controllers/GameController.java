@@ -1274,6 +1274,25 @@ public class GameController implements Initializable {
     public void setApp(Main application) {
         this.application = application;
     }
+    
+    /**
+     * Attempts to top off the fuel.
+     *
+     * @param event
+     */
+    @FXML
+    private void attemptRefuel(ActionEvent event) {
+    	int fuel = myPlayer.getShip().getFuelReading();
+    	int fuelCapacity = myPlayer.getShip().getFuelCapacity();
+    	int cost = 1 * (fuelCapacity - fuel);
+    	int cash = myPlayer.getBalance();
+    	if (cash >= cost) {
+    		myPlayer.setBalance(cash - cost);
+    		myPlayer.getShip().refill(fuelCapacity - fuel);
+    		updateFuelGauge();
+    		displayShipInfo();
+    	}
+    }
 
     /**
      * Initializes the controller class.
@@ -1307,6 +1326,8 @@ public class GameController implements Initializable {
         //mySS.setTechLevel(TechLevel.INDUSTRIAL);
         //mySS.setResource(Resource.LOTSOFWATER);
         //mySS.setTechLevel(TechLevel.MEDIEVAL);
+        //mySS.setGovernment(Government.CAPITALIST);
+        //myPlayer.getShip().addCargo(Item.ORE, 1);DT
 
         fillMainCanvas();
         displayShipInfo();

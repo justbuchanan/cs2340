@@ -20,7 +20,7 @@
       <Button layoutX="680.0" layoutY="48.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="106.0" text="SAVE" />
         <Button layoutX="680.0" layoutY="118.0" mnemonicParsing="false" onAction="#openShipyard" prefHeight="25.0" prefWidth="106.0" text="SHIPYARD" />
         <Button layoutX="680.0" layoutY="179.0" mnemonicParsing="false" onAction="#openMap" prefHeight="25.0" prefWidth="106.0" text="JUMP DRIVE" />
-        <Button layoutX="680.0" layoutY="210.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="STEALTHMODE" />
+        <Button layoutX="680.0" layoutY="210.0" mnemonicParsing="false" onAction="#attemptRefuel" prefHeight="25.0" prefWidth="106.0" text="REFUEL" />
         <Label fx:id="coordinates" layoutX="632.0" layoutY="496.0" text="Coordinates (0,0)&#10;Solar System:&#10;Tech Level:&#10;Government:" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <padding>
                 <Insets bottom="20.0" right="30.0" />
