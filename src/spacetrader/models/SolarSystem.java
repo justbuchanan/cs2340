@@ -5,7 +5,11 @@ import spacetrader.data.Item;
 import spacetrader.data.Resource;
 import spacetrader.data.TechLevel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
 import spacetrader.data.Government;
 
 /**
@@ -241,6 +245,23 @@ public class SolarSystem {
      */
     public void setGovernment(Government gov) {
         this.gov = gov;
+        
+        if (gov == Government.ANARCHY) {
+        	Random rand = new Random();
+        	int idx = rand.nextInt(availableItems.size());
+        	List<Item> allItems = new ArrayList(availableItems.keySet());
+        	Item item = allItems.get(idx);
+        	int oldQuantity = availableItems.get(item);
+        	availableItems.put(item, 0);
+        }
+        if (gov == Government.COMMUNIST) {
+        	for (Item item : availableItems.keySet()) {
+        		availableItems.put(item, availableItems.get(item) / 2);
+        	}
+        }
+        if (gov == Government.PACIFIST) {
+        	availableItems.put(Item.FIREARMS, 0);
+        }
     }
 
     /**
