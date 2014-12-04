@@ -30,8 +30,11 @@ public class SoundPlayer {
     }
 
     private static void playSound(String path) {
-        Media sound = new Media(SoundPlayer.class.getResource(path).toString());
-        MediaPlayer player = new MediaPlayer(sound);
-        player.play();
+        boolean b = false;
+        if (b) {
+            Media sound = new Media(SoundPlayer.class.getResource(path).toString());
+            MediaPlayer player = new MediaPlayer(sound);
+            player.play();
+        }
     }
 }
