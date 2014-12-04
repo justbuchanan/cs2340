@@ -8,10 +8,10 @@ import javafx.scene.media.MediaPlayer;
  */
 public class SoundPlayer {
 
-    private static String clickPath = "../resources/sound/click.wav";
-    private static String coinPath = "../resources/sound/coin.wav";
-    private static String powerupPath = "../resources/sound/powerup.wav";
-    private static String refreshPath = "../resources/sound/refresh.wav";
+    private final static String clickPath = "sounds/click.wav";
+    private final static String coinPath = "sounds/coin.wav";
+    private final static String powerupPath = "sounds/powerup.wav";
+    private final static String refreshPath = "sounds/refresh.wav";
 
     public static void playClick() {
         playSound(clickPath);
@@ -30,11 +30,8 @@ public class SoundPlayer {
     }
 
     private static void playSound(String path) {
-        boolean b = false;
-        if (b) {
-            Media sound = new Media(SoundPlayer.class.getResource(path).toString());
-            MediaPlayer player = new MediaPlayer(sound);
-            player.play();
-        }
+        Media sound = new Media(SoundPlayer.class.getResource(path).toString());
+        MediaPlayer player = new MediaPlayer(sound);
+        player.play();
     }
 }
