@@ -464,6 +464,10 @@ public class GameController implements Initializable {
             int q = Integer.parseInt(sellQuantity.getText());
             q--;
             sellQuantity.setText(q + "");
+            int newBalance = myPlayer.getBalance()
+                    + Integer.parseInt(sellQuantity.getText())
+                    * Integer.parseInt(sellPrice.getText());
+            sellAfterBalance.setText(String.valueOf(newBalance));
         }
     }
 
@@ -1137,7 +1141,7 @@ public class GameController implements Initializable {
         SoundPlayer.playCoin();
         MessageAPI msgAPI = new MessageAPI(topPane);
         Upgrade select = upgradeTable.getSelectionModel().getSelectedItem();
-        if (select.getType() == Upgrade.UPGRADE_TYPE.Weapon) {
+        if (Upgrade.UPGRADE_TYPE.Weapon != null && select.getType() == Upgrade.UPGRADE_TYPE.Weapon) {
             if ((myPlayer.getShip().getWeaponSlots() > 0)
                     && myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
@@ -1152,7 +1156,8 @@ public class GameController implements Initializable {
                 msgAPI.showMessage("Unable to upgrade. Check if you have"
                         + " available slots and enough money.");
             }
-        } else if (select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
+        } else if (Upgrade.UPGRADE_TYPE.Shield != null
+            && select.getType() == Upgrade.UPGRADE_TYPE.Shield) {
             if ((myPlayer.getShip().getShieldSlots() > 0)
                      && myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
@@ -1167,7 +1172,8 @@ public class GameController implements Initializable {
                 msgAPI.showMessage("Unable to upgrade. Check if you have"
                         + "available slots and enough money.");
             }
-        } else if (select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
+        } else if (Upgrade.UPGRADE_TYPE.Gadget != null
+            && select.getType() == Upgrade.UPGRADE_TYPE.Gadget) {
             if ((myPlayer.getShip().getGadgetSlots() > 0)
                     && myPlayer.getBalance() > select.getPrice()) {
                 myPlayer.setBalance(myPlayer.getBalance() - select.getPrice());
